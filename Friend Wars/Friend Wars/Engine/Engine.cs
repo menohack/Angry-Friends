@@ -22,7 +22,6 @@ public class Engine
 
         BitmapSource bitmap = new BitmapImage(new Uri("Resources//GunboundTitleScreen.bmp"));
         WriteableBitmap luis = new WriteableBitmap(bitmap);
-        Window wind = new Window();
 
     }
 
