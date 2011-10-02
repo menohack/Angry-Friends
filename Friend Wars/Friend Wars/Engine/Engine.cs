@@ -20,8 +20,8 @@ public class Engine
 
         canvas.Children.Add(time);
 
-        BitmapSource bitmap = new BitmapImage(new Uri("Resources//GunboundTitleScreen.bmp"));
-        WriteableBitmap luis = new WriteableBitmap(bitmap);
+        //BitmapSource bitmap = new BitmapImage(new Uri("Resources//GunboundTitleScreen.bmp"));
+        //WriteableBitmap luis = new WriteableBitmap(bitmap);
 
     }
 
@@ -30,7 +30,8 @@ public class Engine
         DateTime now = DateTime.Now;
         TimeSpan elapsed = now - lastUpdate;
         lastUpdate = now;
-        time.Text = elapsed.ToString();
+        double fred = 1000.0 / elapsed.Milliseconds;
+        time.Text = "FPS " + fred.ToString();
     }
 
     public void tickEvent(object sender, EventArgs e)
