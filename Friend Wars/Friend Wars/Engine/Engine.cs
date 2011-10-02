@@ -32,6 +32,8 @@ public class Engine
         lastUpdate = now;
         double fred = 1000.0 / elapsed.Milliseconds;
         time.Text = "FPS " + fred.ToString();
+        int derp = 2;
+        //Is this the branched version? I hope so!
     }
 
     public void tickEvent(object sender, EventArgs e)
