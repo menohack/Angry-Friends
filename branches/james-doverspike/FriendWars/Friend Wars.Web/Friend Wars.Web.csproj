@@ -51,6 +51,7 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="ClientBin\blob.png" />
     <Content Include="ClientBin\Friend Wars.xap" />
     <Content Include="Friend WarsTestPage.aspx" />
     <Content Include="Friend WarsTestPage.html" />

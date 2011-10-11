@@ -17,7 +17,7 @@ namespace Friend_Wars
         public MainPage()
         {
             InitializeComponent();
-            Engine engine = new Engine(canvas);
+            Engine engine = new Engine(canvas, image1);
         }
     }
 }

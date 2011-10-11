@@ -8,8 +8,9 @@ public class Engine
 {
     private DateTime lastUpdate;
     TextBlock time;
+    Sprite sprite;
 
-	public Engine(Canvas canvas)
+	public Engine(Canvas canvas, Image image)
 	{
         DispatcherTimer timer = new DispatcherTimer();
         timer.Interval = TimeSpan.Zero;
@@ -19,6 +20,8 @@ public class Engine
         time = new TextBlock();
 
         canvas.Children.Add(time);
+
+        sprite = new Sprite(200.0, 200.0, image);
 
         //BitmapSource bitmap = new BitmapImage(new Uri("Resources//GunboundTitleScreen.bmp"));
         //WriteableBitmap luis = new WriteableBitmap(bitmap);
@@ -32,6 +35,8 @@ public class Engine
         lastUpdate = now;
         double fred = 1000.0 / elapsed.Milliseconds;
         time.Text = "FPS " + fred.ToString();
+
+        sprite.Update(now.Millisecond);
     }
 
     public void tickEvent(object sender, EventArgs e)
