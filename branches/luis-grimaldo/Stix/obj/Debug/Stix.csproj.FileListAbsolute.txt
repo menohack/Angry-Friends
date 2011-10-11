@@ -1,0 +1,13 @@
+C:\Users\Luis Grimaldo\Desktop\Stix\Bin\Debug\Stix.dll
+C:\Users\Luis Grimaldo\Desktop\Stix\Bin\Debug\Stix.pdb
+C:\Users\Luis Grimaldo\Desktop\Stix\Bin\Debug\AppManifest.xaml
+C:\Users\Luis Grimaldo\Desktop\Stix\Bin\Debug\Stix.xap
+C:\Users\Luis Grimaldo\Desktop\Stix\Bin\Debug\StixTestPage.html
+C:\Users\Luis Grimaldo\Desktop\Stix\obj\Debug\Stix.csprojResolveAssemblyReference.cache
+C:\Users\Luis Grimaldo\Desktop\Stix\obj\Debug\App.g.i.cs
+C:\Users\Luis Grimaldo\Desktop\Stix\obj\Debug\MainPage.g.i.cs
+C:\Users\Luis Grimaldo\Desktop\Stix\obj\Debug\Stix.g.resources
+C:\Users\Luis Grimaldo\Desktop\Stix\obj\Debug\Stix.dll
+C:\Users\Luis Grimaldo\Desktop\Stix\obj\Debug\Stix.pdb
+C:\Users\Luis Grimaldo\Desktop\Stix\obj\Debug\XapCacheFile.xml
+C:\Users\Luis Grimaldo\Desktop\Stix\Bin\Debug\WriteableBitmapEx.dll
