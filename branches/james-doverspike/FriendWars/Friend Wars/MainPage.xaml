@@ -6,6 +6,7 @@
     mc:Ignorable="d"
     d:DesignHeight="300" d:DesignWidth="400">
     <Canvas Height="300" Name="canvas" Width="400">
-        <Image Canvas.Left="138" Canvas.Top="89" Height="113" Name="image1" Stretch="Fill" Width="137" Source="/Friend%20Wars;component/Images/blob.png" Visibility="Visible" />
+        <Image Canvas.Left="113" Canvas.Top="73" Height="113" Name="image1" Stretch="Fill" Width="137" Source="/Friend%20Wars;component/Images/blob.png" Visibility="Collapsed" />
+        <Image Canvas.Left="61" Canvas.Top="38" Height="200" Name="fractalImage" Stretch="Fill" Width="200" />
     </Canvas>
 </UserControl>

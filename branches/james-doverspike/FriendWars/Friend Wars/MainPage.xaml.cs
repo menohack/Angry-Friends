@@ -17,7 +17,8 @@ namespace Friend_Wars
         public MainPage()
         {
             InitializeComponent();
-            Engine engine = new Engine(canvas, image1);
+            //Engine engine = new Engine(canvas, image1);
+            Fractal fractal = new Fractal(fractalImage);
         }
     }
 }
