@@ -4,9 +4,9 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
-    d:DesignHeight="300" d:DesignWidth="400">
-    <Canvas Height="300" Name="canvas" Width="400">
+    d:DesignHeight="369" d:DesignWidth="634">
+    <Canvas Height="369" Name="canvas" Width="634">
         <Image Canvas.Left="113" Canvas.Top="73" Height="113" Name="image1" Stretch="Fill" Width="137" Source="/Friend%20Wars;component/Images/blob.png" Visibility="Collapsed" />
-        <Image Canvas.Left="61" Canvas.Top="38" Height="200" Name="fractalImage" Stretch="Fill" Width="200" />
+        <Image Canvas.Left="61" Canvas.Top="38" Height="285" Name="fractalImage" Stretch="Fill" Width="500" />
     </Canvas>
 </UserControl>
