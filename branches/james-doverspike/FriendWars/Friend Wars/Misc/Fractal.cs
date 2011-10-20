@@ -27,7 +27,7 @@ using System.Windows.Media.Imaging;
             //color.B = new byte();
 
             double leftBound = -2.5;
-            double rightBound = 2.5;
+            double rightBound = 1.0;
             double upBound = 1.0;
             double downBound = -1.0;
             
@@ -80,8 +80,10 @@ using System.Windows.Media.Imaging;
 
         private double[] mandelbrot(double[] v, double[] c)
         {
-            v[0] = v[0] * v[0] - v[1] * v[1] + c[0];
-            v[1] = v[1] * v[0] + v[0] * v[1] + c[1];
+            double xTemp = v[0] * v[0] - v[1] * v[1] + c[0];
+            v[1] = 2.0 * v[1] * v[0] + c[1];
+
+            v[0] = xTemp;
 
             return v;
         }
