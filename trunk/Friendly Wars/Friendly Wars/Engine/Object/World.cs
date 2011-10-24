@@ -11,7 +11,7 @@ using System.Windows.Shapes;
 
 namespace Friendly_Wars.Engine.Object
 {
-    public class : GameObject
+    public class World : GameObject
     {
 
     }
