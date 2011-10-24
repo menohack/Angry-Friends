@@ -7,6 +7,6 @@
     d:DesignHeight="300" d:DesignWidth="400">
 
     <Grid x:Name="LayoutRoot" Background="White">
-
+        <Image Height="300" HorizontalAlignment="Left" Name="terrain" Stretch="Fill" VerticalAlignment="Top" Width="400" />
     </Grid>
 </UserControl>

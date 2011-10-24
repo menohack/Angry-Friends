@@ -82,6 +82,7 @@
     <Compile Include="Engine\Object\GameObject.cs" />
     <Compile Include="Engine\Object\UpdateableGameObject.cs" />
     <Compile Include="Engine\Object\World.cs" />
+    <Compile Include="GameLogic\Terrain.cs" />
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
