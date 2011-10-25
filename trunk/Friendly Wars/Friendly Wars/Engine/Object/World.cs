@@ -28,7 +28,7 @@ namespace Friendly_Wars.Engine.Object
         /// <summary>
         /// The timer that handles updating World.
         /// </summary>
-        private DispatcherTimer timer;
+        private static DispatcherTimer timer;
 
         /// <summary>
         /// 30 FPS, or 33 ms between each frame. 
@@ -38,27 +38,27 @@ namespace Friendly_Wars.Engine.Object
         /// <summary>
         /// The DateTime associated with the last frame.
         /// </summary>
-        private DateTime previousTime;
+        private static DateTime previousTime;
 
         /// <summary>
         /// The change in time from the previous frame, in miliseconds.
         /// </summary>
-        private int deltaTime = 0;
+        private static int deltaTime = 0;
 
         /// <summary>
         /// All of the GameObjects in the game.
         /// </summary>
-        private ICollection<GameObject> gameObjects;
+        private static ICollection<GameObject> gameObjects;
 
         /// <summary>
         /// The queue of GameObjects that need to be re-drawn/updated the next time WordObject updates.
         /// </summary>
-        private ICollection<GameObject> redrawQueue;
+        private static ICollection<GameObject> redrawQueue;
 
         /// <summary>
         /// The list of GameObjects that need to be updated at every interval.
         /// </summary>
-        private ICollection<GameObject> updateableGameObjects;
+        private static ICollection<GameObject> updateableGameObjects;
 
         /// <summary>
         /// The constructor for a new instance of World.
@@ -78,46 +78,15 @@ namespace Friendly_Wars.Engine.Object
         }
 
         /// <summary>
-        /// Updates the World as fast as possible; updating is capped at 1000/INTERVAL times per second.
-        /// The Update is frame-rate-independent and will account for a drop in frame rate.
-        /// </summary>
-        /// <param name="sender">The Object that called this function.</param>
-        /// <param name="e">The event that corresponds to this function.</param>
-        void Update(object sender, EventArgs e)
-        {
-            DateTime currentTime = DateTime.Now;
-
-            deltaTime = currentTime.Millisecond - previousTime.Millisecond;
-            // If we elapsed one second
-            if (deltaTime <= 0)
-            {
-                deltaTime = 1000 - previousTime.Millisecond + currentTime.Millisecond;
-            }
-
-            // Iterate through each GameObject in updateableGameObjects and update each GameObject.
-            foreach (GameObject gameObject in updateableGameObjects) {
-                //gameObject.renderComponent.forceRedraw();
-            }
-
-            // Iterate through each GameObject in the redrawQueue and update each GameObject.
-            foreach (GameObject gameObject in redrawQueue)
-            {
-                //gameObject.renderComponent.forceRedraw();
-            }
-
-            previousTime = DateTime.Now;
-        }
-
-        /// <summary>
         /// Access all of the GameObjects that contain a specific name.
         /// </summary>
         /// <param name="name">The name of the GameObjects.</param>
         /// <returns>A Collection of GameObjects with that specific name.</returns>
-        ICollection<GameObject> FindGameObjectsWithName(String name)
+        public static ICollection<GameObject> FindGameObjectsWithName(String name)
         {
             ICollection<GameObject> gameObjects = new List<GameObject>();
 
-            foreach (GameObject gameObject in this.gameObjects)
+            foreach (GameObject gameObject in World.gameObjects)
             {
                 if (gameObject.name == name)
                 {
@@ -133,11 +102,11 @@ namespace Friendly_Wars.Engine.Object
         /// </summary>
         /// <param name="tag">The tag of the GameObjects.</param>
         /// <returns>A Collection of GameObjects with that specific tag.</returns>
-        ICollection<GameObject> FindGameObjectsWithTag(String tag)
+        public static ICollection<GameObject> FindGameObjectsWithTag(String tag)
         {
             ICollection<GameObject> gameObjects = new List<GameObject>();
 
-            foreach (GameObject gameObject in this.gameObjects)
+            foreach (GameObject gameObject in World.gameObjects)
             {
                 if (gameObject.tag == tag)
                 {
@@ -153,11 +122,11 @@ namespace Friendly_Wars.Engine.Object
         /// </summary>
         /// <param name="UID">The UID of the GameObjects.</param>
         /// <returns>A Collection of GameObjects with that specific tag.</returns>
-        ICollection<GameObject> FindGameObjectsWithUID(int UID)
+        public static ICollection<GameObject> FindGameObjectsWithUID(int UID)
         {
             ICollection<GameObject> gameObjects = new List<GameObject>();
 
-            foreach (GameObject gameObject in this.gameObjects)
+            foreach (GameObject gameObject in World.gameObjects)
             {
                 if (gameObject.UID == UID)
                 {
@@ -166,6 +135,39 @@ namespace Friendly_Wars.Engine.Object
             }
 
             return gameObjects;
+        }
+
+
+        /// <summary>
+        /// Updates the World as fast as possible; updating is capped at 1000/INTERVAL times per second.
+        /// The Update is frame-rate-independent and will account for a drop in frame rate.
+        /// </summary>
+        /// <param name="sender">The Object that called this function.</param>
+        /// <param name="e">The event that corresponds to this function.</param>
+        private void Update(object sender, EventArgs e)
+        {
+            DateTime currentTime = DateTime.Now;
+
+            deltaTime = currentTime.Millisecond - previousTime.Millisecond;
+            // If we elapsed one second
+            if (deltaTime <= 0)
+            {
+                deltaTime = 1000 - previousTime.Millisecond + currentTime.Millisecond;
+            }
+
+            // Iterate through each GameObject in updateableGameObjects and update each GameObject.
+            foreach (GameObject gameObject in updateableGameObjects)
+            {
+                //gameObject.renderComponent.forceRedraw();
+            }
+
+            // Iterate through each GameObject in the redrawQueue and update each GameObject.
+            foreach (GameObject gameObject in redrawQueue)
+            {
+                //gameObject.renderComponent.forceRedraw();
+            }
+
+            previousTime = DateTime.Now;
         }
     }
 }
