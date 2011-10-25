@@ -14,11 +14,23 @@ namespace Friendly_Wars.Engine.Component.Graphic
 {
     public class RenderComponent
     {
+        private Image bitmap;
 
         public RenderComponent(GameObject owner)
         {
 
         }
 
+        public Image Bitmap
+        {
+            get
+            {
+                return bitmap;
+            }
+            set
+            {
+                bitmap = value;
+            }
+        }
     }
 }
