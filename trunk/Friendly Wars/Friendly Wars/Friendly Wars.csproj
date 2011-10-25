@@ -74,6 +74,7 @@
     </Compile>
     <Compile Include="Engine\Component\AudioComponent.cs" />
     <Compile Include="Engine\Component\BaseComponent.cs" />
+    <Compile Include="Engine\Component\BoundingBox.cs" />
     <Compile Include="Engine\Component\Graphic\Animation.cs" />
     <Compile Include="Engine\Component\Graphic\Frame.cs" />
     <Compile Include="Engine\Component\Graphic\RenderComponent.cs" />
@@ -82,6 +83,7 @@
     <Compile Include="Engine\Object\GameObject.cs" />
     <Compile Include="Engine\Object\UpdateableGameObject.cs" />
     <Compile Include="Engine\Object\World.cs" />
+    <Compile Include="GameLogic\Game.cs" />
     <Compile Include="GameLogic\Terrain.cs" />
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>

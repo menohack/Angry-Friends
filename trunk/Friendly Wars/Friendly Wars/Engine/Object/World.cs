@@ -60,6 +60,7 @@ namespace Friendly_Wars.Engine.Object
         /// </summary>
         private static ICollection<GameObject> updateableGameObjects;
 
+
         /// <summary>
         /// The constructor for a new instance of World.
         /// </summary>
