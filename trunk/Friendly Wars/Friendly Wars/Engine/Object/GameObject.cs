@@ -27,7 +27,7 @@ namespace Friendly_Wars.Engine.Object
         public TransformComponent transformComponent { get; private set; }
         /// <summary>
         /// This GameObject's PhysicsComponent.
-        /// </summaBry>
+        /// </summary>
         public PhysicsComponent physicsComponent { get; private set; }
         /// <summary>
         /// The GameObject's AudioComponent.
