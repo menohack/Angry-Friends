@@ -21,21 +21,6 @@ namespace Friendly_Wars.GameLogic
     {
         private WriteableBitmap bitmap;
 
-        /*
-        /// <summary>
-        /// The width of the bitmap.
-        /// </summary>
-        private int width;
-        /// <summary>
-        /// The height of the bitmap.
-        /// </summary>
-        private int height;
-        /// <summary>
-        /// The position of the bitmap.
-        /// </summary>
-        private Point position;
-        */
-
         /// <summary>
         /// Constructs a Terrain object.
         /// </summary>
@@ -44,17 +29,22 @@ namespace Friendly_Wars.GameLogic
         {
             renderComponent.Bitmap = image;
 
-            int width = (int) renderComponent.Bitmap.Width;
-            int height = (int) renderComponent.Bitmap.Height;
+            int width = (int) renderComponent.Bitmap.Width * 2;
+            int height = (int) renderComponent.Bitmap.Height * 2;
 
             WriteableBitmap bitmap = new WriteableBitmap(width, height);
 
             ///Initialize the terrain
             for (int i = 0; i < width; i++)
             {
-                for (int j=0; j < height/4 + Math.Sin(i*Math.PI) * (height/4) && j < height; j++)
-                    bitmap.Pixels[j*width + i] = ConvertToARGB32(Color.FromArgb(255, 0, 50, 200));
+                for (int j=0; j < height; j++) {
+                    if (j > 3*height/4 + Math.Sin(i/(8.0*Math.PI)) * (height/8))
+                        bitmap.Pixels[j*width + i] = ConvertToARGB32(Color.FromArgb(255, 0, 50, 200));
+                    else
+                        bitmap.Pixels[j * width + i] = ConvertToARGB32(Color.FromArgb(255, 0, 200, 200));
+                }
             }
+
 
             bitmap.Invalidate();
 

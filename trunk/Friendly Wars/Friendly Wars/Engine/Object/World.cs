@@ -15,7 +15,7 @@ using System.Diagnostics;
 namespace Friendly_Wars.Engine.Object
 {
     /// <summary>
-    /// World can be thought of the "universe" of a game. 
+    /// World can be thought of as the "universe" of a game. 
     /// Not only does it contains all GameObjects, but it also provides functionality for finding GameObjects and drawing GameObjects at appropriate times.
     /// </summary>
     public class World : GameObject

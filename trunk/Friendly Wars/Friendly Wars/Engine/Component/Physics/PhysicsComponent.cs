@@ -10,7 +10,7 @@ using System.Windows.Media.Animation;
 using System.Windows.Shapes;
 using Friendly_Wars.Engine.Object;
 
-namespace Friendly_Wars.Engine.Component
+namespace Friendly_Wars.Engine.Component.Physics
 {
     public class PhysicsComponent
     {
