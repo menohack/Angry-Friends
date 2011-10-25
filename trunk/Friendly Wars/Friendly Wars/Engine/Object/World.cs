@@ -13,6 +13,8 @@ namespace Friendly_Wars.Engine.Object
 {
     public class World : GameObject
     {
-
+        public World(String name, String tag = null) : base(name, tag) {
+        
+        }
     }
 }

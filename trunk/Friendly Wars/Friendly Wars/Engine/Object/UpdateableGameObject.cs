@@ -13,6 +13,8 @@ namespace Friendly_Wars.Engine.Object
 {
     public class UpdateableGameObject : GameObject
     {
-
+        public UpdateableGameObject(String name, String tag = null) : base(name, tag) {
+        
+        }
     }
 }
