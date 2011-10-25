@@ -68,6 +68,7 @@ namespace Friendly_Wars.Engine.Object
         public World(String name, String tag = null) : base(name, tag) {
             redrawQueue = new List<GameObject>();
             updateableGameObjects = new List<GameObject>();
+            gameObjects = new List<GameObject>();
             previousTime = DateTime.Now;
 
             // Begin updating the world.

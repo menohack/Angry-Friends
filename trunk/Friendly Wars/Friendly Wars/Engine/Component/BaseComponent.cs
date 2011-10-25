@@ -10,7 +10,7 @@ namespace Friendly_Wars.Engine.Component
         /// <summary>
         ///   Is this BaseComponent enabled?
         /// </summary>
-        private bool isEnabled;
+        public bool isEnabled { get; private set; }
 
         /// <summary>
         /// The GameObject that is the owner of this component.
@@ -24,7 +24,7 @@ namespace Friendly_Wars.Engine.Component
         public BaseComponent(GameObject owner)
         {
             this.owner = owner;
-            this.isEnabled = true;
+            isEnabled = true;
         }
 
         /// <summary>
