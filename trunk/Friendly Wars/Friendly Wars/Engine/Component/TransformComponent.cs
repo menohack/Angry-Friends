@@ -32,23 +32,24 @@ namespace Friendly_Wars.Engine.Component
         public Point position { get; set; }
 
         /// <summary>
+        /// The size of the TransformComponent.
+        /// </summary>
+        public Point size { get; set; }
+
+        /// <summary>
         /// The rotation of the TransformComponent [0, 360].
         /// </summary>
         public int rotation { get; set; }
 
         /// <summary>
-        /// The size of the TransformComponent.
-        /// </summary>
-        public Double size { get; set; }
-
-        /// <summary>
         /// Constructor for a new instance of TransformComponent.
         /// </summary>
         /// <param name="owner">The owner of this TransformComponent.</param>
-        /// <param name="isEnabled">Is this TransformComponent enabled?</param>
         public TransformComponent(GameObject owner) : base(owner)
         {
-            
+            position = new Point(0, 0);
+            size = new Point(1, 1);
+            rotation = 0;
         }
         
         /// <summary>
@@ -132,9 +133,9 @@ namespace Friendly_Wars.Engine.Component
         /// Resize by a given amount.
         /// </summary>
         /// <param name="resizeAmount"></param>
-        public void Resize(Double resizeFactor)
+        public void Resize(Point resizeFactor)
         {
-            size *= resizeFactor;
+            size = new Point(size.X * resizeFactor.X, size.Y * resizeFactor.Y);
         }
     }
 }

@@ -18,6 +18,7 @@ namespace Friendly_Wars
         public MainPage()
         {
             InitializeComponent();
+            new World(World.WORLD_NAME);
         }
     }
 }

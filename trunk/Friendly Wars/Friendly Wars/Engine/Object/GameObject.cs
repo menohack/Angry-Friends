@@ -85,12 +85,22 @@ namespace Friendly_Wars.Engine.Object
         }
 
         /// <summary>
+        /// Removes a child GameObject from the current GameObject.  This does not delete the child GameObject.  
+        /// It only removes the parent-child relationship between the two GameObjects.
+        /// </summary>
+        /// <param name="child">The child GameObject that will be removed from the current GameObject (the parent).</param>
+        public void RemoveChild(GameObject child)
+        {
+            children.Remove(child);
+        }
+
+        /// <summary>
         /// Destroys a given GameObject.
         /// </summary>
         /// <param name="gameObject">The GameObject that will be destroyed.</param>
         public static void Destroy(GameObject gameObject)
         {
-            // Need to remove the GameObject from World.
+            // TODO: Need to remove the GameObject from World.
             gameObject = null;
         }
 
