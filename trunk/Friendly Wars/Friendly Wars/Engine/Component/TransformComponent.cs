@@ -17,24 +17,29 @@ namespace Friendly_Wars.Engine.Component
     /// </summary>
     public class TransformComponent : BaseComponent
     {
-
+        /// <summary>
+        /// The right direction of the game.
+        /// </summary>
         private static readonly Point globalRight = new Point(1, 0);
+        /// <summary>
+        /// The up direction of the game.
+        /// </summary>
         private static readonly Point globalUp = new Point(0, 1);
 
         /// <summary>
         /// The position of the TransformComponent.
         /// </summary>
-        private Point position;
+        public Point position { get; set; }
 
         /// <summary>
         /// The rotation of the TransformComponent [0, 360].
         /// </summary>
-        private int rotation;
+        public int rotation { get; set; }
 
         /// <summary>
         /// The size of the TransformComponent.
         /// </summary>
-        private int size;
+        public Double size { get; set; }
 
         /// <summary>
         /// Constructor for a new instance of TransformComponent.
@@ -70,7 +75,30 @@ namespace Friendly_Wars.Engine.Component
         /// <returns>Returns the Point that corresponds to the right direction of this TransformComponent.</returns>
         public Point LocalRight()
         {
-            return new Point();
+            // normalizedRotation e [0, 1].  This represents the percent it is rotated.
+            Double normalizedRotation = (rotation % 90)/90.0;
+
+            // This code isn't completely right, but the idea is there.
+            if (rotation > 0 && rotation <= 90)
+            {
+                return new Point(1, normalizedRotation);
+            }
+            else if (rotation > 90 && rotation <= 180)
+            {
+                return new Point(-1, normalizedRotation);
+            }
+            else if (rotation > 180 && rotation <= 270)
+            {
+                return new Point(-1, -normalizedRotation);
+            }
+            else if (rotation > 270 && rotation <= 359)
+            {
+                return new Point(1, -normalizedRotation);
+            }
+            else
+            {
+                return new Point(1, 0);
+            }
         }
 
         /// <summary>
@@ -97,8 +125,16 @@ namespace Friendly_Wars.Engine.Component
         /// <param name="deltaPosition">The change of position.</param>
         public void Translate(Point deltaPosition)
         {
-            position.X += deltaPosition.X;
-            position.Y += deltaPosition.Y;
+            position = new Point(position.X + deltaPosition.X, position.Y + deltaPosition.Y);
+        }
+
+        /// <summary>
+        /// Resize by a given amount.
+        /// </summary>
+        /// <param name="resizeAmount"></param>
+        public void Resize(Double resizeFactor)
+        {
+            size *= resizeFactor;
         }
     }
 }

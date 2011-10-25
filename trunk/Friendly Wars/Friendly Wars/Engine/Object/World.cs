@@ -13,6 +13,9 @@ namespace Friendly_Wars.Engine.Object
 {
     public class World : GameObject
     {
+
+        public static readonly String WORLD_NAME = "WORLD";
+
         public World(String name, String tag = null) : base(name, tag) {
         
         }
