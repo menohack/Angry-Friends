@@ -46,6 +46,12 @@ namespace Friendly_Wars.Engine.Object
         /// This GameObject's tag.
         /// </summary>
         public String tag { get; private set; }
+
+        /// <summary>
+        /// This GameObject's UID.
+        /// </summary>
+        public int UID { get; private set; }
+
         /// <summary>
         /// The last UID assigned to a GameObject.
         /// </summary>
@@ -65,14 +71,14 @@ namespace Friendly_Wars.Engine.Object
         {
             this.name = name;
             this.tag = tag;
-            currentUID = NextUID();
+            this.UID = NextUID();
+
+            children = new List<GameObject>();
 
             transformComponent = new TransformComponent(this);
             physicsComponent = new PhysicsComponent(this);
             audioComponent = new AudioComponent(this);
             renderComponent = new RenderComponent(this);
-
-            children = new List<GameObject>();
         }
 
         /// <summary>

@@ -46,6 +46,11 @@ namespace Friendly_Wars.Engine.Object
         private int deltaTime = 0;
 
         /// <summary>
+        /// All of the GameObjects in the game.
+        /// </summary>
+        private ICollection<GameObject> gameObjects;
+
+        /// <summary>
         /// The queue of GameObjects that need to be re-drawn/updated the next time WordObject updates.
         /// </summary>
         private ICollection<GameObject> redrawQueue;
@@ -53,7 +58,7 @@ namespace Friendly_Wars.Engine.Object
         /// <summary>
         /// The list of GameObjects that need to be updated at every interval.
         /// </summary>
-        private IList<GameObject> updateableGameObjects;
+        private ICollection<GameObject> updateableGameObjects;
 
         /// <summary>
         /// The constructor for a new instance of World.
@@ -89,7 +94,78 @@ namespace Friendly_Wars.Engine.Object
                 deltaTime = 1000 - previousTime.Millisecond + currentTime.Millisecond;
             }
 
+            // Iterate through each GameObject in updateableGameObjects and update each GameObject.
+            foreach (GameObject gameObject in updateableGameObjects) {
+                //gameObject.renderComponent.forceRedraw();
+            }
+
+            // Iterate through each GameObject in the redrawQueue and update each GameObject.
+            foreach (GameObject gameObject in redrawQueue)
+            {
+                //gameObject.renderComponent.forceRedraw();
+            }
+
             previousTime = DateTime.Now;
+        }
+
+        /// <summary>
+        /// Access all of the GameObjects that contain a specific name.
+        /// </summary>
+        /// <param name="name">The name of the GameObjects.</param>
+        /// <returns>A Collection of GameObjects with that specific name.</returns>
+        ICollection<GameObject> FindGameObjectsWithName(String name)
+        {
+            ICollection<GameObject> gameObjects = new List<GameObject>();
+
+            foreach (GameObject gameObject in this.gameObjects)
+            {
+                if (gameObject.name == name)
+                {
+                    gameObjects.Add(gameObject);
+                }
+            }
+
+            return gameObjects;
+        }
+
+        /// <summary>
+        /// Access all of the GameObjects that contain a specific tag.
+        /// </summary>
+        /// <param name="tag">The tag of the GameObjects.</param>
+        /// <returns>A Collection of GameObjects with that specific tag.</returns>
+        ICollection<GameObject> FindGameObjectsWithTag(String tag)
+        {
+            ICollection<GameObject> gameObjects = new List<GameObject>();
+
+            foreach (GameObject gameObject in this.gameObjects)
+            {
+                if (gameObject.tag == tag)
+                {
+                    gameObjects.Add(gameObject);
+                }
+            }
+
+            return gameObjects;
+        }
+
+        /// <summary>
+        /// Access all of the GameObjects that contain a specific tag.
+        /// </summary>
+        /// <param name="UID">The UID of the GameObjects.</param>
+        /// <returns>A Collection of GameObjects with that specific tag.</returns>
+        ICollection<GameObject> FindGameObjectsWithUID(int UID)
+        {
+            ICollection<GameObject> gameObjects = new List<GameObject>();
+
+            foreach (GameObject gameObject in this.gameObjects)
+            {
+                if (gameObject.UID == UID)
+                {
+                    gameObjects.Add(gameObject);
+                }
+            }
+
+            return gameObjects;
         }
     }
 }
