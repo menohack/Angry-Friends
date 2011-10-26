@@ -1,96 +1,90 @@
 ﻿using System;
-using System.Net;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Documents;
-using System.Windows.Ink;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Animation;
-using System.Windows.Shapes;
-using Friendly_Wars.Engine.Object;
 using System.Collections.Generic;
+using Friendly_Wars.Engine.Object;
+using Friendly_Wars.Engine.Ultilities;
 
 namespace Friendly_Wars.Engine.Component.Graphic
 {
-    /// <summary>
-    /// Handles the rendering of a GameObject.
-    /// </summary>
-    public class RenderComponent : BaseComponent
-    {
+	/// <summary>
+	/// Handles the rendering of a GameObject.
+	/// </summary>
+	public class RenderComponent : BaseComponent, IUpdateable
+	{
+		/// <summary>
+		/// All animations of this RenderComponent.
+		/// </summary>
+		internal IDictionary<String, Animation> animations { get; private set; }
 
-        /// <summary>
-        /// All animations of this RenderComponent.
-        /// </summary>
-        public ICollection<Animation> animations { get; private set; }
+		/// <summary>
+		/// The current animation.
+		/// </summary>
+		public Animation currentAnimation { get; private set; }
 
-        /// <summary>
-        /// The current animation.
-        /// </summary>
-        public Animation currentAnimation { get; private set; }
+		/// <summary>
+		/// The default animation for this RenderComponent.
+		/// </summary>
+		public Animation defaultAnimation { get; private set; }
 
-        /// <summary>
-        /// The default animation that is played when specific animations are stopped and/or no animation is explicitly played.
-        /// </summary>
-        public Animation defaultAnimation { get; private set; }
+		/// <summary>
+		/// The timer that handles updating this RenderComponent.
+		/// </summary>
+		private static EngineTimer updateTimer;
 
-        /// <summary>
-        /// Constructor for a new RenderComponent.
-        /// </summary>
-        /// <param name="owner"> The owner of this RenderComponent. </param>
-        public RenderComponent(GameObject owner, ICollection<Animation> animations) :base(owner)
-        {
-            this.animations = animations;
+		/// <summary>
+		/// Constructor for a new RenderComponent.
+		/// </summary>
+		/// <param name="owner"> The owner of this RenderComponent. </param>
+		/// <param name="animations">The Dictionary of names-to-Animations for this RenderComponent. </param>
+		public RenderComponent(GameObject owner, IDictionary<String, Animation> animations) : base(owner)
+		{
+			this.animations = animations;
+			
+			foreach (Animation animation in animations.Values) {
+				if (animation.isDefaultAnimation)
+				{
+					defaultAnimation = animation;
+					currentAnimation = defaultAnimation;
+					return;
+				}
+			}
+		}
 
-            // Find the default Animation.
-            foreach (Animation animation in animations) {
-                if (animation.isDefaultAnimation)
-                {
-                    defaultAnimation = animation;
-                    currentAnimation = defaultAnimation;
-                    return;
-                }
-            }
-        }
+		/// <summary>
+		/// Plays a specific Animation.
+		/// </summary>
+		/// <param name="animationName">The name of the Animation to play.</param>
+		public void Play(String animationName)
+		{
+			Animation animation;
+			animations.TryGetValue(animationName, out animation);
+			currentAnimation = animation;
+			updateTimer = new EngineTimer(currentAnimation.FPS, new List<IUpdateable> { this });
+			currentAnimation.Play();
+		}
 
-        /// <summary>
-        /// Plays a specific Animation.
-        /// </summary>
-        /// <param name="animationName">The name of the Animation to play.</param>
-        public void Play(String animationName)
-        {
-            foreach (Animation animation in animations)
-            {
-                if (animation.name == animationName)
-                {
-                    currentAnimation = animation;
-                    animation.Play();
-                    return;
-                }
-            }
-        }
+		/// <summary>
+		/// Stops playing a specific Animation.
+		/// </summary>
+		/// <param name="animationName">The name of the Animation to stop playing.</param>
+		public void Stop(String animationName)
+		{
+			Animation animation;
+			animations.TryGetValue(animationName, out animation);
+			if (currentAnimation.name == animation.name)
+			{
+				currentAnimation = animation;
+				updateTimer.Stop();
+			}
+		}
 
-        /// <summary>
-        /// Stops playing a specific Animation.
-        /// </summary>
-        /// <param name="animationName">The name of the Animation to stop playing.</param>
-        public void Stop(String animationName)
-        {
-
-            foreach (Animation animation in animations)
-            {
-                if (animation.name == animationName)
-                {
-                    currentAnimation = defaultAnimation;
-                    animation.Stop();
-                    return;
-                }
-            }
-        }
-
-        private void Render()
-        {
-
-        }
-    }
+		/// <summary>
+		/// Updates the frame.
+		/// </summary>
+		/// <param name="deltaTime">The time since the last Update.</param>
+		public void Update(double deltaTime)
+		{
+			currentAnimation.UpdateFrame(deltaTime);
+			World.AddToRedrawQueue(base.owner);
+		}
+	}
 }
