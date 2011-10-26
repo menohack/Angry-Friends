@@ -11,6 +11,7 @@ using System.Windows.Shapes;
 using System.Collections.Generic;
 using System.Windows.Threading;
 using System.Diagnostics;
+using Friendly_Wars.Engine.Ultilities;
 
 namespace Friendly_Wars.Engine.Object
 {
@@ -18,7 +19,7 @@ namespace Friendly_Wars.Engine.Object
     /// World can be thought of as the "universe" of a game. 
     /// Not only does it contains all GameObjects, but it also provides functionality for finding GameObjects and drawing GameObjects at appropriate times.
     /// </summary>
-    public class World : GameObject
+    public class World : GameObject, IUpdateable
     {
         /// <summary>
         /// The compile-time constant for the World object's name.
@@ -26,24 +27,14 @@ namespace Friendly_Wars.Engine.Object
         public static readonly String WORLD_NAME = "WORLD";
 
         /// <summary>
-        /// The timer that handles updating World.
+        /// World will try to update 30 times per second.
         /// </summary>
-        private static DispatcherTimer timer;
+        private static readonly int UPDATES_PER_SECOND = 30;
 
         /// <summary>
-        /// 30 FPS, or 33 ms between each frame. 
+        /// The EngineTimer that will handle updating this world.
         /// </summary>
-        private static readonly int INTERVAL = 33;
-
-        /// <summary>
-        /// The DateTime associated with the last frame.
-        /// </summary>
-        private static DateTime previousTime;
-
-        /// <summary>
-        /// The change in time from the previous frame, in miliseconds.
-        /// </summary>
-        private static int deltaTime = 0;
+        private EngineTimer engineTimer;
 
         /// <summary>
         /// All of the GameObjects in the game.
@@ -70,13 +61,18 @@ namespace Friendly_Wars.Engine.Object
             redrawQueue = new List<GameObject>();
             updateableGameObjects = new List<GameObject>();
             gameObjects = new List<GameObject>();
-            previousTime = DateTime.Now;
 
-            // Begin updating the world.
-            timer = new DispatcherTimer();
-            timer.Interval = TimeSpan.FromMilliseconds(INTERVAL);
-            timer.Tick += new EventHandler(Update);
-            timer.Start();
+            // Initialize the timing of the updating of the World.
+            engineTimer = new EngineTimer(EngineTimer.FromHertzToMiliSeconds(UPDATES_PER_SECOND), new List<IUpdateable> { this });
+            engineTimer.Start();
+        }
+
+        /// <summary>
+        /// Adds a GameObject to the redraw queue.
+        /// </summary>
+        /// <param name="gameobject">The GameObject to add to the queue.</param>
+        public void AddToRedrawQueue(GameObject gameobject) {
+            redrawQueue.Add(gameobject);
         }
 
         /// <summary>
@@ -139,23 +135,13 @@ namespace Friendly_Wars.Engine.Object
             return gameObjects;
         }
 
-
         /// <summary>
-        /// Updates the World as fast as possible; updating is capped at 1000/INTERVAL times per second.
-        /// The Update is frame-rate-independent and will account for a drop in frame rate.
+        /// Updates World as fast as possible; however, updating is capped at UPDATES_PER_SECOND.
         /// </summary>
-        /// <param name="sender">The Object that called this function.</param>
-        /// <param name="e">The event that corresponds to this function.</param>
-        private void Update(object sender, EventArgs e)
+        /// <param name="deltaTime">The time elapsed since the last update.</param>
+        public void Update(double deltaTime)
         {
-            DateTime currentTime = DateTime.Now;
-
-            deltaTime = currentTime.Millisecond - previousTime.Millisecond;
-            // If we elapsed one second
-            if (deltaTime <= 0)
-            {
-                deltaTime = 1000 - previousTime.Millisecond + currentTime.Millisecond;
-            }
+            Debug.WriteLine("World is being updated!");
 
             // Iterate through each GameObject in updateableGameObjects and update each GameObject.
             foreach (GameObject gameObject in updateableGameObjects)
@@ -168,8 +154,6 @@ namespace Friendly_Wars.Engine.Object
             {
                 //gameObject.renderComponent.forceRedraw();
             }
-
-            previousTime = DateTime.Now;
         }
     }
 }

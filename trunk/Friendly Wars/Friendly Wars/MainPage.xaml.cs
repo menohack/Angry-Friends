@@ -26,7 +26,8 @@ namespace Friendly_Wars
 
             ///terrain is an image in the xaml. I'm not sure how to draw an image without doing this.
             ///Change it if you figure it out.
-            new Game(terrain);
+            //new Game(terrain);
+            new World(World.WORLD_NAME);
         }
     }
 }

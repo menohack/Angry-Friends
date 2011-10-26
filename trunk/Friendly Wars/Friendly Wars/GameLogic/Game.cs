@@ -35,7 +35,7 @@ namespace Friendly_Wars.GameLogic
         {
             world = new World(World.WORLD_NAME);
 
-            terrain = new Terrain(image, "terrain");
+           // terrain = new Terrain(image, "terrain");
         }
     }
 }
