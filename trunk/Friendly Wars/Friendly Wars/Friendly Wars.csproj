@@ -86,7 +86,10 @@
     <Compile Include="Engine\Object\World.cs" />
     <Compile Include="Engine\Ultilities\EngineMath.cs" />
     <Compile Include="Engine\Ultilities\EngineTimer.cs" />
+    <Compile Include="Engine\Ultilities\MediaLoader.cs" />
+    <Compile Include="Engine\Ultilities\Web.cs" />
     <Compile Include="GameLogic\Game.cs" />
+    <Compile Include="GameLogic\MapInfo.cs" />
     <Compile Include="GameLogic\Terrain.cs" />
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
