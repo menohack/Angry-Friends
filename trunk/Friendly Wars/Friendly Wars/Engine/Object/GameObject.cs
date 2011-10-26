@@ -80,7 +80,7 @@ namespace Friendly_Wars.Engine.Object
             transformComponent = new TransformComponent(this);
             physicsComponent = new PhysicsComponent(this);
             audioComponent = new AudioComponent(this);
-            renderComponent = new RenderComponent(this, null);
+            //renderComponent = new RenderComponent(this, null);
 
         }
 
