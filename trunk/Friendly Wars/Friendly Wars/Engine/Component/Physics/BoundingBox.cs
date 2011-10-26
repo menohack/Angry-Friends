@@ -1,92 +1,132 @@
 ﻿using System;
-using System.Net;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Documents;
-using System.Windows.Ink;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Animation;
-using System.Windows.Shapes;
 using Friendly_Wars.Engine.Object;
 
 namespace Friendly_Wars.Engine.Component.Physics
 {
-    /// <summary>
-    /// This class represents an axis-aligned rectangle for specifying the bounds of an object.
-    /// </summary>
-    public class BoundingBox
-    {
-		/// <summary>
-		/// The top-most value of the bounding box.
-		/// </summary>
-		private double Top { get; set; }
-		/// <summary>
-		/// The bottom-most value of the bounding box.
-		/// </summary>
-		private double Bottom { get; set; }
-		/// <summary>
-		/// The right-most value of the bounding box.
-		/// </summary>
-		private double Right { get; set; }
-		/// <summary>
-		/// The left-most value of the bounding box.
-		/// </summary>
-		private double Left { get; set; }
-
-        private static readonly Double EPSILON = .001;
-
-        /// <summary>
-        /// Constructor for a bounding box.
-        /// </summary>
-        /// <param name="top"> The top value. </param>
-        /// <param name="bottom"> The bottom value. </param>
-        /// <param name="left"> The left value. </param>
-        /// <param name="right"> The right value. </param>
-        public BoundingBox(double top, double bottom, double left, double right)
-        {
-            Top = top;
-            Bottom = bottom;
-            Left = left;
-            Right = right;
-        }
+	/// <summary>
+	/// A box-representation of an object's physical being.
+	/// </summary>
+	public class BoundingBox
+	{
 
 		/// <summary>
-		/// Checks if two bounding boxes collide.
+		/// Represents sides of a BoundingBox.
 		/// </summary>
-		/// <param name="gameObject"> The other bounding box. </param>
-		/// <returns> True if there is a collision. </returns>
-        public bool Collide(BoundingBox gameObject)
-        {
-			if (gameObject.Left > Left && gameObject.Left < Right || gameObject.Right < Right && gameObject.Right > Left)
-            {
-				if (gameObject.Top > Top && gameObject.Top < Bottom)
-					return true;
-				else if (gameObject.Bottom < Bottom && gameObject.Bottom > Top)
-					return true;
-				else
-					return false;
-            }
+		public enum Side {LEFT, RIGHT}
 
-            return true;
-        }
+		/// <summary>
+		/// The size of the BoundingBox.
+		/// </summary>
+		private Point size;
+		/// <summary>
+		/// The offset of the box, with respect to the GameObject's TransformComponent.
+		/// </summary>
+		private Point offset;
+		/// <summary>
+		/// The owner of this BoundingBox.
+		/// </summary>
+		private GameObject owner;
 
-        /// <summary>
-        /// Determines if two Doubles are approximately the same value.
-        /// </summary>
-        /// <param name="number1">The first number.</param>
-        /// <param name="number2">The second number.</param>
-        /// <returns> True if the numbers are approximately the same. </returns>
-        private bool Approximately(Double number1, Double number2)
-        {
-            if (Math.Abs(number1 - number2) < EPSILON)
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
-        }
-    }
+		/// <summary>
+		/// Constructor for a new BoundingBox.
+		/// </summary>
+		public BoundingBox(GameObject owner, Point size, Point offset)
+		{
+			this.owner = owner;
+			this.size = size;
+			this.offset = offset;
+		}
+
+		/// <summary>
+		/// Checks to see if this BoundingBox is colliding with another GameObject.
+		/// </summary>
+		/// <param name="gameObject"> The GameObject in question. </param>
+		/// <returns>Determines if this BoundingBox is colliding with another GameObject.</returns>
+		public bool IsCollidingWith(GameObject gameObject)
+		{
+			// Get all of the coordinates of the potential-colliding GameObject's BoundingBox.
+			BoundingBox boundingBox = gameObject.physicsComponent.boundingBox;
+			Point potentialBottomLeft = GetBottom(Side.LEFT, gameObject);
+			Point potentialBottomRight = GetBottom(Side.RIGHT, gameObject);
+			Point potentialTopLeft = GetTop(Side.LEFT, gameObject);
+			Point potentialTopRight = GetTop(Side.RIGHT, gameObject);
+
+			// Get all of the coordinates of this BoundingBox.
+			Point thisBottomLeft = GetBottom(Side.LEFT, owner);
+			Point thisBottomRight = GetBottom(Side.RIGHT, owner);
+			Point thisTopLeft = GetTop(Side.LEFT, owner);
+			Point thisTopRight = GetTop(Side.RIGHT, owner);
+
+			// Test X-based collision.
+			if (potentialBottomLeft.X <= thisBottomLeft.X && thisBottomLeft.X <= potentialBottomRight.X)
+			{
+				return true;
+			}
+			else if (potentialTopLeft.X <= thisTopLeft.X && thisTopLeft.X <= potentialTopRight.X)
+			{
+				return true;
+			}
+
+			// Test Y-based collision.
+			if (potentialBottomLeft.Y <= thisBottomLeft.Y && thisBottomLeft.Y <= potentialBottomRight.Y)
+			{
+				return true;
+			}
+			else if (potentialTopRight.Y <= thisTopRight.Y && thisTopRight.Y <= potentialTopLeft.Y)
+			{
+				return true;
+			}
+			else
+			{
+				return false;
+			}
+		}
+
+		/// <summary>
+		/// Access a bottom point of a GameObject's BoundingBox.
+		/// </summary>
+		/// <param name="side">The bottom-side of the GameObject's BoundingBox to calculate.</param>
+		/// <param name="gameObject">The GameObject whose BoundingBox needs to be analyzed.</param>
+		/// <returns>The specified bottom-side of this GameObject's BoundingBox.</returns>
+		public static Point GetBottom(Side side, GameObject gameObject)
+		{
+			BoundingBox boundingBox = gameObject.physicsComponent.boundingBox;
+			if (side == Side.LEFT)
+			{
+				return new Point(boundingBox.offset.X + gameObject.transformComponent.position.X, boundingBox.offset.Y + gameObject.transformComponent.position.Y);
+			}
+			else if (side == Side.RIGHT)
+			{
+				return new Point(boundingBox.offset.X + boundingBox.size.X + gameObject.transformComponent.position.X, boundingBox.offset.Y + gameObject.transformComponent.position.Y);
+			}
+			else
+			{
+				throw new ArgumentException("Must pass a proper type of Side.");
+			}
+		}
+
+		/// <summary>
+		/// Access a top point of a GameObject's BoundingBox.
+		/// </summary>
+		/// <param name="side">The top-side of the GameObject's BoundingBox to calculate.</param>
+		/// <param name="gameObject">The GameObject whose BoundingBox needs to be analyzed.</param>
+		/// <returns>The specified top-side of this GameObject's BoundingBox.</returns>
+		public static Point GetTop(Side side, GameObject gameObject)
+		{
+			BoundingBox boundingBox = gameObject.physicsComponent.boundingBox;
+			if (side == Side.LEFT)
+			{
+				return new Point(boundingBox.offset.X + gameObject.transformComponent.position.X, boundingBox.offset.Y + boundingBox.size.Y + gameObject.transformComponent.position.Y);
+			}
+			else if (side == Side.RIGHT)
+			{
+				return new Point(boundingBox.offset.X + boundingBox.size.X + gameObject.transformComponent.position.X, boundingBox.offset.Y + boundingBox.size.Y + gameObject.transformComponent.position.Y);
+			}
+			else
+			{
+				throw new ArgumentException("Must pass a proper type of Side.");
+			}
+		}
+	}
 }

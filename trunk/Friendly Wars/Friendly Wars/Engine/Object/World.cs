@@ -141,7 +141,8 @@ namespace Friendly_Wars.Engine.Object
 		/// <param name="deltaTime">The time elapsed since the last update.</param>
 		public void Update(double deltaTime)
 		{
-			Debug.WriteLine("World is being updated!");
+			int FPS = (int)(1000.00 / deltaTime);
+			Debug.WriteLine("Engine FPS: " + FPS.ToString());
 
 			// Iterate through each GameObject in updateableGameObjects and update each GameObject.
 			foreach (GameObject gameObject in updateableGameObjects)
