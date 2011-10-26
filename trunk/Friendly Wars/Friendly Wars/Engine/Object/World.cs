@@ -39,7 +39,7 @@ namespace Friendly_Wars.Engine.Object
         /// <summary>
         /// All of the GameObjects in the game.
         /// </summary>
-        private static ICollection<GameObject> gameObjects;
+        public static ICollection<GameObject> gameObjects { get; private set; }
 
         /// <summary>
         /// The queue of GameObjects that need to be re-drawn/updated the next time WordObject updates.

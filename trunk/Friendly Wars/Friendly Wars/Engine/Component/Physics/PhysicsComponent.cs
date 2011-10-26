@@ -31,15 +31,17 @@ namespace Friendly_Wars.Engine.Component.Physics
         /// <summary>
         /// Checks whether a GameObject is colliding with this object.
         /// </summary>
-        /// <param name="gameObject"> The other object. </param>
         /// <returns> True if the objects are colliding. </returns>
-        public bool Collide(GameObject gameObject)
+        public bool Collide()
         {
-            if (boundingBox.Collide(gameObject.physicsComponent.boundingBox))
-                return true;
-            else
-                return false;
+            foreach (GameObject gameObject in World.gameObjects)
+            {
+                if (boundingBox.Collide(gameObject.physicsComponent.boundingBox))
+                {
+                    return true;
+                }
+            }
+            return false;
         }
-
     }
 }

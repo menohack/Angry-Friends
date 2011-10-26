@@ -26,6 +26,8 @@ namespace Friendly_Wars.Engine.Component.Physics
         /// </summary>
         private Point bottomRight;
 
+        private static readonly Double EPSILON = .001;
+
         /// <summary>
         /// Constructor for a bounding box.
         /// </summary>
@@ -113,6 +115,24 @@ namespace Friendly_Wars.Engine.Component.Physics
             set
             {
                 topLeft.X = value;
+            }
+        }
+
+        /// <summary>
+        /// Determines if two Doubles are approximately the same value.
+        /// </summary>
+        /// <param name="number1">The first number.</param>
+        /// <param name="number2">The second number.</param>
+        /// <returns></returns>
+        private bool Approximately(Double number1, Double number2)
+        {
+            if (Math.Abs(number1 - number2) < EPSILON)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
             }
         }
     }
