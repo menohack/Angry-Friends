@@ -16,7 +16,7 @@ namespace Friendly_Wars.Engine.Component
     /// <summary>
     /// Handles the control of a GameObject's audio.
     /// </summary>
-    public class AudioComponent
+    public class AudioComponent : BaseComponent
     {
         /// <summary>
         /// A Collection between the names of MediaElements and the actual MediaElement.
@@ -55,14 +55,14 @@ namespace Friendly_Wars.Engine.Component
         /// <param name="name">The name of the audio clip to play.</param>
         public void Play(String name)
         {
-            AudioClip audioClip;
-            if (audioClips.TryGet(name, out audioClip))
+            MediaElement audioClip;
+            if (audioClips.TryGetValue(name, out audioClip))
             {
                 audioClip.Play();
             }
             else
             {
-                throw new ApplicationException("No such AudioClip");
+                throw new InvalidOperationException("No such AudioClip");
             }
         }
 
@@ -72,14 +72,14 @@ namespace Friendly_Wars.Engine.Component
         /// <param name="name">The name of the audio clip to stop playing.</param>
         public void Stop(String name)
         {
-            AudioClip audioClip;
-            if (audioClips.TryGet(name, out audioClip))
+            MediaElement audioClip;
+            if (audioClips.TryGetValue(name, out audioClip))
             {
                 audioClip.Stop();
             }
             else
             {
-                throw new ApplicationException("No such AudioClip");
+                throw new InvalidOperationException("No such AudioClip");
             }
         }
 
