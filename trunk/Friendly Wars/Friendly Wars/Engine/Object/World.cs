@@ -142,7 +142,7 @@ namespace Friendly_Wars.Engine.Object
 		public void Update(double deltaTime)
 		{
 			int FPS = (int)(1000.00 / deltaTime);
-			Debug.WriteLine("Engine FPS: " + FPS.ToString());
+			MainPage.page.label1.Content = FPS.ToString();
 
 			// Iterate through each GameObject in updateableGameObjects and update each GameObject.
 			foreach (GameObject gameObject in updateableGameObjects)

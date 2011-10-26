@@ -15,19 +15,21 @@ using Friendly_Wars.GameLogic;
 
 namespace Friendly_Wars
 {
-    public partial class MainPage : UserControl
-    {
-        /// <summary>
-        /// This class represents our Silverlight page.
-        /// </summary>
-        public MainPage()
-        {
-            InitializeComponent();
+	public partial class MainPage : UserControl
+	{
+		public static MainPage page;
+		/// <summary>
+		/// This class represents our Silverlight page.
+		/// </summary>
+		public MainPage()
+		{
+			InitializeComponent();
 
-            ///terrain is an image in the xaml. I'm not sure how to draw an image without doing this.
-            ///Change it if you figure it out.
-            //new Game(terrain);
-            new World(World.WORLD_NAME);
-        }
-    }
+			///terrain is an image in the xaml. I'm not sure how to draw an image without doing this.
+			///Change it if you figure it out.
+			//new Game(terrain);
+			page = this;
+			new World(World.WORLD_NAME);
+		}
+	}
 }
