@@ -6,7 +6,7 @@ using Friendly_Wars.Engine.Ultilities;
 namespace Friendly_Wars.Engine.Component.Graphic
 {
 	/// <summary>
-	/// Handles the rendering of a GameObject.
+	/// Handles the rendering of a GameObject. 
 	/// </summary>
 	public class RenderComponent : BaseComponent, IUpdateable
 	{
