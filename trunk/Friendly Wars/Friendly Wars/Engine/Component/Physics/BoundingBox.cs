@@ -13,28 +13,36 @@ using Friendly_Wars.Engine.Object;
 namespace Friendly_Wars.Engine.Component.Physics
 {
     /// <summary>
-    /// This class represents a Bounding Box.
+    /// This class represents an axis-aligned rectangle for specifying the bounds of an object.
     /// </summary>
     public class BoundingBox
     {
-        /// <summary>
-        /// The top left point of the box.
-        /// </summary>
-        private Point topLeft;
-        /// <summary>
-        /// The bottom right point of the box.
-        /// </summary>
-        private Point bottomRight;
+		/// <summary>
+		/// The top-most value of the bounding box.
+		/// </summary>
+		private double Top { get; set; }
+		/// <summary>
+		/// The bottom-most value of the bounding box.
+		/// </summary>
+		private double Bottom { get; set; }
+		/// <summary>
+		/// The right-most value of the bounding box.
+		/// </summary>
+		private double Right { get; set; }
+		/// <summary>
+		/// The left-most value of the bounding box.
+		/// </summary>
+		private double Left { get; set; }
 
         private static readonly Double EPSILON = .001;
 
         /// <summary>
         /// Constructor for a bounding box.
         /// </summary>
-        /// <param name="top"> The top. </param>
-        /// <param name="bottom"> The bottom. </param>
-        /// <param name="left"> The left. </param>
-        /// <param name="right"> The right. </param>
+        /// <param name="top"> The top value. </param>
+        /// <param name="bottom"> The bottom value. </param>
+        /// <param name="left"> The left value. </param>
+        /// <param name="right"> The right value. </param>
         public BoundingBox(double top, double bottom, double left, double right)
         {
             Top = top;
@@ -43,79 +51,24 @@ namespace Friendly_Wars.Engine.Component.Physics
             Right = right;
         }
 
+		/// <summary>
+		/// Checks if two bounding boxes collide.
+		/// </summary>
+		/// <param name="gameObject"> The other bounding box. </param>
+		/// <returns> True if there is a collision. </returns>
         public bool Collide(BoundingBox gameObject)
         {
-            ///Collide from the top
-            if (gameObject.Bottom < Top && gameObject.Top > Bottom)
+			if (gameObject.Left > Left && gameObject.Left < Right || gameObject.Right < Right && gameObject.Right > Left)
             {
-                if (gameObject.Left < Right && gameObject.Right > Left)
-                    return true;
-                else
-                    return false;
+				if (gameObject.Top > Top && gameObject.Top < Bottom)
+					return true;
+				else if (gameObject.Bottom < Bottom && gameObject.Bottom > Top)
+					return true;
+				else
+					return false;
             }
 
-            ///TODO: The other cases.
             return true;
-        }
-
-        /// <summary>
-        /// Getters and setters for the bottom of the bounding box.
-        /// </summary>
-        private double Bottom
-        {
-            get
-            {
-                return bottomRight.Y;
-            }
-            set
-            {
-                bottomRight.Y = value;
-            }
-        }
-
-        /// <summary>
-        /// Getters and setters for the top of the bounding box.
-        /// </summary>
-        private double Top
-        {
-            get
-            {
-                return topLeft.Y;
-            }
-            set
-            {
-                topLeft.Y = value;
-            }
-        }
-
-        /// <summary>
-        /// Getters and setters for the right of the bounding box.
-        /// </summary>
-        private double Right
-        {
-            get
-            {
-                return bottomRight.X;
-            }
-            set
-            {
-                bottomRight.X = value;
-            }
-        }
-
-        /// <summary>
-        /// Getters and setters for the left of the bounding box.
-        /// </summary>
-        private double Left
-        {
-            get
-            {
-                return topLeft.X;
-            }
-            set
-            {
-                topLeft.X = value;
-            }
         }
 
         /// <summary>
@@ -123,7 +76,7 @@ namespace Friendly_Wars.Engine.Component.Physics
         /// </summary>
         /// <param name="number1">The first number.</param>
         /// <param name="number2">The second number.</param>
-        /// <returns></returns>
+        /// <returns> True if the numbers are approximately the same. </returns>
         private bool Approximately(Double number1, Double number2)
         {
             if (Math.Abs(number1 - number2) < EPSILON)

@@ -35,12 +35,8 @@ namespace Friendly_Wars.Engine.Component.Physics
         public bool Collide()
         {
             foreach (GameObject gameObject in World.gameObjects)
-            {
                 if (boundingBox.Collide(gameObject.physicsComponent.boundingBox))
-                {
                     return true;
-                }
-            }
             return false;
         }
     }
