@@ -21,13 +21,12 @@ namespace Friendly_Wars.Engine.Component
         /// <summary>
         /// A Collection between the names of MediaElements and the actual MediaElement.
         /// </summary>
-        ICollection<KeyValuePair<String, MediaElement>> audioClips;
-
+        private IDictionary<String, MediaElement> audioClips;
         /// <summary>
         /// The constructor for an AudioComponent.
         /// </summary>
         /// <param name="owner">The owner of this AudioComponent.</param>
-        public AudioComponent(GameObject owner)
+        public AudioComponent(GameObject owner) : base(owner)
         {
             audioClips = new Dictionary<String, MediaElement>();
         }
@@ -38,7 +37,7 @@ namespace Friendly_Wars.Engine.Component
         /// <param name="name">The name of the audio clip.</param>
         /// <param name="audioClip">The audio clip, in the form of a MediaElement. </param>
         public void AddAudioClip(String name, MediaElement audioClip) {
-            audioClips.Add(new KeyValuePair<String, MediaElement>(name, audioClip));
+            audioClips.Add(name, audioClip);
         }
 
         /// <summary>
@@ -47,11 +46,7 @@ namespace Friendly_Wars.Engine.Component
         /// <param name="name">The name of the audio clip to remove.</param>
         public void RemoveAudioClip(String name)
         {
-            foreach (KeyValuePair<String, MediaElement> audioClip in audioClips) {
-                if (audioClip.Key.ToString() == name) {
-                    audioClips.Remove(new KeyValuePair<String, MediaElement>(audioClip.Key, audioClip.Value));
-                }
-            }
+            audioClips.Remove(name);
         }
 
         /// <summary>
@@ -60,12 +55,14 @@ namespace Friendly_Wars.Engine.Component
         /// <param name="name">The name of the audio clip to play.</param>
         public void Play(String name)
         {
-            foreach (KeyValuePair<String, MediaElement> audioClip in audioClips)
+            AudioClip audioClip;
+            if (audioClips.TryGet(name, out audioClip))
             {
-                if (audioClip.Key.ToString() == name)
-                {
-                    audioClip.Value.Play();
-                }
+                audioClip.Play();
+            }
+            else
+            {
+                throw new ApplicationException("No such AudioClip");
             }
         }
 
@@ -75,12 +72,14 @@ namespace Friendly_Wars.Engine.Component
         /// <param name="name">The name of the audio clip to stop playing.</param>
         public void Stop(String name)
         {
-            foreach (KeyValuePair<String, MediaElement> audioClip in audioClips)
+            AudioClip audioClip;
+            if (audioClips.TryGet(name, out audioClip))
             {
-                if (audioClip.Key.ToString() == name)
-                {
-                    audioClip.Value.Stop();
-                }
+                audioClip.Stop();
+            }
+            else
+            {
+                throw new ApplicationException("No such AudioClip");
             }
         }
 
