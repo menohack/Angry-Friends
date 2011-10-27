@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Windows.Threading;
 
-namespace Friendly_Wars.Engine.Ultilities
+namespace Friendly_Wars.Engine.Utilities
 {
 	/// <summary>
 	/// An interface for listening to an EngineTimer. It recieves the time elapsed from the last interval.
@@ -26,22 +26,22 @@ namespace Friendly_Wars.Engine.Ultilities
 		/// <summary>
 		/// The timer that tries to update at a given interval.
 		/// </summary>
-		private DispatcherTimer updateTimer;
+		private DispatcherTimer UpdateTimer;
 
 		/// <summary>
 		/// The interval, in miliseconds, at which the timer will try to update.
 		/// </summary>
-		public int interval { get; private set; }
+		public int Interval { get; private set; }
 
 		/// <summary>
 		/// The DateTime associated with the last update.
 		/// </summary>
-		private DateTime previousTime;
+		private DateTime PreviousTime;
 
 		/// <summary>
 		/// All of the objects that are listening for dispatched events from this EngineTimer.
 		/// </summary>
-		private ICollection<IUpdateable> eventListeners;
+		private ICollection<IUpdateable> EventListeners;
 
 		/// <summary>
 		/// Constructor for a new EngineTimer.
@@ -50,8 +50,8 @@ namespace Friendly_Wars.Engine.Ultilities
 		/// <param name="callBackFunction">The function that will be called back from this Timer.</param>
 		public EngineTimer(int interval, ICollection<IUpdateable> eventListeners)
 		{
-			this.interval = interval;
-			this.eventListeners = eventListeners;
+			this.Interval = interval;
+			this.EventListeners = eventListeners;
 		}
 
 		/// <summary>
@@ -60,7 +60,7 @@ namespace Friendly_Wars.Engine.Ultilities
 		/// <param name="eventListener">The IUpdateable to add to this EngineTimer.</param>
 		public void AddEventListener(IUpdateable eventListener)
 		{
-			eventListeners.Add(eventListener);
+			EventListeners.Add(eventListener);
 		}
 
 		/// <summary>
@@ -69,7 +69,7 @@ namespace Friendly_Wars.Engine.Ultilities
 		/// <param name="eventListener">The IUpdateable to remove from this EngineTimer.</param>
 		public void RemoveEventListener(IUpdateable eventListener)
 		{
-			eventListeners.Remove(eventListener);
+			EventListeners.Remove(eventListener);
 		}
 
 		/// <summary>
@@ -77,11 +77,11 @@ namespace Friendly_Wars.Engine.Ultilities
 		/// </summary>
 		public void Start()
 		{
-			updateTimer = new DispatcherTimer();
-			updateTimer.Interval = TimeSpan.FromMilliseconds(interval);
-			updateTimer.Tick += new EventHandler(DispatchEvent);
-			previousTime = DateTime.Now;
-			updateTimer.Start();
+			UpdateTimer = new DispatcherTimer();
+			UpdateTimer.Interval = TimeSpan.FromMilliseconds(Interval);
+			UpdateTimer.Tick += new EventHandler(DispatchEvent);
+			PreviousTime = DateTime.Now;
+			UpdateTimer.Start();
 		}
 
 		/// <summary>
@@ -89,7 +89,7 @@ namespace Friendly_Wars.Engine.Ultilities
 		/// </summary>
 		public void Stop()
 		{
-			updateTimer.Stop();
+			UpdateTimer.Stop();
 		}
 
 		/// <summary>
@@ -101,19 +101,19 @@ namespace Friendly_Wars.Engine.Ultilities
 		{
 			DateTime currentTime = DateTime.Now;
 
-			Double deltaTime = currentTime.Millisecond - previousTime.Millisecond;
+			Double deltaTime = currentTime.Millisecond - PreviousTime.Millisecond;
 			// If we elapsed one second
 			if (deltaTime <= 0)
 			{
-				deltaTime = 1000 - previousTime.Millisecond + currentTime.Millisecond;
+				deltaTime = 1000 - PreviousTime.Millisecond + currentTime.Millisecond;
 			}
 
-			foreach (IUpdateable eventListener in eventListeners)
+			foreach (IUpdateable eventListener in EventListeners)
 			{
 				eventListener.Update(deltaTime);
 			}
 
-			previousTime = DateTime.Now;
+			PreviousTime = DateTime.Now;
 		}
 
 		/// <summary>
@@ -121,11 +121,11 @@ namespace Friendly_Wars.Engine.Ultilities
 		/// </summary>
 		/// <param name="hertz">The amount of hertz to convert.</param>
 		/// <returns>The converted amount of hertz, now in Miliseconds.</returns>
-		public static int FromHertzToMiliSeconds(int hertz)
+		public static int FromHertzToMiliSeconds(Int32 hertz)
 		{
-			Double seconds = 1.00 / (1.00 * hertz);
+			Double seconds = 1.00 / Convert.ToDouble(hertz);
 			Double miliseconds = 1000 * seconds;
-			return (int)(miliseconds);
+			return Convert.ToInt32(miliseconds);
 		}
 
 		/// <summary>
@@ -133,8 +133,9 @@ namespace Friendly_Wars.Engine.Ultilities
 		/// </summary>
 		/// <param name="amount">The amount of seconds to convert into miliseconds.</param>
 		/// <returns>The amount of miliseconds in the given amount of seconds.</returns>
-		public static int SecondsToMiliseconds(Double amount) {
-			return (int)(1000.00 * amount);
+		public static int SecondsToMiliseconds(Double amount)
+        {
+			return Convert.ToInt32(1000.00 * amount);
 		}
 	}
 }

@@ -17,28 +17,28 @@ namespace Friendly_Wars.Engine.Object
         /// <summary>
         /// This GameObject's TransformComponent.
         /// </summary>
-        public TransformComponent transformComponent { get; private set; }
+        public TransformComponent TransformComponent { get; private set; }
         /// <summary>
         /// This GameObject's PhysicsComponent.
         /// </summary>
-        public PhysicsComponent physicsComponent { get; private set; }
+        public PhysicsComponent PhysicsComponent { get; private set; }
         /// <summary>
         /// The GameObject's AudioComponent.
         /// </summary>
-        public AudioComponent audioComponent { get; private set; }
+        public AudioComponent AudioComponent { get; private set; }
         /// <summary>
         /// This GameObject's RenderComponent.
         /// </summary>
-        public RenderComponent renderComponent { get; private set; }
+        public RenderComponent RenderComponent { get; private set; }
 
         /// <summary>
         /// This GameObject's name.
         /// </summary>
-        public String name { get; private set; }
+        public String Name { get; private set; }
         /// <summary>
         /// This GameObject's tag.
         /// </summary>
-        public String tag { get; private set; }
+        public String Tag { get; private set; }
 
         /// <summary>
         /// This GameObject's UID.
@@ -48,12 +48,12 @@ namespace Friendly_Wars.Engine.Object
         /// <summary>
         /// The last UID assigned to a GameObject.
         /// </summary>
-        public static int currentUID { get; private set; }
+        public static int CurrentUID { get; private set; }
 
         /// <summary>
         /// This GameObject's children.
         /// </summary>
-        public IList<GameObject> children { get; private set; }
+        public IList<GameObject> Children { get; private set; }
 
         /// <summary>
         /// The Constructor for a GameObject.
@@ -62,16 +62,16 @@ namespace Friendly_Wars.Engine.Object
         /// <param name="tag">The tag of the GameObject.</param>
         public GameObject(String name, String tag = null)
         {
-            this.name = name;
-            this.tag = tag;
+            this.Name = name;
+            this.Tag = tag;
             this.UID = NextUID();
 
-            children = new List<GameObject>();
+            Children = new List<GameObject>();
 
-            transformComponent = new TransformComponent(this, new Point(), new Point());
-            physicsComponent = new PhysicsComponent(this, new Point(), new Point());
-            audioComponent = new AudioComponent(this, new Dictionary<String, MediaElement>());
-            renderComponent = new RenderComponent(this, new Dictionary<string, Animation>(), null);
+            TransformComponent = new TransformComponent(this, new Point(), new Point());
+            PhysicsComponent = new PhysicsComponent(this, new Point(), new Point());
+            AudioComponent = new AudioComponent(this, new Dictionary<String, MediaElement>());
+            RenderComponent = new RenderComponent(this, new Dictionary<string, Animation>(), null);
         }
 
         /// <summary>
@@ -80,7 +80,7 @@ namespace Friendly_Wars.Engine.Object
         /// <param name="child">The child GameObject that will be appended to the current GameObject (the parent).</param>
         public void AddChild(GameObject child)
         {
-            children.Add(child);
+            Children.Add(child);
         }
 
         /// <summary>
@@ -90,7 +90,7 @@ namespace Friendly_Wars.Engine.Object
         /// <param name="child">The child GameObject that will be removed from the current GameObject (the parent).</param>
         public void RemoveChild(GameObject child)
         {
-            children.Remove(child);
+            Children.Remove(child);
         }
 
         /// <summary>
@@ -109,7 +109,7 @@ namespace Friendly_Wars.Engine.Object
         /// <returns>Returns a UID for a GameObject</returns>
         private static int NextUID()
         {
-            return ++currentUID;
+            return ++CurrentUID;
         }
     }
 }

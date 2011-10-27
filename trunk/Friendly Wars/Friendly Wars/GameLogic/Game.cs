@@ -1,6 +1,6 @@
 ﻿
 using Friendly_Wars.Engine.Object;
-using Friendly_Wars.Engine.Ultilities;
+using Friendly_Wars.Engine.Utilities;
 
 namespace Friendly_Wars.GameLogic
 {

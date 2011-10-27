@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Friendly_Wars.Engine.Ultilities
+namespace Friendly_Wars.Engine.Utilities
 {
 	/// <summary>
 	/// EngineMath process Engine-related math.

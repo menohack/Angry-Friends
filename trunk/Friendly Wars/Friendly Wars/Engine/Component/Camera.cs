@@ -10,14 +10,14 @@ namespace Friendly_Wars.Engine.Component
 		/// <summary>
 		/// The position of the camera, in pixels.
 		/// </summary>
-		public Point position { get; private set; }
+		public Point Position { get; private set; }
 
 		/// <summary>
 		/// Constructor for a new Camera.
 		/// </summary>
 		public Camera()
 		{
-			position = new Point();
+			Position = new Point();
 		}
 
 		/// <summary>
@@ -26,7 +26,7 @@ namespace Friendly_Wars.Engine.Component
 		/// <param name="deltaPosition">The change in units to move Translate this Camera.</param>
 		public void Translate(Point deltaPosition)
 		{
-			position = new Point(position.X + deltaPosition.X, position.Y + deltaPosition.Y);
+			Position = new Point(Position.X + deltaPosition.X, Position.Y + deltaPosition.Y);
 		}
 	}
 }

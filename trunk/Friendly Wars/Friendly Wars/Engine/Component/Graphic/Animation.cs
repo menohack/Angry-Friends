@@ -11,22 +11,22 @@ namespace Friendly_Wars.Engine.Component.Graphic
 		/// <summary>
 		/// All the Frames of this Animation.
 		/// </summary>
-		public IList<Frame> frames { get; private set; }
+		public IList<Frame> Frames { get; private set; }
 
 		/// <summary>
 		/// The current Frame of this Animation.
 		/// </summary>
-		public Frame currentFrame { get; private set; }
+		public Frame CurrentFrame { get; private set; }
 
 		/// <summary>
 		/// The index of the current Frame of this Animation.
 		/// </summary>
-		private int index;
+		private int Index;
 
 		/// <summary>
 		/// The length, in miliseconds, of this Animation. 
 		/// </summary>
-		public Double length { get; private set; }
+		public Double Length { get; private set; }
 
 		/// <summary>
 		/// The frames-per-second of this Animation.
@@ -36,17 +36,17 @@ namespace Friendly_Wars.Engine.Component.Graphic
 		/// <summary>
 		/// The name of this Animation.
 		/// </summary>
-		public String name { get; private set; }
+		public String Name { get; private set; }
 
 		/// <summary>
 		/// Is this Animation playing?
 		/// </summary>
-		public bool isPlaying { get; private set; }
+		public bool IsPlaying { get; private set; }
 
 		/// <summary>
 		/// The elapsed time between the previous update (for playing Animations).
 		/// </summary>
-		private Double elapsedTime;
+		private Double ElapsedTime;
 
 		/// <summary>
 		/// Constructor for a new Animation.
@@ -57,11 +57,11 @@ namespace Friendly_Wars.Engine.Component.Graphic
 		/// <param name="name">The name of this Animation.</param>
 		public Animation(IList<Frame> frames, double length, int FPS, String name)
 		{
-			this.frames = frames;
-			this.length = length;
+			this.Frames = frames;
+			this.Length = length;
 			this.FPS = FPS;
-			this.name = name;
-			index = 0;
+			this.Name = name;
+			this.Index = 0;
 		}
 
 		/// <summary>
@@ -69,7 +69,7 @@ namespace Friendly_Wars.Engine.Component.Graphic
 		/// </summary>
 		public void Play()
 		{
-			isPlaying = true;
+			IsPlaying = true;
 		}
 
 		/// <summary>
@@ -77,7 +77,7 @@ namespace Friendly_Wars.Engine.Component.Graphic
 		/// </summary>
 		public void Stop()
 		{
-			isPlaying = false;
+			IsPlaying = false;
 		}
 
 		/// <summary>
@@ -86,20 +86,21 @@ namespace Friendly_Wars.Engine.Component.Graphic
 		/// <param name="deltaTime">The time elapsed from the previous update.</param>
 		internal void UpdateFrame(Double deltaTime)
 		{
-			elapsedTime += deltaTime;
+			ElapsedTime += deltaTime;
 			
 			// While frames need to be updated:
-			while (elapsedTime >= (1.00 / FPS))
+			while (ElapsedTime >= (1.00 / FPS))
 			{
-				index++;
-				if (index == frames.Count)
+                //FIXME: Should we be using foreach/enumerators instead of indices? Seems to me like the more C# way. [Max]
+				Index++;
+				if (Index == Frames.Count)
 				{
-					index = 0;
+					Index = 0;
 				}
-				elapsedTime -= (1.00 / FPS);
+				ElapsedTime -= (1.00 / FPS);
 			}
 
-			currentFrame = frames[index];
+			CurrentFrame = Frames[Index];
 		}
 	}
 }

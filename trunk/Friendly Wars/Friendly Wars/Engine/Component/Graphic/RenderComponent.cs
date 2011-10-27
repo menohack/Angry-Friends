@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Friendly_Wars.Engine.Object;
-using Friendly_Wars.Engine.Ultilities;
+using Friendly_Wars.Engine.Utilities;
 
 namespace Friendly_Wars.Engine.Component.Graphic
 {
@@ -13,22 +13,22 @@ namespace Friendly_Wars.Engine.Component.Graphic
 		/// <summary>
 		/// A Dictionary of <String, Animation> that contains all of the animations of this RenderComponent.
 		/// </summary>
-		internal IDictionary<String, Animation> animations { get; private set; }
+		internal IDictionary<String, Animation> Animations { get; private set; }
 
 		/// <summary>
 		/// The current animation.
 		/// </summary>
-		public Animation currentAnimation { get; private set; }
+		public Animation CurrentAnimation { get; private set; }
 
 		/// <summary>
 		/// The default animation for this RenderComponent.
 		/// </summary>
-		public Animation defaultAnimation { get; private set; }
+		public Animation DefaultAnimation { get; private set; }
 
 		/// <summary>
 		/// The timer that handles updating this RenderComponent.
 		/// </summary>
-		private static EngineTimer updateTimer;
+		private static EngineTimer UpdateTimer;
 
 		/// <summary>
 		/// Constructor for a new RenderComponent.
@@ -37,9 +37,9 @@ namespace Friendly_Wars.Engine.Component.Graphic
 		/// <param name="animations">The Dictionary of names-to-Animations for this RenderComponent. </param>
 		public RenderComponent(GameObject owner, IDictionary<String, Animation> animations, Animation defaultAnimation) : base(owner)
 		{
-			this.animations = animations;
-			this.defaultAnimation = defaultAnimation;
-			currentAnimation = this.defaultAnimation;
+			this.Animations = animations;
+			this.DefaultAnimation = defaultAnimation;
+			this.CurrentAnimation = this.DefaultAnimation;
 			//Play(this.defaultAnimation.name);
 		}
 
@@ -50,11 +50,11 @@ namespace Friendly_Wars.Engine.Component.Graphic
 		public void Play(String animationName)
 		{
 			Animation animation;
-			animations.TryGetValue(animationName, out animation);
-			currentAnimation = animation;
+		    Animations.TryGetValue(animationName, out animation);
+			CurrentAnimation = animation;
 
-			updateTimer = new EngineTimer(currentAnimation.FPS, new List<IUpdateable> { this });
-			currentAnimation.Play();
+			UpdateTimer = new EngineTimer(CurrentAnimation.FPS, new List<IUpdateable> { this });
+			CurrentAnimation.Play();
 		}
 
 		/// <summary>
@@ -64,12 +64,12 @@ namespace Friendly_Wars.Engine.Component.Graphic
 		public void Stop(String animationName)
 		{
 			Animation animation;
-			animations.TryGetValue(animationName, out animation);
+			Animations.TryGetValue(animationName, out animation);
 
-			if (currentAnimation.name == animation.name)
+			if (CurrentAnimation.Name == animation.Name)
 			{
-				Play(defaultAnimation.name);
-				updateTimer.Stop();
+				Play(DefaultAnimation.Name);
+				UpdateTimer.Stop();
 			}
 		}
 
@@ -79,7 +79,7 @@ namespace Friendly_Wars.Engine.Component.Graphic
 		/// <param name="deltaTime">The time since the last Update.</param>
 		public void Update(double deltaTime)
 		{
-			currentAnimation.UpdateFrame(deltaTime);
+			CurrentAnimation.UpdateFrame(deltaTime);
 			//World.AddToRedrawQueue(base.owner);
 		}
 	}

@@ -13,7 +13,7 @@ namespace Friendly_Wars.Engine.Component
 		/// <summary>
 		/// A Dictionary between the names of audio and the audio, itself.
 		/// </summary>
-		private IDictionary<String, MediaElement> audioClips;
+		private IDictionary<String, MediaElement> AudioClips;
 
 		/// <summary>
 		/// Constructor for an AudioComponent.
@@ -21,7 +21,7 @@ namespace Friendly_Wars.Engine.Component
 		/// <param name="owner">The owner of this AudioComponent.</param>
 		public AudioComponent(GameObject owner, IDictionary<String, MediaElement> audioClips) : base(owner)
 		{
-			this.audioClips = audioClips;
+			this.AudioClips = audioClips;
 		}
 
 		/// <summary>
@@ -30,7 +30,7 @@ namespace Friendly_Wars.Engine.Component
 		/// <param name="name">The name of the audio clip.</param>
 		/// <param name="audioClip">The audio clip, in the form of a MediaElement. </param>
 		public void AddAudioClip(String name, MediaElement audioClip) {
-			audioClips.Add(name, audioClip);
+			AudioClips.Add(name, audioClip);
 		}
 
 		/// <summary>
@@ -39,7 +39,7 @@ namespace Friendly_Wars.Engine.Component
 		/// <param name="name">The name of the audio clip to remove.</param>
 		public void RemoveAudioClip(String name)
 		{
-			audioClips.Remove(name);
+			AudioClips.Remove(name);
 		}
 
 		/// <summary>
@@ -49,7 +49,7 @@ namespace Friendly_Wars.Engine.Component
 		public void Play(String name)
 		{
 			MediaElement audioClip;
-			if (audioClips.TryGetValue(name, out audioClip))
+			if (AudioClips.TryGetValue(name, out audioClip))
 			{
 				audioClip.Play();
 			}
@@ -66,7 +66,7 @@ namespace Friendly_Wars.Engine.Component
 		public void Stop(String name)
 		{
 			MediaElement audioClip;
-			if (audioClips.TryGetValue(name, out audioClip))
+			if (AudioClips.TryGetValue(name, out audioClip))
 			{
 				audioClip.Stop();
 			}

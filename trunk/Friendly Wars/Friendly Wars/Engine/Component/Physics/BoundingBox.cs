@@ -17,26 +17,26 @@ namespace Friendly_Wars.Engine.Component.Physics
 		/// <summary>
 		/// The size of the BoundingBox.
 		/// </summary>
-		private Point size;
+		private Point Size;
 
 		/// <summary>
 		/// The offset of the box, with respect to the GameObject's TransformComponent.
 		/// </summary>
-		private Point offset;
+		private Point Offset;
 
 		/// <summary>
 		/// The owner of this BoundingBox.
 		/// </summary>
-		private GameObject owner;
+		private GameObject Owner;
 
 		/// <summary>
 		/// Constructor for a new BoundingBox.
 		/// </summary>
 		public BoundingBox(GameObject owner, Point size, Point offset)
 		{
-			this.owner = owner;
-			this.size = size;
-			this.offset = offset;
+			this.Owner = owner;
+			this.Size = size;
+			this.Offset = offset;
 		}
 
 		/// <summary>
@@ -47,17 +47,17 @@ namespace Friendly_Wars.Engine.Component.Physics
 		public bool IsCollidingWith(GameObject gameObject)
 		{
 			// Get all of the coordinates of the potential-colliding GameObject's BoundingBox.
-			BoundingBox boundingBox = gameObject.physicsComponent.boundingBox;
+			BoundingBox boundingBox = gameObject.PhysicsComponent.BoundingBox;
 			Point potentialBottomLeft = GetBottom(Side.LEFT, gameObject);
 			Point potentialBottomRight = GetBottom(Side.RIGHT, gameObject);
 			Point potentialTopLeft = GetTop(Side.LEFT, gameObject);
 			Point potentialTopRight = GetTop(Side.RIGHT, gameObject);
 
 			// Get all of the coordinates of this BoundingBox.
-			Point thisBottomLeft = GetBottom(Side.LEFT, owner);
-			Point thisBottomRight = GetBottom(Side.RIGHT, owner);
-			Point thisTopLeft = GetTop(Side.LEFT, owner);
-			Point thisTopRight = GetTop(Side.RIGHT, owner);
+			Point thisBottomLeft = GetBottom(Side.LEFT, Owner);
+			Point thisBottomRight = GetBottom(Side.RIGHT, Owner);
+			Point thisTopLeft = GetTop(Side.LEFT, Owner);
+			Point thisTopRight = GetTop(Side.RIGHT, Owner);
 
 			// Test X-based collision.
 			if (potentialBottomLeft.X <= thisBottomLeft.X && thisBottomLeft.X <= potentialBottomRight.X)
@@ -92,14 +92,14 @@ namespace Friendly_Wars.Engine.Component.Physics
 		/// <returns>The specified bottom-side of this GameObject's BoundingBox.</returns>
 		public static Point GetBottom(Side side, GameObject gameObject)
 		{
-			BoundingBox boundingBox = gameObject.physicsComponent.boundingBox;
+			BoundingBox boundingBox = gameObject.PhysicsComponent.BoundingBox;
 			if (side == Side.LEFT)
 			{
-				return new Point(boundingBox.offset.X + gameObject.transformComponent.position.X, boundingBox.offset.Y + gameObject.transformComponent.position.Y);
+				return new Point(boundingBox.Offset.X + gameObject.TransformComponent.Position.X, boundingBox.Offset.Y + gameObject.TransformComponent.Position.Y);
 			}
 			else if (side == Side.RIGHT)
 			{
-				return new Point(boundingBox.offset.X + boundingBox.size.X + gameObject.transformComponent.position.X, boundingBox.offset.Y + gameObject.transformComponent.position.Y);
+				return new Point(boundingBox.Offset.X + boundingBox.Size.X + gameObject.TransformComponent.Position.X, boundingBox.Offset.Y + gameObject.TransformComponent.Position.Y);
 			}
 			else
 			{
@@ -115,14 +115,14 @@ namespace Friendly_Wars.Engine.Component.Physics
 		/// <returns>The specified top-side of this GameObject's BoundingBox.</returns>
 		public static Point GetTop(Side side, GameObject gameObject)
 		{
-			BoundingBox boundingBox = gameObject.physicsComponent.boundingBox;
+			BoundingBox boundingBox = gameObject.PhysicsComponent.BoundingBox;
 			if (side == Side.LEFT)
 			{
-				return new Point(boundingBox.offset.X + gameObject.transformComponent.position.X, boundingBox.offset.Y + boundingBox.size.Y + gameObject.transformComponent.position.Y);
+				return new Point(boundingBox.Offset.X + gameObject.TransformComponent.Position.X, boundingBox.Offset.Y + boundingBox.Size.Y + gameObject.TransformComponent.Position.Y);
 			}
 			else if (side == Side.RIGHT)
 			{
-				return new Point(boundingBox.offset.X + boundingBox.size.X + gameObject.transformComponent.position.X, boundingBox.offset.Y + boundingBox.size.Y + gameObject.transformComponent.position.Y);
+				return new Point(boundingBox.Offset.X + boundingBox.Size.X + gameObject.TransformComponent.Position.X, boundingBox.Offset.Y + boundingBox.Size.Y + gameObject.TransformComponent.Position.Y);
 			}
 			else
 			{

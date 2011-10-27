@@ -1,5 +1,5 @@
 ﻿using System.Windows.Controls;
-using Friendly_Wars.Engine.Ultilities;
+using Friendly_Wars.Engine.Utilities;
 using Friendly_Wars.Engine.Object;
 using Friendly_Wars.GameLogic;
 

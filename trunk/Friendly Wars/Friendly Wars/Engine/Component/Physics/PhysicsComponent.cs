@@ -11,7 +11,7 @@ namespace Friendly_Wars.Engine.Component.Physics
 		/// <summary>
 		/// The BoundingBox that encapsulates this GameObject.
 		/// </summary>
-		public BoundingBox boundingBox { get; private set; }
+		public BoundingBox BoundingBox { get; private set; }
 
 		/// <summary>
 		/// Constructor for a new PhysicsComponent.
@@ -19,7 +19,7 @@ namespace Friendly_Wars.Engine.Component.Physics
 		/// <param name="owner"> The owner of this PhysicsComponent. </param>
 		public PhysicsComponent(GameObject owner, Point size, Point offset) : base(owner)
 		{
-			boundingBox = new BoundingBox(owner, size, offset);
+			this.BoundingBox = new BoundingBox(owner, size, offset);
 		}
 
 		/// <summary>
@@ -28,9 +28,9 @@ namespace Friendly_Wars.Engine.Component.Physics
 		/// <returns> Determines whether the owner of this PhysicsComponent is colliding with any other GameObjects. </returns>
 		public bool IsColliding()
 		{
-			foreach (GameObject gameObject in World.gameObjects)
+			foreach (GameObject gameObject in World.GameObjects)
 			{
-				if (boundingBox.IsCollidingWith(gameObject))
+				if (BoundingBox.IsCollidingWith(gameObject))
 				{
 					return true;
 				}
