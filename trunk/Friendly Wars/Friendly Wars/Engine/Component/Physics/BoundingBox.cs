@@ -17,26 +17,26 @@ namespace Friendly_Wars.Engine.Component.Physics
 		/// <summary>
 		/// The size of the BoundingBox.
 		/// </summary>
-		private Point Size;
+		private Point size;
 
 		/// <summary>
 		/// The offset of the box, with respect to the GameObject's TransformComponent.
 		/// </summary>
-		private Point Offset;
+		private Point offset;
 
 		/// <summary>
 		/// The owner of this BoundingBox.
 		/// </summary>
-		private GameObject Owner;
+		private GameObject owner;
 
 		/// <summary>
 		/// Constructor for a new BoundingBox.
 		/// </summary>
 		public BoundingBox(GameObject owner, Point size, Point offset)
 		{
-			this.Owner = owner;
-			this.Size = size;
-			this.Offset = offset;
+			this.owner = owner;
+			this.size = size;
+			this.offset = offset;
 		}
 
 		/// <summary>
@@ -54,10 +54,10 @@ namespace Friendly_Wars.Engine.Component.Physics
 			Point potentialTopRight = GetTop(Side.RIGHT, gameObject);
 
 			// Get all of the coordinates of this BoundingBox.
-			Point thisBottomLeft = GetBottom(Side.LEFT, Owner);
-			Point thisBottomRight = GetBottom(Side.RIGHT, Owner);
-			Point thisTopLeft = GetTop(Side.LEFT, Owner);
-			Point thisTopRight = GetTop(Side.RIGHT, Owner);
+			Point thisBottomLeft = GetBottom(Side.LEFT, owner);
+			Point thisBottomRight = GetBottom(Side.RIGHT, owner);
+			Point thisTopLeft = GetTop(Side.LEFT, owner);
+			Point thisTopRight = GetTop(Side.RIGHT, owner);
 
 			// Test X-based collision.
 			if (potentialBottomLeft.X <= thisBottomLeft.X && thisBottomLeft.X <= potentialBottomRight.X)
@@ -95,11 +95,11 @@ namespace Friendly_Wars.Engine.Component.Physics
 			BoundingBox boundingBox = gameObject.PhysicsComponent.BoundingBox;
 			if (side == Side.LEFT)
 			{
-				return new Point(boundingBox.Offset.X + gameObject.TransformComponent.Position.X, boundingBox.Offset.Y + gameObject.TransformComponent.Position.Y);
+				return new Point(boundingBox.offset.X + gameObject.TransformComponent.Position.X, boundingBox.offset.Y + gameObject.TransformComponent.Position.Y);
 			}
 			else if (side == Side.RIGHT)
 			{
-				return new Point(boundingBox.Offset.X + boundingBox.Size.X + gameObject.TransformComponent.Position.X, boundingBox.Offset.Y + gameObject.TransformComponent.Position.Y);
+				return new Point(boundingBox.offset.X + boundingBox.size.X + gameObject.TransformComponent.Position.X, boundingBox.offset.Y + gameObject.TransformComponent.Position.Y);
 			}
 			else
 			{
@@ -118,11 +118,11 @@ namespace Friendly_Wars.Engine.Component.Physics
 			BoundingBox boundingBox = gameObject.PhysicsComponent.BoundingBox;
 			if (side == Side.LEFT)
 			{
-				return new Point(boundingBox.Offset.X + gameObject.TransformComponent.Position.X, boundingBox.Offset.Y + boundingBox.Size.Y + gameObject.TransformComponent.Position.Y);
+				return new Point(boundingBox.offset.X + gameObject.TransformComponent.Position.X, boundingBox.offset.Y + boundingBox.size.Y + gameObject.TransformComponent.Position.Y);
 			}
 			else if (side == Side.RIGHT)
 			{
-				return new Point(boundingBox.Offset.X + boundingBox.Size.X + gameObject.TransformComponent.Position.X, boundingBox.Offset.Y + boundingBox.Size.Y + gameObject.TransformComponent.Position.Y);
+				return new Point(boundingBox.offset.X + boundingBox.size.X + gameObject.TransformComponent.Position.X, boundingBox.offset.Y + boundingBox.size.Y + gameObject.TransformComponent.Position.Y);
 			}
 			else
 			{

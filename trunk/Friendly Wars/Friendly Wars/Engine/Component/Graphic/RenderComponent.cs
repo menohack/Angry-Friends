@@ -28,7 +28,7 @@ namespace Friendly_Wars.Engine.Component.Graphic
 		/// <summary>
 		/// The timer that handles updating this RenderComponent.
 		/// </summary>
-		private static EngineTimer UpdateTimer;
+		private static EngineTimer updateTimer;
 
 		/// <summary>
 		/// Constructor for a new RenderComponent.
@@ -53,7 +53,7 @@ namespace Friendly_Wars.Engine.Component.Graphic
 		    Animations.TryGetValue(animationName, out animation);
 			CurrentAnimation = animation;
 
-			UpdateTimer = new EngineTimer(CurrentAnimation.FPS, new List<IUpdateable> { this });
+			updateTimer = new EngineTimer(CurrentAnimation.FPS, new List<IUpdateable> { this });
 			CurrentAnimation.Play();
 		}
 
@@ -69,7 +69,7 @@ namespace Friendly_Wars.Engine.Component.Graphic
 			if (CurrentAnimation.Name == animation.Name)
 			{
 				Play(DefaultAnimation.Name);
-				UpdateTimer.Stop();
+				updateTimer.Stop();
 			}
 		}
 

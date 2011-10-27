@@ -21,7 +21,7 @@ namespace Friendly_Wars.Engine.Component.Graphic
 		/// <summary>
 		/// The index of the current Frame of this Animation.
 		/// </summary>
-		private int Index;
+		private int index;
 
 		/// <summary>
 		/// The length, in miliseconds, of this Animation. 
@@ -46,7 +46,7 @@ namespace Friendly_Wars.Engine.Component.Graphic
 		/// <summary>
 		/// The elapsed time between the previous update (for playing Animations).
 		/// </summary>
-		private Double ElapsedTime;
+		private Double elapsedTime;
 
 		/// <summary>
 		/// Constructor for a new Animation.
@@ -61,7 +61,7 @@ namespace Friendly_Wars.Engine.Component.Graphic
 			this.Length = length;
 			this.FPS = FPS;
 			this.Name = name;
-			this.Index = 0;
+			this.index = 0;
 		}
 
 		/// <summary>
@@ -86,21 +86,21 @@ namespace Friendly_Wars.Engine.Component.Graphic
 		/// <param name="deltaTime">The time elapsed from the previous update.</param>
 		internal void UpdateFrame(Double deltaTime)
 		{
-			ElapsedTime += deltaTime;
+			elapsedTime += deltaTime;
 			
 			// While frames need to be updated:
-			while (ElapsedTime >= (1.00 / FPS))
+			while (elapsedTime >= (1.00 / FPS))
 			{
-                //FIXME: Should we be using foreach/enumerators instead of indices? Seems to me like the more C# way. [Max]
-				Index++;
-				if (Index == Frames.Count)
+				//FIXME: Should we be using foreach/enumerators instead of indices? Seems to me like the more C# way. [Max]
+				index++;
+				if (index == Frames.Count)
 				{
-					Index = 0;
+					index = 0;
 				}
-				ElapsedTime -= (1.00 / FPS);
+				elapsedTime -= (1.00 / FPS);
 			}
 
-			CurrentFrame = Frames[Index];
+			CurrentFrame = Frames[index];
 		}
 	}
 }

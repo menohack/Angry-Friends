@@ -10,13 +10,13 @@ namespace Friendly_Wars.Engine.Component
 	public class TransformComponent : BaseComponent
 	{
 		/// <summary>
-        /// The right direction of the game, the global-relative direction of right.
+		/// The right direction of the game, the global-relative direction of right.
 		/// </summary>
-		private static readonly Point GlobalRight = new Point(1, 0);
+		private static readonly Point GLOBAL_RIGHT = new Point(1, 0);
 		/// <summary>
-        /// The up direction of the game, the global-relative direction of up.
+		/// The up direction of the game, the global-relative direction of up.
 		/// </summary>
-		private static readonly Point GlobalUp = new Point(0, 1);
+		private static readonly Point GLOBAL_UP = new Point(0, 1);
 
 		/// <summary>
 		/// The position of the TransformComponent.

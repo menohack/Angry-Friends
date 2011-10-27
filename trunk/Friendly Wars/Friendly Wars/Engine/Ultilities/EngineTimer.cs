@@ -5,7 +5,7 @@ using System.Windows.Threading;
 namespace Friendly_Wars.Engine.Utilities
 {
 	/// <summary>
-	/// An interface for listening to an EngineTimer. It recieves the time elapsed from the last interval.
+	/// An interface for listening to an engineTimer. It recieves the time elapsed from the last interval.
 	/// </summary>
 	public interface IUpdateable
 	{
@@ -17,16 +17,16 @@ namespace Friendly_Wars.Engine.Utilities
 	}
 
 	/// <summary>
-	/// An EngineTimer dispatches events to IUpdateables. 
+	/// An engineTimer dispatches events to IUpdateables. 
 	/// It dispatches the change in time from the last update, all while trying to update at a constant interval.
-	/// EngineTimer is frame-rate-independent and will account for a drop in frame rate.
+	/// engineTimer is frame-rate-independent and will account for a drop in frame rate.
 	/// </summary>
 	public class EngineTimer
 	{
 		/// <summary>
 		/// The timer that tries to update at a given interval.
 		/// </summary>
-		private DispatcherTimer UpdateTimer;
+		private DispatcherTimer updateTimer;
 
 		/// <summary>
 		/// The interval, in miliseconds, at which the timer will try to update.
@@ -36,12 +36,12 @@ namespace Friendly_Wars.Engine.Utilities
 		/// <summary>
 		/// The DateTime associated with the last update.
 		/// </summary>
-		private DateTime PreviousTime;
+		private DateTime previousTime;
 
 		/// <summary>
-		/// All of the objects that are listening for dispatched events from this EngineTimer.
+		/// All of the objects that are listening for dispatched events from this engineTimer.
 		/// </summary>
-		private ICollection<IUpdateable> EventListeners;
+		private ICollection<IUpdateable> eventListeners;
 
 		/// <summary>
 		/// Constructor for a new EngineTimer.
@@ -51,25 +51,25 @@ namespace Friendly_Wars.Engine.Utilities
 		public EngineTimer(int interval, ICollection<IUpdateable> eventListeners)
 		{
 			this.Interval = interval;
-			this.EventListeners = eventListeners;
+			this.eventListeners = eventListeners;
 		}
 
 		/// <summary>
 		/// Adds an IUpdateable to this EngineTimer.
 		/// </summary>
-		/// <param name="eventListener">The IUpdateable to add to this EngineTimer.</param>
+		/// <param name="eventListener">The IUpdateable to add to this engineTimer.</param>
 		public void AddEventListener(IUpdateable eventListener)
 		{
-			EventListeners.Add(eventListener);
+			eventListeners.Add(eventListener);
 		}
 
 		/// <summary>
 		/// Removes an IUpdateable from this EngineTimer.
 		/// </summary>
-		/// <param name="eventListener">The IUpdateable to remove from this EngineTimer.</param>
+		/// <param name="eventListener">The IUpdateable to remove from this engineTimer.</param>
 		public void RemoveEventListener(IUpdateable eventListener)
 		{
-			EventListeners.Remove(eventListener);
+			eventListeners.Remove(eventListener);
 		}
 
 		/// <summary>
@@ -77,11 +77,11 @@ namespace Friendly_Wars.Engine.Utilities
 		/// </summary>
 		public void Start()
 		{
-			UpdateTimer = new DispatcherTimer();
-			UpdateTimer.Interval = TimeSpan.FromMilliseconds(Interval);
-			UpdateTimer.Tick += new EventHandler(DispatchEvent);
-			PreviousTime = DateTime.Now;
-			UpdateTimer.Start();
+			updateTimer = new DispatcherTimer();
+			updateTimer.Interval = TimeSpan.FromMilliseconds(Interval);
+			updateTimer.Tick += new EventHandler(DispatchEvent);
+			previousTime = DateTime.Now;
+			updateTimer.Start();
 		}
 
 		/// <summary>
@@ -89,7 +89,7 @@ namespace Friendly_Wars.Engine.Utilities
 		/// </summary>
 		public void Stop()
 		{
-			UpdateTimer.Stop();
+			updateTimer.Stop();
 		}
 
 		/// <summary>
@@ -101,19 +101,19 @@ namespace Friendly_Wars.Engine.Utilities
 		{
 			DateTime currentTime = DateTime.Now;
 
-			Double deltaTime = currentTime.Millisecond - PreviousTime.Millisecond;
+			Double deltaTime = currentTime.Millisecond - previousTime.Millisecond;
 			// If we elapsed one second
 			if (deltaTime <= 0)
 			{
-				deltaTime = 1000 - PreviousTime.Millisecond + currentTime.Millisecond;
+				deltaTime = 1000 - previousTime.Millisecond + currentTime.Millisecond;
 			}
 
-			foreach (IUpdateable eventListener in EventListeners)
+			foreach (IUpdateable eventListener in eventListeners)
 			{
 				eventListener.Update(deltaTime);
 			}
 
-			PreviousTime = DateTime.Now;
+			previousTime = DateTime.Now;
 		}
 
 		/// <summary>
@@ -134,7 +134,7 @@ namespace Friendly_Wars.Engine.Utilities
 		/// <param name="amount">The amount of seconds to convert into miliseconds.</param>
 		/// <returns>The amount of miliseconds in the given amount of seconds.</returns>
 		public static int SecondsToMiliseconds(Double amount)
-        {
+		{
 			return Convert.ToInt32(1000.00 * amount);
 		}
 	}

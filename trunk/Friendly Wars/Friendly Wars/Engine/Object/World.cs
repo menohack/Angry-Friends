@@ -23,9 +23,9 @@ namespace Friendly_Wars.Engine.Object
 		private static readonly int UPDATES_PER_SECOND = 60;
 
 		/// <summary>
-		/// The EngineTimer that will handle updating this world.
+		/// The engineTimer that will handle updating this world.
 		/// </summary>
-		private EngineTimer EngineTimer;
+		private EngineTimer engineTimer;
 
 		/// <summary>
 		/// All of the GameObjects in the game.
@@ -35,12 +35,12 @@ namespace Friendly_Wars.Engine.Object
 		/// <summary>
 		/// The queue of GameObjects that need to be re-drawn/updated the next time WordObject updates.
 		/// </summary>
-		private static IList<GameObject> RedrawQueue;
+		private static IList<GameObject> redrawQueue;
 
 		/// <summary>
 		/// The list of GameObjects that need to be updated at every interval.
 		/// </summary>
-		private static IList<GameObject> UpdateableGameObjects;
+		private static IList<GameObject> updateableGameObjects;
 
 
 		/// <summary>
@@ -49,13 +49,13 @@ namespace Friendly_Wars.Engine.Object
 		/// <param name="name">The name of</param>
 		/// <param name="tag"></param>
 		public World(String name, String tag = null) : base(name, tag) {
-			RedrawQueue = new List<GameObject>();
-			UpdateableGameObjects = new List<GameObject>();
+			redrawQueue = new List<GameObject>();
+			updateableGameObjects = new List<GameObject>();
 			GameObjects = new List<GameObject>();
 
 			// Initialize the timing of the updating of the World.
-			EngineTimer = new EngineTimer(EngineTimer.FromHertzToMiliSeconds(UPDATES_PER_SECOND), new List<IUpdateable> { this });
-			EngineTimer.Start();
+			engineTimer = new EngineTimer(EngineTimer.FromHertzToMiliSeconds(UPDATES_PER_SECOND), new List<IUpdateable> { this });
+			engineTimer.Start();
 		}
 
 		/// <summary>
@@ -63,7 +63,7 @@ namespace Friendly_Wars.Engine.Object
 		/// </summary>
 		/// <param name="gameobject">The GameObject to add to the queue.</param>
 		public static void AddToRedrawQueue(GameObject gameobject) {
-			RedrawQueue.Add(gameobject);
+			redrawQueue.Add(gameobject);
 		}
 
 		/// <summary>
@@ -142,14 +142,14 @@ namespace Friendly_Wars.Engine.Object
 			MainPage.mainPage.LayoutRoot.Children.Add(label);
 
 			// Iterate through each GameObject in updateableGameObjects and update each GameObject.
-			foreach (GameObject gameObject in UpdateableGameObjects)
+			foreach (GameObject gameObject in updateableGameObjects)
 			{
 				//Canvas.Remove(gameObject);
 				//Canvas.Add(gameObject);
 			}
 
 			// Iterate through each GameObject in the redrawQueue and update each GameObject.
-			foreach (GameObject gameObject in RedrawQueue)
+			foreach (GameObject gameObject in redrawQueue)
 			{
 				//Canvas.Remove(gameObject);
 				//Canvas.Add(gameObject);
