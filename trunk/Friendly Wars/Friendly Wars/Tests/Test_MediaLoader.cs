@@ -3,12 +3,12 @@ namespace Friendly_Wars.Tests {
 	/// <summary>
 	/// Test for loading media
 	/// </summary>
-	public static class Test_MediaLoader : ITestable {
+	public class Test_MediaLoader : ITestable {
 		/// <summary>
 		/// Runs the test
 		/// </summary>
 		/// <return>True if the test works.</return>
-		public static bool RunTest() {
+		public bool RunTest() {
 			new MediaLoader();
 			string test_case = @"
 				<map title='beach'>

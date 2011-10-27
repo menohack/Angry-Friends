@@ -20,6 +20,6 @@ namespace Friendly_Wars.Tests
 		/// Runs this given test.
 		/// </summary>
 		/// <returns>True if the test ran successfully.</returns>
-		public static bool RunTest();
+		bool RunTest();
 	}
 }

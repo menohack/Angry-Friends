@@ -22,7 +22,7 @@ namespace Friendly_Wars.Tests
 		/// Tests to see if tags can be properly found.
 		/// </summary>
 		/// <returns>True if the test works.</returns>
-		public static bool RunTest()
+		public bool RunTest()
 		{
 			GameObject go1 = new GameObject("1", "1");
 			GameObject go2 = new GameObject("2", "1");

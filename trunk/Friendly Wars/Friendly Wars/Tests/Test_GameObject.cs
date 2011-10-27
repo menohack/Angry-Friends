@@ -21,7 +21,7 @@ namespace Friendly_Wars.Tests
 		/// Tests to see if the World can handle 10000 GameObjects
 		/// </summary>
 		/// <returns>True if the test works.</returns>
-		public static bool RunTest()
+		public bool RunTest()
 		{
 			for (int i = 0; i < 10000; i++)
 			{
