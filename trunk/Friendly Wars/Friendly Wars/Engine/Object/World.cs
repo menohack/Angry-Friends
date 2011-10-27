@@ -29,7 +29,7 @@ namespace Friendly_Wars.Engine.Object
 		/// <summary>
 		/// World will try to update 30 times per second.
 		/// </summary>
-		private static readonly int UPDATES_PER_SECOND = 30;
+		private static readonly int UPDATES_PER_SECOND = 60;
 
 		/// <summary>
 		/// The EngineTimer that will handle updating this world.
@@ -142,11 +142,13 @@ namespace Friendly_Wars.Engine.Object
 		public void Update(double deltaTime)
 		{
 			int FPS = (int)(1000.00 / deltaTime);
-			MainPage.canvas.Children.Clear();
+			MainPage.mainPage.LayoutRoot.Children.Clear();
 
 			Label label = new Label();
-			label.Content = FPS.ToString();
-			MainPage.canvas.Children.Add(label);
+			label.Content = "FPS: " + FPS.ToString();
+			label.HorizontalAlignment = HorizontalAlignment.Center;
+			label.VerticalAlignment = VerticalAlignment.Center;
+			MainPage.mainPage.LayoutRoot.Children.Add(label);
 
 			// Iterate through each GameObject in updateableGameObjects and update each GameObject.
 			foreach (GameObject gameObject in updateableGameObjects)
