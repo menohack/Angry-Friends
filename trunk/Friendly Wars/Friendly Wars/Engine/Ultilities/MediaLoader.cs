@@ -3,7 +3,7 @@ using System.IO;
 using System.Windows.Controls;
 using System.Xml;
 using Friendly_Wars.GameLogic;
-namespace Friendly_Wars.Engine.Ultilities {
+namespace Friendly_Wars.Engine.Utilities {
 	/// <summary>
 	/// Loads the media
 	/// </summary>
@@ -13,20 +13,9 @@ namespace Friendly_Wars.Engine.Ultilities {
 		/// </summary>
 		/// <param name="filename">XML filename</param>
 		/// <returns>Map Information</returns>
-		public static MapInfo LoadMapXml(string filename) {
+		public static MapInfo LoadMapXml(string text) {
 			//XmlReader reader = XmlReader.Create(new StringReader(Web.DownloadString(filename)));
-			using (XmlReader reader = XmlReader.Create(new StringReader(@"
-				<map title='beach'>
-					<resources>
-						<sound url='explosion_0.wav'/>
-						<image url='moving_1.png'/>
-						<image url='moving_2.png'/>
-						<image url='moving_3.png'/>
-						<image url='moving_4.png'/>
-						<image url='moving_5.png'/>
-					</resources>
-				</map>
-				"))) {
+			using (XmlReader reader = XmlReader.Create(new StringReader(text))) {
 				MapInfo mapInfo = new MapInfo();
 				var path = Web.Path + "maps/";
 				reader.ReadToFollowing("map");

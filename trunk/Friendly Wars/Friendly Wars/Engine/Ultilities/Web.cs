@@ -11,7 +11,7 @@ using System.Windows.Shapes;
 using System.Windows.Media.Imaging;
 using System.Xml;
 using System.Threading;
-namespace Friendly_Wars.Engine.Ultilities {
+namespace Friendly_Wars.Engine.Utilities {
 	/// <summary>
 	/// Download manager
 	/// </summary>
