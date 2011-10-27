@@ -48,6 +48,11 @@ namespace Friendly_Wars.Engine.Component.Graphic
 		/// </summary>
 		private Double elapsedTime;
 
+        /// <summary>
+        /// Whether the animation is the default
+        /// </summary>
+        public bool isDefaultAnimation { get; private set; }
+
 		/// <summary>
 		/// Constructor for a new Animation.
 		/// </summary>
