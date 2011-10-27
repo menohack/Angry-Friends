@@ -5,13 +5,12 @@ using Friendly_Wars.Engine.Object;
 namespace Friendly_Wars.Engine.Component.Physics
 {
 	/// <summary>
-	/// A box-representation of an object's physical being.
+	/// A box-representation of the PhysicsComponent's collider.
 	/// </summary>
 	public class BoundingBox
 	{
-
 		/// <summary>
-		/// Represents sides of a BoundingBox.
+		/// Represents the sides of a BoundingBox.
 		/// </summary>
 		public enum Side {LEFT, RIGHT}
 
@@ -19,10 +18,12 @@ namespace Friendly_Wars.Engine.Component.Physics
 		/// The size of the BoundingBox.
 		/// </summary>
 		private Point size;
+
 		/// <summary>
 		/// The offset of the box, with respect to the GameObject's TransformComponent.
 		/// </summary>
 		private Point offset;
+
 		/// <summary>
 		/// The owner of this BoundingBox.
 		/// </summary>
@@ -39,10 +40,10 @@ namespace Friendly_Wars.Engine.Component.Physics
 		}
 
 		/// <summary>
-		/// Checks to see if this BoundingBox is colliding with another GameObject.
+		/// Checks to see if this BoundingBox is colliding with the specified GameObject.
 		/// </summary>
-		/// <param name="gameObject"> The GameObject in question. </param>
-		/// <returns>Determines if this BoundingBox is colliding with another GameObject.</returns>
+		/// <param name="gameObject"> The GameObject that might be colliding with this BoundingBox's GameObject. </param>
+		/// <returns>Determines if this BoundingBox is colliding with the specified GameObject.</returns>
 		public bool IsCollidingWith(GameObject gameObject)
 		{
 			// Get all of the coordinates of the potential-colliding GameObject's BoundingBox.

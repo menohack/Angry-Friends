@@ -24,7 +24,7 @@ namespace Friendly_Wars.Engine.Component.Graphic
 		private int index;
 
 		/// <summary>
-		/// The length, in seconds, of this Animation. 
+		/// The length, in miliseconds, of this Animation. 
 		/// </summary>
 		public Double length { get; private set; }
 
@@ -44,12 +44,7 @@ namespace Friendly_Wars.Engine.Component.Graphic
 		public bool isPlaying { get; private set; }
 
 		/// <summary>
-		/// Is this the default Animation?
-		/// </summary>
-		public bool isDefaultAnimation { get; private set; }
-
-		/// <summary>
-		/// The elapsed time from the last Update that needs to be accounted for animations.
+		/// The elapsed time between the previous update (for playing Animations).
 		/// </summary>
 		private Double elapsedTime;
 
@@ -60,13 +55,12 @@ namespace Friendly_Wars.Engine.Component.Graphic
 		/// <param name="length">The length, in seconds, of this Animation.</param>
 		/// <param name="FPS">The frames-per-second of this Animation.</param>
 		/// <param name="name">The name of this Animation.</param>
-		public Animation(IList<Frame> frames, Double length, int FPS, String name, bool isDefaultAnimation)
+		public Animation(IList<Frame> frames, double length, int FPS, String name)
 		{
 			this.frames = frames;
 			this.length = length;
 			this.FPS = FPS;
 			this.name = name;
-			this.isDefaultAnimation = isDefaultAnimation;
 			index = 0;
 		}
 
@@ -98,12 +92,11 @@ namespace Friendly_Wars.Engine.Component.Graphic
 			while (elapsedTime >= (1.00 / FPS))
 			{
 				index++;
+				if (index == frames.Count)
+				{
+					index = 0;
+				}
 				elapsedTime -= (1.00 / FPS);
-			}
-
-			if (index == frames.Count)
-			{
-				index = 0;
 			}
 
 			currentFrame = frames[index];

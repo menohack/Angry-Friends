@@ -9,16 +9,17 @@ using System.Windows.Media;
 using System.Windows.Media.Animation;
 using System.Windows.Shapes;
 using Friendly_Wars.Engine.Object;
+using System.Collections;
 
 namespace Friendly_Wars.Engine.Component.Physics
 {
 	/// <summary>
-	/// PhysicsComponent handles collision with other GameObjects.
+	/// PhysicsComponent handles the collision with other GameObjects.
 	/// </summary>
 	public class PhysicsComponent : BaseComponent
 	{
 		/// <summary>
-		/// The bounding box that this object is within.
+		/// The BoundingBox that encapsulates this GameObject.
 		/// </summary>
 		public BoundingBox boundingBox { get; private set; }
 

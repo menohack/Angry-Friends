@@ -11,7 +11,7 @@ namespace Friendly_Wars.Engine.Component.Graphic
 	public class RenderComponent : BaseComponent, IUpdateable
 	{
 		/// <summary>
-		/// All animations of this RenderComponent.
+		/// A Dictionary of <String, Animation> that contains all of the animations of this RenderComponent.
 		/// </summary>
 		internal IDictionary<String, Animation> animations { get; private set; }
 
@@ -35,18 +35,12 @@ namespace Friendly_Wars.Engine.Component.Graphic
 		/// </summary>
 		/// <param name="owner"> The owner of this RenderComponent. </param>
 		/// <param name="animations">The Dictionary of names-to-Animations for this RenderComponent. </param>
-		public RenderComponent(GameObject owner, IDictionary<String, Animation> animations) : base(owner)
+		public RenderComponent(GameObject owner, IDictionary<String, Animation> animations, Animation defaultAnimation) : base(owner)
 		{
 			this.animations = animations;
-			
-			foreach (Animation animation in animations.Values) {
-				if (animation.isDefaultAnimation)
-				{
-					defaultAnimation = animation;
-					currentAnimation = defaultAnimation;
-					return;
-				}
-			}
+			this.defaultAnimation = defaultAnimation;
+			currentAnimation = this.defaultAnimation;
+			//Play(this.defaultAnimation.name);
 		}
 
 		/// <summary>
@@ -58,6 +52,7 @@ namespace Friendly_Wars.Engine.Component.Graphic
 			Animation animation;
 			animations.TryGetValue(animationName, out animation);
 			currentAnimation = animation;
+
 			updateTimer = new EngineTimer(currentAnimation.FPS, new List<IUpdateable> { this });
 			currentAnimation.Play();
 		}
@@ -70,9 +65,10 @@ namespace Friendly_Wars.Engine.Component.Graphic
 		{
 			Animation animation;
 			animations.TryGetValue(animationName, out animation);
+
 			if (currentAnimation.name == animation.name)
 			{
-				currentAnimation = animation;
+				Play(defaultAnimation.name);
 				updateTimer.Stop();
 			}
 		}
@@ -84,7 +80,7 @@ namespace Friendly_Wars.Engine.Component.Graphic
 		public void Update(double deltaTime)
 		{
 			currentAnimation.UpdateFrame(deltaTime);
-			World.AddToRedrawQueue(base.owner);
+			//World.AddToRedrawQueue(base.owner);
 		}
 	}
 }

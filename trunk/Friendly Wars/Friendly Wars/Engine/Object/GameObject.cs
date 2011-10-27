@@ -77,10 +77,10 @@ namespace Friendly_Wars.Engine.Object
 
             children = new List<GameObject>();
 
-            transformComponent = new TransformComponent(this);
+            transformComponent = new TransformComponent(this, new Point(), new Point());
             physicsComponent = new PhysicsComponent(this, new Point(), new Point());
-            audioComponent = new AudioComponent(this);
-            //renderComponent = new RenderComponent(this, null);
+            audioComponent = new AudioComponent(this, new Dictionary<String, MediaElement>());
+            renderComponent = new RenderComponent(this, null, null);
         }
 
         /// <summary>

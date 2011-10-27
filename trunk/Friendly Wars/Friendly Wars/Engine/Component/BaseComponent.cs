@@ -4,11 +4,12 @@ namespace Friendly_Wars.Engine.Component
 {
 	/// <summary>
 	/// BaseComponent is the base for all components, which provides the ability to enable and disable components.
+	/// BaseComponent also contains the owner, in the form of a GameObject, for this component.
 	/// </summary>
 	public class BaseComponent
 	{
 		/// <summary>
-		///   Is this BaseComponent enabled?
+		///	Is this BaseComponent enabled?
 		/// </summary>
 		public bool isEnabled { get; private set; }
 
