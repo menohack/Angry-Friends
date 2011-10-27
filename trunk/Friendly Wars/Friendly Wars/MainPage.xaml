@@ -8,6 +8,5 @@
 
     <Grid x:Name="LayoutRoot" Background="White">
         <Image Height="300" HorizontalAlignment="Left" Name="terrain" Stretch="Fill" VerticalAlignment="Top" Width="400" />
-        <sdk:Label Height="28" HorizontalAlignment="Left" Margin="131,133,0,0" Name="label1" VerticalAlignment="Top" Width="120" DataContext="{Binding}" />
     </Grid>
 </UserControl>

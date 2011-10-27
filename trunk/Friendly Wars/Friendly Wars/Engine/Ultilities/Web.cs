@@ -41,6 +41,7 @@ namespace Friendly_Wars.Engine.Ultilities {
 				if (onLoaded == null) mre.Set();
 				else onLoaded(image);
 			};
+			image.UriSource = new Uri(url);
 			if (onLoaded == null) {
 				mre.WaitOne();
 				return image;
