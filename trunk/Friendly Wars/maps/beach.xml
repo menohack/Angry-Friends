@@ -1,4 +1,5 @@
-<map title="beach">
+<map>
+	<title>beach</title>
 	<resources>
 		<sound url="explosion_0.wav"/>
 		<image url="moving_1.png"/>
