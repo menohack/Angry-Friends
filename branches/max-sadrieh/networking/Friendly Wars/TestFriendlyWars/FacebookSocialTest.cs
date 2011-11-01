@@ -25,7 +25,7 @@ namespace TestFriendlyWars
         [TestMethod]
         public void TestCorrectNiceId()
         {
-            FacebookSocial fs = new FacebookSocial("msadrieh");
+            FacebookSocial fs = new FacebookSocial("zuck");
             Assert.IsNotNull(fs);
             Assert.IsInstanceOfType(fs, typeof(FacebookSocial));
         }
@@ -33,7 +33,7 @@ namespace TestFriendlyWars
         [TestMethod]
         public void TestCorrectUglyId()
         {
-            FacebookSocial fs = new FacebookSocial("1225470476");
+            FacebookSocial fs = new FacebookSocial("4");
             Assert.IsNotNull(fs);
             Assert.IsInstanceOfType(fs, typeof(FacebookSocial));
         }
