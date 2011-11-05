@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Windows.Threading;
 using System.Collections.ObjectModel;
+using Friendly_Wars.Engine.Object;
 
 namespace Friendly_Wars.Engine.Utilities
 {

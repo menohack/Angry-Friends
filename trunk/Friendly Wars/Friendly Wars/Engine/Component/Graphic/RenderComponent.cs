@@ -27,11 +27,6 @@ namespace Friendly_Wars.Engine.Component.Graphic
 		public Animation DefaultAnimation { get; private set; }
 
 		/// <summary>
-		/// The timer that handles updating this RenderComponent.
-		/// </summary>
-		private static EngineTimer updateTimer;
-
-		/// <summary>
 		/// The width of the entire SilverLight canvas.
 		/// </summary>
 		public static readonly double CanvasWidth = MainPage.mainPage.LayoutRoot.Width;
@@ -90,8 +85,8 @@ namespace Friendly_Wars.Engine.Component.Graphic
 
 			//Collection<IUpdateable> listeners = new Collection<IUpdateable>();
 			//listeners.Add(this);
-			updateTimer = new EngineTimer(animation.Length, this);
-			updateTimer.Start();
+			//updateTimer = new EngineTimer(animation.Length, this);
+			//updateTimer.Start();
 		}
 
 		/// <summary>
@@ -106,7 +101,7 @@ namespace Friendly_Wars.Engine.Component.Graphic
 			if (CurrentAnimation.Name == animation.Name)
 			{
 				Play(DefaultAnimation.Name);
-				updateTimer.Stop();
+				animation.Stop();
 			}
 		}
 
@@ -116,7 +111,8 @@ namespace Friendly_Wars.Engine.Component.Graphic
 		/// <param name="deltaTime">The time in milliseconds since the last Update.</param>
 		public void Update(double deltaTime)
 		{
-			CurrentAnimation.UpdateFrame(deltaTime);
+			//TODO: Animation has a timer which switches frames so there is nothing to do here.
+			//CurrentAnimation.UpdateFrame(deltaTime);
 			//World.AddToRedrawQueue(base.owner);
 		}
 	}

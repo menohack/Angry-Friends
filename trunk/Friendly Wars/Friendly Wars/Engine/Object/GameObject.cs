@@ -121,6 +121,16 @@ namespace Friendly_Wars.Engine.Object
             gameObject = null;
         }
 
+		/// <summary>
+		/// Updates the GameObject.
+		/// </summary>
+		/// <param name="deltaTime">The time since the last update.</param>
+		public void Update(double deltaTime)
+		{
+			PhysicsComponent.Update(deltaTime);
+			RenderComponent.Update(deltaTime);
+		}
+
         /// <summary>
         /// Creates a UID for a GameObject.
         /// </summary>

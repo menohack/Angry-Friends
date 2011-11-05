@@ -36,7 +36,7 @@ namespace Friendly_Wars.GameLogic
 		/// </summary>
 		public Game()
 		{
-			world = new World(World.WORLD_NAME);
+			world = new World("Friendly Wars");
 			web = new Web();
 
 			//
@@ -59,9 +59,12 @@ namespace Friendly_Wars.GameLogic
 			slopedBackground.Source = drawMe;
 
 			terrain = new Terrain(slopedBackground, "Level 1");
+			world.AddGameObject(terrain);
 
 
 			GameObject projectile = new GameObject("projectile");
+			world.AddGameObject(projectile);
+			world.AddToRedrawQueue(projectile);
 
 			//Build a temporary projectile image
 
@@ -102,6 +105,9 @@ namespace Friendly_Wars.GameLogic
 				image.Height = height;
 
 				frames.Insert(f, new Frame(image, new Point(xOffset, yOffset)));
+
+
+				world.Start();
 			}
 
 			//TODO: Figure out why 0,0 corresponds to the center of the screen

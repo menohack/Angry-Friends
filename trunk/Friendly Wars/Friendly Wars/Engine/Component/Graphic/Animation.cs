@@ -1,13 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Windows;
+using Friendly_Wars.Engine.Utilities;
 
 namespace Friendly_Wars.Engine.Component.Graphic
 {
 	/// <summary>
 	/// Animation contains all data pertaining to an animation.
 	/// </summary>
-	public class Animation
+	public class Animation : IUpdateable
 	{
 		/// <summary>
 		/// All the Frames of this Animation.
@@ -49,6 +50,8 @@ namespace Friendly_Wars.Engine.Component.Graphic
 		/// </summary>
 		private Double elapsedTime;
 
+		private EngineTimer frameTimer;
+
 		/// <summary>
 		/// Constructor for a new Animation with multiple frames.
 		/// </summary>
@@ -68,7 +71,10 @@ namespace Friendly_Wars.Engine.Component.Graphic
 
 			//Should I have this test?
 			if (frames.Count > 0)
+			{
 				CurrentFrame = frames[0];
+				frameTimer = new EngineTimer(Length, this);
+			}
 		}
 
 		/// <summary>
@@ -88,6 +94,7 @@ namespace Friendly_Wars.Engine.Component.Graphic
 			IsPlaying = false;
 
 			CurrentFrame = frame;
+			frameTimer = new EngineTimer(Length, this);
 		}
 
 		/// <summary>
@@ -99,10 +106,9 @@ namespace Friendly_Wars.Engine.Component.Graphic
 			if (CurrentFrame == null)
 				return;
 
-			//TODO: Create Draw() method instead of this?
-			//CurrentFrame.image.Visibility = Visibility.Visible;
 			CurrentFrame.Draw();
 			IsPlaying = true;
+			frameTimer.Start();
 		}
 
 		/// <summary>
@@ -110,9 +116,14 @@ namespace Friendly_Wars.Engine.Component.Graphic
 		/// </summary>
 		public void Stop()
 		{
+			if (CurrentFrame == null)
+				return;
+			CurrentFrame.Hide();
 			IsPlaying = false;
+			frameTimer.Stop();
 		}
 
+		//TODO: I broke this function into two functions for the two possible timers.
 		/// <summary>
 		/// Updates the frame of this Animation.
 		/// </summary>
@@ -140,6 +151,16 @@ namespace Friendly_Wars.Engine.Component.Graphic
 
 			if (elapsedTime > 1e20)
 				elapsedTime -= 1e20;
+		}
+
+		/// <summary>
+		/// Updates to the correct frame of the animation.
+		/// </summary>
+		/// <param name="deltaTime">The time since the last update.</param>
+		public void Update(double deltaTime)
+		{
+			if (Frames.Count < 2)
+				return;
 
 			//TODO: I am not sure which one of these is more correct. Feel free to change it.
 			//index = (int)(elapsedTime / Length) % Frames.Count;
