@@ -17,15 +17,21 @@ namespace Friendly_Wars.Engine.Object
 		/// </summary>
 		public static readonly String WORLD_NAME = "WORLD";
 
+		//TODO: Unused variable, disabled by James.
+		/*
 		/// <summary>
 		/// World will try to update 30 times per second.
 		/// </summary>
 		private static readonly int UPDATES_PER_SECOND = 60;
+		*/
 
+		//TODO: Unused variable, removed by James.
+		/*
 		/// <summary>
 		/// The engineTimer that will handle updating this world.
 		/// </summary>
-		private EngineTimer engineTimer;
+		//private EngineTimer engineTimer;
+		*/
 
 		/// <summary>
 		/// All of the GameObjects in the game.
@@ -46,16 +52,17 @@ namespace Friendly_Wars.Engine.Object
 		/// <summary>
 		/// The constructor for a new instance of World.
 		/// </summary>
-		/// <param name="name">The name of</param>
-		/// <param name="tag"></param>
+		/// <param name="name">The name of the world.</param>
+		/// <param name="tag">The tag of the world.</param>
 		public World(String name, String tag = null) : base(name, tag) {
 			redrawQueue = new List<GameObject>();
 			updateableGameObjects = new List<GameObject>();
 			GameObjects = new List<GameObject>();
 
+			//TODO: DISABLED TEMPORARILY BY JAMES
 			// Initialize the timing of the updating of the World.
-			engineTimer = new EngineTimer(EngineTimer.FromHertzToMiliSeconds(UPDATES_PER_SECOND), new List<IUpdateable> { this });
-			engineTimer.Start();
+			//engineTimer = new EngineTimer(EngineTimer.FromHertzToMiliSeconds(UPDATES_PER_SECOND), new List<IUpdateable> { this });
+			//engineTimer.Start();
 		}
 
 		/// <summary>

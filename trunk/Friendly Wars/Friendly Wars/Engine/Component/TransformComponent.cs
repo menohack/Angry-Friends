@@ -37,6 +37,8 @@ namespace Friendly_Wars.Engine.Component
 		/// Constructor for a new instance of TransformComponent.
 		/// </summary>
 		/// <param name="owner">The owner of this TransformComponent.</param>
+		/// <param name="position">The position that the TransformComponent represents.</param>
+		/// <param name="size">The scale that the TransformComponent represents.</param>
 		public TransformComponent(GameObject owner, Point position, Point size) : base(owner)
 		{
 			this.Position = position;
@@ -106,7 +108,7 @@ namespace Friendly_Wars.Engine.Component
 		/// <summary>
 		/// Resize by a given amount.
 		/// </summary>
-		/// <param name="resizeAmount"></param>
+		/// <param name="resizeFactor">The scale by which to resize.</param>
 		public void Resize(Point resizeFactor)
 		{
 			Size = new Point(Size.X * resizeFactor.X, Size.Y * resizeFactor.Y);

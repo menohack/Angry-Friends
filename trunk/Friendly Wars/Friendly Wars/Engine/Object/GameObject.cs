@@ -29,7 +29,7 @@ namespace Friendly_Wars.Engine.Object
         /// <summary>
         /// This GameObject's RenderComponent.
         /// </summary>
-        public RenderComponent RenderComponent { get; private set; }
+        private RenderComponent RenderComponent { get; set; }
 
         /// <summary>
         /// This GameObject's name.
@@ -73,6 +73,24 @@ namespace Friendly_Wars.Engine.Object
             AudioComponent = new AudioComponent(this, new Dictionary<String, MediaElement>());
             RenderComponent = new RenderComponent(this, new Dictionary<string, Animation>(), null);
         }
+
+		/// <summary>
+		/// Adds a new animation.
+		/// </summary>
+		/// <param name="animation">The animation.</param>
+		public void AddAnimation(Animation animation)
+		{
+			RenderComponent.AddAnimation(animation);
+		}
+
+		/// <summary>
+		/// Plays the given animation.
+		/// </summary>
+		/// <param name="animationName">The name of the animation.</param>
+		public void Play(String animationName)
+		{
+			RenderComponent.Play(animationName);
+		}
 
         /// <summary>
         /// Adds a child GameObject to the current GameObject, creating a parent-child relationship.

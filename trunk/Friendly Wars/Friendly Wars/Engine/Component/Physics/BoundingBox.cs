@@ -12,7 +12,15 @@ namespace Friendly_Wars.Engine.Component.Physics
 		/// <summary>
 		/// Represents the sides of a BoundingBox.
 		/// </summary>
-		public enum Side {LEFT, RIGHT}
+		public enum Side {
+			/// <summary>
+			/// The left or west side.
+			/// </summary>
+			LEFT, 
+			/// <summary>
+			/// The right or east side.
+			/// </summary>
+			RIGHT}
 
 		/// <summary>
 		/// The size of the BoundingBox.

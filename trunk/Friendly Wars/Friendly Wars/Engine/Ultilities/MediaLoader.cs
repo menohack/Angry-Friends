@@ -4,14 +4,16 @@ using System.Windows.Controls;
 using System.Xml;
 using Friendly_Wars.GameLogic;
 namespace Friendly_Wars.Engine.Utilities {
+
 	/// <summary>
 	/// Loads the media
 	/// </summary>
 	public class MediaLoader {
+
 		/// <summary>
 		/// Loads a map's xml description
 		/// </summary>
-		/// <param name="filename">XML filename</param>
+		/// <param name="text">The xml text to parse.</param>
 		/// <returns>Map Information</returns>
 		public static MapInfo LoadMapXml(string text) {
 			//XmlReader reader = XmlReader.Create(new StringReader(Web.DownloadString(filename)));

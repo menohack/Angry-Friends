@@ -17,6 +17,8 @@ namespace Friendly_Wars.Engine.Component.Physics
 		/// Constructor for a new PhysicsComponent.
 		/// </summary>
 		/// <param name="owner"> The owner of this PhysicsComponent. </param>
+		/// <param name="size">The size of the BoundingBox.</param>
+		/// <param name="offset">The offset of the BoundingBox.</param>
 		public PhysicsComponent(GameObject owner, Point size, Point offset) : base(owner)
 		{
 			this.BoundingBox = new BoundingBox(owner, size, offset);
