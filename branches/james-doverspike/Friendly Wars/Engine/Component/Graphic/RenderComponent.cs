@@ -44,6 +44,21 @@ namespace Friendly_Wars.Engine.Component.Graphic
 		}
 
 		/// <summary>
+		/// Adds a new animation.
+		/// </summary>
+		/// <param name="animation"> The new animation. </param>
+		/// <returns> True if the animation was added, false if it already exists. </returns>
+		public bool AddAnimation(Animation animation)
+		{
+			KeyValuePair<String, Animation> value = new KeyValuePair<String, Animation>(animation.Name, animation);
+			if (Animations.Contains(value))
+				return false;
+
+			Animations.Add(value);
+			return true;
+		}
+
+		/// <summary>
 		/// Plays a specific Animation.
 		/// </summary>
 		/// <param name="animationName">The name of the Animation to play.</param>
