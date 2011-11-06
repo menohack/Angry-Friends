@@ -98,6 +98,7 @@ namespace Friendly_Wars.Engine.Object
 		public void Start()
 		{
 			engineTimer.Start();
+			FPSLabel.Visibility = Visibility.Visible;
 		}
 
 		/// <summary>

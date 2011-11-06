@@ -108,7 +108,9 @@ namespace Friendly_Wars.Engine.Component.Graphic
 
 			CurrentFrame.Draw();
 			IsPlaying = true;
-			frameTimer.Start();
+
+			if (this.Frames.Count > 1)
+				frameTimer.Start();
 		}
 
 		/// <summary>

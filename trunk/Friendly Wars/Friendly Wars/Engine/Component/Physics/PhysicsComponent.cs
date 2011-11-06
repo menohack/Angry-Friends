@@ -47,8 +47,7 @@ namespace Friendly_Wars.Engine.Component.Physics
 		/// </summary>
 		/// <param name="deltaTime">The time since the last update.</param>
 		public void Update(double deltaTime)
-		{
-			
+		{	
 		}
 	}
 }

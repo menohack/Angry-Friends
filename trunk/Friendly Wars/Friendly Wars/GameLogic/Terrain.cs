@@ -5,8 +5,6 @@ using Friendly_Wars.Engine.Component;
 using System.Windows;
 using Friendly_Wars.Engine.Component.Graphic;
 using System.Windows.Controls;
-using System.Collections;
-using System.Collections.Generic;
 
 namespace Friendly_Wars.GameLogic
 {
