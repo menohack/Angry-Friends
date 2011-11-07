@@ -107,12 +107,14 @@ namespace Friendly_Wars.GameLogic
 				frames.Insert(f, new Frame(image, new Point(xOffset, yOffset)));
 
 
-				world.Start();
+				
 			}
 
 			//TODO: Figure out why 0,0 corresponds to the center of the screen
 			projectile.AddAnimation(new Animation(frames, 1000*duration/numFrames, 60, "grow"));
 			projectile.Play("grow");
+
+			world.Start();
 		}
 
 		/// <summary>
