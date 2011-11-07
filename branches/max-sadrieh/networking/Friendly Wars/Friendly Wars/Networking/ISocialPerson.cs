@@ -2,6 +2,9 @@
 
 namespace Friendly_Wars.Networking
 {
+    /// <summary>
+    /// A general person with friends.
+    /// </summary>
     public interface ISocialPerson
     {
         /// <summary>
