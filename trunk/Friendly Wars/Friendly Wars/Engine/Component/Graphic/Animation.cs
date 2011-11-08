@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Windows;
 using Friendly_Wars.Engine.Utilities;
+using System.Collections;
 
 namespace Friendly_Wars.Engine.Component.Graphic
 {
@@ -21,9 +22,9 @@ namespace Friendly_Wars.Engine.Component.Graphic
 		public Frame CurrentFrame { get; private set; }
 
 		/// <summary>
-		/// The index of the current Frame of this Animation.
+		/// The enumerator for the current Frame of this Animation.
 		/// </summary>
-		private int index;
+		private IEnumerator index;
 
 		/// <summary>
 		/// The length, in miliseconds, of this Animation. 
@@ -41,16 +42,9 @@ namespace Friendly_Wars.Engine.Component.Graphic
 		public String Name { get; private set; }
 
 		/// <summary>
-		/// Is this Animation playing?
-		/// </summary>
-		public bool IsPlaying { get; private set; }
-
-		/// <summary>
 		/// The elapsed time between the previous update (for playing Animations).
 		/// </summary>
 		private Double elapsedTime;
-
-		private EngineTimer frameTimer;
 
 		/// <summary>
 		/// Constructor for a new Animation with multiple frames.
@@ -65,16 +59,7 @@ namespace Friendly_Wars.Engine.Component.Graphic
 			Length = length;
 			FPS = fps;
 			Name = name;
-			index = 0;
-
-			IsPlaying = false;
-
-			//Should I have this test?
-			if (frames.Count > 0)
-			{
-				CurrentFrame = frames[0];
-				frameTimer = new EngineTimer(Length, this);
-			}
+			index = Frames.GetEnumerator();
 		}
 
 		/// <summary>
@@ -82,100 +67,28 @@ namespace Friendly_Wars.Engine.Component.Graphic
 		/// </summary>
 		/// <param name="frame">The frame of the animation.</param>
 		/// <param name="name">The name of the animation.</param>
-		public Animation(Frame frame, String name)
-		{
-			Frames = new List<Frame>();
-			Frames.Add(frame);
-			Length = 0.0;
-			FPS = 0;
-			Name = name;
-			index = 0;
+		public Animation(Frame frame, String name) : this(new List<Frame> {frame}, 0.0, 0, name )
+		{}
 
-			IsPlaying = false;
-
-			CurrentFrame = frame;
-			frameTimer = new EngineTimer(Length, this);
-		}
-
-		/// <summary>
-		/// Plays this animation.
-		/// </summary>
-		public void Play()
-		{
-			//Should I have this test?
-			if (CurrentFrame == null)
-				return;
-
-			CurrentFrame.Draw();
-			IsPlaying = true;
-
-			if (this.Frames.Count > 1)
-				frameTimer.Start();
-		}
-
-		/// <summary>
-		/// Stops playing this Animation.
-		/// </summary>
-		public void Stop()
-		{
-			if (CurrentFrame == null)
-				return;
-			CurrentFrame.Hide();
-			IsPlaying = false;
-			frameTimer.Stop();
-		}
-
-		//TODO: I broke this function into two functions for the two possible timers.
 		/// <summary>
 		/// Updates the frame of this Animation.
 		/// </summary>
 		/// <param name="deltaTime">The time in milliseconds from the previous update.</param>
-		internal void UpdateFrame(Double deltaTime)
+		public void Update(Double deltaTime)
 		{
 			elapsedTime += deltaTime;
 
-			if (Frames.Count < 2)
-				return;
-
-			//TODO: Removed by James. What were you trying to do?
-			/*
 			// While frames need to be updated:
 			while (elapsedTime >= (1.00 / FPS))
 			{
-				//FIXME: Should we be using foreach/enumerators instead of indices? Seems to me like the more C# way. [Max]
-				index++;
-				if (index == Frames.Count)
-					index = 0;
+				if (!index.MoveNext())
+				{
+					index.Reset();
+					index.MoveNext();
+				}
 
 				elapsedTime -= (1.00 / FPS);
 			}
-			*/
-
-			if (elapsedTime > 1e20)
-				elapsedTime -= 1e20;
-		}
-
-		/// <summary>
-		/// Updates to the correct frame of the animation.
-		/// </summary>
-		/// <param name="deltaTime">The time since the last update.</param>
-		public void Update(double deltaTime)
-		{
-			if (Frames.Count < 2)
-				return;
-
-			//TODO: I am not sure which one of these is more correct. Feel free to change it.
-			//index = (int)(elapsedTime / Length) % Frames.Count;
-			index = (index + (int)(deltaTime / Length)) % Frames.Count;
-
-			//Hide the old frame
-			CurrentFrame.Hide();
-
-			//Switch to the new frame
-			CurrentFrame = Frames[index];
-
-			//Render the new frame
-			CurrentFrame.Draw();
 		}
 	}
 }

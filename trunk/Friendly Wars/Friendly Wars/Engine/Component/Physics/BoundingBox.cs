@@ -20,7 +20,8 @@ namespace Friendly_Wars.Engine.Component.Physics
 			/// <summary>
 			/// The right or east side.
 			/// </summary>
-			RIGHT}
+			RIGHT
+		}
 
 		/// <summary>
 		/// The size of the BoundingBox.

@@ -6,9 +6,9 @@ using Friendly_Wars.Engine.Utilities;
 namespace Friendly_Wars.Engine.Component.Physics
 {
 	/// <summary>
-	/// PhysicsComponent handles the collision with other GameObjects.
+	/// PhysicsComponent handles the collision with other gameObjects.
 	/// </summary>
-	public class PhysicsComponent : BaseComponent, IUpdateable
+	public class PhysicsComponent : BaseComponent
 	{
 		/// <summary>
 		/// The BoundingBox that encapsulates this GameObject.
@@ -27,12 +27,12 @@ namespace Friendly_Wars.Engine.Component.Physics
 		}
 
 		/// <summary>
-		/// Checks whether the owner of this PhysicsComponent is colliding with any other GameObjects.
+		/// Checks if the owner of this PhysicsComponent is colliding with any other gameObjects.
 		/// </summary>
-		/// <returns> Determines whether the owner of this PhysicsComponent is colliding with any other GameObjects. </returns>
-		public bool IsColliding(IList<GameObject> gameObjects)
+		/// <returns> Determines whether the owner of this PhysicsComponent is colliding with any other gameObjects. </returns>
+		public bool IsColliding()
 		{
-			foreach (GameObject gameObject in gameObjects)
+			foreach (GameObject gameObject in World.Instance.GetGameObjects())
 			{
 				if (BoundingBox.IsCollidingWith(gameObject))
 				{
@@ -40,14 +40,6 @@ namespace Friendly_Wars.Engine.Component.Physics
 				}
 			}
 			return false;
-		}
-
-		/// <summary>
-		/// Updates the PhysicsComponent.
-		/// </summary>
-		/// <param name="deltaTime">The time since the last update.</param>
-		public void Update(double deltaTime)
-		{	
 		}
 	}
 }

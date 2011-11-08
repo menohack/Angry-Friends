@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Friendly_Wars.Engine.Object;
 using Friendly_Wars.Engine.Utilities;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 
 namespace Friendly_Wars.Engine.Component.Graphic
 {
@@ -17,53 +18,32 @@ namespace Friendly_Wars.Engine.Component.Graphic
 		internal IDictionary<String, Animation> Animations { get; private set; }
 
 		/// <summary>
-		/// The current animation.
+		/// The animation that is currently playing.
 		/// </summary>
 		public Animation CurrentAnimation { get; private set; }
 
 		/// <summary>
-		/// The default animation for this RenderComponent.
+		/// The default animation for this RenderComponent.  It will play when no other animation is specified to play.
 		/// </summary>
 		public Animation DefaultAnimation { get; private set; }
 
 		/// <summary>
-		/// The width of the entire SilverLight canvas.
+		/// The EngineTimer that handles updating this RenderComponent's animations.
 		/// </summary>
-		public static readonly double CanvasWidth = MainPage.mainPage.LayoutRoot.Width;
-
-		/// <summary>
-		/// The height of the entire SilverLight canvas.
-		/// </summary>
-		public static readonly double CanvasHeight = MainPage.mainPage.LayoutRoot.Height;
+		private EngineTimer updateTimer;
 
 		/// <summary>
 		/// Constructor for a new RenderComponent.
 		/// </summary>
 		/// <param name="owner"> The owner of this RenderComponent. </param>
-		/// <param name="animations">The Dictionary of names-to-Animations for this RenderComponent. </param>
-		/// <param name="defaultAnimation">The animation to play when none is selected.</param>
+		/// <param name="animations">The Dictionary of names-to-Animations of this RenderComponent. </param>
+		/// <param name="defaultAnimation">The animation to play when no other animation is specified to play.</param>
 		public RenderComponent(GameObject owner, IDictionary<String, Animation> animations, Animation defaultAnimation) : base(owner)
 		{
 			this.Animations = animations;
 			this.DefaultAnimation = defaultAnimation;
 			this.CurrentAnimation = this.DefaultAnimation;
-			//Play(this.defaultAnimation.name);
-		}
-
-		//TODO: Should these play methods return a bool or throw exceptions? I'm leaning towards exceptions because it is a mistake.
-		/// <summary>
-		/// Adds a new animation.
-		/// </summary>
-		/// <param name="animation"> The new animation. </param>
-		/// <returns> True if the animation was added, false if it already exists. </returns>
-		public bool AddAnimation(Animation animation)
-		{
-			KeyValuePair<String, Animation> value = new KeyValuePair<String, Animation>(animation.Name, animation);
-			if (Animations.Contains(value))
-				return false;
-
-			Animations.Add(value);
-			return true;
+			Play(this.DefaultAnimation.Name);
 		}
 
 		/// <summary>
@@ -73,20 +53,11 @@ namespace Friendly_Wars.Engine.Component.Graphic
 		public void Play(String animationName)
 		{
 			Animation animation;
-
-			//TODO: Exception handling?
-			if (!Animations.TryGetValue(animationName, out animation))
-				return;
-
+			Debug.Assert(!Animations.TryGetValue(animationName, out animation), "The Animation: " + animationName + " does not exist.");
 			CurrentAnimation = animation;
 
-			//updateTimer = new EngineTimer(CurrentAnimation.FPS, new List<IUpdateable> { this });
-			CurrentAnimation.Play();
-
-			//Collection<IUpdateable> listeners = new Collection<IUpdateable>();
-			//listeners.Add(this);
-			//updateTimer = new EngineTimer(animation.Length, this);
-			//updateTimer.Start();
+			updateTimer = new EngineTimer(CurrentAnimation.FPS, new List<IUpdateable> { CurrentAnimation, this });
+			updateTimer.Start();
 		}
 
 		/// <summary>
@@ -96,24 +67,19 @@ namespace Friendly_Wars.Engine.Component.Graphic
 		public void Stop(String animationName)
 		{
 			Animation animation;
-			Animations.TryGetValue(animationName, out animation);
+			Debug.Assert(!Animations.TryGetValue(animationName, out animation), "The Animation: " + animationName + " does not exist.");
+			updateTimer.Stop();
 
-			if (CurrentAnimation.Name == animation.Name)
-			{
-				Play(DefaultAnimation.Name);
-				animation.Stop();
-			}
+			Play(DefaultAnimation.Name);
 		}
 
 		/// <summary>
-		/// Updates the frame.
+		/// Notify the RenderComponent that it needs to be re-rendered.
 		/// </summary>
 		/// <param name="deltaTime">The time in milliseconds since the last Update.</param>
 		public void Update(double deltaTime)
 		{
-			//TODO: Animation has a timer which switches frames so there is nothing to do here.
-			//CurrentAnimation.UpdateFrame(deltaTime);
-			//World.AddToRedrawQueue(base.owner);
+			World.Instance.AddToRedrawQueue(base.Owner);
 		}
 	}
 }

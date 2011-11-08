@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Windows.Threading;
-using System.Collections.ObjectModel;
-using Friendly_Wars.Engine.Object;
 
 namespace Friendly_Wars.Engine.Utilities
 {
@@ -33,7 +31,7 @@ namespace Friendly_Wars.Engine.Utilities
 		/// <summary>
 		/// The interval, in miliseconds, at which the timer will try to update.
 		/// </summary>
-		public double Interval { get; private set; }
+		public int Interval { get; private set; }
 
 		/// <summary>
 		/// The DateTime associated with the last update.
@@ -46,27 +44,14 @@ namespace Friendly_Wars.Engine.Utilities
 		private ICollection<IUpdateable> eventListeners;
 
 		/// <summary>
-		/// Constructor for a new EngineTimer with multiple listeners.
+		/// Constructor for a new EngineTimer.
 		/// </summary>
 		/// <param name="interval">The interval, in miliseconds, at which the timer will try to update.</param>
-		/// <param name="eventListeners">The listeners for this timer.</param>
-		public EngineTimer(double interval, ICollection<IUpdateable> eventListeners)
+		/// <param name="eventListeners">The EngineTimer's eventListeners.</param>
+		public EngineTimer(int interval, ICollection<IUpdateable> eventListeners)
 		{
 			this.Interval = interval;
 			this.eventListeners = eventListeners;
-		}
-
-		/// <summary>
-		/// Constructor for a new engine timer with only one listener.
-		/// </summary>
-		/// <param name="interval">The interval, in miliseconds, at which the timer will try to update.</param>
-		/// <param name="eventListener">The listener for this timer.</param>
-		public EngineTimer(double interval, IUpdateable eventListener)
-		{
-			this.Interval = interval;
-
-			eventListeners = new Collection<IUpdateable>();
-			eventListeners.Add(eventListener);
 		}
 
 		/// <summary>
@@ -112,34 +97,24 @@ namespace Friendly_Wars.Engine.Utilities
 		/// </summary>
 		/// <param name="sender">The Object that called this function.</param>
 		/// <param name="e">The event that corresponds to this function.</param>
+
 		private void DispatchEvent(object sender, EventArgs e)
 		{
 			DateTime currentTime = DateTime.Now;
-
 			
-			TimeSpan span = currentTime - previousTime;
-			previousTime = DateTime.Now;
-
-			double deltaTime = span.TotalMilliseconds;
-
-			//TODO: Removed by James. Not exactly sure what you were going for.
-			//Comparing one DateTime.Milliseconds to another is completely arbitrary --
-			//if 10.055 seconds have passed then deltaTime will be 55, not 10,055.
-			//Subtracting two DateTimes gives you a TimeSpan, and TotalMilliseconds
-			//would give you 10,055 in this example.
-			/*
 			Double deltaTime = currentTime.Millisecond - previousTime.Millisecond;
 			// If we elapsed one second
 			if (deltaTime <= 0)
 			{
 				deltaTime = 1000 - previousTime.Millisecond + currentTime.Millisecond;
 			}
-			*/
 
 			foreach (IUpdateable eventListener in eventListeners)
 			{
 				eventListener.Update(deltaTime);
 			}
+
+			previousTime = DateTime.Now;
 		}
 
 		/// <summary>

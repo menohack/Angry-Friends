@@ -91,17 +91,10 @@
     <Compile Include="Engine\Ultilities\Web.cs" />
     <Compile Include="GameLogic\Game.cs" />
     <Compile Include="GameLogic\MapInfo.cs" />
-    <Compile Include="GameLogic\Terrain.cs" />
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Tests\Test_FindTag.cs" />
-    <Compile Include="Tests\ITestable.cs" />
-    <Compile Include="Tests\Test_GameObject.cs" />
-    <Compile Include="Tests\Test_FindName.cs" />
-    <Compile Include="Tests\Test_Web.cs" />
-    <Compile Include="Tests\Test_MediaLoader.cs" />
   </ItemGroup>
   <ItemGroup>
     <ApplicationDefinition Include="App.xaml">

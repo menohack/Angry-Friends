@@ -2,6 +2,7 @@
 using System.Windows.Controls;
 using Friendly_Wars.Engine.Object;
 using System.Collections.Generic;
+using System.Diagnostics;
 
 namespace Friendly_Wars.Engine.Component
 {
@@ -50,14 +51,8 @@ namespace Friendly_Wars.Engine.Component
 		public void Play(String name)
 		{
 			MediaElement audioClip;
-			if (audioClips.TryGetValue(name, out audioClip))
-			{
-				audioClip.Play();
-			}
-			else
-			{
-				throw new InvalidOperationException("This AudioClip does not exist.");
-			}
+			Debug.Assert(audioClips.TryGetValue(name, out audioClip), "This AudioClip " + name + " does not exist.");
+			audioClip.Play();
 		}
 
 		/// <summary>
@@ -67,14 +62,8 @@ namespace Friendly_Wars.Engine.Component
 		public void Stop(String name)
 		{
 			MediaElement audioClip;
-			if (audioClips.TryGetValue(name, out audioClip))
-			{
-				audioClip.Stop();
-			}
-			else
-			{
-				throw new InvalidOperationException("This AudioClip does not exist.");
-			}
+			Debug.Assert(audioClips.TryGetValue(name, out audioClip), "This AudioClip " + name + " does not exist.");
+			audioClip.Stop();
 		}
 	}
 }
