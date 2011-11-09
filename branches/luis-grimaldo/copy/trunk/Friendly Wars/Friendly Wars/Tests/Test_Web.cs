@@ -11,7 +11,7 @@ namespace Friendly_Wars.Tests {
 		public bool RunTest() {
 			new Web();
 			Web.DownloadImage("http://www.google.com/intl/en_com/images/srpr/logo3w.png");
-			Web.DownloadString("http://www.google.com");
+			//Web.DownloadString("http://www.google.com");
 			Web.DownloadSound("http://www.choosah.com/example.wav");
 			return true;
 		}

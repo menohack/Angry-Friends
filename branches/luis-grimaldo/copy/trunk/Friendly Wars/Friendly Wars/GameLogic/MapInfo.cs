@@ -1,11 +1,18 @@
 ﻿using System.Collections.Generic;
-using System.Windows.Media.Imaging;
 using System.Windows.Controls;
+using System.Windows.Media.Imaging;
 namespace Friendly_Wars.GameLogic {
 	/// <summary>
 	/// Map Information
 	/// </summary>
 	public class MapInfo {
+		/// <summary>
+		/// Constructor for the Map Information
+		/// </summary>
+		public MapInfo() {
+			Images = new Dictionary<string, BitmapImage>();
+			Sounds = new Dictionary<string, MediaElement>();
+		}
 		/// <summary>
 		/// Title of the map
 		/// </summary>

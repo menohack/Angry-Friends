@@ -4,9 +4,19 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
-    d:DesignHeight="300" d:DesignWidth="400" xmlns:sdk="http://schemas.microsoft.com/winfx/2006/xaml/presentation/sdk">
+    d:DesignHeight="267" d:DesignWidth="553">
 
-    <Grid x:Name="LayoutRoot" Background="White">
-        <Image Height="300" HorizontalAlignment="Left" Name="terrain" Stretch="Fill" VerticalAlignment="Top" Width="400" />
+    <Grid x:Name="LayoutRoot" Background="White" Width="550" Height="260">
+        <TextBlock Height="19" HorizontalAlignment="Left" Margin="11,229,0,12" Name="textBlock1" Text="Loading..." VerticalAlignment="Center" Width="525" TextAlignment="Center" />
+        <Image Height="100" HorizontalAlignment="Left" Margin="12,12,0,0" Name="image1" Source="http://maps.google.com/images/experiments/nav_logo78.png" Stretch="Fill" VerticalAlignment="Top" Width="100" />
+        <Image Height="100" HorizontalAlignment="Left" Margin="118,12,0,0" Name="image2" Source="http://maps.google.com/images/experiments/nav_logo78.png" Stretch="Fill" VerticalAlignment="Top" Width="100" />
+        <Image Height="100" HorizontalAlignment="Left" Margin="224,12,0,0" Name="image3" Source="http://maps.google.com/images/experiments/nav_logo78.png" Stretch="Fill" VerticalAlignment="Top" Width="100" />
+        <Image Height="100" HorizontalAlignment="Left" Margin="330,12,0,0" Name="image4" Source="http://maps.google.com/images/experiments/nav_logo78.png" Stretch="Fill" VerticalAlignment="Top" Width="100" />
+        <Image Height="100" HorizontalAlignment="Left" Margin="436,12,0,0" Name="image5" Source="http://maps.google.com/images/experiments/nav_logo78.png" Stretch="Fill" VerticalAlignment="Top" Width="100" />
+        <Image Height="100" HorizontalAlignment="Left" Margin="12,118,0,0" Name="image6" Source="http://maps.google.com/images/experiments/nav_logo78.png" Stretch="Fill" VerticalAlignment="Top" Width="100" />
+        <Image Height="100" HorizontalAlignment="Left" Margin="118,118,0,0" Name="image7" Source="http://maps.google.com/images/experiments/nav_logo78.png" Stretch="Fill" VerticalAlignment="Top" Width="100" />
+        <Image Height="100" HorizontalAlignment="Left" Margin="224,118,0,0" Name="image8" Source="http://maps.google.com/images/experiments/nav_logo78.png" Stretch="Fill" VerticalAlignment="Top" Width="100" />
+        <Image Height="100" HorizontalAlignment="Left" Margin="330,118,0,0" Name="image9" Source="http://maps.google.com/images/experiments/nav_logo78.png" Stretch="Fill" VerticalAlignment="Top" Width="100" />
+        <Image Height="100" HorizontalAlignment="Left" Margin="436,118,0,0" Name="image10" Source="http://maps.google.com/images/experiments/nav_logo78.png" Stretch="Fill" VerticalAlignment="Top" Width="100" />
     </Grid>
 </UserControl>
