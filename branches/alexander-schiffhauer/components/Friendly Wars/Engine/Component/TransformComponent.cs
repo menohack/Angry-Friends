@@ -58,10 +58,10 @@ namespace Friendly_Wars.Engine.Component
 		/// <summary>
 		/// Rotates by a given number of degrees.
 		/// </summary>
-		/// <param name="deltaAngle">The change of rotation.</param>
-		public void Rotate(int deltaAngle)
+		/// <param name="deltaRotation">The change of rotation.</param>
+		public void Rotate(int deltaRotation)
 		{
-			EngineMath.Clamp(Rotation += deltaAngle, MIMIMUM_ROTATION_ANGLE, MAXIMUM_ROTATION_ANGLE);
+			EngineMath.Clamp(Rotation += deltaRotation, MIMIMUM_ROTATION_ANGLE, MAXIMUM_ROTATION_ANGLE);
 		}
 
 

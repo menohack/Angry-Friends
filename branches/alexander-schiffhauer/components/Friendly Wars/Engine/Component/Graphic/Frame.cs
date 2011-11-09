@@ -13,11 +13,11 @@ namespace Friendly_Wars.Engine.Component.Graphic
 		/// <summary>
 		/// The actual Image of this Frame.
 		/// </summary>
-		private Image image;
+		public Image Image { get; private set; }
 		/// <summary>
 		/// The offset of this Frame's Image.
 		/// </summary>
-		private Point offset;
+		public Point Offset { get; private set; }
 
 		/// <summary>
 		/// Constructor for a Frame.
@@ -26,8 +26,8 @@ namespace Friendly_Wars.Engine.Component.Graphic
 		/// <param name="offset">The offset of this Frame's Image.</param>
 		public Frame(Image image, Point offset)
 		{
-			this.image = image;
-			this.offset = offset;
+			this.Image = image;
+			this.Offset = offset;
 		}
 	}
 }

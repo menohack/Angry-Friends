@@ -29,7 +29,7 @@ namespace Friendly_Wars.Engine.Object
 		/// <param name="deltaPosition">The amount by which to move.</param>
 		public void MoveBy(Point deltaPosition)
 		{
-			throw new NotImplementedException();
+			transformComponent.Translate(deltaPosition);
 		}
 
 		/// <summary>
@@ -38,7 +38,7 @@ namespace Friendly_Wars.Engine.Object
 		/// <param name="absolutePosition">The absolute value in which to move.</param>
 		public void MoveTo(Point absolutePosition)
 		{
-			throw new NotImplementedException();
+			transformComponent.Position = absolutePosition;
 		}
 
 		/// <summary>
@@ -47,7 +47,7 @@ namespace Friendly_Wars.Engine.Object
 		/// <param name="deltaRotation">The value by which to rotate.</param>
 		public void RotateBy(int deltaRotation)
 		{
-			throw new NotImplementedException();
+			transformComponent.Rotate(deltaRotation);
 		}
 
 		/// <summary>
@@ -56,7 +56,7 @@ namespace Friendly_Wars.Engine.Object
 		/// <param name="absolutePosition">The value in which to rotate.</param>
 		public void RotateTo(int absolutePosition)
 		{
-			throw new NotImplementedException();
+			transformComponent.Rotation = absolutePosition;
 		}
 
 		/// <summary>
@@ -65,7 +65,7 @@ namespace Friendly_Wars.Engine.Object
 		/// <param name="deltaSize">The factor by which to resize.</param>
 		public void ResizeBy(Point deltaSize)
 		{
-			throw new NotImplementedException();
+			transformComponent.Resize(deltaSize);
 		}
 
 		/// <summary>
@@ -74,8 +74,7 @@ namespace Friendly_Wars.Engine.Object
 		/// <param name="absoluteSize">The size in which to resize.</param>
 		public void ResizeTo(Point absoluteSize)
 		{
-			throw new NotImplementedException();
+			transformComponent.Size = absoluteSize;
 		}
-
 	}
 }

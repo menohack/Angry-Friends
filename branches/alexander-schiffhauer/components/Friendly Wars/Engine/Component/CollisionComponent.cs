@@ -24,19 +24,15 @@ namespace Friendly_Wars.Engine.Component
 		}
 
 		/// <summary>
-		/// Checks if the owner of this CollisionComponent is colliding with any other GameObjects.
+		/// Determines if there is any collision from a linear path from the currentPosition to the desiredPosition.
 		/// </summary>
-		/// <returns> Determines whether this CollisionComponent is colliding with any other gameObjects. </returns>
-		public bool IsColliding()
+		/// <param name="currentPosition">The current position.</param>
+		/// <param name="desiredPosition">The position that is desired.</param>
+		/// <returns>Returns desiredPosition if there is no collision.
+		/// If there is collision, it returns the closest modified position, such that there is no collision.</returns>
+		public Point CheckCollision(Point currentPosition, Point desiredPosition)
 		{
-			foreach (GameObject gameObject in World.Instance.GetGameObjects())
-			{
-				if (boundingBox.IsCollidingWith(gameObject))
-				{
-					return true;
-				}
-			}
-			return false;
+			return new Point();
 		}
 	}
 

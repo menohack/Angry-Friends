@@ -75,7 +75,7 @@ namespace Friendly_Wars.Engine.Object
 		/// <param name="deltaPosition">The amount by which to move.</param>
 		public void MoveBy(Point deltaPosition)
 		{
-			throw new NotImplementedException();
+			transformComponent.Translate(deltaPosition);
 		}
 
 		/// <summary>
@@ -84,7 +84,7 @@ namespace Friendly_Wars.Engine.Object
 		/// <param name="absolutePosition">The absolute value in which to move.</param>
 		public void MoveTo(Point absolutePosition)
 		{
-			throw new NotImplementedException();
+			transformComponent.Position = absolutePosition;
 		}
 
 		/// <summary>
@@ -93,7 +93,7 @@ namespace Friendly_Wars.Engine.Object
 		/// <param name="deltaRotation">The value by which to rotate.</param>
 		public void RotateBy(int deltaRotation)
 		{
-			throw new NotImplementedException();
+			transformComponent.Rotate(deltaRotation);
 		}
 
 		/// <summary>
@@ -102,7 +102,7 @@ namespace Friendly_Wars.Engine.Object
 		/// <param name="absolutePosition">The value in which to rotate.</param>
 		public void RotateTo(int absolutePosition)
 		{
-			throw new NotImplementedException();
+			transformComponent.Rotation = absolutePosition;
 		}
 
 		/// <summary>
@@ -111,7 +111,7 @@ namespace Friendly_Wars.Engine.Object
 		/// <param name="deltaSize">The factor by which to resize.</param>
 		public void ResizeBy(Point deltaSize)
 		{
-			throw new NotImplementedException();
+			transformComponent.Resize(deltaSize);
 		}
 
 		/// <summary>
@@ -120,7 +120,7 @@ namespace Friendly_Wars.Engine.Object
 		/// <param name="absoluteSize">The size in which to resize.</param>
 		public void ResizeTo(Point absoluteSize)
 		{
-			throw new NotImplementedException();
+			transformComponent.Size = absoluteSize;
 		}
 
 		/// <summary>
@@ -132,7 +132,7 @@ namespace Friendly_Wars.Engine.Object
 		/// If there is collision, it returns the closest modified position, such that there is no collision.</returns>
 		public Point CheckCollision(Point currentPosition, Point desiredPosition)
 		{
-			throw new NotImplementedException();
+			return collisionComponent.CheckCollision(currentPosition, desiredPosition);
 		}
 
 		/// <summary>
@@ -141,7 +141,7 @@ namespace Friendly_Wars.Engine.Object
 		/// <param name="name">The AudioClip to play.</param>
 		public void PlayAudioClip(string name)
 		{
-			throw new NotImplementedException();
+			audioComponent.Play(name);
 		}
 
 		/// <summary>
@@ -150,7 +150,25 @@ namespace Friendly_Wars.Engine.Object
 		/// <param name="name">The AudioClip to stop playing.</param>
 		public void StopAudioClip(string name)
 		{
-			throw new NotImplementedException();
+			audioComponent.Stop(name);
+		}
+
+		/// <summary>
+		/// Plays a specific Animation.
+		/// </summary>
+		/// <param name="animationName">The name of the Animation to play.</param>
+		public void PlayAnimation(String animationName)
+		{
+			renderComponent.Play(animationName);
+		}
+
+		/// <summary>
+		/// Stops playing a specific Animation.
+		/// </summary>
+		/// <param name="animationName">The name of the Animation to stop playing.</param>
+		public void StopAnimation(String animationName)
+		{
+			renderComponent.Play(animationName);
 		}
 
 		/// <summary>
@@ -159,7 +177,7 @@ namespace Friendly_Wars.Engine.Object
 		/// <returns>The content that needs to be rendered.</returns>
 		public Image GetRenderContent()
 		{
-			throw new NotImplementedException();
+			return renderComponent.CurrentAnimation.CurrentFrame.Image;
 		}
 
 		/// <summary>

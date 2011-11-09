@@ -18,6 +18,18 @@ namespace Friendly_Wars.Engine.Component.Interfaces
 	public interface IRenderable
 	{
 		/// <summary>
+		/// Plays a specific Animation.
+		/// </summary>
+		/// <param name="animationName">The name of the Animation to play.</param>
+		void PlayAnimation(String animationName);
+
+		/// <summary>
+		/// Stops playing a specific Animation.
+		/// </summary>
+		/// <param name="animationName">The name of the Animation to stop playing.</param>
+		void StopAnimation(String animationName);
+
+		/// <summary>
 		/// Access the content that should be rendered.
 		/// </summary>
 		/// <returns>The content that needs to be rendered.</returns>
