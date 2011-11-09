@@ -8,9 +8,8 @@ namespace Friendly_Wars.Engine.Component
 	/// <summary>
 	/// Handles positioning, size and rotation of an Object.
 	/// </summary>
-	public class TransformComponent
+	public class TransformComponent : BaseComponent
 	{
-
 		/// <summary>
 		/// The mimimum angle of rotation.
 		/// </summary>
@@ -23,15 +22,56 @@ namespace Friendly_Wars.Engine.Component
 		/// <summary>
 		/// The position of this TransformComponent.
 		/// </summary>
-		public Point Position { get; set; }
+		private Point position;
 		/// <summary>
-		/// The rotation of this TransformComponent, clamped in degrees: [0, 360].
+		/// The rotation of this TransformComponent.
 		/// </summary>
-		public int Rotation { get; set; }
+		private int rotation;
 		/// <summary>
 		/// The size of this TransformComponent.
 		/// </summary>
-		public Point Size { get; set; }
+		private Point size;
+
+		/// <summary>
+		/// The accessor for the position of the TransformComponent.
+		/// </summary>
+		public Point Position { 
+			get {
+				return position;	
+			}
+			set
+			{
+				position = CollisionDetection(position, new Point(position.X + value.X, position.Y + value.Y));
+			}
+		}
+		/// <summary>
+		/// The rotation of this TransformComponent, clamped in degrees: [0, 360].
+		/// </summary>
+		public int Rotation {
+			get
+			{
+				return rotation;
+			}
+			set
+			{
+				rotation = value;
+				position = CollisionDetection(position, position);
+			}
+		}
+		/// <summary>
+		/// The size of this TransformComponent.
+		/// </summary>
+		public Point Size {
+			get
+			{
+				return size;
+			}
+			set
+			{
+				size = value;
+				position = CollisionDetection(position, position);
+			}
+		}
 
 		/// <summary>
 		/// Constructor for a new instance of TransformComponent.
@@ -39,7 +79,8 @@ namespace Friendly_Wars.Engine.Component
 		/// <param name="position">The initial position of this TransformComponent.</param>
 		/// <param name="rotation">The initial rotation of this TransformComponent.</param>
 		/// <param name="size">The initial size of this TransformComponent.</param>
-		public TransformComponent(Point position, int rotation, Point size)
+		/// <param name="owner">The GameObject that owns this TransformComponent.</param>
+		public TransformComponent(Point position, int rotation, Point size, GameObject owner) : base(owner)
 		{
 			this.Position = position;
 			this.Rotation = rotation;
@@ -64,7 +105,6 @@ namespace Friendly_Wars.Engine.Component
 			EngineMath.Clamp(Rotation += deltaRotation, MIMIMUM_ROTATION_ANGLE, MAXIMUM_ROTATION_ANGLE);
 		}
 
-
 		/// <summary>
 		/// Resizes by a given factor.
 		/// </summary>
@@ -72,6 +112,15 @@ namespace Friendly_Wars.Engine.Component
 		public void Resize(Point resizeFactor)
 		{
 			Size = new Point(Size.X * resizeFactor.X, Size.Y * resizeFactor.Y);
+		}
+
+		/// <summary>
+		/// If this linear-motion produces collision, CollisionDetection returns the modified value that satisifies non-collision requirements.
+		/// </summary>
+		private Point CollisionDetection(Point currentPosition, Point desiredPosition)
+		{
+			//foreach (GameObject gameObject : World.Instance.GameObjects) {}
+			return currentPosition;
 		}
 	}
 }

@@ -3,31 +3,28 @@ using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
 using Friendly_Wars.Engine.Component;
-using Friendly_Wars.Engine.Component.Interfaces;
 using Friendly_Wars.Engine.Component.Graphic;
-using Friendly_Wars.Engine.Component.Realizations;
 
 namespace Friendly_Wars.Engine.Object
 {
 	/// <summary>
-	/// GameObject represent a base for all in-game objects. 
-	/// GameObject are composed of different BaseComponents, which provide core game-functionality, such as rendering, audio, movement, rotation, physics and networking.
+	/// GameObject represents a base for all in-game objects. 
+	/// GameObject is composed of different Components that provide core game-functionality, such as rendering, audio and movement.
 	/// </summary>
-	public class GameObject : Transformable, ICollidable, IAudible, IRenderable
+	public class GameObject
 	{
 		/// <summary>
-		/// This GameObject's CollisionComponent.
+		/// This GameObject's TransformComponent.
 		/// </summary>
-		private CollisionComponent collisionComponent;
+		public TransformComponent TransformComponent { get; private set; }
 		/// <summary>
 		/// The GameObject's AudioComponent.
 		/// </summary>
-		private AudioComponent audioComponent;
+		public AudioComponent AudioComponent { get; private set; }
 		/// <summary>
 		/// This GameObject's RenderComponent.
 		/// </summary>
-		private RenderComponent renderComponent;
-
+		public RenderComponent RenderComponent { get; private set; }
 
 		/// <summary>
 		/// This GameObject's name.
@@ -44,7 +41,7 @@ namespace Friendly_Wars.Engine.Object
 		/// <summary>
 		/// The last UID assigned to a GameObject.
 		/// </summary>
-		private static int CurrentUID { get; set; }
+		private static int currentUID;
 		/// <summary>
 		/// This GameObject's children.
 		/// </summary>
@@ -66,69 +63,12 @@ namespace Friendly_Wars.Engine.Object
 		}
 
 		/// <summary>
-		/// Determines if there is any collision from a linear path from the currentPosition to the desiredPosition.
-		/// </summary>
-		/// <param name="currentPosition">The current position.</param>
-		/// <param name="desiredPosition">The position that is desired.</param>
-		/// <returns>Returns desiredPosition if there is no collision.
-		/// If there is collision, it returns the closest modified position, such that there is no collision.</returns>
-		public Point CheckCollision(Point currentPosition, Point desiredPosition)
-		{
-			return collisionComponent.CheckCollision(currentPosition, desiredPosition);
-		}
-
-		/// <summary>
-		/// Plays a specific AudioClip.
-		/// </summary>
-		/// <param name="name">The AudioClip to play.</param>
-		public void PlayAudioClip(string name)
-		{
-			audioComponent.Play(name);
-		}
-
-		/// <summary>
-		/// Stops playing a specific AudioClip.
-		/// </summary>
-		/// <param name="name">The AudioClip to stop playing.</param>
-		public void StopAudioClip(string name)
-		{
-			audioComponent.Stop(name);
-		}
-
-		/// <summary>
-		/// Plays a specific Animation.
-		/// </summary>
-		/// <param name="animationName">The name of the Animation to play.</param>
-		public void PlayAnimation(String animationName)
-		{
-			renderComponent.Play(animationName);
-		}
-
-		/// <summary>
-		/// Stops playing a specific Animation.
-		/// </summary>
-		/// <param name="animationName">The name of the Animation to stop playing.</param>
-		public void StopAnimation(String animationName)
-		{
-			renderComponent.Play(animationName);
-		}
-
-		/// <summary>
-		/// Access the content that should be rendered.
-		/// </summary>
-		/// <returns>The content that needs to be rendered.</returns>
-		public Image GetRenderContent()
-		{
-			return renderComponent.CurrentAnimation.CurrentFrame.Image;
-		}
-
-		/// <summary>
 		/// Creates a UID for a GameObject.
 		/// </summary>
 		/// <returns>Returns a UID for a GameObject</returns>
 		private static int NextUID()
 		{
-			return ++CurrentUID;
+			return ++currentUID;
 		}
 
 		/// <summary>

@@ -36,9 +36,9 @@ namespace Friendly_Wars.Engine.Object
 		/// </summary>
 		private IList<GameObject> gameObjects;
 		/// <summary>
-		/// The queue of RenderComponents that need to be re-drawn/updated the next time WordObject updates.
+		/// The queue of GameObjects that need to be re-drawn/updated the next time WordObject updates.
 		/// </summary>
-		private IList<RenderComponent> redrawQueue;
+		private IList<GameObject> redrawQueue;
 
 		/// <summary>
 		/// The constructor for a new instance of World.
@@ -46,7 +46,7 @@ namespace Friendly_Wars.Engine.Object
 		/// </summary>
 		private World() {
 			gameObjects = new List<GameObject>();
-			redrawQueue = new List<RenderComponent>();
+			redrawQueue = new List<GameObject>();
 			
 			// Initialize the timing of the updating of the World.
 			worldUpdateTimer = new EngineTimer(EngineTimer.FromHertzToMiliSeconds(UPDATES_PER_SECOND), new List<IUpdateable> { this });
@@ -78,23 +78,27 @@ namespace Friendly_Wars.Engine.Object
 			Debug.WriteLine("FPS: " + Convert.ToInt32(1000.00 / deltaTime).ToString());
 
 			// Iterate through each RenderComponent in the redrawQueue and redraw it.
-			foreach (RenderComponent renderComponent in redrawQueue)
+			foreach (GameObject gameObject in redrawQueue)
 			{
 				//Remove previous frame.
+				// update position through currentPos = GameObject.TransformComponent.Position;
+				// Image image = gameObject.renderComponent.CurrentAnimation.CurrentFrame.Image;
+				// image.position = currentPos;
+				// Stage.addChild(image);
 				//Draw(renderComponent.CurrentAnimation.CurrentFrame);
 				//redrawQueue.Remove(renderComponent);
 			}
 		}
 
 		/// <summary>
-		/// Adds a RenderComponent to the redraw queue.
+		/// Adds a GameObject to the redraw queue.
 		/// </summary>
-		/// <param name="renderComponent">The RenderComponent to add to the queue.</param>
-		public void AddToRedrawQueue(RenderComponent renderComponent)
+		/// <param name="gameObject">The GameObject to add to the queue.</param>
+		public void AddToRedrawQueue(GameObject gameObject)
 		{
-			if (!redrawQueue.Contains(renderComponent))
+			if (!redrawQueue.Contains(gameObject))
 			{
-				redrawQueue.Add(renderComponent);
+				redrawQueue.Add(gameObject);
 			}
 		}
 

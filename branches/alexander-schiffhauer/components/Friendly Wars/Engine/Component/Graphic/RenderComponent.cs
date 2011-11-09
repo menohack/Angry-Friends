@@ -10,7 +10,7 @@ namespace Friendly_Wars.Engine.Component.Graphic
 	/// <summary>
 	/// Handles the rendering of an Object. 
 	/// </summary>
-	public class RenderComponent : IUpdateable
+	public class RenderComponent : BaseComponent, IUpdateable
 	{
 		/// <summary>
 		/// A Dictionary of names-to-Animations that contains all of the Animations of this RenderComponent.
@@ -34,7 +34,8 @@ namespace Friendly_Wars.Engine.Component.Graphic
 		/// </summary>
 		/// <param name="animations">The Dictionary of names-to-Animations of this RenderComponent. </param>
 		/// <param name="defaultAnimation">The Animation to play when no other Animation is specified to play.</param>
-		public RenderComponent(IDictionary<String, Animation> animations, Animation defaultAnimation)
+		/// <param name="owner">The GameObject that owns this RenderComponent.</param>
+		public RenderComponent(IDictionary<String, Animation> animations, Animation defaultAnimation, GameObject owner) : base(owner)
 		{
 			this.animations = animations;
 			this.defaultAnimation = defaultAnimation;
@@ -75,7 +76,7 @@ namespace Friendly_Wars.Engine.Component.Graphic
 		/// <param name="deltaTime">The time in milliseconds since the last Update.</param>
 		public void Update(double deltaTime)
 		{
-			World.Instance.AddToRedrawQueue(this);
+			World.Instance.AddToRedrawQueue(base.Owner);
 		}
 	}
 }
