@@ -12,16 +12,15 @@ using Friendly_Wars.Engine.Component.Graphic;
 
 namespace Friendly_Wars.Engine.Component.Interfaces
 {
+	/// <summary>
+	/// Represents an object that is renderable.
+	/// </summary>
 	public interface IRenderable
 	{
-		/// <summary>
-		/// Accessor for a RenderComponent.
-		/// </summary>
-		private RenderComponent RenderComponent { get; set; }
 		/// <summary>
 		/// Access the content that should be rendered.
 		/// </summary>
 		/// <returns>The content that needs to be rendered.</returns>
-		public Image GetRenderContent();
+		Image GetRenderContent();
 	}
 }

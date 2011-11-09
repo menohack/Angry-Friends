@@ -89,7 +89,7 @@ namespace Friendly_Wars.Engine.Object
 		/// <summary>
 		/// Adds a RenderComponent to the redraw queue.
 		/// </summary>
-		/// <param name="gameObject">The RenderComponent to add to the queue.</param>
+		/// <param name="renderComponent">The RenderComponent to add to the queue.</param>
 		public void AddToRedrawQueue(RenderComponent renderComponent)
 		{
 			if (!redrawQueue.Contains(renderComponent))

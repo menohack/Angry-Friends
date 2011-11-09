@@ -14,22 +14,24 @@ namespace Friendly_Wars.Engine.Object
 	/// </summary>
 	public class GameObject : ITransformable, ICollidable, IAudible, IRenderable
 	{
+
 		/// <summary>
 		/// This GameObject's TransformComponent.
 		/// </summary>
-		private TransformComponent TransformComponent { get; set; }
+		private TransformComponent transformComponent;
 		/// <summary>
 		/// This GameObject's CollisionComponent.
 		/// </summary>
-		private CollisionComponent CollisionComponent { get; set; }
+		private CollisionComponent collisionComponent;
 		/// <summary>
 		/// The GameObject's AudioComponent.
 		/// </summary>
-		private AudioComponent AudioComponent { get; set; }
+		private AudioComponent audioComponent;
 		/// <summary>
 		/// This GameObject's RenderComponent.
 		/// </summary>
-		private RenderComponent RenderComponent { get; set; }
+		private RenderComponent renderComponent;
+
 
 		/// <summary>
 		/// This GameObject's name.
@@ -65,30 +67,99 @@ namespace Friendly_Wars.Engine.Object
 			this.UID = NextUID();
 
 			Children = new List<GameObject>();
-
-			TransformComponent = new TransformComponent(this, new Point());
-			CollisionComponent = new PhysicsComponent(this, new BoundingBox(new TransformComponent(this, new Point())));
-			AudioComponent = new AudioComponent(this, new Dictionary<String, MediaElement>());
-			RenderComponent = new RenderComponent(this, new Dictionary<string, Animation>(), null);
 		}
 
 		/// <summary>
-		/// Adds a child GameObject to the current GameObject, creating a parent-child relationship.
+		/// Moves the TransformComponent by a specified amount.
 		/// </summary>
-		/// <param name="child">The child GameObject that will be appended to the current GameObject (the parent).</param>
-		public void AddChild(GameObject child)
+		/// <param name="deltaPosition">The amount by which to move.</param>
+		public void MoveBy(Point deltaPosition)
 		{
-			Children.Add(child);
+			throw new NotImplementedException();
 		}
 
 		/// <summary>
-		/// Removes a child GameObject from the current GameObject.  This does not delete the child GameObject.  
-		/// It only removes the parent-child relationship between the two gameObjects.
+		/// Move the TransformComponent to a given value.
 		/// </summary>
-		/// <param name="child">The child GameObject that will be removed from the current GameObject (the parent).</param>
-		public void RemoveChild(GameObject child)
+		/// <param name="absolutePosition">The absolute value in which to move.</param>
+		public void MoveTo(Point absolutePosition)
 		{
-			Children.Remove(child);
+			throw new NotImplementedException();
+		}
+
+		/// <summary>
+		/// Rotates the TransformComponent by a given value.
+		/// </summary>
+		/// <param name="deltaRotation">The value by which to rotate.</param>
+		public void RotateBy(int deltaRotation)
+		{
+			throw new NotImplementedException();
+		}
+
+		/// <summary>
+		/// Rotates the TransformComponent to a given value.
+		/// </summary>
+		/// <param name="absolutePosition">The value in which to rotate.</param>
+		public void RotateTo(int absolutePosition)
+		{
+			throw new NotImplementedException();
+		}
+
+		/// <summary>
+		/// Resizes the TransformComponent by a given factor.
+		/// </summary>
+		/// <param name="deltaSize">The factor by which to resize.</param>
+		public void ResizeBy(Point deltaSize)
+		{
+			throw new NotImplementedException();
+		}
+
+		/// <summary>
+		/// Resizes the TransformComponent to a specific size.
+		/// </summary>
+		/// <param name="absoluteSize">The size in which to resize.</param>
+		public void ResizeTo(Point absoluteSize)
+		{
+			throw new NotImplementedException();
+		}
+
+		/// <summary>
+		/// Determines if there is any collision from a linear path from the currentPosition to the desiredPosition.
+		/// </summary>
+		/// <param name="currentPosition">The current position.</param>
+		/// <param name="desiredPosition">The position that is desired.</param>
+		/// <returns>Returns desiredPosition if there is no collision.
+		/// If there is collision, it returns the closest modified position, such that there is no collision.</returns>
+		public Point CheckCollision(Point currentPosition, Point desiredPosition)
+		{
+			throw new NotImplementedException();
+		}
+
+		/// <summary>
+		/// Plays a specific AudioClip.
+		/// </summary>
+		/// <param name="name">The AudioClip to play.</param>
+		public void PlayAudioClip(string name)
+		{
+			throw new NotImplementedException();
+		}
+
+		/// <summary>
+		/// Stops playing a specific AudioClip.
+		/// </summary>
+		/// <param name="name">The AudioClip to stop playing.</param>
+		public void StopAudioClip(string name)
+		{
+			throw new NotImplementedException();
+		}
+
+		/// <summary>
+		/// Access the content that should be rendered.
+		/// </summary>
+		/// <returns>The content that needs to be rendered.</returns>
+		public Image GetRenderContent()
+		{
+			throw new NotImplementedException();
 		}
 
 		/// <summary>

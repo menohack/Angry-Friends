@@ -68,7 +68,7 @@ namespace Friendly_Wars.Engine.Component
 		/// <summary>
 		/// Resizes by a given factor.
 		/// </summary>
-		/// <param name="deltaAngle">The factor by which to resize.</param>
+		/// <param name="resizeFactor">The factor by which to resize.</param>
 		public void Resize(Point resizeFactor)
 		{
 			Size = new Point(Size.X * resizeFactor.X, Size.Y * resizeFactor.Y);

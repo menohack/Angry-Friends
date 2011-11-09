@@ -48,7 +48,7 @@ namespace Friendly_Wars.Engine.Component
 		/// <summary>
 		/// The TransformComponent of the BoundingBox.
 		/// </summary>
-		private TransformComponent transformComponent { get; private set; }
+		private TransformComponent transformComponent;
 		/// <summary>
 		/// Constructor for a new BoundingBox.
 		/// </summary>

@@ -11,23 +11,21 @@ using System.Windows.Shapes;
 
 namespace Friendly_Wars.Engine.Component.Interfaces
 {
+	/// <summary>
+	/// Represents an object that is audible.
+	/// </summary>
 	public interface IAudible
 	{
-		/// <summary>
-		/// Accessor for an AudioComponent.
-		/// </summary>
-		private AudioComponent AudioComponent { get; set; }
-
 		/// <summary>
 		/// Plays a specific AudioClip.
 		/// </summary>
 		/// <param name="name">The AudioClip to play.</param>
-		public void PlayAudioClip(String name);
+		void PlayAudioClip(String name);
 
 		/// <summary>
 		/// Stops playing a specific AudioClip.
 		/// </summary>
 		/// <param name="name">The AudioClip to stop playing.</param>
-		public void StopAudioClip(String name);
+		void StopAudioClip(String name);
 	}
 }

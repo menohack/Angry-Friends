@@ -9,7 +9,7 @@ namespace Friendly_Wars.Engine.Component
 	/// <summary>
 	/// Handles the control of a GameObject's audio.
 	/// </summary>
-	public class AudioComponent : BaseComponent
+	public class AudioComponent
 	{
 		/// <summary>
 		/// A Dictionary between the names of audio and the audio, itself.
@@ -19,9 +19,8 @@ namespace Friendly_Wars.Engine.Component
 		/// <summary>
 		/// Constructor for an audioComponent.
 		/// </summary>
-		/// <param name="owner">The owner of this audioComponent.</param>
 		/// <param name="audioClips">The clips that the audioComponent is capable of playing.</param>
-		public AudioComponent(GameObject owner, IDictionary<String, MediaElement> audioClips) : base(owner)
+		public AudioComponent(IDictionary<String, MediaElement> audioClips)
 		{
 			this.audioClips = audioClips;
 		}
