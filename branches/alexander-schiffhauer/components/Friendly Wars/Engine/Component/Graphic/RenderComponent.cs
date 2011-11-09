@@ -8,42 +8,38 @@ using System.Diagnostics;
 namespace Friendly_Wars.Engine.Component.Graphic
 {
 	/// <summary>
-	/// Handles the rendering of a GameObject. 
+	/// Handles the rendering of an Object. 
 	/// </summary>
-	public class RenderComponent : BaseComponent, IUpdateable
+	public class RenderComponent : IUpdateable
 	{
 		/// <summary>
 		/// A Dictionary of &lt;String Animation&gt; that contains all of the animations of this RenderComponent.
 		/// </summary>
-		internal IDictionary<String, Animation> Animations { get; private set; }
-
+		private IDictionary<String, Animation> animations;
 		/// <summary>
-		/// The animation that is currently playing.
+		/// The Animation that is currently playing.
 		/// </summary>
 		public Animation CurrentAnimation { get; private set; }
-
 		/// <summary>
-		/// The default animation for this RenderComponent.  It will play when no other animation is specified to play.
+		/// The default Animation for this RenderComponent.  It will play when no other animation is specified to play.
 		/// </summary>
-		public Animation DefaultAnimation { get; private set; }
-
+		private Animation defaultAnimation;
 		/// <summary>
 		/// The EngineTimer that handles updating this RenderComponent's animations.
 		/// </summary>
-		private EngineTimer updateTimer;
+		private EngineTimer animationTimer;
 
 		/// <summary>
 		/// Constructor for a new RenderComponent.
 		/// </summary>
-		/// <param name="owner"> The owner of this RenderComponent. </param>
 		/// <param name="animations">The Dictionary of names-to-Animations of this RenderComponent. </param>
-		/// <param name="defaultAnimation">The animation to play when no other animation is specified to play.</param>
-		public RenderComponent(GameObject owner, IDictionary<String, Animation> animations, Animation defaultAnimation) : base(owner)
+		/// <param name="defaultAnimation">The Animation to play when no other Animation is specified to play.</param>
+		public RenderComponent(IDictionary<String, Animation> animations, Animation defaultAnimation)
 		{
-			this.Animations = animations;
-			this.DefaultAnimation = defaultAnimation;
-			this.CurrentAnimation = this.DefaultAnimation;
-			Play(this.DefaultAnimation.Name);
+			this.animations = animations;
+			this.defaultAnimation = defaultAnimation;
+			this.CurrentAnimation = this.defaultAnimation;
+			Play(this.defaultAnimation.Name);
 		}
 
 		/// <summary>
@@ -53,11 +49,11 @@ namespace Friendly_Wars.Engine.Component.Graphic
 		public void Play(String animationName)
 		{
 			Animation animation;
-			Debug.Assert(!Animations.TryGetValue(animationName, out animation), "The Animation: " + animationName + " does not exist.");
+			Debug.Assert(!animations.TryGetValue(animationName, out animation), "The Animation: " + animationName + " does not exist.");
 			CurrentAnimation = animation;
 
-			updateTimer = new EngineTimer(CurrentAnimation.FPS, new List<IUpdateable> { CurrentAnimation, this });
-			updateTimer.Start();
+			animationTimer = new EngineTimer(CurrentAnimation.FPS, new List<IUpdateable> { CurrentAnimation, this });
+			animationTimer.Start();
 		}
 
 		/// <summary>
@@ -67,19 +63,19 @@ namespace Friendly_Wars.Engine.Component.Graphic
 		public void Stop(String animationName)
 		{
 			Animation animation;
-			Debug.Assert(!Animations.TryGetValue(animationName, out animation), "The Animation: " + animationName + " does not exist.");
-			updateTimer.Stop();
+			Debug.Assert(!animations.TryGetValue(animationName, out animation), "The Animation: " + animationName + " does not exist.");
+			animationTimer.Stop();
 
-			Play(DefaultAnimation.Name);
+			Play(defaultAnimation.Name);
 		}
 
 		/// <summary>
-		/// Notify the RenderComponent that it needs to be re-rendered.
+		/// Notify the World that this RenderComponent needs to be re-rendered.
 		/// </summary>
 		/// <param name="deltaTime">The time in milliseconds since the last Update.</param>
 		public void Update(double deltaTime)
 		{
-			World.Instance.AddToRedrawQueue(base.Owner);
+			World.Instance.AddToRedrawQueue(this);
 		}
 	}
 }

@@ -7,40 +7,35 @@ using System.Collections;
 namespace Friendly_Wars.Engine.Component.Graphic
 {
 	/// <summary>
-	/// Animation contains all data pertaining to an animation.
+	/// Contains all data pertaining to a series of Frames representing an Animation.
 	/// </summary>
 	public class Animation : IUpdateable
 	{
 		/// <summary>
 		/// All the Frames of this Animation.
 		/// </summary>
-		public IList<Frame> Frames { get; private set; }
-
+		private IList<Frame> frames;
 		/// <summary>
 		/// The current Frame of this Animation.
 		/// </summary>
 		public Frame CurrentFrame { get; private set; }
-
 		/// <summary>
-		/// The enumerator for the current Frame of this Animation.
+		/// The Enumerator for the current Frame of this Animation.
 		/// </summary>
 		private IEnumerator index;
 
 		/// <summary>
 		/// The length, in miliseconds, of this Animation. 
 		/// </summary>
-		public Double Length { get; private set; }
-
+		private Double length;
 		/// <summary>
 		/// The frames-per-second of this Animation.
 		/// </summary>
 		public int FPS { get; private set; }
-
 		/// <summary>
 		/// The name of this Animation.
 		/// </summary>
 		public String Name { get; private set; }
-
 		/// <summary>
 		/// The elapsed time between the previous update (for playing Animations).
 		/// </summary>
@@ -55,23 +50,23 @@ namespace Friendly_Wars.Engine.Component.Graphic
 		/// <param name="name">The name of this Animation.</param>
 		public Animation(IList<Frame> frames, double length, int fps, String name)
 		{
-			Frames = frames;
-			Length = length;
+			this.frames = frames;
+			this.length = length;
 			FPS = fps;
-			Name = name;
-			index = Frames.GetEnumerator();
+			this.Name = name;
+			index = frames.GetEnumerator();
 		}
 
 		/// <summary>
 		/// Constructor for a new Animation with a single frame.
 		/// </summary>
-		/// <param name="frame">The frame of the animation.</param>
-		/// <param name="name">The name of the animation.</param>
+		/// <param name="frame">The Frame of the Animation.</param>
+		/// <param name="name">The name of the Animation.</param>
 		public Animation(Frame frame, String name) : this(new List<Frame> {frame}, 0.0, 0, name )
 		{}
 
 		/// <summary>
-		/// Updates the frame of this Animation.
+		/// Updates the Frame of this Animation.
 		/// </summary>
 		/// <param name="deltaTime">The time in milliseconds from the previous update.</param>
 		public void Update(Double deltaTime)

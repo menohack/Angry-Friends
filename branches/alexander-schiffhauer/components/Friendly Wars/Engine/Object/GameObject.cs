@@ -9,27 +9,27 @@ using Friendly_Wars.Engine.Component.Physics;
 namespace Friendly_Wars.Engine.Object
 {
 	/// <summary>
-	/// gameObjects represent a base for all in-game objects. 
-	/// gameObjects are composed of different BaseComponents, which provide core game-functionality, such as rendering, audio, movement, rotation, physics and networking.
+	/// GameObject represent a base for all in-game objects. 
+	/// GameObject are composed of different BaseComponents, which provide core game-functionality, such as rendering, audio, movement, rotation, physics and networking.
 	/// </summary>
-	public class GameObject
+	public class GameObject : ITransformable, ICollidable, IAudible, IVisible
 	{
 		/// <summary>
 		/// This GameObject's TransformComponent.
 		/// </summary>
-		public TransformComponent TransformComponent { get; private set; }
+		private TransformComponent transformComponent;
 		/// <summary>
 		/// This GameObject's PhysicsComponent.
 		/// </summary>
-		public PhysicsComponent PhysicsComponent { get; private set; }
+		private PhysicsComponent physicsComponent;
 		/// <summary>
 		/// The GameObject's AudioComponent.
 		/// </summary>
-		public AudioComponent AudioComponent { get; private set; }
+		private AudioComponent audioComponent;
 		/// <summary>
 		/// This GameObject's RenderComponent.
 		/// </summary>
-		public RenderComponent RenderComponent { get; set; }
+		private RenderComponent renderComponent;
 
 		/// <summary>
 		/// This GameObject's name.
@@ -43,12 +43,10 @@ namespace Friendly_Wars.Engine.Object
 		/// This GameObject's UID.
 		/// </summary>
 		public int UID { get; private set; }
-
 		/// <summary>
 		/// The last UID assigned to a GameObject.
 		/// </summary>
 		private static int CurrentUID { get; set; }
-
 		/// <summary>
 		/// This GameObject's children.
 		/// </summary>
@@ -68,10 +66,85 @@ namespace Friendly_Wars.Engine.Object
 
 			Children = new List<GameObject>();
 
-			TransformComponent = new TransformComponent(this, new Point(), new Point());
-			PhysicsComponent = new PhysicsComponent(this, new Point(), new Point());
-			AudioComponent = new AudioComponent(this, new Dictionary<String, MediaElement>());
-			RenderComponent = new RenderComponent(this, new Dictionary<string, Animation>(), null);
+			transformComponent = new TransformComponent(this, new Point());
+			physicsComponent = new PhysicsComponent(this, new BoundingBox(new TransformComponent(this, new Point())));
+			audioComponent = new AudioComponent(this, new Dictionary<String, MediaElement>());
+			renderComponent = new RenderComponent(this, new Dictionary<string, Animation>(), null);
+		}
+
+		/// <summary>
+		/// Moves this GameObject by a given amount.
+		/// </summary>
+		/// <param name="deltaPosition">The amount by which to move this GameObject.</param>
+		public void MoveBy(Point deltaPosition)
+		{
+			transformComponent.Translate(deltaPosition);
+		}
+
+		public void MoveTo(Point absolutePosition)
+		{
+
+		}
+
+		/// <summary>
+		/// Rotates this GameObject by a given amount (in degrees.)
+		/// </summary>
+		/// <param name="deltaRotation">The amount by which to rotate this GameObject.</param>
+		public void RotateBy(int deltaRotation)
+		{
+			transformComponent.Rotate(deltaRotation);
+		}
+
+		public void RotateTo(int absolutePosition)
+		{
+
+		}
+
+		public void ResizeBy(Point deltaSize)
+		{
+
+		}
+
+
+		public void ResizeTo(Point absoluteSize)
+		{
+
+		}
+
+		/// <summary>
+		/// Plays a specific Animation.
+		/// </summary>
+		/// <param name="animationName">The specific Animation to play.</param>
+		public void PlayAnimation(String animationName)
+		{
+			renderComponent.Play(animationName);
+		}
+
+		/// <summary>
+		/// Stops playing a specific Animation.
+		/// </summary>
+		/// <param name="animationName">The Animation to stop playing.</param>
+		public void StopAnimation(String animationName)
+		{
+			renderComponent.Stop(animationName);
+		}
+
+		/// <summary>
+		/// Plays a specific AudioClip.
+		/// </summary>
+		/// <param name="name">The AudioClip to play.</param>
+		public void PlayAudioClip(String name)
+		{
+			audioComponent.Play(name);
+		}
+
+		/// <summary>
+		/// Stops playing a specific AudioClip.
+		/// </summary>
+		/// <param name="name">The AudioClip to stop playing.</param>
+		public void StopAudioClip(String name)
+		{
+			audioComponent.Stop(name);
 		}
 
 		/// <summary>

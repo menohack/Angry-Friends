@@ -6,35 +6,34 @@ using Friendly_Wars.Engine.Utilities;
 namespace Friendly_Wars.Engine.Component.Physics
 {
 	/// <summary>
-	/// PhysicsComponent handles the collision with other gameObjects.
+	/// PhysicsComponent handles the collision with other GameObjects.
 	/// </summary>
 	public class PhysicsComponent : BaseComponent
 	{
 		/// <summary>
 		/// The BoundingBox that encapsulates this GameObject.
 		/// </summary>
-		public BoundingBox BoundingBox { get; private set; }
+		private BoundingBox boundingBox;
 
 		/// <summary>
 		/// Constructor for a new PhysicsComponent.
 		/// </summary>
 		/// <param name="owner"> The owner of this PhysicsComponent. </param>
-		/// <param name="size">The size of the BoundingBox.</param>
-		/// <param name="offset">The offset of the BoundingBox.</param>
-		public PhysicsComponent(GameObject owner, Point size, Point offset) : base(owner)
+		/// <param name="boundingBox">This PhysicsComponent's BoundingBox. </param>
+		public PhysicsComponent(GameObject owner, BoundingBox boundingBox) : base(owner)
 		{
-			this.BoundingBox = new BoundingBox(owner, size, offset);
+			this.boundingBox = boundingBox;
 		}
 
 		/// <summary>
-		/// Checks if the owner of this PhysicsComponent is colliding with any other gameObjects.
+		/// Checks if the owner of this physicsComponent is colliding with any other gameObjects.
 		/// </summary>
-		/// <returns> Determines whether the owner of this PhysicsComponent is colliding with any other gameObjects. </returns>
+		/// <returns> Determines whether the owner of this physicsComponent is colliding with any other gameObjects. </returns>
 		public bool IsColliding()
 		{
 			foreach (GameObject gameObject in World.Instance.GetGameObjects())
 			{
-				if (BoundingBox.IsCollidingWith(gameObject))
+				if (boundingBox.IsCollidingWith(gameObject))
 				{
 					return true;
 				}

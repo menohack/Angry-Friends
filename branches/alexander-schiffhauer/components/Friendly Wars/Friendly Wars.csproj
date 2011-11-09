@@ -76,7 +76,7 @@
     </Compile>
     <Compile Include="Engine\Component\AudioComponent.cs" />
     <Compile Include="Engine\Component\BaseComponent.cs" />
-    <Compile Include="Engine\Component\Camera.cs" />
+    <Compile Include="Engine\Object\Camera.cs" />
     <Compile Include="Engine\Component\Physics\BoundingBox.cs" />
     <Compile Include="Engine\Component\Graphic\Animation.cs" />
     <Compile Include="Engine\Component\Graphic\Frame.cs" />

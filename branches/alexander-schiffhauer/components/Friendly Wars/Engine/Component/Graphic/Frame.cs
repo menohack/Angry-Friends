@@ -5,32 +5,29 @@ using System.Windows.Media;
 namespace Friendly_Wars.Engine.Component.Graphic
 {
 	/// <summary>
-	/// Frame contains an image and its offset.
+	/// Frame is the base class for an Animation.  
+	/// It contains the actual Image of this Frame and its offset.
 	/// </summary>
 	public class Frame
 	{
 		/// <summary>
-		/// The actual image of this Frame.
+		/// The actual Image of this Frame.
 		/// </summary>
-		private Image image { get; set; }
+		private Image image;
+		/// <summary>
+		/// The offset of this Frame's Image.
+		/// </summary>
+		private Point offset;
 
 		/// <summary>
-		/// The offset of this Frame's image.
+		/// Constructor for a Frame.
 		/// </summary>
-		public Point offset { get; private set; }
-
-		/// <summary>
-		/// Creates an Image on the Silverlight canvas.
-		/// </summary>
-		/// <param name="image">The image of this Frame.</param>
-		/// <param name="offset">The start position of this Frame's image.</param>
+		/// <param name="image">The Image of this Frame.</param>
+		/// <param name="offset">The offset of this Frame's Image.</param>
 		public Frame(Image image, Point offset)
 		{
 			this.image = image;
 			this.offset = offset;
-
-			image.Visibility = Visibility.Collapsed;
-			//image.RenderTransform = new TranslateTransform() { X = offset.X, Y = offset.Y };
 		}
 	}
 }

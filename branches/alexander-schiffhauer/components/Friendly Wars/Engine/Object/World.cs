@@ -6,6 +6,7 @@ using Friendly_Wars.Engine.Utilities;
 using System.Windows.Media;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
+using Friendly_Wars.Engine.Component.Graphic;
 
 namespace Friendly_Wars.Engine.Object
 {
@@ -22,29 +23,22 @@ namespace Friendly_Wars.Engine.Object
 		private static World instance;
 
 		/// <summary>
+		/// The EngineTimer that will handle updating this world.
+		/// </summary>
+		private EngineTimer worldUpdateTimer;
+		/// <summary>
 		/// World will try to update this many times per second.
 		/// </summary>
 		private readonly int UPDATES_PER_SECOND = 60;
 		
 		/// <summary>
-		/// The engineTimer that will handle updating this world.
-		/// </summary>
-		private EngineTimer engineTimer;
-		
-		/// <summary>
 		/// All of the gameObjects in the game.
 		/// </summary>
 		private IList<GameObject> gameObjects;
-
 		/// <summary>
-		/// The queue of gameObjects that need to be re-drawn/updated the next time WordObject updates.
+		/// The queue of RenderComponents that need to be re-drawn/updated the next time WordObject updates.
 		/// </summary>
-		private IList<GameObject> redrawQueue;
-
-		/// <summary>
-		/// The name of this world.
-		/// </summary>
-		private String Name { get; set; }
+		private IList<RenderComponent> redrawQueue;
 
 		/// <summary>
 		/// The constructor for a new instance of World.
@@ -52,11 +46,11 @@ namespace Friendly_Wars.Engine.Object
 		/// </summary>
 		private World() {
 			gameObjects = new List<GameObject>();
-			redrawQueue = new List<GameObject>();
+			redrawQueue = new List<RenderComponent>();
 			
 			// Initialize the timing of the updating of the World.
-			engineTimer = new EngineTimer(EngineTimer.FromHertzToMiliSeconds(UPDATES_PER_SECOND), new List<IUpdateable> { this });
-			engineTimer.Start();
+			worldUpdateTimer = new EngineTimer(EngineTimer.FromHertzToMiliSeconds(UPDATES_PER_SECOND), new List<IUpdateable> { this });
+			worldUpdateTimer.Start();
 		}
 
 		/// <summary>
@@ -83,11 +77,24 @@ namespace Friendly_Wars.Engine.Object
 		{
 			Debug.WriteLine("FPS: " + Convert.ToInt32(1000.00 / deltaTime).ToString());
 
-			// Iterate through each GameObject in the redrawQueue and update each GameObject.
-			foreach (GameObject gameObject in redrawQueue)
+			// Iterate through each RenderComponent in the redrawQueue and redraw it.
+			foreach (RenderComponent renderComponent in redrawQueue)
 			{
-				//gameObject.Update(deltaTime);
-				//redrawQueue.Remove(gameObject);
+				//Remove previous frame.
+				//Draw(renderComponent.CurrentAnimation.CurrentFrame);
+				//redrawQueue.Remove(renderComponent);
+			}
+		}
+
+		/// <summary>
+		/// Adds a RenderComponent to the redraw queue.
+		/// </summary>
+		/// <param name="gameObject">The RenderComponent to add to the queue.</param>
+		public void AddToRedrawQueue(RenderComponent renderComponent)
+		{
+			if (!redrawQueue.Contains(renderComponent))
+			{
+				redrawQueue.Add(renderComponent);
 			}
 		}
 
@@ -122,22 +129,10 @@ namespace Friendly_Wars.Engine.Object
 		}
 
 		/// <summary>
-		/// Adds a GameObject to the redraw queue.
+		/// Access all of the GameObjects that contain a specific name.
 		/// </summary>
-		/// <param name="gameObject">The GameObject to add to the queue.</param>
-		public void AddToRedrawQueue(GameObject gameObject)
-		{
-			if (!redrawQueue.Contains(gameObject))
-			{
-				redrawQueue.Add(gameObject);
-			}
-		}
-
-		/// <summary>
-		/// Access all of the gameObjects that contain a specific name.
-		/// </summary>
-		/// <param name="name">The name of the gameObjects.</param>
-		/// <returns>A Collection of gameObjects with that specific name.</returns>
+		/// <param name="name">The name of the GameObjects.</param>
+		/// <returns>A Collection of GameObjects with that specific name.</returns>
 		public ICollection<GameObject> FindGameObjectsWithName(String name)
 		{
 			ICollection<GameObject> gameObjects = new List<GameObject>();
@@ -154,10 +149,10 @@ namespace Friendly_Wars.Engine.Object
 		}
 
 		/// <summary>
-		/// Access all of the gameObjects that contain a specific tag.
+		/// Access all of the GameObjects that contain a specific tag.
 		/// </summary>
-		/// <param name="tag">The tag of the gameObjects.</param>
-		/// <returns>A Collection of gameObjects with that specific tag.</returns>
+		/// <param name="tag">The tag of the GameObjects.</param>
+		/// <returns>A Collection of GameObjects with that specific tag.</returns>
 		public ICollection<GameObject> FindGameObjectsWithTag(String tag)
 		{
 			ICollection<GameObject> gameObjects = new List<GameObject>();
@@ -174,10 +169,10 @@ namespace Friendly_Wars.Engine.Object
 		}
 
 		/// <summary>
-		/// Access the gameObject that contains a UID.
+		/// Access the GameObject that contains a specific UID.
 		/// </summary>
 		/// <param name="UID">The UID of the gameObject.</param>
-		/// <returns>The gameObject with the specific UID.</returns>
+		/// <returns>The GameObject with the specific UID.</returns>
 		public GameObject FindGameObjectWithUID(int UID)
 		{
 			foreach (GameObject gameObject in gameObjects)

@@ -17,31 +17,13 @@ namespace Friendly_Wars.Engine.Component
 		private IDictionary<String, MediaElement> audioClips;
 
 		/// <summary>
-		/// Constructor for an AudioComponent.
+		/// Constructor for an audioComponent.
 		/// </summary>
-		/// <param name="owner">The owner of this AudioComponent.</param>
-		/// <param name="audioClips">The clips that the AudioComponent is capable of playing.</param>
+		/// <param name="owner">The owner of this audioComponent.</param>
+		/// <param name="audioClips">The clips that the audioComponent is capable of playing.</param>
 		public AudioComponent(GameObject owner, IDictionary<String, MediaElement> audioClips) : base(owner)
 		{
 			this.audioClips = audioClips;
-		}
-
-		/// <summary>
-		/// Adds an audio clip to this AudioComponent.
-		/// </summary>
-		/// <param name="name">The name of the audio clip.</param>
-		/// <param name="audioClip">The audio clip, in the form of a MediaElement. </param>
-		public void AddAudioClip(String name, MediaElement audioClip) {
-			audioClips.Add(name, audioClip);
-		}
-
-		/// <summary>
-		/// Removes an audio clip from this AudioComponent.
-		/// </summary>
-		/// <param name="name">The name of the audio clip to remove.</param>
-		public void RemoveAudioClip(String name)
-		{
-			audioClips.Remove(name);
 		}
 
 		/// <summary>
