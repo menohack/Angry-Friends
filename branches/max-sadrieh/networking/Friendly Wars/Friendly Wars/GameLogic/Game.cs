@@ -22,17 +22,11 @@ namespace Friendly_Wars.GameLogic
 		private World world;
 
 		/// <summary>
-		/// The Web of the game.
-		/// </summary>
-		public Web web { get; private set; }
-
-		/// <summary>
 		/// Constructor for the Game.
 		/// </summary>
 		public Game()
 		{
 			world = World.Instance;
-			web = new Web();
 		}
 	}
 }

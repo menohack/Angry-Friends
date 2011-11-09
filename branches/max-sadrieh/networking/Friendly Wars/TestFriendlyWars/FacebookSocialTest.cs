@@ -56,5 +56,11 @@ namespace TestFriendlyWars
             Assert.Equals("4", fs.Id);
             Assert.Equals("Mark Zuckerberg", fs.Name);
         }
+
+        [TestMethod]
+        public void TestPostMessage()
+        {
+            FacebookPerson fs = new FacebookPerson("msadrieh"); //TODO: Find somebody that won't disable Facebook after this
+        }
     }
 }

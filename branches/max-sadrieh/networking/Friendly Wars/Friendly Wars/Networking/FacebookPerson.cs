@@ -32,25 +32,29 @@ namespace Friendly_Wars.Networking
 
         private static FacebookClient FacebookClient;
 
-        public static FacebookPerson()
-        {
-            OAuth = new FacebookOAuthClient { AppId = "287397801291137", AppSecret = "364a98d9291bb78b437be48ce43e1435" };
-            string[] extendedPermissions = new[] { "publish_stream", "offline_access" };
+        /*
+public static FacebookPerson()
+{
+ 
+ OAuth = new FacebookOAuthClient { AppId = "287397801291137", AppSecret = "364a98d9291bb78b437be48ce43e1435" };
+ string[] extendedPermissions = new[] { "publish_stream", "offline_access" };
 
-            Dictionary<string, object> parameters = new Dictionary<string, object>
-                    {
-                        { "response_type", "token" }, // might want "code"
-                        { "display", "popup" }
-                    };
-            if (extendedPermissions != null && extendedPermissions.Length > 0)
-                {
-                    var scope = new StringBuilder();
-                    scope.Append(string.Join(",", extendedPermissions));
-                    parameters["scope"] = scope.ToString();
-                }
+ Dictionary<string, object> parameters = new Dictionary<string, object>
+         {
+             { "response_type", "token" }, // might want "code"
+             { "display", "popup" }
+         };
+ if (extendedPermissions != null && extendedPermissions.Length > 0)
+     {
+         var scope = new StringBuilder();
+         scope.Append(string.Join(",", extendedPermissions));
+         parameters["scope"] = scope.ToString();
+     }
 
-            FacebookClient = new FacebookClient("token");
-        }
+ FacebookClient = new FacebookClient("token");
+
+}
+         *              */
 
         /// <summary>
         /// Creates a new FacebookPerson
