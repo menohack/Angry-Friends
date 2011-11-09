@@ -2,6 +2,7 @@
 using Friendly_Wars.Engine.Object;
 using System.Collections.Generic;
 using Friendly_Wars.Engine.Utilities;
+using Friendly_Wars.Engine.Component.Realizations;
 
 namespace Friendly_Wars.Engine.Component
 {
@@ -39,18 +40,13 @@ namespace Friendly_Wars.Engine.Component
 	/// <summary>
 	/// A box-representation of the PhysicsComponent's collider.
 	/// </summary>
-	public class BoundingBox
+	public class BoundingBox : Transformable
 	{
-		/// <summary>
-		/// The TransformComponent of the BoundingBox.
-		/// </summary>
-		private TransformComponent transformComponent;
 		/// <summary>
 		/// Constructor for a new BoundingBox.
 		/// </summary>
-		public BoundingBox(TransformComponent transformComponent)
+		public BoundingBox()
 		{
-			this.transformComponent = transformComponent;
 		}
 
 		/// <summary>

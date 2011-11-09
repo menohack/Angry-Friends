@@ -5,6 +5,7 @@ using System.Windows.Controls;
 using Friendly_Wars.Engine.Component;
 using Friendly_Wars.Engine.Component.Interfaces;
 using Friendly_Wars.Engine.Component.Graphic;
+using Friendly_Wars.Engine.Component.Realizations;
 
 namespace Friendly_Wars.Engine.Object
 {
@@ -12,13 +13,8 @@ namespace Friendly_Wars.Engine.Object
 	/// GameObject represent a base for all in-game objects. 
 	/// GameObject are composed of different BaseComponents, which provide core game-functionality, such as rendering, audio, movement, rotation, physics and networking.
 	/// </summary>
-	public class GameObject : ITransformable, ICollidable, IAudible, IRenderable
+	public class GameObject : Transformable, ICollidable, IAudible, IRenderable
 	{
-
-		/// <summary>
-		/// This GameObject's TransformComponent.
-		/// </summary>
-		private TransformComponent transformComponent;
 		/// <summary>
 		/// This GameObject's CollisionComponent.
 		/// </summary>
@@ -67,60 +63,6 @@ namespace Friendly_Wars.Engine.Object
 			this.UID = NextUID();
 
 			Children = new List<GameObject>();
-		}
-
-		/// <summary>
-		/// Moves the TransformComponent by a specified amount.
-		/// </summary>
-		/// <param name="deltaPosition">The amount by which to move.</param>
-		public void MoveBy(Point deltaPosition)
-		{
-			transformComponent.Translate(deltaPosition);
-		}
-
-		/// <summary>
-		/// Move the TransformComponent to a given value.
-		/// </summary>
-		/// <param name="absolutePosition">The absolute value in which to move.</param>
-		public void MoveTo(Point absolutePosition)
-		{
-			transformComponent.Position = absolutePosition;
-		}
-
-		/// <summary>
-		/// Rotates the TransformComponent by a given value.
-		/// </summary>
-		/// <param name="deltaRotation">The value by which to rotate.</param>
-		public void RotateBy(int deltaRotation)
-		{
-			transformComponent.Rotate(deltaRotation);
-		}
-
-		/// <summary>
-		/// Rotates the TransformComponent to a given value.
-		/// </summary>
-		/// <param name="absolutePosition">The value in which to rotate.</param>
-		public void RotateTo(int absolutePosition)
-		{
-			transformComponent.Rotation = absolutePosition;
-		}
-
-		/// <summary>
-		/// Resizes the TransformComponent by a given factor.
-		/// </summary>
-		/// <param name="deltaSize">The factor by which to resize.</param>
-		public void ResizeBy(Point deltaSize)
-		{
-			transformComponent.Resize(deltaSize);
-		}
-
-		/// <summary>
-		/// Resizes the TransformComponent to a specific size.
-		/// </summary>
-		/// <param name="absoluteSize">The size in which to resize.</param>
-		public void ResizeTo(Point absoluteSize)
-		{
-			transformComponent.Size = absoluteSize;
 		}
 
 		/// <summary>
