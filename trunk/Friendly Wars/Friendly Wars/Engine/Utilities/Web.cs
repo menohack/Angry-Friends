@@ -125,55 +125,66 @@ namespace Friendly_Wars.Engine.Utilities {
 			return null;
 		}
 
+        public void DownloadMapComponent(string data, Action<int, MapInfo> progress)
+        {
+            using (XmlReader reader = XmlReader.Create(new StringReader(data)))
+            {
+                MapInfo mapInfo = new MapInfo();
+                List<Resource> resources = new List<Resource>();
+                reader.MoveToContent();
+                while (reader.MoveToNextAttribute())
+                    switch (reader.Name)
+                    {
+                        case "title": mapInfo.Title = reader.Value; break;
+                    }
+                while (reader.Read()) // Reads all the elements
+                    if (reader.NodeType == XmlNodeType.Element)
+                        switch (reader.Name)
+                        {
+                            case "resources": // If in 'resources' element
+                                while (reader.Read())
+                                { // reads all the resources
+                                    switch (reader.NodeType)
+                                    {
+                                        case XmlNodeType.Element:
+                                            resources.Add(new Resource(reader.GetAttribute("url"), reader.Name, reader.GetAttribute("priority")));
+                                            break;
+                                    }
+                                }
+                                break;
+                        }
+                double count = 0, total = resources.Count;
+                resources.ForEach(r =>
+                {
+                    switch (r.Type)
+                    {
+                        case Resource.Types.Image:
+                            BitmapImage image = DownloadImage(r.URL);
+                            if (image == null)
+                                throw new Exception(string.Format("The image resource \"{0}\" in the map \"{1}\" was not found.", r.Name, mapInfo.Title));
+                            else mapInfo.Images.Add(r.Name, image);
+                            break;
+                        case Resource.Types.Sound:
+                            MediaElement sound = DownloadSound(r.URL);
+                            if (sound == null)
+                                throw new Exception(string.Format("The sound resource \"{0}\" in the map \"{1}\" was not found.", r.Name, mapInfo.Title));
+                            else mapInfo.Sounds.Add(r.Name, sound);
+                            break;
+                    }
+                    progress(Convert.ToInt32(100.0 * ++count / total), mapInfo);
+                });
+            }
+        }
+
 		/// <summary>
 		/// Downloads a map asynchronously
 		/// </summary>
 		/// <param name="url">URL where the xml file describing the map is located</param>
+        /// <param name="progress"> </param>
 		/// <returns></returns>
 		public void DownloadMap(string url, Action<int, MapInfo> progress)
         {
-			DownloadString(url, data => {
-				using (XmlReader reader = XmlReader.Create(new StringReader(data))) {
-					MapInfo mapInfo = new MapInfo();
-					List<Resource> resources = new List<Resource>();
-					reader.MoveToContent();
-					while (reader.MoveToNextAttribute())
-						switch (reader.Name) {
-							case "title": mapInfo.Title = reader.Value; break;
-						}
-					while (reader.Read()) // Reads all the elements
-						if (reader.NodeType == XmlNodeType.Element)
-							switch (reader.Name) {
-								case "resources": // If in 'resources' element
-									while (reader.Read()) { // reads all the resources
-										switch (reader.NodeType) {
-											case XmlNodeType.Element:
-												resources.Add(new Resource(reader.GetAttribute("url"), reader.Name, reader.GetAttribute("priority")));
-												break;
-										}
-									}
-									break;
-							}
-					double count = 0, total = resources.Count;
-					resources.ForEach(r => {
-						switch (r.Type) {
-							case Resource.Types.Image:
-								BitmapImage image = DownloadImage(r.URL);
-								if (image == null)
-									throw new Exception(string.Format("The image resource \"{0}\" in the map \"{1}\" was not found.", r.Name, mapInfo.Title));
-								else mapInfo.Images.Add(r.Name, image);
-								break;
-							case Resource.Types.Sound:
-								MediaElement sound = DownloadSound(r.URL);
-								if (sound == null)
-									throw new Exception(string.Format("The sound resource \"{0}\" in the map \"{1}\" was not found.", r.Name, mapInfo.Title));
-								else mapInfo.Sounds.Add(r.Name, sound);
-								break;
-						}
-						progress(Convert.ToInt32(100.0 * ++count / total), mapInfo);
-					});
-				}
-			});
+            DownloadString(url, data => { DownloadMapComponent(data, progress); });
 		}
 	}
 }
