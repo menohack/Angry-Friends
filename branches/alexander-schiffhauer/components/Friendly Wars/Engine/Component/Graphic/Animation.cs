@@ -37,7 +37,7 @@ namespace Friendly_Wars.Engine.Component.Graphic
 		/// </summary>
 		public String Name { get; private set; }
 		/// <summary>
-		/// The elapsed time between the previous update (for playing Animations).
+		/// The elapsed time between the previous Animation's update.
 		/// </summary>
 		private Double elapsedTime;
 

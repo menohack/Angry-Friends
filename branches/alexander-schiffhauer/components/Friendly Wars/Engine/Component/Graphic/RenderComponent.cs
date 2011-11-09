@@ -13,7 +13,7 @@ namespace Friendly_Wars.Engine.Component.Graphic
 	public class RenderComponent : IUpdateable
 	{
 		/// <summary>
-		/// A Dictionary of &lt;String Animation&gt; that contains all of the animations of this RenderComponent.
+		/// A Dictionary of names-to-Animations that contains all of the Animations of this RenderComponent.
 		/// </summary>
 		private IDictionary<String, Animation> animations;
 		/// <summary>
@@ -21,11 +21,11 @@ namespace Friendly_Wars.Engine.Component.Graphic
 		/// </summary>
 		public Animation CurrentAnimation { get; private set; }
 		/// <summary>
-		/// The default Animation for this RenderComponent.  It will play when no other animation is specified to play.
+		/// The default Animation for this RenderComponent.  It will play when no other Animation is specified to play.
 		/// </summary>
 		private Animation defaultAnimation;
 		/// <summary>
-		/// The EngineTimer that handles updating this RenderComponent's animations.
+		/// The EngineTimer that handles updating this RenderComponent's Animations.
 		/// </summary>
 		private EngineTimer animationTimer;
 
