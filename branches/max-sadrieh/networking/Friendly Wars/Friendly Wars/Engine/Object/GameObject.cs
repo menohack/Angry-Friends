@@ -29,7 +29,7 @@ namespace Friendly_Wars.Engine.Object
         /// <summary>
         /// This GameObject's RenderComponent.
         /// </summary>
-        public RenderComponent RenderComponent { get; private set; }
+        private RenderComponent RenderComponent { get; set; }
 
         /// <summary>
         /// This GameObject's name.
@@ -74,6 +74,24 @@ namespace Friendly_Wars.Engine.Object
             RenderComponent = new RenderComponent(this, new Dictionary<string, Animation>(), null);
         }
 
+		/// <summary>
+		/// Adds a new animation.
+		/// </summary>
+		/// <param name="animation">The animation.</param>
+		public void AddAnimation(Animation animation)
+		{
+			RenderComponent.AddAnimation(animation);
+		}
+
+		/// <summary>
+		/// Plays the given animation.
+		/// </summary>
+		/// <param name="animationName">The name of the animation.</param>
+		public void Play(String animationName)
+		{
+			RenderComponent.Play(animationName);
+		}
+
         /// <summary>
         /// Adds a child GameObject to the current GameObject, creating a parent-child relationship.
         /// </summary>
@@ -102,6 +120,16 @@ namespace Friendly_Wars.Engine.Object
             // TODO: Need to remove the GameObject from World.
             gameObject = null;
         }
+
+		/// <summary>
+		/// Updates the GameObject.
+		/// </summary>
+		/// <param name="deltaTime">The time since the last update.</param>
+		public void Update(double deltaTime)
+		{
+			PhysicsComponent.Update(deltaTime);
+			RenderComponent.Update(deltaTime);
+		}
 
         /// <summary>
         /// Creates a UID for a GameObject.

@@ -5,6 +5,7 @@ using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Friendly_Wars.Networking;
 
+
 namespace TestFriendlyWars
 {
     [TestClass]
@@ -13,29 +14,47 @@ namespace TestFriendlyWars
         [TestMethod, ExpectedException(typeof(ArgumentNullException))]
         public void TestOnNullId()
         {
-            new FacebookSocial(null);
+            new FacebookPerson(null);
         }
 
         [TestMethod, ExpectedException(typeof(ArgumentException))]
         public void TestOnEmptyId()
         {
-            new FacebookSocial(String.Empty);
+            new FacebookPerson(String.Empty);
         }
 
         [TestMethod]
         public void TestCorrectNiceId()
         {
-            FacebookSocial fs = new FacebookSocial("zuck");
+            FacebookPerson fs = new FacebookPerson("zuck");
             Assert.IsNotNull(fs);
-            Assert.IsInstanceOfType(fs, typeof(FacebookSocial));
+            Assert.IsInstanceOfType(fs, typeof(FacebookPerson));
         }
 
         [TestMethod]
         public void TestCorrectUglyId()
         {
-            FacebookSocial fs = new FacebookSocial("4");
+            FacebookPerson fs = new FacebookPerson("4");
             Assert.IsNotNull(fs);
-            Assert.IsInstanceOfType(fs, typeof(FacebookSocial));
+            Assert.IsInstanceOfType(fs, typeof(FacebookPerson));
+        }
+
+        [TestMethod]
+        public void TestRetrievalNameNiceId()
+        {
+            FacebookPerson fs = new FacebookPerson("zuck");
+            Assert.IsNotNull(fs.Name);
+            Assert.Equals("zuck", fs.Id);
+            Assert.Equals("Mark Zuckerberg", fs.Name);
+        }
+
+        [TestMethod]
+        public void TestRetrievalNameUglyId()
+        {
+            FacebookPerson fs = new FacebookPerson("4");
+            Assert.IsNotNull(fs.Name);
+            Assert.Equals("4", fs.Id);
+            Assert.Equals("Mark Zuckerberg", fs.Name);
         }
     }
 }

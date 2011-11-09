@@ -47,6 +47,7 @@
   <ItemGroup>
     <Compile Include="FacebookSocialTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="WorldTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Friendly Wars\Friendly Wars.csproj">

@@ -19,6 +19,7 @@ namespace Friendly_Wars.Engine.Component
 		/// Constructor for an AudioComponent.
 		/// </summary>
 		/// <param name="owner">The owner of this AudioComponent.</param>
+		/// <param name="audioClips">The clips that the AudioComponent is capable of playing.</param>
 		public AudioComponent(GameObject owner, IDictionary<String, MediaElement> audioClips) : base(owner)
 		{
 			this.audioClips = audioClips;

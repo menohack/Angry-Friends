@@ -24,11 +24,16 @@ namespace Friendly_Wars.Tests
 		/// <returns>True if the test works.</returns>
 		public bool RunTest()
 		{
+			World world = new World("Test World");
+
 			GameObject go1 = new GameObject("1", "1");
 			GameObject go2 = new GameObject("2", "1");
 
-			ICollection<GameObject> list1 = World.FindGameObjectsWithTag("1");
-			ICollection<GameObject> list2 = World.FindGameObjectsWithTag("2");
+			world.AddGameObject(go1);
+			world.AddGameObject(go2);
+
+			ICollection<GameObject> list1 = world.FindGameObjectsWithTag("1");
+			ICollection<GameObject> list2 = world.FindGameObjectsWithTag("2");
 
 			if (list1.Count == 1 && list2.Count == 2)
 			{

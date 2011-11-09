@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using Friendly_Wars.Engine.Object;
 using Friendly_Wars.Engine.Utilities;
+using System.Collections.ObjectModel;
 
 namespace Friendly_Wars.Engine.Component.Graphic
 {
@@ -11,7 +12,7 @@ namespace Friendly_Wars.Engine.Component.Graphic
 	public class RenderComponent : BaseComponent, IUpdateable
 	{
 		/// <summary>
-		/// A Dictionary of <String, Animation> that contains all of the animations of this RenderComponent.
+		/// A Dictionary of &lt;String Animation&gt; that contains all of the animations of this RenderComponent.
 		/// </summary>
 		internal IDictionary<String, Animation> Animations { get; private set; }
 
@@ -26,21 +27,43 @@ namespace Friendly_Wars.Engine.Component.Graphic
 		public Animation DefaultAnimation { get; private set; }
 
 		/// <summary>
-		/// The timer that handles updating this RenderComponent.
+		/// The width of the entire SilverLight canvas.
 		/// </summary>
-		private static EngineTimer updateTimer;
+		public static readonly double CanvasWidth = MainPage.mainPage.LayoutRoot.Width;
+
+		/// <summary>
+		/// The height of the entire SilverLight canvas.
+		/// </summary>
+		public static readonly double CanvasHeight = MainPage.mainPage.LayoutRoot.Height;
 
 		/// <summary>
 		/// Constructor for a new RenderComponent.
 		/// </summary>
 		/// <param name="owner"> The owner of this RenderComponent. </param>
 		/// <param name="animations">The Dictionary of names-to-Animations for this RenderComponent. </param>
+		/// <param name="defaultAnimation">The animation to play when none is selected.</param>
 		public RenderComponent(GameObject owner, IDictionary<String, Animation> animations, Animation defaultAnimation) : base(owner)
 		{
 			this.Animations = animations;
 			this.DefaultAnimation = defaultAnimation;
 			this.CurrentAnimation = this.DefaultAnimation;
 			//Play(this.defaultAnimation.name);
+		}
+
+		//TODO: Should these play methods return a bool or throw exceptions? I'm leaning towards exceptions because it is a mistake.
+		/// <summary>
+		/// Adds a new animation.
+		/// </summary>
+		/// <param name="animation"> The new animation. </param>
+		/// <returns> True if the animation was added, false if it already exists. </returns>
+		public bool AddAnimation(Animation animation)
+		{
+			KeyValuePair<String, Animation> value = new KeyValuePair<String, Animation>(animation.Name, animation);
+			if (Animations.Contains(value))
+				return false;
+
+			Animations.Add(value);
+			return true;
 		}
 
 		/// <summary>
@@ -50,11 +73,20 @@ namespace Friendly_Wars.Engine.Component.Graphic
 		public void Play(String animationName)
 		{
 			Animation animation;
-		    Animations.TryGetValue(animationName, out animation);
+
+			//TODO: Exception handling?
+			if (!Animations.TryGetValue(animationName, out animation))
+				return;
+
 			CurrentAnimation = animation;
 
-			updateTimer = new EngineTimer(CurrentAnimation.FPS, new List<IUpdateable> { this });
+			//updateTimer = new EngineTimer(CurrentAnimation.FPS, new List<IUpdateable> { this });
 			CurrentAnimation.Play();
+
+			//Collection<IUpdateable> listeners = new Collection<IUpdateable>();
+			//listeners.Add(this);
+			//updateTimer = new EngineTimer(animation.Length, this);
+			//updateTimer.Start();
 		}
 
 		/// <summary>
@@ -69,17 +101,18 @@ namespace Friendly_Wars.Engine.Component.Graphic
 			if (CurrentAnimation.Name == animation.Name)
 			{
 				Play(DefaultAnimation.Name);
-				updateTimer.Stop();
+				animation.Stop();
 			}
 		}
 
 		/// <summary>
 		/// Updates the frame.
 		/// </summary>
-		/// <param name="deltaTime">The time since the last Update.</param>
+		/// <param name="deltaTime">The time in milliseconds since the last Update.</param>
 		public void Update(double deltaTime)
 		{
-			CurrentAnimation.UpdateFrame(deltaTime);
+			//TODO: Animation has a timer which switches frames so there is nothing to do here.
+			//CurrentAnimation.UpdateFrame(deltaTime);
 			//World.AddToRedrawQueue(base.owner);
 		}
 	}

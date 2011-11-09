@@ -12,9 +12,16 @@ using System.Windows.Shapes;
 
 namespace Friendly_Wars
 {
+
+	/// <summary>
+	/// The App class (we didn't write this).
+	/// </summary>
     public partial class App : Application
     {
 
+		/// <summary>
+		/// I have no idea what this does (again, we didn't write this code [Microsoft did])
+		/// </summary>
         public App()
         {
             this.Startup += this.Application_Startup;

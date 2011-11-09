@@ -32,6 +32,6 @@ namespace Friendly_Wars.Networking
         /// Makes a request to a friend of the person on his or her behalf
         /// </summary>
         /// <param name="friend">The friend to make a request to</param>
-        void MakeRequest(ISocialPerson friend);
+        void MakeRequest(ISocialPerson friend, string message);
     }
 }
