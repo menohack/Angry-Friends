@@ -2,7 +2,6 @@
 using Friendly_Wars.Engine.Object;
 using System.Collections.Generic;
 using Friendly_Wars.Engine.Utilities;
-using Friendly_Wars.Engine.Component.Realizations;
 
 namespace Friendly_Wars.Engine.Component
 {

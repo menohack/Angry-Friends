@@ -38,7 +38,7 @@ namespace Friendly_Wars.Engine.Object
 		/// <summary>
 		/// The queue of RenderComponents that need to be re-drawn/updated the next time WordObject updates.
 		/// </summary>
-		private IList<RenderComponent> redrawQueue;
+		private IList<GameObject> redrawQueue;
 
 		/// <summary>
 		/// The constructor for a new instance of World.
@@ -77,12 +77,12 @@ namespace Friendly_Wars.Engine.Object
 		{
 			Debug.WriteLine("FPS: " + Convert.ToInt32(1000.00 / deltaTime).ToString());
 
-			// Iterate through each RenderComponent in the redrawQueue and redraw it.
-			foreach (RenderComponent renderComponent in redrawQueue)
+			// Iterate through each GameObject in the redrawQueue and redraw it.
+			foreach (GameObject gameObject in redrawQueue)
 			{
-				//Remove previous frame.
-				//Draw(renderComponent.CurrentAnimation.CurrentFrame);
-				//redrawQueue.Remove(renderComponent);
+				Point position = gameObject.TransformComponent.Position;
+				Image image = gameObject.RenderComponent.CurrentAnimation.CurrentFrame.Image;
+				image.RenderTransform = new TranslateTransform() { X = position.X, Y = position.Y };
 			}
 		}
 

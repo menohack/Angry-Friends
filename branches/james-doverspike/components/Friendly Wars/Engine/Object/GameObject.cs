@@ -26,8 +26,9 @@ namespace Friendly_Wars.Engine.Object
 		/// <summary>
 		/// This GameObject's RenderComponent.
 		/// </summary>
-		private RenderComponent renderComponent;
+		public RenderComponent RenderComponent { get; private set; }
 
+		public TransformComponent TransformComponent { get; private set; }
 
 		/// <summary>
 		/// This GameObject's name.
