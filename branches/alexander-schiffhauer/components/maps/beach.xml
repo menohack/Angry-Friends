@@ -1,11 +1,15 @@
-<map>
-	<title>beach</title>
+<map title="beach">
 	<resources>
-		<sound url="explosion_0.wav"/>
-		<image url="moving_1.png"/>
-		<image url="moving_2.png"/>
-		<image url="moving_3.png"/>
-		<image url="moving_4.png"/>
-		<image url="moving_5.png"/>
+		<!-- <sound url="explosion_0.wav"/> -->
+		<image url="http://luisgrimaldo.com/luis/logo_0.png"/>
+		<image url="http://luisgrimaldo.com/luis/blur_0.jpg"/>
+		<image url="http://luisgrimaldo.com/luis/bg_0.jpg"/>
+		<image url="http://luisgrimaldo.com/luis/class/hw2.PNG"/>
+		<image url="http://luisgrimaldo.com/luis/class/hw4.PNG"/>
+		<image url="http://luisgrimaldo.com/luis/class/non-word.PNG"/>
+		<image url="http://luisgrimaldo.com/luis/class/word.PNG"/>
+		<image url="http://luisgrimaldo.com/taxi/blur.jpg"/>
+		<image url="http://luisgrimaldo.com/taxi/plus_0.png"/>
+		<image url="http://luisgrimaldo.com/taxi/check_0.png"/>
 	</resources>
 </map>
