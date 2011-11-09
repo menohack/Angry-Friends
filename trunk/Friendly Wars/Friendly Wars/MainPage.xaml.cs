@@ -17,7 +17,7 @@ namespace Friendly_Wars {
 		public MainPage() {
 			InitializeComponent();
 			mainPage = this;
-			Web.DownloadMap("http://luisgrimaldo.com/test.xml", progress);
+			Web.Instance.DownloadMap("http://luisgrimaldo.com/test.xml", progress);
 		}
 		/// <summary>
 		/// This method is called by the map downloader to check progress and results

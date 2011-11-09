@@ -12,15 +12,27 @@ namespace Friendly_Wars.Engine.Utilities {
 	/// Download manager
 	/// </summary>
 	public class Web {
-		static WebClient webclient = new WebClient();
-		static ManualResetEvent mre = new ManualResetEvent(false);
+
+        private static Web instance;
+        public static Web Instance
+        {
+            get
+            {
+                if (instance == null)
+                    instance = new Web();
+                return instance;
+            }
+        }
+
+		WebClient webclient = new WebClient();
+		ManualResetEvent mre = new ManualResetEvent(false);
 		/// <summary>
 		/// Downloads a string async/sync
 		/// </summary>
 		/// <param name="url">URL where the string is located</param>
 		/// <param name="onLoaded">Event to be fired once the download is completed</param>
 		/// <returns>The resulting string if sync, An empty string if async</returns>
-		public static void DownloadString(string url, Action<string> onLoaded) {
+		public void DownloadString(string url, Action<string> onLoaded) {
 			webclient.DownloadStringCompleted += (s, events) => { onLoaded(events.Result); };
 			webclient.DownloadStringAsync(new Uri(url));
 		}
@@ -29,14 +41,14 @@ namespace Friendly_Wars.Engine.Utilities {
 		/// </summary>
 		/// <param name="url">URL where the image is located</param>
 		/// <returns>The resulting image</returns>
-		public static BitmapImage DownloadImage(string url) { return DownloadImage(url, null); }
+		public BitmapImage DownloadImage(string url) { return DownloadImage(url, null); }
 		/// <summary>
 		/// Downloads an image async/sync
 		/// </summary>
 		/// <param name="url">URL where the image is located</param>
 		/// <param name="onLoaded">Event to be fired once the download is completed</param>
 		/// <returns>The resulting string</returns>
-		public static BitmapImage DownloadImage(string url, Action<BitmapImage> onLoaded) {
+		public BitmapImage DownloadImage(string url, Action<BitmapImage> onLoaded) {
 			try {
 				var image = new BitmapImage(new Uri(url)) { CreateOptions = BitmapCreateOptions.None };
 				image.ImageOpened += (s, events) => {
@@ -57,14 +69,14 @@ namespace Friendly_Wars.Engine.Utilities {
 		/// </summary>
 		/// <param name="url">URL where the sound is located</param>
 		/// <returns>The resulting string</returns>
-		public static MediaElement DownloadSound(string url) { return DownloadSound(url, null); }
+		public MediaElement DownloadSound(string url) { return DownloadSound(url, null); }
 		/// <summary>
 		/// Downloads a sound sync
 		/// </summary>
 		/// <param name="url">URL where the sound is located</param>
 		/// <param name="onLoaded">Event to be fired once the download is completed</param>
 		/// <returns>The resulting string</returns>
-		public static MediaElement DownloadSound(string url, Action<MediaElement> onLoaded) {
+		public MediaElement DownloadSound(string url, Action<MediaElement> onLoaded) {
 			try {
 				MediaElement media = new MediaElement();
 				media.Source = new Uri(url);
@@ -85,7 +97,7 @@ namespace Friendly_Wars.Engine.Utilities {
 		/// </summary>
 		/// <param name="url"></param>
 		/// <returns></returns>
-		public static void DownloadMap(string url, Action<int, MapInfo> progress) {
+		public void DownloadMap(string url, Action<int, MapInfo> progress) {
 			DownloadString(url, data => {
 				using (XmlReader reader = XmlReader.Create(new StringReader(data))) {
 					MapInfo mapInfo = new MapInfo();
