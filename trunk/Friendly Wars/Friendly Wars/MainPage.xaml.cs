@@ -4,11 +4,6 @@ using Friendly_Wars.Engine.Object;
 using Friendly_Wars.GameLogic;
 
 namespace Friendly_Wars {
-
-	/// <summary>
-	/// This class represents all of the objects on our Silverlight page. Interacting with this class is how the application communicates
-	/// with Silverlight. For example, any image that needs to be displayed must be added to one of the children of this class.
-	/// </summary>
 	public partial class MainPage : UserControl {
 
 		/// <summary>
@@ -22,9 +17,27 @@ namespace Friendly_Wars {
 		public MainPage() {
 			InitializeComponent();
 			mainPage = this;
-
-			// HOOK
-			new Game();
+			Web.DownloadMap("http://luisgrimaldo.com/test.xml", progress);
+		}
+		/// <summary>
+		/// This method is called by the map downloader to check progress and results
+		/// </summary>
+		/// <param name="percentage">Downloads percentage</param>
+		/// <param name="mapInfo">Partial/Complete Map Information</param>
+		public void progress(int percentage, MapInfo mapInfo) {
+			textBlock1.Text = percentage + "% Downloaded";
+			if (percentage == 100) {
+				image1.Source = mapInfo.Images["hw2"];
+				image2.Source = mapInfo.Images["hw4"];
+				image3.Source = mapInfo.Images["bg_0"];
+				image4.Source = mapInfo.Images["non-word"];
+				image5.Source = mapInfo.Images["word"];
+				image6.Source = mapInfo.Images["logo_0"];
+				image7.Source = mapInfo.Images["blur_0"];
+				image8.Source = mapInfo.Images["plus_0"];
+				image9.Source = mapInfo.Images["check_0"];
+				image10.Source = mapInfo.Images["blur"];
+			}
 		}
 	}
 }
