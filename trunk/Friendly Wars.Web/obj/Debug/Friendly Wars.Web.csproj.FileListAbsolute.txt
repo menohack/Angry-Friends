@@ -8,3 +8,8 @@ Z:\Dropbox\Undergraduate\Junior\Fall Semester\OOSE\Team 11\alexander-schiffhauer
 \\psf\Home\Dropbox\Undergraduate\Junior\Fall Semester\OOSE\Team 11\oose-game\Friendly Wars.Web\obj\Debug\ResolveAssemblyReference.cache
 \\psf\Home\Dropbox\Undergraduate\Junior\Fall Semester\OOSE\Team 11\oose-game\Friendly Wars.Web\obj\Debug\Friendly Wars.Web.dll
 \\psf\Home\Dropbox\Undergraduate\Junior\Fall Semester\OOSE\Team 11\oose-game\Friendly Wars.Web\obj\Debug\Friendly Wars.Web.pdb
+C:\Users\Max\Documents\Visual Studio 2010\Projects\Friendly Wars\Friendly Wars.Web\bin\Friendly Wars.Web.dll
+C:\Users\Max\Documents\Visual Studio 2010\Projects\Friendly Wars\Friendly Wars.Web\bin\Friendly Wars.Web.pdb
+C:\Users\Max\Documents\Visual Studio 2010\Projects\Friendly Wars\Friendly Wars.Web\obj\Debug\ResolveAssemblyReference.cache
+C:\Users\Max\Documents\Visual Studio 2010\Projects\Friendly Wars\Friendly Wars.Web\obj\Debug\Friendly Wars.Web.dll
+C:\Users\Max\Documents\Visual Studio 2010\Projects\Friendly Wars\Friendly Wars.Web\obj\Debug\Friendly Wars.Web.pdb

@@ -5,7 +5,20 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Friendly Wars", "Friendly W
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Friendly Wars.Web", "Friendly Wars.Web\Friendly Wars.Web.csproj", "{E8BBBC67-4A51-44AB-B7E8-CBF664C6E5B2}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Friendly Wars Test", "Friendly Wars Test\Friendly Wars Test.csproj", "{B0FB82A3-F75A-4E7E-BAC3-8A2EA52C24B8}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{F63AD796-7C2A-426F-A101-1EE6B1503A8E}"
+	ProjectSection(SolutionItems) = preProject
+		Friendly Wars.vsmdi = Friendly Wars.vsmdi
+		Local.testsettings = Local.testsettings
+		TraceAndTestImpact.testsettings = TraceAndTestImpact.testsettings
+	EndProjectSection
+EndProject
 Global
+	GlobalSection(SubversionScc) = preSolution
+		Svn-Managed = True
+		Manager = AnkhSVN - Subversion Support for Visual Studio
+	EndGlobalSection
 	GlobalSection(TestCaseManagementSettings) = postSolution
 		CategoryFile = Friendly Wars.vsmdi
 	EndGlobalSection
@@ -22,12 +35,12 @@ Global
 		{E8BBBC67-4A51-44AB-B7E8-CBF664C6E5B2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E8BBBC67-4A51-44AB-B7E8-CBF664C6E5B2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E8BBBC67-4A51-44AB-B7E8-CBF664C6E5B2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B0FB82A3-F75A-4E7E-BAC3-8A2EA52C24B8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B0FB82A3-F75A-4E7E-BAC3-8A2EA52C24B8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B0FB82A3-F75A-4E7E-BAC3-8A2EA52C24B8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B0FB82A3-F75A-4E7E-BAC3-8A2EA52C24B8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
-	EndGlobalSection
-	GlobalSection(SubversionScc) = preSolution
-		Svn-Managed = True
-		Manager = AnkhSVN - Subversion Support for Visual Studio
 	EndGlobalSection
 EndGlobal
