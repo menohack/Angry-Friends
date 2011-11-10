@@ -20,7 +20,7 @@ namespace Friendly_Wars.Engine.Utilities
 		/// <returns> True if the numbers are approximately the same. </returns>
 		public static bool Approximately(Double firstNumber, Double secondNumber)
 		{
-			if (Math.Abs(firstNumber - secondNumber)/secondNumber < EPSILON)
+			if (Math.Abs(firstNumber - secondNumber) < EPSILON)
 			{
 				return true;
 			}
