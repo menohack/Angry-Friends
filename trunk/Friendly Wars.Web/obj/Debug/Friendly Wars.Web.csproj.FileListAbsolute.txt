@@ -3,3 +3,8 @@ Z:\Dropbox\Undergraduate\Junior\Fall Semester\OOSE\Team 11\alexander-schiffhauer
 Z:\Dropbox\Undergraduate\Junior\Fall Semester\OOSE\Team 11\alexander-schiffhauer\components\Friendly Wars.Web\obj\Debug\ResolveAssemblyReference.cache
 Z:\Dropbox\Undergraduate\Junior\Fall Semester\OOSE\Team 11\alexander-schiffhauer\components\Friendly Wars.Web\obj\Debug\Friendly Wars.Web.dll
 Z:\Dropbox\Undergraduate\Junior\Fall Semester\OOSE\Team 11\alexander-schiffhauer\components\Friendly Wars.Web\obj\Debug\Friendly Wars.Web.pdb
+\\psf\Home\Dropbox\Undergraduate\Junior\Fall Semester\OOSE\Team 11\oose-game\Friendly Wars.Web\bin\Friendly Wars.Web.dll
+\\psf\Home\Dropbox\Undergraduate\Junior\Fall Semester\OOSE\Team 11\oose-game\Friendly Wars.Web\bin\Friendly Wars.Web.pdb
+\\psf\Home\Dropbox\Undergraduate\Junior\Fall Semester\OOSE\Team 11\oose-game\Friendly Wars.Web\obj\Debug\ResolveAssemblyReference.cache
+\\psf\Home\Dropbox\Undergraduate\Junior\Fall Semester\OOSE\Team 11\oose-game\Friendly Wars.Web\obj\Debug\Friendly Wars.Web.dll
+\\psf\Home\Dropbox\Undergraduate\Junior\Fall Semester\OOSE\Team 11\oose-game\Friendly Wars.Web\obj\Debug\Friendly Wars.Web.pdb
