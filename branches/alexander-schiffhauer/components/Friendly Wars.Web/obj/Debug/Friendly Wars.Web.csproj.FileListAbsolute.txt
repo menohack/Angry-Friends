@@ -1,0 +1,5 @@
+Z:\Dropbox\Undergraduate\Junior\Fall Semester\OOSE\Team 11\alexander-schiffhauer\components\Friendly Wars.Web\bin\Friendly Wars.Web.dll
+Z:\Dropbox\Undergraduate\Junior\Fall Semester\OOSE\Team 11\alexander-schiffhauer\components\Friendly Wars.Web\bin\Friendly Wars.Web.pdb
+Z:\Dropbox\Undergraduate\Junior\Fall Semester\OOSE\Team 11\alexander-schiffhauer\components\Friendly Wars.Web\obj\Debug\ResolveAssemblyReference.cache
+Z:\Dropbox\Undergraduate\Junior\Fall Semester\OOSE\Team 11\alexander-schiffhauer\components\Friendly Wars.Web\obj\Debug\Friendly Wars.Web.dll
+Z:\Dropbox\Undergraduate\Junior\Fall Semester\OOSE\Team 11\alexander-schiffhauer\components\Friendly Wars.Web\obj\Debug\Friendly Wars.Web.pdb
