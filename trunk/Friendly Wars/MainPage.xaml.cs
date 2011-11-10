@@ -17,7 +17,7 @@ namespace Friendly_Wars {
 		public MainPage() {
 			InitializeComponent();
 			mainPage = this;
-			Web.Instance.DownloadMap("http://luisgrimaldo.com/test.xml", progress);
+			Web.Instance.DownloadMap("http://alexanderschiffhauer.com/Friendly_Wars/spritesheet.png", progress);
 		}
 		/// <summary>
 		/// This method is called by the map downloader to check progress and results
@@ -27,16 +27,7 @@ namespace Friendly_Wars {
 		public void progress(int percentage, MapInfo mapInfo) {
 			textBlock1.Text = percentage + "% Downloaded";
 			if (percentage == 100) {
-				image1.Source = mapInfo.Images["hw2"];
-				image2.Source = mapInfo.Images["hw4"];
-				image3.Source = mapInfo.Images["bg_0"];
-				image4.Source = mapInfo.Images["non-word"];
-				image5.Source = mapInfo.Images["word"];
-				image6.Source = mapInfo.Images["logo_0"];
-				image7.Source = mapInfo.Images["blur_0"];
-				image8.Source = mapInfo.Images["plus_0"];
-				image9.Source = mapInfo.Images["check_0"];
-				image10.Source = mapInfo.Images["blur"];
+				image1.Source = mapInfo.Images["spritesheet"];
 			}
 		}
 	}
