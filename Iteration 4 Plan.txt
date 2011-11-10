@@ -1,0 +1,7 @@
+This iteration we refactored our class design several times. We realized that we did not have a solution to component communication. That is, components contained in GameObject like RenderComponent and TransformComponent need to communicate. For example, to render a GameObject, RenderComponent needs information from TransformComponent. We briefly implemented the observer pattern with listeners, then decided against it. Then we had GameObject implement interfaces that contained the functionality of components. Alex spent several hours writing this code, which can be seen in revision 144. Then we decided to replace this with the following solution: GameObject facilitates the communication between components by keeping them private. We also realized that PhysicsComponent and TransformComponent are too dependent on each other to keep separate.
+
+EXPLAIN HOW WE COMBINED PHYSICS AND TRANSFORM
+
+We also implemented XML asset loading in this iteration. The Web class contains functions for loading map files and their resources from the web.
+
+Facebook integration was implemented as well.
