@@ -39,6 +39,10 @@ namespace Friendly_Wars.Engine.Object
 		/// The queue of GameObjects that need to be re-drawn/updated the next time WordObject updates.
 		/// </summary>
 		private IList<GameObject> redrawQueue;
+		/// <summary>
+		/// TEMPORARY: This stores a reference to the GameObject's previous Frame, allowing us to remove it from the screen.
+		/// </summary>
+		private IDictionary<GameObject, Image> previousImages;
 
 		/// <summary>
 		/// The constructor for a new instance of World.
@@ -46,7 +50,8 @@ namespace Friendly_Wars.Engine.Object
 		/// </summary>
 		private World() {
 			gameObjects = new List<GameObject>();
-			redrawQueue = new List<GameObject>();
+			redrawQueue = new List<GameObject>(0);
+			previousImages = new Dictionary<GameObject, Image>();
 			
 			// Initialize the timing of the updating of the World.
 			worldUpdateTimer = new EngineTimer(EngineTimer.FromHertzToMiliSeconds(UPDATES_PER_SECOND), new List<IUpdateable> { this });
@@ -77,16 +82,28 @@ namespace Friendly_Wars.Engine.Object
 		{
 			Debug.WriteLine("FPS: " + Convert.ToInt32(1000.00 / deltaTime).ToString());
 
+			// Remove previously drawn GameObjects.
+			foreach (GameObject gameObject in redrawQueue)
+			{
+				Image image;
+				previousImages.TryGetValue(gameObject, out image);
+				if (image != null)
+				{
+					MainPage.mainPage.LayoutRoot.Children.Remove(image);
+					previousImages.Remove(gameObject);
+				}
+			}
+
 			// Iterate through each RenderComponent in the redrawQueue and redraw it.
 			foreach (GameObject gameObject in redrawQueue)
 			{
-				//Remove previous frame.
-				// update position through currentPos = GameObject.TransformComponent.Position;
-				// Image image = gameObject.renderComponent.CurrentAnimation.CurrentFrame.Image;
-				// image.position = currentPos;
-				// Stage.addChild(image);
-				//Draw(renderComponent.CurrentAnimation.CurrentFrame);
-				//redrawQueue.Remove(renderComponent);
+				if (gameObject == null)
+					continue;
+
+				Image image = gameObject.RenderComponent.CurrentAnimation.CurrentFrame.Image;
+				MainPage.mainPage.LayoutRoot.Children.Add(image);
+
+				previousImages.Add(gameObject, gameObject.RenderComponent.CurrentAnimation.CurrentFrame.Image);
 			}
 		}
 

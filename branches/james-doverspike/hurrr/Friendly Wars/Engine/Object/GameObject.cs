@@ -24,7 +24,7 @@ namespace Friendly_Wars.Engine.Object
 		/// <summary>
 		/// This GameObject's RenderComponent.
 		/// </summary>
-		public RenderComponent RenderComponent { get; private set; }
+		public RenderComponent RenderComponent { get; set; }
 
 		/// <summary>
 		/// This GameObject's name.
@@ -53,13 +53,14 @@ namespace Friendly_Wars.Engine.Object
 		/// </summary>
 		/// <param name="name">The name of the GameObject.</param>
 		/// <param name="tag">The tag of the GameObject.</param>
-		public GameObject(String name, String tag = null)
+		public GameObject(IDictionary<String, Animation> animations, Animation defaultAnimation, String name, String tag = null)
 		{
 			this.Name = name;
 			this.Tag = tag;
 			this.UID = NextUID();
 
 			Children = new List<GameObject>();
+			RenderComponent = new RenderComponent(animations, defaultAnimation, this);
 		}
 
 		/// <summary>

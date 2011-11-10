@@ -17,7 +17,8 @@ namespace Friendly_Wars {
 		public MainPage() {
 			InitializeComponent();
 			mainPage = this;
-			Web.Instance.DownloadMap("http://alexanderschiffhauer.com/Friendly_Wars/spritesheet.png", progress);
+			Game game = new Game();
+			//Web.Instance.DownloadMap("http://alexanderschiffhauer.com/Friendly_Wars/spritesheet.png", progress);
 		}
 		/// <summary>
 		/// This method is called by the map downloader to check progress and results
