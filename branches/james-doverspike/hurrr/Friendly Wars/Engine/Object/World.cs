@@ -26,6 +26,7 @@ namespace Friendly_Wars.Engine.Object
 		/// The EngineTimer that will handle updating this world.
 		/// </summary>
 		private EngineTimer worldUpdateTimer;
+
 		/// <summary>
 		/// World will try to update this many times per second.
 		/// </summary>
