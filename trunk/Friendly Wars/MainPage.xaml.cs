@@ -5,7 +5,6 @@ using Friendly_Wars.GameLogic;
 
 namespace Friendly_Wars {
 	public partial class MainPage : UserControl {
-
 		/// <summary>
 		/// A reference to the instance of our MainPage; this way, we can access non-static fields.
 		/// </summary>
@@ -17,8 +16,9 @@ namespace Friendly_Wars {
 		public MainPage() {
 			InitializeComponent();
 			mainPage = this;
-			Web.Instance.DownloadMap("http://alexanderschiffhauer.com/Friendly_Wars/spritesheet.png", progress);
+			Web.Instance.DownloadMap("http://alexanderschiffhauer.com/Friendly_Wars/test.xml", progress);
 		}
+
 		/// <summary>
 		/// This method is called by the map downloader to check progress and results
 		/// </summary>

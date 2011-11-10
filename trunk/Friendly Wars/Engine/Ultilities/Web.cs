@@ -16,7 +16,6 @@ namespace Friendly_Wars.Engine.Utilities
 	/// </summary>
 	public class Web
 	{
-
 		/// <summary>
 		/// The single instance of Web.
 		/// </summary>
