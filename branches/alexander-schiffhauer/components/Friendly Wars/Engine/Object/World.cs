@@ -18,7 +18,7 @@ namespace Friendly_Wars.Engine.Object
 	{
 
 		/// <summary>
-		/// The single instsance of world.
+		/// The single instance of world.
 		/// </summary>
 		private static World instance;
 
