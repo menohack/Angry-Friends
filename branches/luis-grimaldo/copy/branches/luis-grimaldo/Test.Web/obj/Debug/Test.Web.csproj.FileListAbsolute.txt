@@ -1,5 +1,0 @@
-C:\Users\Luis Grimaldo\Desktop\oose-game\branches\luis-grimaldo\Test.Web\bin\Test.Web.dll
-C:\Users\Luis Grimaldo\Desktop\oose-game\branches\luis-grimaldo\Test.Web\bin\Test.Web.pdb
-C:\Users\Luis Grimaldo\Desktop\oose-game\branches\luis-grimaldo\Test.Web\obj\Debug\Test.Web.csprojResolveAssemblyReference.cache
-C:\Users\Luis Grimaldo\Desktop\oose-game\branches\luis-grimaldo\Test.Web\obj\Debug\Test.Web.dll
-C:\Users\Luis Grimaldo\Desktop\oose-game\branches\luis-grimaldo\Test.Web\obj\Debug\Test.Web.pdb

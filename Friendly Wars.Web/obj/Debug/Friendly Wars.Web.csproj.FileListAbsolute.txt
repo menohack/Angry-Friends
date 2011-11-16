@@ -1,0 +1,5 @@
+\\psf\Home\Dropbox\Undergraduate\Junior\Fall Semester\OOSE\Team 11\angry-friends\Friendly Wars.Web\bin\Friendly Wars.Web.dll
+\\psf\Home\Dropbox\Undergraduate\Junior\Fall Semester\OOSE\Team 11\angry-friends\Friendly Wars.Web\bin\Friendly Wars.Web.pdb
+\\psf\Home\Dropbox\Undergraduate\Junior\Fall Semester\OOSE\Team 11\angry-friends\Friendly Wars.Web\obj\Debug\ResolveAssemblyReference.cache
+\\psf\Home\Dropbox\Undergraduate\Junior\Fall Semester\OOSE\Team 11\angry-friends\Friendly Wars.Web\obj\Debug\Friendly Wars.Web.dll
+\\psf\Home\Dropbox\Undergraduate\Junior\Fall Semester\OOSE\Team 11\angry-friends\Friendly Wars.Web\obj\Debug\Friendly Wars.Web.pdb

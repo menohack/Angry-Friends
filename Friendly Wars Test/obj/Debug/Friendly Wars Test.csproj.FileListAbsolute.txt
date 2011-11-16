@@ -1,0 +1,8 @@
+\\psf\Home\Dropbox\Undergraduate\Junior\Fall Semester\OOSE\Team 11\angry-friends\Friendly Wars Test\bin\Debug\Friendly Wars Test.dll
+\\psf\Home\Dropbox\Undergraduate\Junior\Fall Semester\OOSE\Team 11\angry-friends\Friendly Wars Test\bin\Debug\Friendly Wars Test.pdb
+\\psf\Home\Dropbox\Undergraduate\Junior\Fall Semester\OOSE\Team 11\angry-friends\Friendly Wars Test\bin\Debug\Friendly Wars.dll
+\\psf\Home\Dropbox\Undergraduate\Junior\Fall Semester\OOSE\Team 11\angry-friends\Friendly Wars Test\bin\Debug\Friendly Wars.pdb
+\\psf\Home\Dropbox\Undergraduate\Junior\Fall Semester\OOSE\Team 11\angry-friends\Friendly Wars Test\bin\Debug\Friendly Wars.xml
+\\psf\Home\Dropbox\Undergraduate\Junior\Fall Semester\OOSE\Team 11\angry-friends\Friendly Wars Test\obj\Debug\ResolveAssemblyReference.cache
+\\psf\Home\Dropbox\Undergraduate\Junior\Fall Semester\OOSE\Team 11\angry-friends\Friendly Wars Test\obj\Debug\Friendly Wars Test.dll
+\\psf\Home\Dropbox\Undergraduate\Junior\Fall Semester\OOSE\Team 11\angry-friends\Friendly Wars Test\obj\Debug\Friendly Wars Test.pdb
