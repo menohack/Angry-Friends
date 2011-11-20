@@ -4,43 +4,6 @@
         <name>Friendly Wars</name>
     </assembly>
     <members>
-        <member name="M:Friendly_Wars.MainPage.InitializeComponent">
-            <summary>
-            InitializeComponent
-            </summary>
-        </member>
-        <member name="F:Friendly_Wars.MainPage.mainPage">
-            <summary>
-            A reference to the instance of our MainPage; this way, we can access non-static fields.
-            </summary>
-        </member>
-        <member name="M:Friendly_Wars.MainPage.#ctor">
-            <summary>
-            This class represents our Silverlight page.
-            </summary>
-        </member>
-        <member name="M:Friendly_Wars.MainPage.progress(System.Int32,Friendly_Wars.GameLogic.MapInfo)">
-            <summary>
-            This method is called by the map downloader to check progress and results
-            </summary>
-            <param name="percentage">Downloads percentage</param>
-            <param name="mapInfo">Partial/Complete Map Information</param>
-        </member>
-        <member name="T:Friendly_Wars.App">
-            <summary>
-            The App class (we didn't write this).
-            </summary>
-        </member>
-        <member name="M:Friendly_Wars.App.#ctor">
-            <summary>
-            I have no idea what this does (again, we didn't write this code [Microsoft did])
-            </summary>
-        </member>
-        <member name="M:Friendly_Wars.App.InitializeComponent">
-            <summary>
-            InitializeComponent
-            </summary>
-        </member>
         <member name="T:Friendly_Wars.Engine.Utilities.Web">
             <summary>
             Download manager. Is responsible for loading media such as images, sound, text or maps.
@@ -113,82 +76,32 @@
             This accessor follows the singleton pattern for C# provided at Microsoft's MSDN.
             </summary>
         </member>
-        <member name="T:Friendly_Wars.Engine.Component.Graphic.Animation">
+        <member name="T:Friendly_Wars.Engine.Component.Graphic.Frame">
             <summary>
-            Contains all data pertaining to a series of Frames representing an Animation.
+            Frame is the base class for an Animation.  
+            It contains the actual Image of this Frame and its offset.
             </summary>
         </member>
-        <member name="T:Friendly_Wars.Engine.Utilities.IUpdateable">
+        <member name="M:Friendly_Wars.Engine.Component.Graphic.Frame.#ctor(System.Windows.Controls.Image,System.Windows.Point)">
             <summary>
-            An interface for listening to an engineTimer. It recieves the time elapsed from the last interval.
+            Constructor for a Frame.
+            </summary>
+            <param name="image">The Image of this Frame.</param>
+            <param name="offset">The offset of this Frame's Image.</param>
+        </member>
+        <member name="P:Friendly_Wars.Engine.Component.Graphic.Frame.Image">
+            <summary>
+            The actual Image of this Frame.
             </summary>
         </member>
-        <member name="M:Friendly_Wars.Engine.Utilities.IUpdateable.Update(System.Double)">
+        <member name="P:Friendly_Wars.Engine.Component.Graphic.Frame.Offset">
             <summary>
-            Dispatches an event with the elapsed time, in miliseconds, from the previous update.
-            </summary>
-            <param name="deltaTime">The elapsed time, in miliseconds, from the previous update.</param>
-        </member>
-        <member name="F:Friendly_Wars.Engine.Component.Graphic.Animation.frames">
-            <summary>
-            All the Frames of this Animation.
+            The offset of this Frame's Image.
             </summary>
         </member>
-        <member name="F:Friendly_Wars.Engine.Component.Graphic.Animation.index">
+        <member name="T:Friendly_Wars.Engine.Component.AudioComponent">
             <summary>
-            The Enumerator for the current Frame of this Animation.
-            </summary>
-        </member>
-        <member name="F:Friendly_Wars.Engine.Component.Graphic.Animation.length">
-            <summary>
-            The length, in miliseconds, of this Animation. 
-            </summary>
-        </member>
-        <member name="F:Friendly_Wars.Engine.Component.Graphic.Animation.elapsedTime">
-            <summary>
-            The elapsed time between the previous Animation's update.
-            </summary>
-        </member>
-        <member name="M:Friendly_Wars.Engine.Component.Graphic.Animation.#ctor(System.Collections.Generic.IList{Friendly_Wars.Engine.Component.Graphic.Frame},System.Double,System.Int32,System.String)">
-            <summary>
-            Constructor for a new Animation with multiple frames.
-            </summary>
-            <param name="frames">All the Frames of this Animation.</param>
-            <param name="length">The length, in seconds, of this Animation.</param>
-            <param name="fps">The frames-per-second of this Animation.</param>
-            <param name="name">The name of this Animation.</param>
-        </member>
-        <member name="M:Friendly_Wars.Engine.Component.Graphic.Animation.#ctor(Friendly_Wars.Engine.Component.Graphic.Frame,System.String)">
-            <summary>
-            Constructor for a new Animation with a single frame.
-            </summary>
-            <param name="frame">The Frame of the Animation.</param>
-            <param name="name">The name of the Animation.</param>
-        </member>
-        <member name="M:Friendly_Wars.Engine.Component.Graphic.Animation.Update(System.Double)">
-            <summary>
-            Updates the Frame of this Animation.
-            </summary>
-            <param name="deltaTime">The time in milliseconds from the previous update.</param>
-        </member>
-        <member name="P:Friendly_Wars.Engine.Component.Graphic.Animation.CurrentFrame">
-            <summary>
-            The current Frame of this Animation.
-            </summary>
-        </member>
-        <member name="P:Friendly_Wars.Engine.Component.Graphic.Animation.FPS">
-            <summary>
-            The frames-per-second of this Animation.
-            </summary>
-        </member>
-        <member name="P:Friendly_Wars.Engine.Component.Graphic.Animation.Name">
-            <summary>
-            The name of this Animation.
-            </summary>
-        </member>
-        <member name="T:Friendly_Wars.Engine.Component.TransformComponent">
-            <summary>
-            Handles positioning, size and rotation of an Object.
+            Handles the control of a GameObject's audio.
             </summary>
         </member>
         <member name="T:Friendly_Wars.Engine.Component.BaseComponent">
@@ -205,83 +118,6 @@
         <member name="P:Friendly_Wars.Engine.Component.BaseComponent.Owner">
             <summary>
             The GameObject that owns this Component.
-            </summary>
-        </member>
-        <member name="F:Friendly_Wars.Engine.Component.TransformComponent.MIMIMUM_ROTATION_ANGLE">
-            <summary>
-            The mimimum angle of rotation.
-            </summary>
-        </member>
-        <member name="F:Friendly_Wars.Engine.Component.TransformComponent.MAXIMUM_ROTATION_ANGLE">
-            <summary>
-            The maximum angle of rotation.
-            </summary>
-        </member>
-        <member name="F:Friendly_Wars.Engine.Component.TransformComponent.position">
-            <summary>
-            The position of this TransformComponent.
-            </summary>
-        </member>
-        <member name="F:Friendly_Wars.Engine.Component.TransformComponent.rotation">
-            <summary>
-            The rotation of this TransformComponent.
-            </summary>
-        </member>
-        <member name="F:Friendly_Wars.Engine.Component.TransformComponent.size">
-            <summary>
-            The size of this TransformComponent.
-            </summary>
-        </member>
-        <member name="M:Friendly_Wars.Engine.Component.TransformComponent.#ctor(System.Windows.Point,System.Int32,System.Windows.Point,Friendly_Wars.Engine.Object.GameObject)">
-            <summary>
-            Constructor for a new instance of TransformComponent.
-            </summary>
-            <param name="position">The initial position of this TransformComponent.</param>
-            <param name="rotation">The initial rotation of this TransformComponent.</param>
-            <param name="size">The initial size of this TransformComponent.</param>
-            <param name="owner">The GameObject that owns this TransformComponent.</param>
-        </member>
-        <member name="M:Friendly_Wars.Engine.Component.TransformComponent.Translate(System.Windows.Point)">
-            <summary>
-            Translates by a given point.
-            </summary>
-            <param name="deltaPosition">The change of position.</param>
-        </member>
-        <member name="M:Friendly_Wars.Engine.Component.TransformComponent.Rotate(System.Int32)">
-            <summary>
-            Rotates by a given number of degrees.
-            </summary>
-            <param name="deltaRotation">The change of rotation.</param>
-        </member>
-        <member name="M:Friendly_Wars.Engine.Component.TransformComponent.Resize(System.Windows.Point)">
-            <summary>
-            Resizes by a given factor.
-            </summary>
-            <param name="resizeFactor">The factor by which to resize.</param>
-        </member>
-        <member name="M:Friendly_Wars.Engine.Component.TransformComponent.CollisionDetection(System.Windows.Point,System.Windows.Point)">
-            <summary>
-            If this linear-motion produces collision, CollisionDetection returns the modified value that satisifies non-collision requirements.
-            </summary>
-        </member>
-        <member name="P:Friendly_Wars.Engine.Component.TransformComponent.Position">
-            <summary>
-            The accessor for the position of the TransformComponent.
-            </summary>
-        </member>
-        <member name="P:Friendly_Wars.Engine.Component.TransformComponent.Rotation">
-            <summary>
-            The rotation of this TransformComponent, clamped in degrees: [0, 360].
-            </summary>
-        </member>
-        <member name="P:Friendly_Wars.Engine.Component.TransformComponent.Size">
-            <summary>
-            The size of this TransformComponent.
-            </summary>
-        </member>
-        <member name="T:Friendly_Wars.Engine.Component.AudioComponent">
-            <summary>
-            Handles the control of a GameObject's audio.
             </summary>
         </member>
         <member name="F:Friendly_Wars.Engine.Component.AudioComponent.audioClips">
@@ -308,19 +144,29 @@
             </summary>
             <param name="name">The name of the audio clip to stop playing.</param>
         </member>
-        <member name="T:Friendly_Wars.GameLogic.Game">
+        <member name="T:Friendly_Wars.App">
             <summary>
-            This class represents the Game. All game-logic stems from here.
+            The App class (we didn't write this).
             </summary>
         </member>
-        <member name="F:Friendly_Wars.GameLogic.Game.world">
+        <member name="M:Friendly_Wars.App.InitializeComponent">
             <summary>
-            The world of the game.
+            InitializeComponent
             </summary>
         </member>
-        <member name="M:Friendly_Wars.GameLogic.Game.#ctor">
+        <member name="M:Friendly_Wars.App.#ctor">
             <summary>
-            Constructor for the Game.
+            I have no idea what this does (again, we didn't write this code [Microsoft did])
+            </summary>
+        </member>
+        <member name="T:Friendly_Wars.Engine.Object.Camera">
+            <summary>
+            Represents a Camera that handles the positioning of the "viewport"; it essentially determines what the screen should render.
+            </summary>
+        </member>
+        <member name="M:Friendly_Wars.Engine.Object.Camera.#ctor">
+            <summary>
+            Constructor for a new Camera.
             </summary>
         </member>
         <member name="T:Friendly_Wars.Engine.Utilities.EngineMath">
@@ -350,300 +196,22 @@
             <param name="max">The maximum possible value of this value.</param>
             <returns></returns>
         </member>
-        <member name="T:Friendly_Wars.Engine.Object.GameObject">
-            <summary>
-            GameObject represents a base for all in-game objects. 
-            GameObject is composed of different Components that provide core game-functionality, such as rendering, audio and movement.
-            </summary>
-        </member>
-        <member name="F:Friendly_Wars.Engine.Object.GameObject.currentUID">
-            <summary>
-            The last UID assigned to a GameObject.
-            </summary>
-        </member>
-        <member name="M:Friendly_Wars.Engine.Object.GameObject.#ctor(System.String,System.String)">
-            <summary>
-            The Constructor for a GameObject.
-            </summary>
-            <param name="name">The name of the GameObject.</param>
-            <param name="tag">The tag of the GameObject.</param>
-        </member>
-        <member name="M:Friendly_Wars.Engine.Object.GameObject.NextUID">
-            <summary>
-            Creates a UID for a GameObject.
-            </summary>
-            <returns>Returns a UID for a GameObject</returns>
-        </member>
-        <member name="M:Friendly_Wars.Engine.Object.GameObject.Destroy(Friendly_Wars.Engine.Object.GameObject)">
-            <summary>
-            Destroys a given GameObject.
-            </summary>
-            <param name="gameObject">The GameObject that will be destroyed.</param>
-        </member>
-        <member name="P:Friendly_Wars.Engine.Object.GameObject.TransformComponent">
-            <summary>
-            This GameObject's TransformComponent.
-            </summary>
-        </member>
-        <member name="P:Friendly_Wars.Engine.Object.GameObject.AudioComponent">
-            <summary>
-            The GameObject's AudioComponent.
-            </summary>
-        </member>
-        <member name="P:Friendly_Wars.Engine.Object.GameObject.RenderComponent">
-            <summary>
-            This GameObject's RenderComponent.
-            </summary>
-        </member>
-        <member name="P:Friendly_Wars.Engine.Object.GameObject.Name">
-            <summary>
-            This GameObject's name.
-            </summary>
-        </member>
-        <member name="P:Friendly_Wars.Engine.Object.GameObject.Tag">
-            <summary>
-            This GameObject's tag.
-            </summary>
-        </member>
-        <member name="P:Friendly_Wars.Engine.Object.GameObject.UID">
-            <summary>
-            This GameObject's UID.
-            </summary>
-        </member>
-        <member name="P:Friendly_Wars.Engine.Object.GameObject.Children">
-            <summary>
-            This GameObject's children.
-            </summary>
-        </member>
-        <member name="T:Friendly_Wars.Engine.Object.Camera">
-            <summary>
-            Represents a Camera that handles the positioning of the "viewport"; it essentially determines what the screen should render.
-            </summary>
-        </member>
-        <member name="M:Friendly_Wars.Engine.Object.Camera.#ctor">
-            <summary>
-            Constructor for a new Camera.
-            </summary>
-        </member>
-        <member name="T:Friendly_Wars.Engine.Utilities.EngineTimer">
-            <summary>
-            An engineTimer dispatches events to IUpdateables. 
-            It dispatches the change in time from the last update, all while trying to update at a constant interval.
-            engineTimer is frame-rate-independent and will account for a drop in frame rate.
-            </summary>
-        </member>
-        <member name="F:Friendly_Wars.Engine.Utilities.EngineTimer.updateTimer">
-            <summary>
-            The timer that tries to update at a given interval.
-            </summary>
-        </member>
-        <member name="F:Friendly_Wars.Engine.Utilities.EngineTimer.previousTime">
-            <summary>
-            The DateTime associated with the last update.
-            </summary>
-        </member>
-        <member name="F:Friendly_Wars.Engine.Utilities.EngineTimer.eventListeners">
-            <summary>
-            All of the objects that are listening for dispatched events from this engineTimer.
-            </summary>
-        </member>
-        <member name="M:Friendly_Wars.Engine.Utilities.EngineTimer.#ctor(System.Int32,System.Collections.Generic.ICollection{Friendly_Wars.Engine.Utilities.IUpdateable})">
-            <summary>
-            Constructor for a new EngineTimer.
-            </summary>
-            <param name="interval">The interval, in miliseconds, at which the timer will try to update.</param>
-            <param name="eventListeners">The EngineTimer's eventListeners.</param>
-        </member>
-        <member name="M:Friendly_Wars.Engine.Utilities.EngineTimer.AddEventListener(Friendly_Wars.Engine.Utilities.IUpdateable)">
-            <summary>
-            Adds an IUpdateable to this EngineTimer.
-            </summary>
-            <param name="eventListener">The IUpdateable to add to this engineTimer.</param>
-        </member>
-        <member name="M:Friendly_Wars.Engine.Utilities.EngineTimer.RemoveEventListener(Friendly_Wars.Engine.Utilities.IUpdateable)">
-            <summary>
-            Removes an IUpdateable from this EngineTimer.
-            </summary>
-            <param name="eventListener">The IUpdateable to remove from this engineTimer.</param>
-        </member>
-        <member name="M:Friendly_Wars.Engine.Utilities.EngineTimer.Start">
-            <summary>
-            Start dispatching events.
-            </summary>
-        </member>
-        <member name="M:Friendly_Wars.Engine.Utilities.EngineTimer.Stop">
-            <summary>
-            Stop dispatching events.
-            </summary>
-        </member>
-        <member name="M:Friendly_Wars.Engine.Utilities.EngineTimer.DispatchEvent(System.Object,System.EventArgs)">
-            <summary>
-            Dispatches an event to all listeners.
-            </summary>
-            <param name="sender">The Object that called this function.</param>
-            <param name="e">The event that corresponds to this function.</param>
-        </member>
-        <member name="M:Friendly_Wars.Engine.Utilities.EngineTimer.FromHertzToMiliSeconds(System.Int32)">
-            <summary>
-            Converts a given amount of hertz (30 Hz = 1/30) to miliseconds.
-            </summary>
-            <param name="hertz">The amount of hertz to convert.</param>
-            <returns>The converted amount of hertz, now in Miliseconds.</returns>
-        </member>
-        <member name="M:Friendly_Wars.Engine.Utilities.EngineTimer.SecondsToMiliseconds(System.Double)">
-            <summary>
-            Converts a given amount of seconds to miliseconds.
-            </summary>
-            <param name="amount">The amount of seconds to convert into miliseconds.</param>
-            <returns>The amount of miliseconds in the given amount of seconds.</returns>
-        </member>
-        <member name="P:Friendly_Wars.Engine.Utilities.EngineTimer.Interval">
-            <summary>
-            The interval, in miliseconds, at which the timer will try to update.
-            </summary>
-        </member>
-        <member name="T:Friendly_Wars.Engine.Component.Graphic.RenderComponent">
-            <summary>
-            Handles the rendering of an Object. 
-            </summary>
-        </member>
-        <member name="F:Friendly_Wars.Engine.Component.Graphic.RenderComponent.animations">
-            <summary>
-            A Dictionary of names-to-Animations that contains all of the Animations of this RenderComponent.
-            </summary>
-        </member>
-        <member name="F:Friendly_Wars.Engine.Component.Graphic.RenderComponent.defaultAnimation">
-            <summary>
-            The default Animation for this RenderComponent.  It will play when no other Animation is specified to play.
-            </summary>
-        </member>
-        <member name="F:Friendly_Wars.Engine.Component.Graphic.RenderComponent.animationTimer">
-            <summary>
-            The EngineTimer that handles updating this RenderComponent's Animations.
-            </summary>
-        </member>
-        <member name="M:Friendly_Wars.Engine.Component.Graphic.RenderComponent.#ctor(System.Collections.Generic.IDictionary{System.String,Friendly_Wars.Engine.Component.Graphic.Animation},Friendly_Wars.Engine.Component.Graphic.Animation,Friendly_Wars.Engine.Object.GameObject)">
-            <summary>
-            Constructor for a new RenderComponent.
-            </summary>
-            <param name="animations">The Dictionary of names-to-Animations of this RenderComponent. </param>
-            <param name="defaultAnimation">The Animation to play when no other Animation is specified to play.</param>
-            <param name="owner">The GameObject that owns this RenderComponent.</param>
-        </member>
-        <member name="M:Friendly_Wars.Engine.Component.Graphic.RenderComponent.Play(System.String)">
-            <summary>
-            Plays a specific Animation.
-            </summary>
-            <param name="animationName">The name of the Animation to play.</param>
-        </member>
-        <member name="M:Friendly_Wars.Engine.Component.Graphic.RenderComponent.Stop(System.String)">
-            <summary>
-            Stops playing a specific Animation.
-            </summary>
-            <param name="animationName">The name of the Animation to stop playing.</param>
-        </member>
-        <member name="M:Friendly_Wars.Engine.Component.Graphic.RenderComponent.Update(System.Double)">
-            <summary>
-            Notify the World that this RenderComponent needs to be re-rendered.
-            </summary>
-            <param name="deltaTime">The time in milliseconds since the last Update.</param>
-        </member>
-        <member name="P:Friendly_Wars.Engine.Component.Graphic.RenderComponent.CurrentAnimation">
-            <summary>
-            The Animation that is currently playing.
-            </summary>
-        </member>
-        <member name="T:Friendly_Wars.Engine.Component.Graphic.Frame">
-            <summary>
-            Frame is the base class for an Animation.  
-            It contains the actual Image of this Frame and its offset.
-            </summary>
-        </member>
-        <member name="M:Friendly_Wars.Engine.Component.Graphic.Frame.#ctor(System.Windows.Controls.Image,System.Windows.Point)">
-            <summary>
-            Constructor for a Frame.
-            </summary>
-            <param name="image">The Image of this Frame.</param>
-            <param name="offset">The offset of this Frame's Image.</param>
-        </member>
-        <member name="P:Friendly_Wars.Engine.Component.Graphic.Frame.Image">
-            <summary>
-            The actual Image of this Frame.
-            </summary>
-        </member>
-        <member name="P:Friendly_Wars.Engine.Component.Graphic.Frame.Offset">
-            <summary>
-            The offset of this Frame's Image.
-            </summary>
-        </member>
-        <member name="T:Friendly_Wars.GameLogic.MapInfo">
-            <summary>
-            Map Information
-            </summary>
-        </member>
-        <member name="M:Friendly_Wars.GameLogic.MapInfo.#ctor">
-            <summary>
-            Constructor for the Map Information
-            </summary>
-        </member>
-        <member name="P:Friendly_Wars.GameLogic.MapInfo.Title">
-            <summary>
-            Title of the map
-            </summary>
-        </member>
-        <member name="P:Friendly_Wars.GameLogic.MapInfo.Images">
-            <summary>
-            Dictionary containing all the images used in the map
-            </summary>
-        </member>
-        <member name="P:Friendly_Wars.GameLogic.MapInfo.Sounds">
-            <summary>
-            Dictionary containing all the sounds used in the map
-            </summary>
-        </member>
-        <member name="M:Friendly_Wars.Engine.Utilities.Resource.#ctor(System.String,System.String,System.String)">
-            <summary>
-            Constructs a resource
-            </summary>
-            <param name="url">Address of the resource</param>
-            <param name="type">Resource type</param>
-            <param name="priority">Resource priority</param>
-        </member>
-        <member name="P:Friendly_Wars.Engine.Utilities.Resource.Name">
-            <summary>
-            Name of the resource
-            </summary>
-        </member>
-        <member name="P:Friendly_Wars.Engine.Utilities.Resource.URL">
-            <summary>
-            Address of the resource
-            </summary>
-        </member>
-        <member name="P:Friendly_Wars.Engine.Utilities.Resource.Type">
-            <summary>
-            Resource type
-            </summary>
-        </member>
-        <member name="P:Friendly_Wars.Engine.Utilities.Resource.Priority">
-            <summary>
-            Resource priority
-            </summary>
-        </member>
-        <member name="T:Friendly_Wars.Engine.Utilities.Resource.Types">
-            <summary>
-            List of resource types
-            </summary>
-        </member>
-        <member name="T:Friendly_Wars.Engine.Utilities.Resource.Priorities">
-            <summary>
-            List of resource priorities
-            </summary>
-        </member>
         <member name="T:Friendly_Wars.Engine.Object.World">
             <summary>
             World can be thought of as the "universe" of a game. 
             Not only does it contain all gameObjects, but it also provides functionality for finding gameObjects and drawing gameObjects at appropriate times.
             </summary>
+        </member>
+        <member name="T:Friendly_Wars.Engine.Utilities.IUpdateable">
+            <summary>
+            An interface for listening to an engineTimer. It recieves the time elapsed from the last interval.
+            </summary>
+        </member>
+        <member name="M:Friendly_Wars.Engine.Utilities.IUpdateable.Update(System.Double)">
+            <summary>
+            Dispatches an event with the elapsed time, in miliseconds, from the previous update.
+            </summary>
+            <param name="deltaTime">The elapsed time, in miliseconds, from the previous update.</param>
         </member>
         <member name="F:Friendly_Wars.Engine.Object.World.instance">
             <summary>
@@ -731,6 +299,484 @@
             <summary>
             Accessor for the instance of World.
             This accessor follows the singleton pattern for C# provided at Microsoft's MSDN.
+            </summary>
+        </member>
+        <member name="T:Friendly_Wars.Engine.Component.Graphic.Animation">
+            <summary>
+            Contains all data pertaining to a series of Frames representing an Animation.
+            </summary>
+        </member>
+        <member name="F:Friendly_Wars.Engine.Component.Graphic.Animation.frames">
+            <summary>
+            All the Frames of this Animation.
+            </summary>
+        </member>
+        <member name="F:Friendly_Wars.Engine.Component.Graphic.Animation.index">
+            <summary>
+            The Enumerator for the current Frame of this Animation.
+            </summary>
+        </member>
+        <member name="F:Friendly_Wars.Engine.Component.Graphic.Animation.length">
+            <summary>
+            The length, in miliseconds, of this Animation. 
+            </summary>
+        </member>
+        <member name="F:Friendly_Wars.Engine.Component.Graphic.Animation.elapsedTime">
+            <summary>
+            The elapsed time between the previous Animation's update.
+            </summary>
+        </member>
+        <member name="M:Friendly_Wars.Engine.Component.Graphic.Animation.#ctor(System.Collections.Generic.IList{Friendly_Wars.Engine.Component.Graphic.Frame},System.Double,System.Int32,System.String)">
+            <summary>
+            Constructor for a new Animation with multiple frames.
+            </summary>
+            <param name="frames">All the Frames of this Animation.</param>
+            <param name="length">The length, in seconds, of this Animation.</param>
+            <param name="fps">The frames-per-second of this Animation.</param>
+            <param name="name">The name of this Animation.</param>
+        </member>
+        <member name="M:Friendly_Wars.Engine.Component.Graphic.Animation.#ctor(Friendly_Wars.Engine.Component.Graphic.Frame,System.String)">
+            <summary>
+            Constructor for a new Animation with a single frame.
+            </summary>
+            <param name="frame">The Frame of the Animation.</param>
+            <param name="name">The name of the Animation.</param>
+        </member>
+        <member name="M:Friendly_Wars.Engine.Component.Graphic.Animation.Update(System.Double)">
+            <summary>
+            Updates the Frame of this Animation.
+            </summary>
+            <param name="deltaTime">The time in milliseconds from the previous update.</param>
+        </member>
+        <member name="P:Friendly_Wars.Engine.Component.Graphic.Animation.CurrentFrame">
+            <summary>
+            The current Frame of this Animation.
+            </summary>
+        </member>
+        <member name="P:Friendly_Wars.Engine.Component.Graphic.Animation.FPS">
+            <summary>
+            The frames-per-second of this Animation.
+            </summary>
+        </member>
+        <member name="P:Friendly_Wars.Engine.Component.Graphic.Animation.Name">
+            <summary>
+            The name of this Animation.
+            </summary>
+        </member>
+        <member name="F:Friendly_Wars.MainPage.mainPage">
+            <summary>
+            A reference to the instance of our MainPage; this way, we can access non-static fields.
+            </summary>
+        </member>
+        <member name="M:Friendly_Wars.MainPage.#ctor">
+            <summary>
+            This class represents our Silverlight page.
+            </summary>
+        </member>
+        <member name="M:Friendly_Wars.MainPage.progress(System.Int32,Friendly_Wars.GameLogic.MapInfo)">
+            <summary>
+            This method is called by the map downloader to check progress and results
+            </summary>
+            <param name="percentage">Downloads percentage</param>
+            <param name="mapInfo">Partial/Complete Map Information</param>
+        </member>
+        <member name="M:Friendly_Wars.MainPage.InitializeComponent">
+            <summary>
+            InitializeComponent
+            </summary>
+        </member>
+        <member name="T:Friendly_Wars.Engine.Component.Graphic.RenderComponent">
+            <summary>
+            Handles the rendering of an Object. 
+            </summary>
+        </member>
+        <member name="F:Friendly_Wars.Engine.Component.Graphic.RenderComponent.animations">
+            <summary>
+            A Dictionary of names-to-Animations that contains all of the Animations of this RenderComponent.
+            </summary>
+        </member>
+        <member name="F:Friendly_Wars.Engine.Component.Graphic.RenderComponent.defaultAnimation">
+            <summary>
+            The default Animation for this RenderComponent.  It will play when no other Animation is specified to play.
+            </summary>
+        </member>
+        <member name="F:Friendly_Wars.Engine.Component.Graphic.RenderComponent.animationTimer">
+            <summary>
+            The EngineTimer that handles updating this RenderComponent's Animations.
+            </summary>
+        </member>
+        <member name="M:Friendly_Wars.Engine.Component.Graphic.RenderComponent.#ctor(System.Collections.Generic.IDictionary{System.String,Friendly_Wars.Engine.Component.Graphic.Animation},Friendly_Wars.Engine.Component.Graphic.Animation,Friendly_Wars.Engine.Object.GameObject)">
+            <summary>
+            Constructor for a new RenderComponent.
+            </summary>
+            <param name="animations">The Dictionary of names-to-Animations of this RenderComponent. </param>
+            <param name="defaultAnimation">The Animation to play when no other Animation is specified to play.</param>
+            <param name="owner">The GameObject that owns this RenderComponent.</param>
+        </member>
+        <member name="M:Friendly_Wars.Engine.Component.Graphic.RenderComponent.Play(System.String)">
+            <summary>
+            Plays a specific Animation.
+            </summary>
+            <param name="animationName">The name of the Animation to play.</param>
+        </member>
+        <member name="M:Friendly_Wars.Engine.Component.Graphic.RenderComponent.Stop(System.String)">
+            <summary>
+            Stops playing a specific Animation.
+            </summary>
+            <param name="animationName">The name of the Animation to stop playing.</param>
+        </member>
+        <member name="M:Friendly_Wars.Engine.Component.Graphic.RenderComponent.Update(System.Double)">
+            <summary>
+            Notify the World that this RenderComponent needs to be re-rendered.
+            </summary>
+            <param name="deltaTime">The time in milliseconds since the last Update.</param>
+        </member>
+        <member name="P:Friendly_Wars.Engine.Component.Graphic.RenderComponent.CurrentAnimation">
+            <summary>
+            The Animation that is currently playing.
+            </summary>
+        </member>
+        <member name="T:Friendly_Wars.Engine.Object.GameObject">
+            <summary>
+            GameObject represents a base for all in-game objects. 
+            GameObject is composed of different Components that provide core game-functionality, such as rendering, audio and movement.
+            </summary>
+        </member>
+        <member name="F:Friendly_Wars.Engine.Object.GameObject.currentUID">
+            <summary>
+            The last UID assigned to a GameObject.
+            </summary>
+        </member>
+        <member name="M:Friendly_Wars.Engine.Object.GameObject.#ctor(System.String,System.String)">
+            <summary>
+            The Constructor for a GameObject. GameObjects are automatically added to the World.
+            </summary>
+            <param name="name">The name of the GameObject.</param>
+            <param name="tag">The tag of the GameObject.</param>
+        </member>
+        <member name="M:Friendly_Wars.Engine.Object.GameObject.#ctor(System.String,System.Windows.Point,System.Int32,System.Windows.Point,System.String)">
+            <summary>
+            The Constructor for a GameObject. GameObjects are automatically added to the World.
+            </summary>
+            <param name="name">The name of the GameObject.</param>
+            <param name="position">The starting position of the GameObject.</param>
+            <param name="rotation">The starting rotation of the GameObject.</param>
+            <param name="size">The starting size of the GameObject.</param>
+            <param name="tag">The tag of the GameObject.</param>
+        </member>
+        <member name="M:Friendly_Wars.Engine.Object.GameObject.NextUID">
+            <summary>
+            Creates a UID for a GameObject.
+            </summary>
+            <returns>Returns a UID for a GameObject</returns>
+        </member>
+        <member name="M:Friendly_Wars.Engine.Object.GameObject.Destroy(Friendly_Wars.Engine.Object.GameObject)">
+            <summary>
+            Destroys a given GameObject.
+            </summary>
+            <param name="gameObject">The GameObject that will be destroyed.</param>
+        </member>
+        <member name="P:Friendly_Wars.Engine.Object.GameObject.TransformComponent">
+            <summary>
+            This GameObject's TransformComponent.
+            </summary>
+        </member>
+        <member name="P:Friendly_Wars.Engine.Object.GameObject.AudioComponent">
+            <summary>
+            The GameObject's AudioComponent.
+            </summary>
+        </member>
+        <member name="P:Friendly_Wars.Engine.Object.GameObject.RenderComponent">
+            <summary>
+            This GameObject's RenderComponent.
+            </summary>
+        </member>
+        <member name="P:Friendly_Wars.Engine.Object.GameObject.Name">
+            <summary>
+            This GameObject's name.
+            </summary>
+        </member>
+        <member name="P:Friendly_Wars.Engine.Object.GameObject.Tag">
+            <summary>
+            This GameObject's tag.
+            </summary>
+        </member>
+        <member name="P:Friendly_Wars.Engine.Object.GameObject.UID">
+            <summary>
+            This GameObject's UID.
+            </summary>
+        </member>
+        <member name="P:Friendly_Wars.Engine.Object.GameObject.Children">
+            <summary>
+            This GameObject's children.
+            </summary>
+        </member>
+        <member name="T:Friendly_Wars.Engine.Component.TransformComponent">
+            <summary>
+            Handles positioning, size and rotation of an Object.
+            </summary>
+        </member>
+        <member name="F:Friendly_Wars.Engine.Component.TransformComponent.MIMIMUM_ROTATION_ANGLE">
+            <summary>
+            The mimimum angle of rotation.
+            </summary>
+        </member>
+        <member name="F:Friendly_Wars.Engine.Component.TransformComponent.MAXIMUM_ROTATION_ANGLE">
+            <summary>
+            The maximum angle of rotation.
+            </summary>
+        </member>
+        <member name="F:Friendly_Wars.Engine.Component.TransformComponent.position">
+            <summary>
+            The position of this TransformComponent.
+            </summary>
+        </member>
+        <member name="F:Friendly_Wars.Engine.Component.TransformComponent.rotation">
+            <summary>
+            The rotation of this TransformComponent.
+            </summary>
+        </member>
+        <member name="F:Friendly_Wars.Engine.Component.TransformComponent.size">
+            <summary>
+            The size of this TransformComponent.
+            </summary>
+        </member>
+        <member name="F:Friendly_Wars.Engine.Component.TransformComponent.velocity">
+            <summary>
+            The velocity of this TransformComponent.
+            </summary>
+        </member>
+        <member name="M:Friendly_Wars.Engine.Component.TransformComponent.#ctor(System.Windows.Point,System.Int32,System.Windows.Point,Friendly_Wars.Engine.Object.GameObject)">
+            <summary>
+            Constructor for a new instance of TransformComponent.
+            </summary>
+            <param name="position">The initial position of this TransformComponent.</param>
+            <param name="rotation">The initial rotation of this TransformComponent.</param>
+            <param name="size">The initial size of this TransformComponent.</param>
+            <param name="owner">The GameObject that owns this TransformComponent.</param>
+        </member>
+        <member name="M:Friendly_Wars.Engine.Component.TransformComponent.Translate(System.Windows.Point)">
+            <summary>
+            Translates by a given point.
+            </summary>
+            <param name="deltaPosition">The change of position.</param>
+        </member>
+        <member name="M:Friendly_Wars.Engine.Component.TransformComponent.Rotate(System.Int32)">
+            <summary>
+            Rotates by a given number of degrees.
+            </summary>
+            <param name="deltaRotation">The change of rotation.</param>
+        </member>
+        <member name="M:Friendly_Wars.Engine.Component.TransformComponent.Resize(System.Windows.Point)">
+            <summary>
+            Resizes by a given factor.
+            </summary>
+            <param name="resizeFactor">The factor by which to resize.</param>
+        </member>
+        <member name="M:Friendly_Wars.Engine.Component.TransformComponent.CollisionDetection(System.Windows.Point)">
+            <summary>
+            If this linear-motion produces collision, CollisionDetection returns the modified value that satisifies non-collision requirements.
+            </summary>
+            <param name="desiredPosition">The position to move to, if possible.</param>
+            <returns>The new position.</returns>
+        </member>
+        <member name="M:Friendly_Wars.Engine.Component.TransformComponent.Collide(System.Windows.Point,Friendly_Wars.Engine.Component.TransformComponent,Friendly_Wars.Engine.Component.TransformComponent)">
+            <summary>
+            Collides a TransformComponent with another TransformComponent along the line between the inital position and desiredPosition.
+            This function is optimized under the assumption that most of the time that it is called there will be no collision.
+            </summary>
+            <param name="desiredPosition">The desired end position of a.</param>
+            <param name="a">The TransformComponent that is moving.</param>
+            <param name="b">The TransformComponent that is fixed.</param>
+            <returns>The closest position towards desiredPosition that a can move before hitting b.</returns>
+        </member>
+        <member name="M:Friendly_Wars.Engine.Component.TransformComponent.Distance(System.Windows.Point,System.Windows.Point)">
+            <summary>
+            Calculates the distance between two points.
+            </summary>
+            <param name="a">A point.</param>
+            <param name="b">Another point.</param>
+            <returns>The distance between a and b.</returns>
+        </member>
+        <member name="P:Friendly_Wars.Engine.Component.TransformComponent.Position">
+            <summary>
+            The accessor for the position of the TransformComponent.
+            </summary>
+        </member>
+        <member name="P:Friendly_Wars.Engine.Component.TransformComponent.Rotation">
+            <summary>
+            The rotation of this TransformComponent, clamped in degrees: [0, 360].
+            </summary>
+        </member>
+        <member name="P:Friendly_Wars.Engine.Component.TransformComponent.Size">
+            <summary>
+            The size of this TransformComponent.
+            </summary>
+        </member>
+        <member name="T:Friendly_Wars.Engine.Component.TransformComponent.CollisionException">
+            <summary>
+            An exception class for when colliding does not make sense.
+            </summary>
+        </member>
+        <member name="M:Friendly_Wars.Engine.Component.TransformComponent.CollisionException.#ctor(System.String)">
+            <summary>
+            Create an exception with the specified error message.
+            </summary>
+            <param name="message">The error message.</param>
+        </member>
+        <member name="T:Friendly_Wars.GameLogic.MapInfo">
+            <summary>
+            Map Information
+            </summary>
+        </member>
+        <member name="M:Friendly_Wars.GameLogic.MapInfo.#ctor">
+            <summary>
+            Constructor for the Map Information
+            </summary>
+        </member>
+        <member name="P:Friendly_Wars.GameLogic.MapInfo.Title">
+            <summary>
+            Title of the map
+            </summary>
+        </member>
+        <member name="P:Friendly_Wars.GameLogic.MapInfo.Images">
+            <summary>
+            Dictionary containing all the images used in the map
+            </summary>
+        </member>
+        <member name="P:Friendly_Wars.GameLogic.MapInfo.Sounds">
+            <summary>
+            Dictionary containing all the sounds used in the map
+            </summary>
+        </member>
+        <member name="T:Friendly_Wars.GameLogic.Game">
+            <summary>
+            This class represents the Game. All game-logic stems from here.
+            </summary>
+        </member>
+        <member name="F:Friendly_Wars.GameLogic.Game.world">
+            <summary>
+            The world of the game.
+            </summary>
+        </member>
+        <member name="M:Friendly_Wars.GameLogic.Game.#ctor">
+            <summary>
+            Constructor for the Game.
+            </summary>
+        </member>
+        <member name="M:Friendly_Wars.Engine.Utilities.Resource.#ctor(System.String,System.String,System.String)">
+            <summary>
+            Constructs a resource
+            </summary>
+            <param name="url">Address of the resource</param>
+            <param name="type">Resource type</param>
+            <param name="priority">Resource priority</param>
+        </member>
+        <member name="P:Friendly_Wars.Engine.Utilities.Resource.Name">
+            <summary>
+            Name of the resource
+            </summary>
+        </member>
+        <member name="P:Friendly_Wars.Engine.Utilities.Resource.URL">
+            <summary>
+            Address of the resource
+            </summary>
+        </member>
+        <member name="P:Friendly_Wars.Engine.Utilities.Resource.Type">
+            <summary>
+            Resource type
+            </summary>
+        </member>
+        <member name="P:Friendly_Wars.Engine.Utilities.Resource.Priority">
+            <summary>
+            Resource priority
+            </summary>
+        </member>
+        <member name="T:Friendly_Wars.Engine.Utilities.Resource.Types">
+            <summary>
+            List of resource types
+            </summary>
+        </member>
+        <member name="T:Friendly_Wars.Engine.Utilities.Resource.Priorities">
+            <summary>
+            List of resource priorities
+            </summary>
+        </member>
+        <member name="T:Friendly_Wars.Engine.Utilities.EngineTimer">
+            <summary>
+            An engineTimer dispatches events to IUpdateables. 
+            It dispatches the change in time from the last update, all while trying to update at a constant interval.
+            engineTimer is frame-rate-independent and will account for a drop in frame rate.
+            </summary>
+        </member>
+        <member name="F:Friendly_Wars.Engine.Utilities.EngineTimer.updateTimer">
+            <summary>
+            The timer that tries to update at a given interval.
+            </summary>
+        </member>
+        <member name="F:Friendly_Wars.Engine.Utilities.EngineTimer.previousTime">
+            <summary>
+            The DateTime associated with the last update.
+            </summary>
+        </member>
+        <member name="F:Friendly_Wars.Engine.Utilities.EngineTimer.eventListeners">
+            <summary>
+            All of the objects that are listening for dispatched events from this engineTimer.
+            </summary>
+        </member>
+        <member name="M:Friendly_Wars.Engine.Utilities.EngineTimer.#ctor(System.Int32,System.Collections.Generic.ICollection{Friendly_Wars.Engine.Utilities.IUpdateable})">
+            <summary>
+            Constructor for a new EngineTimer.
+            </summary>
+            <param name="interval">The interval, in miliseconds, at which the timer will try to update.</param>
+            <param name="eventListeners">The EngineTimer's eventListeners.</param>
+        </member>
+        <member name="M:Friendly_Wars.Engine.Utilities.EngineTimer.AddEventListener(Friendly_Wars.Engine.Utilities.IUpdateable)">
+            <summary>
+            Adds an IUpdateable to this EngineTimer.
+            </summary>
+            <param name="eventListener">The IUpdateable to add to this engineTimer.</param>
+        </member>
+        <member name="M:Friendly_Wars.Engine.Utilities.EngineTimer.RemoveEventListener(Friendly_Wars.Engine.Utilities.IUpdateable)">
+            <summary>
+            Removes an IUpdateable from this EngineTimer.
+            </summary>
+            <param name="eventListener">The IUpdateable to remove from this engineTimer.</param>
+        </member>
+        <member name="M:Friendly_Wars.Engine.Utilities.EngineTimer.Start">
+            <summary>
+            Start dispatching events.
+            </summary>
+        </member>
+        <member name="M:Friendly_Wars.Engine.Utilities.EngineTimer.Stop">
+            <summary>
+            Stop dispatching events.
+            </summary>
+        </member>
+        <member name="M:Friendly_Wars.Engine.Utilities.EngineTimer.DispatchEvent(System.Object,System.EventArgs)">
+            <summary>
+            Dispatches an event to all listeners.
+            </summary>
+            <param name="sender">The Object that called this function.</param>
+            <param name="e">The event that corresponds to this function.</param>
+        </member>
+        <member name="M:Friendly_Wars.Engine.Utilities.EngineTimer.FromHertzToMiliSeconds(System.Int32)">
+            <summary>
+            Converts a given amount of hertz (30 Hz = 1/30) to miliseconds.
+            </summary>
+            <param name="hertz">The amount of hertz to convert.</param>
+            <returns>The converted amount of hertz, now in Miliseconds.</returns>
+        </member>
+        <member name="M:Friendly_Wars.Engine.Utilities.EngineTimer.SecondsToMiliseconds(System.Double)">
+            <summary>
+            Converts a given amount of seconds to miliseconds.
+            </summary>
+            <param name="amount">The amount of seconds to convert into miliseconds.</param>
+            <returns>The amount of miliseconds in the given amount of seconds.</returns>
+        </member>
+        <member name="P:Friendly_Wars.Engine.Utilities.EngineTimer.Interval">
+            <summary>
+            The interval, in miliseconds, at which the timer will try to update.
             </summary>
         </member>
     </members>

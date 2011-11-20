@@ -47,19 +47,38 @@ namespace Friendly_Wars.Engine.Object
 		/// </summary>
 		public IList<GameObject> Children { get; private set; }
 
-		//TODO: Pass in components through constructor.
 		/// <summary>
-		/// The Constructor for a GameObject.
+		/// The Constructor for a GameObject. GameObjects are automatically added to the World.
 		/// </summary>
 		/// <param name="name">The name of the GameObject.</param>
 		/// <param name="tag">The tag of the GameObject.</param>
 		public GameObject(String name, String tag = null)
 		{
+			World.Instance.AddGameObject(this);
 			this.Name = name;
 			this.Tag = tag;
 			this.UID = NextUID();
 
 			Children = new List<GameObject>();
+		}
+
+		/// <summary>
+		/// The Constructor for a GameObject. GameObjects are automatically added to the World.
+		/// </summary>
+		/// <param name="name">The name of the GameObject.</param>
+		/// <param name="position">The starting position of the GameObject.</param>
+		/// <param name="rotation">The starting rotation of the GameObject.</param>
+		/// <param name="size">The starting size of the GameObject.</param>
+		/// <param name="tag">The tag of the GameObject.</param>
+		public GameObject(String name, Point position, int rotation, Point size, String tag = null)
+		{
+			World.Instance.AddGameObject(this);
+			this.Name = name;
+			this.Tag = tag;
+			this.UID = NextUID();
+
+			Children = new List<GameObject>();
+			TransformComponent = new TransformComponent(position, rotation, size, this);
 		}
 
 		/// <summary>

@@ -1,13 +1,7 @@
 ﻿
 using Friendly_Wars.Engine.Object;
-using Friendly_Wars.Engine.Utilities;
-using Friendly_Wars.Engine.Component.Graphic;
-using System.Collections.Generic;
-using System.Windows.Media.Imaging;
-using System.Windows.Media;
-using System.Windows.Controls;
-using System;
 using System.Windows;
+using System.Diagnostics;
 
 namespace Friendly_Wars.GameLogic
 {

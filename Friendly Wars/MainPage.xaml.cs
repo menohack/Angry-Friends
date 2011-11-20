@@ -17,6 +17,7 @@ namespace Friendly_Wars {
 			InitializeComponent();
 			mainPage = this;
 			Web.Instance.DownloadMap("http://alexanderschiffhauer.com/Friendly_Wars/test.xml", progress);
+			Game game = new Game();
 		}
 
 		/// <summary>

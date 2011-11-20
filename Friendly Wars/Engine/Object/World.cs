@@ -108,7 +108,7 @@ namespace Friendly_Wars.Engine.Object
 		/// <returns>The ReadOnlyCollection of GameObjects this World has.</returns>
 		public ReadOnlyCollection<GameObject> GetGameObjects()
 		{
-			return (ReadOnlyCollection<GameObject>) gameObjects;
+			return new ReadOnlyCollection<GameObject>(gameObjects);
 		}
 
 		/// <summary>
