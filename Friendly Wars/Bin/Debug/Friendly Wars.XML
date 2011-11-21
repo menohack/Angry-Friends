@@ -4,10 +4,48 @@
         <name>Friendly Wars</name>
     </assembly>
     <members>
-        <member name="T:Friendly_Wars.Engine.Object.World">
+        <member name="T:Friendly_Wars.Engine.Component.Graphic.Frame">
             <summary>
-            World can be thought of as the "universe" of a game. 
-            Not only does it contain all gameObjects, but it also provides functionality for finding gameObjects and drawing gameObjects at appropriate times.
+            Frame is the base class for an Animation.  
+            It contains the actual Image of this Frame and its offset.
+            </summary>
+        </member>
+        <member name="M:Friendly_Wars.Engine.Component.Graphic.Frame.#ctor(System.Windows.Controls.Image,System.Windows.Point)">
+            <summary>
+            Constructor for a Frame.
+            </summary>
+            <param name="image">The Image of this Frame.</param>
+            <param name="offset">The offset of this Frame's Image.</param>
+        </member>
+        <member name="P:Friendly_Wars.Engine.Component.Graphic.Frame.Image">
+            <summary>
+            The actual Image of this Frame.
+            </summary>
+        </member>
+        <member name="P:Friendly_Wars.Engine.Component.Graphic.Frame.Offset">
+            <summary>
+            The offset of this Frame's Image.
+            </summary>
+        </member>
+        <member name="T:Friendly_Wars.Engine.Component.Graphic.RenderComponent">
+            <summary>
+            Handles the rendering of an Object. 
+            </summary>
+        </member>
+        <member name="T:Friendly_Wars.Engine.Component.BaseComponent">
+            <summary>
+            The base for all Components.  It stores the GameObject that owns this Component.
+            </summary>
+        </member>
+        <member name="M:Friendly_Wars.Engine.Component.BaseComponent.#ctor(Friendly_Wars.Engine.Object.GameObject)">
+            <summary>
+            Constructor for a new BaseComponent.
+            </summary>
+            <param name="owner">The owner of this BaseComponent.</param>
+        </member>
+        <member name="P:Friendly_Wars.Engine.Component.BaseComponent.Owner">
+            <summary>
+            The GameObject that owns this Component.
             </summary>
         </member>
         <member name="T:Friendly_Wars.Engine.Utilities.IUpdateable">
@@ -21,97 +59,103 @@
             </summary>
             <param name="deltaTime">The elapsed time, in miliseconds, from the previous update.</param>
         </member>
-        <member name="F:Friendly_Wars.Engine.Object.World.instance">
+        <member name="F:Friendly_Wars.Engine.Component.Graphic.RenderComponent.animations">
             <summary>
-            The single instsance of world.
+            A Dictionary of names-to-Animations that contains all of the Animations of this RenderComponent.
             </summary>
         </member>
-        <member name="F:Friendly_Wars.Engine.Object.World.worldUpdateTimer">
+        <member name="F:Friendly_Wars.Engine.Component.Graphic.RenderComponent.defaultAnimation">
             <summary>
-            The EngineTimer that will handle updating this world.
+            The default Animation for this RenderComponent.  It will play when no other Animation is specified to play.
             </summary>
         </member>
-        <member name="F:Friendly_Wars.Engine.Object.World.UPDATES_PER_SECOND">
+        <member name="F:Friendly_Wars.Engine.Component.Graphic.RenderComponent.animationTimer">
             <summary>
-            World will try to update this many times per second.
+            The EngineTimer that handles updating this RenderComponent's Animations.
             </summary>
         </member>
-        <member name="F:Friendly_Wars.Engine.Object.World.gameObjects">
+        <member name="M:Friendly_Wars.Engine.Component.Graphic.RenderComponent.#ctor(System.Collections.Generic.IDictionary{System.String,Friendly_Wars.Engine.Component.Graphic.Animation},Friendly_Wars.Engine.Component.Graphic.Animation,Friendly_Wars.Engine.Object.GameObject)">
             <summary>
-            All of the gameObjects in the game.
+            Constructor for a new RenderComponent.
+            </summary>
+            <param name="animations">The Dictionary of names-to-Animations of this RenderComponent. </param>
+            <param name="defaultAnimation">The Animation to play when no other Animation is specified to play.</param>
+            <param name="owner">The GameObject that owns this RenderComponent.</param>
+        </member>
+        <member name="M:Friendly_Wars.Engine.Component.Graphic.RenderComponent.Play(System.String)">
+            <summary>
+            Plays a specific Animation.
+            </summary>
+            <param name="animationName">The name of the Animation to play.</param>
+        </member>
+        <member name="M:Friendly_Wars.Engine.Component.Graphic.RenderComponent.Stop(System.String)">
+            <summary>
+            Stops playing a specific Animation.
+            </summary>
+            <param name="animationName">The name of the Animation to stop playing.</param>
+        </member>
+        <member name="M:Friendly_Wars.Engine.Component.Graphic.RenderComponent.GetRenderContent">
+            <summary>
+            Accesses the current Frame of the current Animation.
+            </summary>
+            <returns>The current frame.</returns>
+        </member>
+        <member name="M:Friendly_Wars.Engine.Component.Graphic.RenderComponent.Update(System.Double)">
+            <summary>
+            Notify the World that this RenderComponent needs to be re-rendered.
+            </summary>
+            <param name="deltaTime">The time in milliseconds since the last Update.</param>
+        </member>
+        <member name="P:Friendly_Wars.Engine.Component.Graphic.RenderComponent.CurrentAnimation">
+            <summary>
+            The Animation that is currently playing.
             </summary>
         </member>
-        <member name="F:Friendly_Wars.Engine.Object.World.redrawQueue">
+        <member name="T:Friendly_Wars.App">
             <summary>
-            The queue of GameObjects that need to be re-drawn/updated the next time WordObject updates.
+            The App class (we didn't write this).
             </summary>
         </member>
-        <member name="F:Friendly_Wars.Engine.Object.World.previousImages">
+        <member name="M:Friendly_Wars.App.InitializeComponent">
             <summary>
-            TEMPORARY: This stores a reference to the GameObject's previous Frame, allowing us to remove it from the screen.
+            InitializeComponent
             </summary>
         </member>
-        <member name="M:Friendly_Wars.Engine.Object.World.#ctor">
+        <member name="M:Friendly_Wars.App.#ctor">
             <summary>
-            The constructor for a new instance of World.
-            World uses the singleton pattern; therefore, its constructor's scope is limited to itself.
+            I have no idea what this does (again, we didn't write this code [Microsoft did])
             </summary>
         </member>
-        <member name="M:Friendly_Wars.Engine.Object.World.Update(System.Double)">
+        <member name="T:Friendly_Wars.GameLogic.Game">
             <summary>
-            Updates World as fast as possible; however, updating is capped at UPDATES_PER_SECOND.
+            This class represents the Game. All game-logic stems from here.
             </summary>
-            <param name="deltaTime">The time elapsed since the last update.</param>
         </member>
-        <member name="M:Friendly_Wars.Engine.Object.World.AddToRedrawQueue(Friendly_Wars.Engine.Object.GameObject)">
+        <member name="F:Friendly_Wars.GameLogic.Game.world">
             <summary>
-            Adds a GameObject to the redraw queue.
+            The world of the game.
             </summary>
-            <param name="gameObject">The GameObject to add to the queue.</param>
         </member>
-        <member name="M:Friendly_Wars.Engine.Object.World.GetGameObjects">
+        <member name="M:Friendly_Wars.GameLogic.Game.#ctor">
             <summary>
-            Access the ReadOnlyCollection of GameObjects this World has.
+            Constructor for the Game.
             </summary>
-            <returns>The ReadOnlyCollection of GameObjects this World has.</returns>
         </member>
-        <member name="M:Friendly_Wars.Engine.Object.World.AddGameObject(Friendly_Wars.Engine.Object.GameObject)">
+        <member name="M:Friendly_Wars.GameLogic.Game.ConvertToARGB32(System.Windows.Media.Color)">
             <summary>
-            Adds a GameObject to the world.
+            TEMPORARY HELPER FUNCTION, DONT KILL ME ALEX
             </summary>
-            <param name="gameObject">The GameObject to add.</param>
+            <param name="color"></param>
+            <returns></returns>
         </member>
-        <member name="M:Friendly_Wars.Engine.Object.World.RemoveGameObject(Friendly_Wars.Engine.Object.GameObject)">
+        <member name="T:Friendly_Wars.Engine.Object.Camera">
             <summary>
-            Removes a GameObject from the world, if it exists.
+            Represents a Camera that handles the positioning of the "viewport"; it essentially determines what the screen should render.
             </summary>
-            <param name="gameObject">The GameObject to remove</param>
         </member>
-        <member name="M:Friendly_Wars.Engine.Object.World.FindGameObjectsWithName(System.String)">
+        <member name="M:Friendly_Wars.Engine.Object.Camera.#ctor">
             <summary>
-            Access all of the GameObjects that contain a specific name.
-            </summary>
-            <param name="name">The name of the GameObjects.</param>
-            <returns>A Collection of GameObjects with that specific name.</returns>
-        </member>
-        <member name="M:Friendly_Wars.Engine.Object.World.FindGameObjectsWithTag(System.String)">
-            <summary>
-            Access all of the GameObjects that contain a specific tag.
-            </summary>
-            <param name="tag">The tag of the GameObjects.</param>
-            <returns>A Collection of GameObjects with that specific tag.</returns>
-        </member>
-        <member name="M:Friendly_Wars.Engine.Object.World.FindGameObjectWithUID(System.Int32)">
-            <summary>
-            Access the GameObject that contains a specific UID.
-            </summary>
-            <param name="UID">The UID of the gameObject.</param>
-            <returns>The GameObject with the specific UID.</returns>
-        </member>
-        <member name="P:Friendly_Wars.Engine.Object.World.Instance">
-            <summary>
-            Accessor for the instance of World.
-            This accessor follows the singleton pattern for C# provided at Microsoft's MSDN.
+            Constructor for a new Camera.
             </summary>
         </member>
         <member name="M:Friendly_Wars.MainPage.InitializeComponent">
@@ -135,110 +179,6 @@
             </summary>
             <param name="percentage">Downloads percentage</param>
             <param name="mapInfo">Partial/Complete Map Information</param>
-        </member>
-        <member name="T:Friendly_Wars.Engine.Utilities.EngineTimer">
-            <summary>
-            An engineTimer dispatches events to IUpdateables. 
-            It dispatches the change in time from the last update, all while trying to update at a constant interval.
-            engineTimer is frame-rate-independent and will account for a drop in frame rate.
-            </summary>
-        </member>
-        <member name="F:Friendly_Wars.Engine.Utilities.EngineTimer.updateTimer">
-            <summary>
-            The timer that tries to update at a given interval.
-            </summary>
-        </member>
-        <member name="F:Friendly_Wars.Engine.Utilities.EngineTimer.previousTime">
-            <summary>
-            The DateTime associated with the last update.
-            </summary>
-        </member>
-        <member name="F:Friendly_Wars.Engine.Utilities.EngineTimer.eventListeners">
-            <summary>
-            All of the objects that are listening for dispatched events from this engineTimer.
-            </summary>
-        </member>
-        <member name="M:Friendly_Wars.Engine.Utilities.EngineTimer.#ctor(System.Int32,System.Collections.Generic.ICollection{Friendly_Wars.Engine.Utilities.IUpdateable})">
-            <summary>
-            Constructor for a new EngineTimer.
-            </summary>
-            <param name="interval">The interval, in miliseconds, at which the timer will try to update.</param>
-            <param name="eventListeners">The EngineTimer's eventListeners.</param>
-        </member>
-        <member name="M:Friendly_Wars.Engine.Utilities.EngineTimer.AddEventListener(Friendly_Wars.Engine.Utilities.IUpdateable)">
-            <summary>
-            Adds an IUpdateable to this EngineTimer.
-            </summary>
-            <param name="eventListener">The IUpdateable to add to this engineTimer.</param>
-        </member>
-        <member name="M:Friendly_Wars.Engine.Utilities.EngineTimer.RemoveEventListener(Friendly_Wars.Engine.Utilities.IUpdateable)">
-            <summary>
-            Removes an IUpdateable from this EngineTimer.
-            </summary>
-            <param name="eventListener">The IUpdateable to remove from this engineTimer.</param>
-        </member>
-        <member name="M:Friendly_Wars.Engine.Utilities.EngineTimer.Start">
-            <summary>
-            Start dispatching events.
-            </summary>
-        </member>
-        <member name="M:Friendly_Wars.Engine.Utilities.EngineTimer.Stop">
-            <summary>
-            Stop dispatching events.
-            </summary>
-        </member>
-        <member name="M:Friendly_Wars.Engine.Utilities.EngineTimer.DispatchEvent(System.Object,System.EventArgs)">
-            <summary>
-            Dispatches an event to all listeners.
-            </summary>
-            <param name="sender">The Object that called this function.</param>
-            <param name="e">The event that corresponds to this function.</param>
-        </member>
-        <member name="M:Friendly_Wars.Engine.Utilities.EngineTimer.FromHertzToMiliSeconds(System.Int32)">
-            <summary>
-            Converts a given amount of hertz (30 Hz = 1/30) to miliseconds.
-            </summary>
-            <param name="hertz">The amount of hertz to convert.</param>
-            <returns>The converted amount of hertz, now in Miliseconds.</returns>
-        </member>
-        <member name="M:Friendly_Wars.Engine.Utilities.EngineTimer.SecondsToMiliseconds(System.Double)">
-            <summary>
-            Converts a given amount of seconds to miliseconds.
-            </summary>
-            <param name="amount">The amount of seconds to convert into miliseconds.</param>
-            <returns>The amount of miliseconds in the given amount of seconds.</returns>
-        </member>
-        <member name="P:Friendly_Wars.Engine.Utilities.EngineTimer.Interval">
-            <summary>
-            The interval, in miliseconds, at which the timer will try to update.
-            </summary>
-        </member>
-        <member name="T:Friendly_Wars.Engine.Utilities.EngineMath">
-            <summary>
-            EngineMath process Engine-related math.
-            </summary>
-        </member>
-        <member name="F:Friendly_Wars.Engine.Utilities.EngineMath.EPSILON">
-            <summary>
-            The cut-off percent-error for an approximation.
-            </summary>
-        </member>
-        <member name="M:Friendly_Wars.Engine.Utilities.EngineMath.Approximately(System.Double,System.Double)">
-            <summary>
-            Determines if two Doubles are approximately the same value, where the threshold value of error is .05.
-            </summary>
-            <param name="firstNumber">The first number.</param>
-            <param name="secondNumber">The second number.</param>
-            <returns> True if the numbers are approximately the same. </returns>
-        </member>
-        <member name="M:Friendly_Wars.Engine.Utilities.EngineMath.Clamp(System.Double,System.Double,System.Double)">
-            <summary>
-            Clamps a value between its minimum and maximum value.
-            </summary>
-            <param name="value">The value in question.</param>
-            <param name="min">The minimum possible value of this value.</param>
-            <param name="max">The maximum possible value of this value.</param>
-            <returns></returns>
         </member>
         <member name="T:Friendly_Wars.Engine.Utilities.Web">
             <summary>
@@ -350,25 +290,257 @@
             List of resource priorities
             </summary>
         </member>
+        <member name="T:Friendly_Wars.Engine.Object.GameObject">
+            <summary>
+            GameObject represents a base for all in-game objects. 
+            GameObject is composed of different Components that provide core game-functionality, such as rendering, audio and movement.
+            </summary>
+        </member>
+        <member name="F:Friendly_Wars.Engine.Object.GameObject.currentUID">
+            <summary>
+            The last UID assigned to a GameObject.
+            </summary>
+        </member>
+        <member name="M:Friendly_Wars.Engine.Object.GameObject.#ctor(System.Collections.Generic.IDictionary{System.String,Friendly_Wars.Engine.Component.Graphic.Animation},Friendly_Wars.Engine.Component.Graphic.Animation,System.String,System.String)">
+            <summary>
+            The Constructor for a GameObject.
+            </summary>
+            <param name="name">The name of the GameObject.</param>
+            <param name="tag">The tag of the GameObject.</param>
+        </member>
+        <member name="M:Friendly_Wars.Engine.Object.GameObject.#ctor(System.String,System.String)">
+            <summary>
+            The Constructor for a GameObject. GameObjects are automatically added to the World.
+            </summary>
+            <param name="name">The name of the GameObject.</param>
+            <param name="tag">The tag of the GameObject.</param>
+        </member>
+        <member name="M:Friendly_Wars.Engine.Object.GameObject.#ctor(System.String,System.Windows.Point,System.Int32,System.Windows.Point,System.String)">
+            <summary>
+            The Constructor for a GameObject. GameObjects are automatically added to the World.
+            </summary>
+            <param name="name">The name of the GameObject.</param>
+            <param name="position">The starting position of the GameObject.</param>
+            <param name="rotation">The starting rotation of the GameObject.</param>
+            <param name="size">The starting size of the GameObject.</param>
+            <param name="tag">The tag of the GameObject.</param>
+        </member>
+        <member name="M:Friendly_Wars.Engine.Object.GameObject.NextUID">
+            <summary>
+            Creates a UID for a GameObject.
+            </summary>
+            <returns>Returns a UID for a GameObject</returns>
+        </member>
+        <member name="M:Friendly_Wars.Engine.Object.GameObject.Destroy(Friendly_Wars.Engine.Object.GameObject)">
+            <summary>
+            Destroys a given GameObject.
+            </summary>
+            <param name="gameObject">The GameObject that will be destroyed.</param>
+        </member>
+        <member name="P:Friendly_Wars.Engine.Object.GameObject.TransformComponent">
+            <summary>
+            This GameObject's TransformComponent.
+            </summary>
+        </member>
+        <member name="P:Friendly_Wars.Engine.Object.GameObject.AudioComponent">
+            <summary>
+            The GameObject's AudioComponent.
+            </summary>
+        </member>
+        <member name="P:Friendly_Wars.Engine.Object.GameObject.RenderComponent">
+            <summary>
+            This GameObject's RenderComponent.
+            </summary>
+        </member>
+        <member name="P:Friendly_Wars.Engine.Object.GameObject.Name">
+            <summary>
+            This GameObject's name.
+            </summary>
+        </member>
+        <member name="P:Friendly_Wars.Engine.Object.GameObject.Tag">
+            <summary>
+            This GameObject's tag.
+            </summary>
+        </member>
+        <member name="P:Friendly_Wars.Engine.Object.GameObject.UID">
+            <summary>
+            This GameObject's UID.
+            </summary>
+        </member>
+        <member name="P:Friendly_Wars.Engine.Object.GameObject.Children">
+            <summary>
+            This GameObject's children.
+            </summary>
+        </member>
+        <member name="T:Friendly_Wars.Engine.Component.Graphic.Animation">
+            <summary>
+            Contains all data pertaining to a series of Frames representing an Animation.
+            </summary>
+        </member>
+        <member name="F:Friendly_Wars.Engine.Component.Graphic.Animation.frames">
+            <summary>
+            All the Frames of this Animation.
+            </summary>
+        </member>
+        <member name="F:Friendly_Wars.Engine.Component.Graphic.Animation.index">
+            <summary>
+            The index for the current Frame of this Animation.
+            </summary>
+        </member>
+        <member name="F:Friendly_Wars.Engine.Component.Graphic.Animation.length">
+            <summary>
+            The length, in miliseconds, of this Animation. 
+            </summary>
+        </member>
+        <member name="F:Friendly_Wars.Engine.Component.Graphic.Animation.elapsedTime">
+            <summary>
+            The elapsed time between the previous Animation's update.
+            </summary>
+        </member>
+        <member name="M:Friendly_Wars.Engine.Component.Graphic.Animation.#ctor(System.Collections.Generic.IList{Friendly_Wars.Engine.Component.Graphic.Frame},System.Double,System.Int32,System.String)">
+            <summary>
+            Constructor for a new Animation with multiple frames.
+            </summary>
+            <param name="frames">All the Frames of this Animation.</param>
+            <param name="length">The length, in seconds, of this Animation.</param>
+            <param name="fps">The frames-per-second of this Animation.</param>
+            <param name="name">The name of this Animation.</param>
+        </member>
+        <member name="M:Friendly_Wars.Engine.Component.Graphic.Animation.#ctor(Friendly_Wars.Engine.Component.Graphic.Frame,System.String)">
+            <summary>
+            Constructor for a new Animation with a single frame.
+            </summary>
+            <param name="frame">The Frame of the Animation.</param>
+            <param name="name">The name of the Animation.</param>
+        </member>
+        <member name="M:Friendly_Wars.Engine.Component.Graphic.Animation.Update(System.Double)">
+            <summary>
+            Updates the Frame of this Animation.
+            </summary>
+            <param name="deltaTime">The time in milliseconds from the previous update.</param>
+        </member>
+        <member name="P:Friendly_Wars.Engine.Component.Graphic.Animation.CurrentFrame">
+            <summary>
+            The current Frame of this Animation.
+            </summary>
+        </member>
+        <member name="P:Friendly_Wars.Engine.Component.Graphic.Animation.FPS">
+            <summary>
+            The frames-per-second of this Animation.
+            </summary>
+        </member>
+        <member name="P:Friendly_Wars.Engine.Component.Graphic.Animation.Name">
+            <summary>
+            The name of this Animation.
+            </summary>
+        </member>
+        <member name="T:Friendly_Wars.Engine.Utilities.EngineMath">
+            <summary>
+            EngineMath process Engine-related math.
+            </summary>
+        </member>
+        <member name="F:Friendly_Wars.Engine.Utilities.EngineMath.EPSILON">
+            <summary>
+            The cut-off percent-error for an approximation.
+            </summary>
+        </member>
+        <member name="M:Friendly_Wars.Engine.Utilities.EngineMath.Approximately(System.Double,System.Double)">
+            <summary>
+            Determines if two Doubles are approximately the same value, where the threshold value of error is .05.
+            </summary>
+            <param name="firstNumber">The first number.</param>
+            <param name="secondNumber">The second number.</param>
+            <returns> True if the numbers are approximately the same. </returns>
+        </member>
+        <member name="M:Friendly_Wars.Engine.Utilities.EngineMath.Clamp(System.Double,System.Double,System.Double)">
+            <summary>
+            Clamps a value between its minimum and maximum value.
+            </summary>
+            <param name="value">The value in question.</param>
+            <param name="min">The minimum possible value of this value.</param>
+            <param name="max">The maximum possible value of this value.</param>
+            <returns></returns>
+        </member>
+        <member name="T:Friendly_Wars.Engine.Utilities.EngineTimer">
+            <summary>
+            An engineTimer dispatches events to IUpdateables. 
+            It dispatches the change in time from the last update, all while trying to update at a constant interval.
+            engineTimer is frame-rate-independent and will account for a drop in frame rate.
+            </summary>
+        </member>
+        <member name="F:Friendly_Wars.Engine.Utilities.EngineTimer.updateTimer">
+            <summary>
+            The timer that tries to update at a given interval.
+            </summary>
+        </member>
+        <member name="F:Friendly_Wars.Engine.Utilities.EngineTimer.previousTime">
+            <summary>
+            The DateTime associated with the last update.
+            </summary>
+        </member>
+        <member name="F:Friendly_Wars.Engine.Utilities.EngineTimer.eventListeners">
+            <summary>
+            All of the objects that are listening for dispatched events from this engineTimer.
+            </summary>
+        </member>
+        <member name="M:Friendly_Wars.Engine.Utilities.EngineTimer.#ctor(System.Int32,System.Collections.Generic.ICollection{Friendly_Wars.Engine.Utilities.IUpdateable})">
+            <summary>
+            Constructor for a new EngineTimer.
+            </summary>
+            <param name="interval">The interval, in miliseconds, at which the timer will try to update.</param>
+            <param name="eventListeners">The EngineTimer's eventListeners.</param>
+        </member>
+        <member name="M:Friendly_Wars.Engine.Utilities.EngineTimer.AddEventListener(Friendly_Wars.Engine.Utilities.IUpdateable)">
+            <summary>
+            Adds an IUpdateable to this EngineTimer.
+            </summary>
+            <param name="eventListener">The IUpdateable to add to this engineTimer.</param>
+        </member>
+        <member name="M:Friendly_Wars.Engine.Utilities.EngineTimer.RemoveEventListener(Friendly_Wars.Engine.Utilities.IUpdateable)">
+            <summary>
+            Removes an IUpdateable from this EngineTimer.
+            </summary>
+            <param name="eventListener">The IUpdateable to remove from this engineTimer.</param>
+        </member>
+        <member name="M:Friendly_Wars.Engine.Utilities.EngineTimer.Start">
+            <summary>
+            Start dispatching events.
+            </summary>
+        </member>
+        <member name="M:Friendly_Wars.Engine.Utilities.EngineTimer.Stop">
+            <summary>
+            Stop dispatching events.
+            </summary>
+        </member>
+        <member name="M:Friendly_Wars.Engine.Utilities.EngineTimer.DispatchEvent(System.Object,System.EventArgs)">
+            <summary>
+            Dispatches an event to all listeners.
+            </summary>
+            <param name="sender">The Object that called this function.</param>
+            <param name="e">The event that corresponds to this function.</param>
+        </member>
+        <member name="M:Friendly_Wars.Engine.Utilities.EngineTimer.FromHertzToMiliSeconds(System.Int32)">
+            <summary>
+            Converts a given amount of hertz (30 Hz = 1/30) to miliseconds.
+            </summary>
+            <param name="hertz">The amount of hertz to convert.</param>
+            <returns>The converted amount of hertz, now in Miliseconds.</returns>
+        </member>
+        <member name="M:Friendly_Wars.Engine.Utilities.EngineTimer.SecondsToMiliseconds(System.Double)">
+            <summary>
+            Converts a given amount of seconds to miliseconds.
+            </summary>
+            <param name="amount">The amount of seconds to convert into miliseconds.</param>
+            <returns>The amount of miliseconds in the given amount of seconds.</returns>
+        </member>
+        <member name="P:Friendly_Wars.Engine.Utilities.EngineTimer.Interval">
+            <summary>
+            The interval, in miliseconds, at which the timer will try to update.
+            </summary>
+        </member>
         <member name="T:Friendly_Wars.Engine.Component.TransformComponent">
             <summary>
             Handles positioning, size and rotation of an Object.
-            </summary>
-        </member>
-        <member name="T:Friendly_Wars.Engine.Component.BaseComponent">
-            <summary>
-            The base for all Components.  It stores the GameObject that owns this Component.
-            </summary>
-        </member>
-        <member name="M:Friendly_Wars.Engine.Component.BaseComponent.#ctor(Friendly_Wars.Engine.Object.GameObject)">
-            <summary>
-            Constructor for a new BaseComponent.
-            </summary>
-            <param name="owner">The owner of this BaseComponent.</param>
-        </member>
-        <member name="P:Friendly_Wars.Engine.Component.BaseComponent.Owner">
-            <summary>
-            The GameObject that owns this Component.
             </summary>
         </member>
         <member name="F:Friendly_Wars.Engine.Component.TransformComponent.MIMIMUM_ROTATION_ANGLE">
@@ -479,78 +651,6 @@
             </summary>
             <param name="message">The error message.</param>
         </member>
-        <member name="T:Friendly_Wars.Engine.Component.Graphic.Animation">
-            <summary>
-            Contains all data pertaining to a series of Frames representing an Animation.
-            </summary>
-        </member>
-        <member name="F:Friendly_Wars.Engine.Component.Graphic.Animation.frames">
-            <summary>
-            All the Frames of this Animation.
-            </summary>
-        </member>
-        <member name="F:Friendly_Wars.Engine.Component.Graphic.Animation.index">
-            <summary>
-            The index for the current Frame of this Animation.
-            </summary>
-        </member>
-        <member name="F:Friendly_Wars.Engine.Component.Graphic.Animation.length">
-            <summary>
-            The length, in miliseconds, of this Animation. 
-            </summary>
-        </member>
-        <member name="F:Friendly_Wars.Engine.Component.Graphic.Animation.elapsedTime">
-            <summary>
-            The elapsed time between the previous Animation's update.
-            </summary>
-        </member>
-        <member name="M:Friendly_Wars.Engine.Component.Graphic.Animation.#ctor(System.Collections.Generic.IList{Friendly_Wars.Engine.Component.Graphic.Frame},System.Double,System.Int32,System.String)">
-            <summary>
-            Constructor for a new Animation with multiple frames.
-            </summary>
-            <param name="frames">All the Frames of this Animation.</param>
-            <param name="length">The length, in seconds, of this Animation.</param>
-            <param name="fps">The frames-per-second of this Animation.</param>
-            <param name="name">The name of this Animation.</param>
-        </member>
-        <member name="M:Friendly_Wars.Engine.Component.Graphic.Animation.#ctor(Friendly_Wars.Engine.Component.Graphic.Frame,System.String)">
-            <summary>
-            Constructor for a new Animation with a single frame.
-            </summary>
-            <param name="frame">The Frame of the Animation.</param>
-            <param name="name">The name of the Animation.</param>
-        </member>
-        <member name="M:Friendly_Wars.Engine.Component.Graphic.Animation.Update(System.Double)">
-            <summary>
-            Updates the Frame of this Animation.
-            </summary>
-            <param name="deltaTime">The time in milliseconds from the previous update.</param>
-        </member>
-        <member name="P:Friendly_Wars.Engine.Component.Graphic.Animation.CurrentFrame">
-            <summary>
-            The current Frame of this Animation.
-            </summary>
-        </member>
-        <member name="P:Friendly_Wars.Engine.Component.Graphic.Animation.FPS">
-            <summary>
-            The frames-per-second of this Animation.
-            </summary>
-        </member>
-        <member name="P:Friendly_Wars.Engine.Component.Graphic.Animation.Name">
-            <summary>
-            The name of this Animation.
-            </summary>
-        </member>
-        <member name="T:Friendly_Wars.Engine.Object.Camera">
-            <summary>
-            Represents a Camera that handles the positioning of the "viewport"; it essentially determines what the screen should render.
-            </summary>
-        </member>
-        <member name="M:Friendly_Wars.Engine.Object.Camera.#ctor">
-            <summary>
-            Constructor for a new Camera.
-            </summary>
-        </member>
         <member name="T:Friendly_Wars.GameLogic.MapInfo">
             <summary>
             Map Information
@@ -576,146 +676,103 @@
             Dictionary containing all the sounds used in the map
             </summary>
         </member>
-        <member name="T:Friendly_Wars.App">
+        <member name="T:Friendly_Wars.Engine.Object.World">
             <summary>
-            The App class (we didn't write this).
+            World can be thought of as the "universe" of a game. 
+            Not only does it contain all gameObjects, but it also provides functionality for finding gameObjects and drawing gameObjects at appropriate times.
             </summary>
         </member>
-        <member name="M:Friendly_Wars.App.InitializeComponent">
+        <member name="F:Friendly_Wars.Engine.Object.World.instance">
             <summary>
-            InitializeComponent
+            The single instsance of world.
             </summary>
         </member>
-        <member name="M:Friendly_Wars.App.#ctor">
+        <member name="F:Friendly_Wars.Engine.Object.World.worldUpdateTimer">
             <summary>
-            I have no idea what this does (again, we didn't write this code [Microsoft did])
+            The EngineTimer that will handle updating this world.
             </summary>
         </member>
-        <member name="T:Friendly_Wars.Engine.Component.Graphic.Frame">
+        <member name="F:Friendly_Wars.Engine.Object.World.UPDATES_PER_SECOND">
             <summary>
-            Frame is the base class for an Animation.  
-            It contains the actual Image of this Frame and its offset.
+            World will try to update this many times per second.
             </summary>
         </member>
-        <member name="M:Friendly_Wars.Engine.Component.Graphic.Frame.#ctor(System.Windows.Controls.Image,System.Windows.Point)">
+        <member name="F:Friendly_Wars.Engine.Object.World.gameObjects">
             <summary>
-            Constructor for a Frame.
-            </summary>
-            <param name="image">The Image of this Frame.</param>
-            <param name="offset">The offset of this Frame's Image.</param>
-        </member>
-        <member name="P:Friendly_Wars.Engine.Component.Graphic.Frame.Image">
-            <summary>
-            The actual Image of this Frame.
+            All of the gameObjects in the game.
             </summary>
         </member>
-        <member name="P:Friendly_Wars.Engine.Component.Graphic.Frame.Offset">
+        <member name="F:Friendly_Wars.Engine.Object.World.redrawQueue">
             <summary>
-            The offset of this Frame's Image.
+            The queue of GameObjects that need to be re-drawn/updated the next time WordObject updates.
             </summary>
         </member>
-        <member name="T:Friendly_Wars.GameLogic.Game">
+        <member name="F:Friendly_Wars.Engine.Object.World.previousImages">
             <summary>
-            This class represents the Game. All game-logic stems from here.
+            TEMPORARY: This stores a reference to the GameObject's previous Frame, allowing us to remove it from the screen.
             </summary>
         </member>
-        <member name="F:Friendly_Wars.GameLogic.Game.world">
+        <member name="M:Friendly_Wars.Engine.Object.World.#ctor">
             <summary>
-            The world of the game.
+            The constructor for a new instance of World.
+            World uses the singleton pattern; therefore, its constructor's scope is limited to itself.
             </summary>
         </member>
-        <member name="M:Friendly_Wars.GameLogic.Game.#ctor">
+        <member name="M:Friendly_Wars.Engine.Object.World.Update(System.Double)">
             <summary>
-            Constructor for the Game.
+            Updates World as fast as possible; however, updating is capped at UPDATES_PER_SECOND.
             </summary>
+            <param name="deltaTime">The time elapsed since the last update.</param>
         </member>
-        <member name="M:Friendly_Wars.GameLogic.Game.ConvertToARGB32(System.Windows.Media.Color)">
+        <member name="M:Friendly_Wars.Engine.Object.World.AddToRedrawQueue(Friendly_Wars.Engine.Object.GameObject)">
             <summary>
-            TEMPORARY HELPER FUNCTION, DONT KILL ME ALEX
+            Adds a GameObject to the redraw queue.
             </summary>
-            <param name="color"></param>
-            <returns></returns>
+            <param name="gameObject">The GameObject to add to the queue.</param>
         </member>
-        <member name="T:Friendly_Wars.Engine.Object.GameObject">
+        <member name="M:Friendly_Wars.Engine.Object.World.GetGameObjects">
             <summary>
-            GameObject represents a base for all in-game objects. 
-            GameObject is composed of different Components that provide core game-functionality, such as rendering, audio and movement.
+            Access the ReadOnlyCollection of GameObjects this World has.
             </summary>
+            <returns>The ReadOnlyCollection of GameObjects this World has.</returns>
         </member>
-        <member name="F:Friendly_Wars.Engine.Object.GameObject.currentUID">
+        <member name="M:Friendly_Wars.Engine.Object.World.AddGameObject(Friendly_Wars.Engine.Object.GameObject)">
             <summary>
-            The last UID assigned to a GameObject.
+            Adds a GameObject to the world.
             </summary>
+            <param name="gameObject">The GameObject to add.</param>
         </member>
-        <member name="M:Friendly_Wars.Engine.Object.GameObject.#ctor(System.Collections.Generic.IDictionary{System.String,Friendly_Wars.Engine.Component.Graphic.Animation},Friendly_Wars.Engine.Component.Graphic.Animation,System.String,System.String)">
+        <member name="M:Friendly_Wars.Engine.Object.World.RemoveGameObject(Friendly_Wars.Engine.Object.GameObject)">
             <summary>
-            The Constructor for a GameObject.
+            Removes a GameObject from the world, if it exists.
             </summary>
-            <param name="name">The name of the GameObject.</param>
-            <param name="tag">The tag of the GameObject.</param>
+            <param name="gameObject">The GameObject to remove</param>
         </member>
-        <member name="M:Friendly_Wars.Engine.Object.GameObject.#ctor(System.String,System.String)">
+        <member name="M:Friendly_Wars.Engine.Object.World.FindGameObjectsWithName(System.String)">
             <summary>
-            The Constructor for a GameObject. GameObjects are automatically added to the World.
+            Access all of the GameObjects that contain a specific name.
             </summary>
-            <param name="name">The name of the GameObject.</param>
-            <param name="tag">The tag of the GameObject.</param>
+            <param name="name">The name of the GameObjects.</param>
+            <returns>A Collection of GameObjects with that specific name.</returns>
         </member>
-        <member name="M:Friendly_Wars.Engine.Object.GameObject.#ctor(System.String,System.Windows.Point,System.Int32,System.Windows.Point,System.String)">
+        <member name="M:Friendly_Wars.Engine.Object.World.FindGameObjectsWithTag(System.String)">
             <summary>
-            The Constructor for a GameObject. GameObjects are automatically added to the World.
+            Access all of the GameObjects that contain a specific tag.
             </summary>
-            <param name="name">The name of the GameObject.</param>
-            <param name="position">The starting position of the GameObject.</param>
-            <param name="rotation">The starting rotation of the GameObject.</param>
-            <param name="size">The starting size of the GameObject.</param>
-            <param name="tag">The tag of the GameObject.</param>
+            <param name="tag">The tag of the GameObjects.</param>
+            <returns>A Collection of GameObjects with that specific tag.</returns>
         </member>
-        <member name="M:Friendly_Wars.Engine.Object.GameObject.NextUID">
+        <member name="M:Friendly_Wars.Engine.Object.World.FindGameObjectWithUID(System.Int32)">
             <summary>
-            Creates a UID for a GameObject.
+            Access the GameObject that contains a specific UID.
             </summary>
-            <returns>Returns a UID for a GameObject</returns>
+            <param name="UID">The UID of the gameObject.</param>
+            <returns>The GameObject with the specific UID.</returns>
         </member>
-        <member name="M:Friendly_Wars.Engine.Object.GameObject.Destroy(Friendly_Wars.Engine.Object.GameObject)">
+        <member name="P:Friendly_Wars.Engine.Object.World.Instance">
             <summary>
-            Destroys a given GameObject.
-            </summary>
-            <param name="gameObject">The GameObject that will be destroyed.</param>
-        </member>
-        <member name="P:Friendly_Wars.Engine.Object.GameObject.TransformComponent">
-            <summary>
-            This GameObject's TransformComponent.
-            </summary>
-        </member>
-        <member name="P:Friendly_Wars.Engine.Object.GameObject.AudioComponent">
-            <summary>
-            The GameObject's AudioComponent.
-            </summary>
-        </member>
-        <member name="P:Friendly_Wars.Engine.Object.GameObject.RenderComponent">
-            <summary>
-            This GameObject's RenderComponent.
-            </summary>
-        </member>
-        <member name="P:Friendly_Wars.Engine.Object.GameObject.Name">
-            <summary>
-            This GameObject's name.
-            </summary>
-        </member>
-        <member name="P:Friendly_Wars.Engine.Object.GameObject.Tag">
-            <summary>
-            This GameObject's tag.
-            </summary>
-        </member>
-        <member name="P:Friendly_Wars.Engine.Object.GameObject.UID">
-            <summary>
-            This GameObject's UID.
-            </summary>
-        </member>
-        <member name="P:Friendly_Wars.Engine.Object.GameObject.Children">
-            <summary>
-            This GameObject's children.
+            Accessor for the instance of World.
+            This accessor follows the singleton pattern for C# provided at Microsoft's MSDN.
             </summary>
         </member>
         <member name="T:Friendly_Wars.Engine.Component.AudioComponent">
@@ -746,63 +803,6 @@
             Stops playing a specific audio clip.
             </summary>
             <param name="name">The name of the audio clip to stop playing.</param>
-        </member>
-        <member name="T:Friendly_Wars.Engine.Component.Graphic.RenderComponent">
-            <summary>
-            Handles the rendering of an Object. 
-            </summary>
-        </member>
-        <member name="F:Friendly_Wars.Engine.Component.Graphic.RenderComponent.animations">
-            <summary>
-            A Dictionary of names-to-Animations that contains all of the Animations of this RenderComponent.
-            </summary>
-        </member>
-        <member name="F:Friendly_Wars.Engine.Component.Graphic.RenderComponent.defaultAnimation">
-            <summary>
-            The default Animation for this RenderComponent.  It will play when no other Animation is specified to play.
-            </summary>
-        </member>
-        <member name="F:Friendly_Wars.Engine.Component.Graphic.RenderComponent.animationTimer">
-            <summary>
-            The EngineTimer that handles updating this RenderComponent's Animations.
-            </summary>
-        </member>
-        <member name="M:Friendly_Wars.Engine.Component.Graphic.RenderComponent.#ctor(System.Collections.Generic.IDictionary{System.String,Friendly_Wars.Engine.Component.Graphic.Animation},Friendly_Wars.Engine.Component.Graphic.Animation,Friendly_Wars.Engine.Object.GameObject)">
-            <summary>
-            Constructor for a new RenderComponent.
-            </summary>
-            <param name="animations">The Dictionary of names-to-Animations of this RenderComponent. </param>
-            <param name="defaultAnimation">The Animation to play when no other Animation is specified to play.</param>
-            <param name="owner">The GameObject that owns this RenderComponent.</param>
-        </member>
-        <member name="M:Friendly_Wars.Engine.Component.Graphic.RenderComponent.Play(System.String)">
-            <summary>
-            Plays a specific Animation.
-            </summary>
-            <param name="animationName">The name of the Animation to play.</param>
-        </member>
-        <member name="M:Friendly_Wars.Engine.Component.Graphic.RenderComponent.Stop(System.String)">
-            <summary>
-            Stops playing a specific Animation.
-            </summary>
-            <param name="animationName">The name of the Animation to stop playing.</param>
-        </member>
-        <member name="M:Friendly_Wars.Engine.Component.Graphic.RenderComponent.GetRenderContent">
-            <summary>
-            Accesses the current Frame of the current Animation.
-            </summary>
-            <returns>The current frame.</returns>
-        </member>
-        <member name="M:Friendly_Wars.Engine.Component.Graphic.RenderComponent.Update(System.Double)">
-            <summary>
-            Notify the World that this RenderComponent needs to be re-rendered.
-            </summary>
-            <param name="deltaTime">The time in milliseconds since the last Update.</param>
-        </member>
-        <member name="P:Friendly_Wars.Engine.Component.Graphic.RenderComponent.CurrentAnimation">
-            <summary>
-            The Animation that is currently playing.
-            </summary>
         </member>
     </members>
 </doc>

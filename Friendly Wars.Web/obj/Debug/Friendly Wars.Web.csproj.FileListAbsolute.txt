@@ -13,3 +13,8 @@ C:\Users\menohack\Documents\OOSE\Angry Friends\angry-friends\Friendly Wars.Web\b
 C:\Users\menohack\Documents\OOSE\Angry Friends\angry-friends\Friendly Wars.Web\obj\Debug\ResolveAssemblyReference.cache
 C:\Users\menohack\Documents\OOSE\Angry Friends\angry-friends\Friendly Wars.Web\obj\Debug\Friendly Wars.Web.dll
 C:\Users\menohack\Documents\OOSE\Angry Friends\angry-friends\Friendly Wars.Web\obj\Debug\Friendly Wars.Web.pdb
+C:\msysgit\msysgit\angry-friends\Friendly Wars.Web\bin\Friendly Wars.Web.dll
+C:\msysgit\msysgit\angry-friends\Friendly Wars.Web\bin\Friendly Wars.Web.pdb
+C:\msysgit\msysgit\angry-friends\Friendly Wars.Web\obj\Debug\Friendly Wars.Web.csprojResolveAssemblyReference.cache
+C:\msysgit\msysgit\angry-friends\Friendly Wars.Web\obj\Debug\Friendly Wars.Web.dll
+C:\msysgit\msysgit\angry-friends\Friendly Wars.Web\obj\Debug\Friendly Wars.Web.pdb
