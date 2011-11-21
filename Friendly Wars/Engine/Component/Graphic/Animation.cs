@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Windows;
 using Friendly_Wars.Engine.Utilities;
 using System.Collections;
+using System.Diagnostics;
 
 namespace Friendly_Wars.Engine.Component.Graphic
 {
@@ -20,9 +21,9 @@ namespace Friendly_Wars.Engine.Component.Graphic
 		/// </summary>
 		public Frame CurrentFrame { get; private set; }
 		/// <summary>
-		/// The Enumerator for the current Frame of this Animation.
+		/// The index for the current Frame of this Animation.
 		/// </summary>
-		private IEnumerator index;
+		private int index;
 
 		/// <summary>
 		/// The length, in miliseconds, of this Animation. 
@@ -54,7 +55,9 @@ namespace Friendly_Wars.Engine.Component.Graphic
 			this.length = length;
 			FPS = fps;
 			this.Name = name;
-			index = frames.GetEnumerator();
+
+			index = 0;
+			this.CurrentFrame = frames[index];
 		}
 
 		/// <summary>
@@ -73,17 +76,8 @@ namespace Friendly_Wars.Engine.Component.Graphic
 		{
 			elapsedTime += deltaTime;
 
-			// While frames need to be updated:
-			while (elapsedTime >= (1.00 / FPS))
-			{
-				if (!index.MoveNext())
-				{
-					index.Reset();
-					index.MoveNext();
-				}
-
-				elapsedTime -= (1.00 / FPS);
-			}
+			index = (index + (int)(deltaTime / length)) % frames.Count;
+			CurrentFrame = frames[index];
 		}
 	}
 }

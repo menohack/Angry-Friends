@@ -50,7 +50,7 @@ namespace Friendly_Wars.Engine.Component.Graphic
 		public void Play(String animationName)
 		{
 			Animation animation;
-			Debug.Assert(!animations.TryGetValue(animationName, out animation), "The Animation: " + animationName + " does not exist.");
+			Debug.Assert(animations.TryGetValue(animationName, out animation), "The Animation: " + animationName + " does not exist.");
 			CurrentAnimation = animation;
 
 			animationTimer = new EngineTimer(CurrentAnimation.FPS, new List<IUpdateable> { CurrentAnimation, this });
@@ -71,12 +71,21 @@ namespace Friendly_Wars.Engine.Component.Graphic
 		}
 
 		/// <summary>
+		/// Accesses the current Frame of the current Animation.
+		/// </summary>
+		/// <returns>The current frame.</returns>
+		public Frame GetRenderContent()
+		{
+			return CurrentAnimation.CurrentFrame;
+		}
+
+		/// <summary>
 		/// Notify the World that this RenderComponent needs to be re-rendered.
 		/// </summary>
 		/// <param name="deltaTime">The time in milliseconds since the last Update.</param>
 		public void Update(double deltaTime)
 		{
-			World.Instance.AddToRedrawQueue(base.Owner);
+			World.Instance.AddToRedrawQueue(Owner);
 		}
 	}
 }

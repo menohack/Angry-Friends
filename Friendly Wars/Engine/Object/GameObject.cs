@@ -24,7 +24,7 @@ namespace Friendly_Wars.Engine.Object
 		/// <summary>
 		/// This GameObject's RenderComponent.
 		/// </summary>
-		public RenderComponent RenderComponent { get; private set; }
+		public RenderComponent RenderComponent { get; set; }
 
 		/// <summary>
 		/// This GameObject's name.
@@ -46,6 +46,23 @@ namespace Friendly_Wars.Engine.Object
 		/// This GameObject's children.
 		/// </summary>
 		public IList<GameObject> Children { get; private set; }
+
+		//TODO: Pass in components through constructor.
+		/// <summary>
+		/// The Constructor for a GameObject.
+		/// </summary>
+		/// <param name="name">The name of the GameObject.</param>
+		/// <param name="tag">The tag of the GameObject.</param>
+		public GameObject(IDictionary<String, Animation> animations, Animation defaultAnimation, String name, String tag = null)
+		{
+			World.Instance.AddGameObject(this);
+			this.Name = name;
+			this.Tag = tag;
+			this.UID = NextUID();
+
+			Children = new List<GameObject>();
+			RenderComponent = new RenderComponent(animations, defaultAnimation, this);
+		}
 
 		/// <summary>
 		/// The Constructor for a GameObject. GameObjects are automatically added to the World.
