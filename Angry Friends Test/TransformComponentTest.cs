@@ -1,23 +1,14 @@
-﻿using System;
-using System.Text;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Windows;
+using Angry_Friends.Library.Engine.Component;
+using Angry_Friends.Library.Engine.Object;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Friendly_Wars.Engine.Component;
-using System.Diagnostics;
-using System.Windows;
-using Friendly_Wars.Engine.Object;
-
-namespace Friendly_Wars_Test
-{
+namespace Friendly_Wars_Test {
 	[TestClass]
-	public class TransformComponentTest
-	{
+	public class TransformComponentTest {
 		GameObject go1, go2;
 
 		[TestInitialize]
-		public void Initialize()
-		{
+		public void Initialize() {
 			World world = World.Instance;
 
 			go1 = new GameObject("go1", new Point(200.0, 300.0), 0, new Point(100, 100));
@@ -25,8 +16,7 @@ namespace Friendly_Wars_Test
 		}
 
 		[TestMethod]
-		public void Translate()
-		{
+		public void Translate() {
 			double xshift = 50.0;
 			double yshift = -70.0;
 			Point startPosition = go1.TransformComponent.Position;
@@ -48,16 +38,13 @@ namespace Friendly_Wars_Test
 		}
 
 		[TestMethod]
-		public void Collide()
-		{
+		public void Collide() {
 			//Try spawning a GameObject on top of another GameObject
-			try
-			{
+			try {
 				GameObject go3 = new GameObject("go3", new Point(250.0, 300.0), 0, new Point(100.0, 100.0));
 			}
-			catch (Friendly_Wars.Engine.Component.TransformComponent.CollisionException e)
-			{
-				Assert.IsTrue(typeof(Friendly_Wars.Engine.Component.TransformComponent.CollisionException).Equals(e.GetType()));
+			catch (TransformComponent.CollisionException e) {
+				Assert.IsTrue(typeof(TransformComponent.CollisionException).Equals(e.GetType()));
 			}
 
 			//Move a GameObject completely around another GameObject without hitting it
