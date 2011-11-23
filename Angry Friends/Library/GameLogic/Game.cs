@@ -18,11 +18,16 @@ namespace Library.GameLogic {
 		public World world;
 		public World World { get { return world; } }
 
+		public Team CurrentTeam { get; private set; }
+		public List<Team> Teams { get; private set; }
+		public Terrain Terrain { get; private set; }
+
 		/// <summary>
 		/// Constructor for the Game.
 		/// </summary>
-		public Game() {
+		public Game(Canvas canvas) {
 			world = World.Instance;
+			world.setCanvas(canvas);
 			//web = new Web();
 
 			//
