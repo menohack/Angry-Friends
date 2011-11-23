@@ -1,0 +1,13 @@
+C:\Users\Luis Grimaldo\Desktop\Library\Bin\Debug\Library.dll
+C:\Users\Luis Grimaldo\Desktop\Library\Bin\Debug\Library.pdb
+C:\Users\Luis Grimaldo\Desktop\Library\obj\Debug\Library.csprojResolveAssemblyReference.cache
+C:\Users\Luis Grimaldo\Desktop\Library\obj\Debug\Library.dll
+C:\Users\Luis Grimaldo\Desktop\Library\obj\Debug\Library.pdb
+Z:\Users\alexanderschiffhauer\Dropbox\Undergraduate\Junior\Fall Semester\OOSE\Angry Friends\Library\Bin\Debug\Library.dll
+Z:\Users\alexanderschiffhauer\Dropbox\Undergraduate\Junior\Fall Semester\OOSE\Angry Friends\Library\Bin\Debug\Library.pdb
+Z:\Users\alexanderschiffhauer\Dropbox\Undergraduate\Junior\Fall Semester\OOSE\Angry Friends\Library\obj\Debug\ResolveAssemblyReference.cache
+Z:\Users\alexanderschiffhauer\Dropbox\Undergraduate\Junior\Fall Semester\OOSE\Angry Friends\Library\obj\Debug\Library.dll
+Z:\Users\alexanderschiffhauer\Dropbox\Undergraduate\Junior\Fall Semester\OOSE\Angry Friends\Library\obj\Debug\Library.pdb
+Z:\Users\alexanderschiffhauer\Dropbox\Undergraduate\Junior\Fall Semester\OOSE\Angry Friends\Library\Bin\Debug\WriteableBitmapEx.dll
+Z:\Users\alexanderschiffhauer\Dropbox\Undergraduate\Junior\Fall Semester\OOSE\Angry Friends\Library\Bin\Debug\WriteableBitmapEx.pdb
+Z:\Users\alexanderschiffhauer\Dropbox\Undergraduate\Junior\Fall Semester\OOSE\Angry Friends\Library\Bin\Debug\WriteableBitmapEx.xml
