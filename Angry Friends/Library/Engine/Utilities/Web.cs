@@ -114,7 +114,7 @@ namespace Library.Engine.Utilities {
 			DownloadString(url, data => {
 				using (XmlReader reader = XmlReader.Create(new StringReader(data))) {
 					MapInfo mapInfo = new MapInfo();
-					List<Resource> resources = new List<Resource>();
+					List<ExternalResource> resources = new List<ExternalResource>();
 					reader.MoveToContent();
 					while (reader.MoveToNextAttribute())
 						switch (reader.Name) {
@@ -127,7 +127,7 @@ namespace Library.Engine.Utilities {
 									while (reader.Read()) { // reads all the resources
 										switch (reader.NodeType) {
 											case XmlNodeType.Element:
-												resources.Add(new Resource(reader.GetAttribute("url"), reader.Name, reader.GetAttribute("priority")));
+												resources.Add(new ExternalResource(reader.GetAttribute("url"), reader.Name, reader.GetAttribute("priority")));
 												break;
 										}
 									}
@@ -136,13 +136,13 @@ namespace Library.Engine.Utilities {
 					double count = 0, total = resources.Count;
 					resources.ForEach(r => {
 						switch (r.Type) {
-							case Resource.Types.Image:
+							case ExternalResource.ResourceType.Image:
 								BitmapImage image = DownloadImage(r.URL);
 								if (image == null)
 									throw new Exception(string.Format("The image resource \"{0}\" in the map \"{1}\" was not found.", r.Name, mapInfo.Title));
 								else mapInfo.Images.Add(r.Name, image);
 								break;
-							case Resource.Types.Sound:
+							case ExternalResource.ResourceType.Sound:
 								MediaElement sound = DownloadSound(r.URL);
 								if (sound == null)
 									throw new Exception(string.Format("The sound resource \"{0}\" in the map \"{1}\" was not found.", r.Name, mapInfo.Title));
