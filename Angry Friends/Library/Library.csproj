@@ -69,8 +69,15 @@
     <Compile Include="Engine\Object\World.cs" />
     <Compile Include="Engine\Utilities\ExternalResource.cs" />
     <Compile Include="Engine\Utilities\SpriteSheetLoader.cs" />
+    <Compile Include="GameLogic\Ammo.cs" />
     <Compile Include="GameLogic\Game.cs" />
     <Compile Include="GameLogic\MapInfo.cs" />
+    <Compile Include="GameLogic\Persistence\Item.cs" />
+    <Compile Include="GameLogic\Persistence\Restriction.cs" />
+    <Compile Include="GameLogic\Persistence\User.cs" />
+    <Compile Include="GameLogic\Player.cs" />
+    <Compile Include="GameLogic\Team.cs" />
+    <Compile Include="GameLogic\Terrain.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Engine\Utilities\EngineMath.cs" />
     <Compile Include="Engine\Utilities\EngineTimer.cs" />

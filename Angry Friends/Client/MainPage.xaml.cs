@@ -16,17 +16,14 @@ namespace Client {
 		public MainPage() {
 			InitializeComponent();
 			Web.Instance.DownloadMap("http://alexanderschiffhauer.com/Friendly_Wars/test.xml", progress);
-			Game game = new Game();
-			game.World.GameObjectAdded += new World.ObjectEventArgs(GameObjectAdded);
-            game.World.GameObjectRemoved += new World.ObjectEventArgs(GameObjectRemoved);
+
+			Canvas canvas2electricboogaloo = new Canvas();
+			canvas.Children.Add(canvas2electricboogaloo);
+
+			Game game = new Game(canvas2electricboogaloo);
 		}
 
-		void GameObjectRemoved(Image image) {
-			canvas.Children.Remove(image);
-		}
-		void GameObjectAdded(Image image) {
-			canvas.Children.Add(image);
-		}
+
 
 		/// <summary>
 		/// This method is called by the map downloader to check progress and results
