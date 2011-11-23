@@ -13,8 +13,6 @@ Z:\Users\alexanderschiffhauer\Dropbox\Undergraduate\Junior\Fall Semester\OOSE\An
 Z:\Users\alexanderschiffhauer\Dropbox\Undergraduate\Junior\Fall Semester\OOSE\Angry Friends\Library\Bin\Debug\WriteableBitmapEx.xml
 Z:\Users\alexanderschiffhauer\Dropbox\Undergraduate\Junior\Fall Semester\OOSE\Angry Friends\Angry Friends\Library\Bin\Debug\Library.dll
 Z:\Users\alexanderschiffhauer\Dropbox\Undergraduate\Junior\Fall Semester\OOSE\Angry Friends\Angry Friends\Library\Bin\Debug\Library.pdb
-Z:\Users\alexanderschiffhauer\Dropbox\Undergraduate\Junior\Fall Semester\OOSE\Angry Friends\Angry Friends\Library\Bin\Debug\WriteableBitmapEx.pdb
-Z:\Users\alexanderschiffhauer\Dropbox\Undergraduate\Junior\Fall Semester\OOSE\Angry Friends\Angry Friends\Library\Bin\Debug\WriteableBitmapEx.xml
 Z:\Users\alexanderschiffhauer\Dropbox\Undergraduate\Junior\Fall Semester\OOSE\Angry Friends\Angry Friends\Library\obj\Debug\ResolveAssemblyReference.cache
 Z:\Users\alexanderschiffhauer\Dropbox\Undergraduate\Junior\Fall Semester\OOSE\Angry Friends\Angry Friends\Library\obj\Debug\Library.dll
 Z:\Users\alexanderschiffhauer\Dropbox\Undergraduate\Junior\Fall Semester\OOSE\Angry Friends\Angry Friends\Library\obj\Debug\Library.pdb

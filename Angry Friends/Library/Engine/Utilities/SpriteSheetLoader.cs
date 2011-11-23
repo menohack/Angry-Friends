@@ -25,9 +25,13 @@ namespace Library.Engine.Utilities
         public class SpriteSheet
         {
             /// <summary>
-            /// The image of this SpriteSheet.
+            /// The Image of this SpriteSheet.
             /// </summary>
             public Image Image { get; private set; }
+            /// <summary>
+            /// The size of this SpriteSheet.
+            /// </summary>
+            public Point Size { get; private set; }
             /// <summary>
             /// The number of rows in this SpriteSheet.
             /// </summary>
@@ -55,6 +59,7 @@ namespace Library.Engine.Utilities
             /// <param name="horizontalVerticalSize">The size of each cell in the vertical direction.</param>
             public SpriteSheet(Image image, int rows, int columns, int horizontalCellSize, int horizontalVerticalSize) {
                 this.Image = image;
+                this.Size = new Point(image.ActualWidth, image.ActualHeight);
                 this.Rows = rows;
                 this.Columns = columns;
                 this.horizontalCellSize = horizontalCellSize;
@@ -101,25 +106,28 @@ namespace Library.Engine.Utilities
         {
             IList<Frame> frames = new List<Frame>();
 
-            int x = (spriteSheet.horizontalCellSize * initialRow) % (int) spriteSheet.Image.Width;
+            int x = (spriteSheet.horizontalCellSize * initialRow) % (int) spriteSheet.Size.X;
             int y = initialColumn * spriteSheet.verticalCellSize;
 
             // The number of pixels to move without taking wrap-over into account.
-            int distanceToMove = ((initialColumn * (int) spriteSheet.Image.Width) + (initialRow * (int) spriteSheet.horizontalCellSize)) - (finalColumn * (int) spriteSheet.Image.Width) + (finalRow * (int) spriteSheet.horizontalCellSize);
+            int distanceToMove = (finalColumn * (int)spriteSheet.Size.X) + (finalRow * (int)spriteSheet.horizontalCellSize) - ((initialColumn * (int)spriteSheet.Size.X) + (initialRow * (int)spriteSheet.horizontalCellSize));
 
             // Loop through and copy the corresponding pixels into a List of Frames.
             while (distanceToMove > 0)
             {
-                if (x >= spriteSheet.Image.Width)
+                if (x >= spriteSheet.Size.X)
                 {
-                    x -= (int) spriteSheet.Image.Width;
+                    x -= (int)spriteSheet.Size.X;
                 }
+                
 
-                WriteableBitmap writeableBitmap = new WriteableBitmap((BitmapSource)spriteSheet.Image.Source);
-                writeableBitmap.Crop(x, y, spriteSheet.horizontalCellSize, spriteSheet.verticalCellSize);
+                WriteableBitmap spriteSheetWriteableBitmap = new WriteableBitmap((BitmapSource) spriteSheet.Image.Source);
+                WriteableBitmap desiredFrame = new WriteableBitmap(spriteSheet.horizontalCellSize, spriteSheet.verticalCellSize);
+
+                desiredFrame.Blit(new Rect(0, 0, spriteSheet.horizontalCellSize, spriteSheet.verticalCellSize), spriteSheetWriteableBitmap, new Rect(x, y, spriteSheet.horizontalCellSize, spriteSheet.verticalCellSize));
 
                 Image frame = new Image();
-                frame.Source = writeableBitmap;
+                frame.Source = desiredFrame;
                 frame.Width = spriteSheet.horizontalCellSize;
                 frame.Height = spriteSheet.verticalCellSize;
                 frames.Add(new Frame(frame, new Point()));

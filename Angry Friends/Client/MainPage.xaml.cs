@@ -15,7 +15,7 @@ namespace Client {
 		/// </summary>
 		public MainPage() {
 			InitializeComponent();
-			Web.Instance.DownloadMap("http://alexanderschiffhauer.com/Friendly_Wars/test.xml", progress);
+            Web.Instance.DownloadMap("http://alexanderschiffhauer.com/Friendly_Wars/test.xml", progress);
 			Game game = new Game();
 			game.World.GameObjectAdded += new World.ObjectEventArgs(GameObjectAdded);
             game.World.GameObjectRemoved += new World.ObjectEventArgs(GameObjectRemoved);
@@ -34,23 +34,20 @@ namespace Client {
 		/// <param name="percentage">Downloads percentage</param>
 		/// <param name="mapInfo">Partial/Complete Map Information</param>
 		public void progress(int percentage, MapInfo mapInfo) {
-            BitmapImage image = mapInfo.Images["spritesheet"];
-            //canvas.Children.Add(image);
-
-
-            ///WTF?!
-            Debug.WriteLine(image.PixelHeight);
-            Debug.WriteLine(image.PixelWidth);
-
-
-
-            //SpriteSheetLoader.SpriteSheet spriteSheet = new SpriteSheetLoader.SpriteSheet(image, 15, 15, 30, 30);
-            //IList<Frame> frames = SpriteSheetLoader.Instance.GetFramesFromSpriteSheet(spriteSheet, 0, 0, 3, 3);
-
-		///	textBlock1.Text = percentage + "% Downloaded";
-			///if (percentage == 100) {
-				///image1.Source = mapInfo.Images["spritesheet"];
-			///}
+			if (percentage == 100) {
+                Image image = new Image();
+                image.Source = mapInfo.Images["spritesheet"];
+                canvas.Children.Add(image);
+                Dispatcher.BeginInvoke(delegate()
+                {
+                    // HALF OF THE TIME THIS DOESN'T WORK AND APPEARS 0.
+                    // <3 SILVERLIGHT
+                    double height = image.ActualHeight;
+                    double width = image.ActualWidth;
+                    SpriteSheetLoader.SpriteSheet spriteSheet = new SpriteSheetLoader.SpriteSheet(image, 15, 15, 30, 30);
+                    //IList<Frame> frames = SpriteSheetLoader.Instance.GetFramesFromSpriteSheet(spriteSheet, 0, 0, 3, 0);
+                });
+			}
 		}
 	}
 }
