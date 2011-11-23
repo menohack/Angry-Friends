@@ -8,3 +8,8 @@ Z:\Users\alexanderschiffhauer\Dropbox\Undergraduate\Junior\Fall Semester\OOSE\An
 Z:\Users\alexanderschiffhauer\Dropbox\Undergraduate\Junior\Fall Semester\OOSE\Angry Friends\Web\obj\Debug\ResolveAssemblyReference.cache
 Z:\Users\alexanderschiffhauer\Dropbox\Undergraduate\Junior\Fall Semester\OOSE\Angry Friends\Web\obj\Debug\Web.dll
 Z:\Users\alexanderschiffhauer\Dropbox\Undergraduate\Junior\Fall Semester\OOSE\Angry Friends\Web\obj\Debug\Web.pdb
+Z:\Users\alexanderschiffhauer\Dropbox\Undergraduate\Junior\Fall Semester\OOSE\Angry Friends\Angry Friends\Web\bin\Web.dll
+Z:\Users\alexanderschiffhauer\Dropbox\Undergraduate\Junior\Fall Semester\OOSE\Angry Friends\Angry Friends\Web\bin\Web.pdb
+Z:\Users\alexanderschiffhauer\Dropbox\Undergraduate\Junior\Fall Semester\OOSE\Angry Friends\Angry Friends\Web\obj\Debug\ResolveAssemblyReference.cache
+Z:\Users\alexanderschiffhauer\Dropbox\Undergraduate\Junior\Fall Semester\OOSE\Angry Friends\Angry Friends\Web\obj\Debug\Web.dll
+Z:\Users\alexanderschiffhauer\Dropbox\Undergraduate\Junior\Fall Semester\OOSE\Angry Friends\Angry Friends\Web\obj\Debug\Web.pdb
