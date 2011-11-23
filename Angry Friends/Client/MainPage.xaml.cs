@@ -37,15 +37,15 @@ namespace Client {
 			if (percentage == 100) {
                 Image image = new Image();
                 image.Source = mapInfo.Images["spritesheet"];
-                canvas.Children.Add(image);
                 Dispatcher.BeginInvoke(delegate()
                 {
                     // HALF OF THE TIME THIS DOESN'T WORK AND APPEARS 0.
                     // <3 SILVERLIGHT
+                    canvas.Children.Add(image);
                     double height = image.ActualHeight;
                     double width = image.ActualWidth;
                     SpriteSheetLoader.SpriteSheet spriteSheet = new SpriteSheetLoader.SpriteSheet(image, 15, 15, 30, 30);
-                    //IList<Frame> frames = SpriteSheetLoader.Instance.GetFramesFromSpriteSheet(spriteSheet, 0, 0, 3, 0);
+                    IList<Frame> frames = SpriteSheetLoader.Instance.GetFramesFromSpriteSheet(spriteSheet, 0, 0, 3, 0);
                 });
 			}
 		}

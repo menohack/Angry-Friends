@@ -119,7 +119,6 @@ namespace Library.Engine.Utilities
                 {
                     x -= (int)spriteSheet.Size.X;
                 }
-                
 
                 WriteableBitmap spriteSheetWriteableBitmap = new WriteableBitmap((BitmapSource) spriteSheet.Image.Source);
                 WriteableBitmap desiredFrame = new WriteableBitmap(spriteSheet.horizontalCellSize, spriteSheet.verticalCellSize);
