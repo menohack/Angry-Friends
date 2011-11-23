@@ -28,6 +28,7 @@ namespace Library.GameLogic {
 		public Game(Canvas canvas) {
 			world = World.Instance;
 			world.setCanvas(canvas);
+			canvas.SetValue(Canvas.LeftProperty, 400.0);
 			//web = new Web();
 
 			//
