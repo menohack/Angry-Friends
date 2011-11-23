@@ -7,6 +7,7 @@
 		/// Constructor for a new Camera.
 		/// </summary>
 		public Camera() {
+
 		}
 	}
 }

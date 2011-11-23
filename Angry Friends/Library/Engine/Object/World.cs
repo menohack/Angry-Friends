@@ -12,7 +12,7 @@ namespace Library.Engine.Object {
 	public class World : IUpdateable {
 
 		public delegate void ObjectEventArgs(Image image);
-		public event ObjectEventArgs GameObjectAdded, GameObjectRemoved;
+		public event ObjectEventArgs GameObjectAddedEvent, GameObjectRemovedEvent;
 
 		/// <summary>
 		/// The single instsance of world.
@@ -40,6 +40,8 @@ namespace Library.Engine.Object {
 		/// </summary>
 		private IDictionary<GameObject, Image> previousImages;
 
+		private Canvas canvas;
+
 		/// <summary>
 		/// The constructor for a new instance of World.
 		/// World uses the singleton pattern; therefore, its constructor's scope is limited to itself.
@@ -49,9 +51,17 @@ namespace Library.Engine.Object {
 			redrawQueue = new List<GameObject>(0);
 			previousImages = new Dictionary<GameObject, Image>();
 
+			GameObjectAddedEvent += new World.ObjectEventArgs(GameObjectAdded);
+			GameObjectRemovedEvent += new World.ObjectEventArgs(GameObjectRemoved);
+
 			// Initialize the timing of the updating of the World.
 			worldUpdateTimer = new EngineTimer(EngineTimer.FromHertzToMiliSeconds(UPDATES_PER_SECOND), new List<IUpdateable> { this });
 			worldUpdateTimer.Start();
+		}
+
+		public void setCanvas(Canvas canvas)
+		{
+			this.canvas = canvas;
 		}
 
 		/// <summary>
@@ -67,6 +77,15 @@ namespace Library.Engine.Object {
 			}
 		}
 
+		void GameObjectRemoved(Image image)
+		{
+			canvas.Children.Remove(image);
+		}
+		void GameObjectAdded(Image image)
+		{
+			canvas.Children.Add(image);
+		}
+
 		/// <summary>
 		/// Updates World as fast as possible; however, updating is capped at UPDATES_PER_SECOND.
 		/// </summary>
@@ -79,7 +98,7 @@ namespace Library.Engine.Object {
 				Image image;
 				previousImages.TryGetValue(gameObject, out image);
 				if (image != null) {
-                    if (GameObjectRemoved != null)
+                    if (GameObjectRemovedEvent != null)
                     {
                         GameObjectRemoved(image);
                     }
@@ -93,7 +112,7 @@ namespace Library.Engine.Object {
 					continue;
 
 				Image image = gameObject.RenderComponent.CurrentAnimation.CurrentFrame.Image;
-                if (GameObjectAdded != null)
+                if (GameObjectAddedEvent != null)
                 {
                     GameObjectAdded(image);
                 }
