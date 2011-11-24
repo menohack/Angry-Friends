@@ -7,6 +7,7 @@ using System.Windows.Media.Imaging;
 using Library.Engine.Component.Graphic;
 using Library.Engine.Object;
 using Library.Engine.Component;
+using System.Windows.Shapes;
 namespace Library.GameLogic {
 	/// <summary>
 	/// This class represents the Game. All game-logic stems from here.
@@ -83,19 +84,36 @@ namespace Library.GameLogic {
 			Animation animation = new Animation(frames, 1000 * duration / numFrames, 60, "grow");
 			animations.Add("grow", animation);
 
-			GameObject projectile = new GameObject(animations, animation, "projectile");
+			
+			//GameObject projectile = new GameObject(animations, animation, "projectile");
+			//projectile.TransformComponent = new TransformComponent(new Point(0, 0), 0, new Point(width, height), projectile); 
 
+			GameObject go2 = new GameObject("derf");
+			//go3.TransformComponent = new TransformComponent(new Point(200, 0), 0, new Point(50, 50), go3);
 
-			GameObject pr2 = new GameObject("pr2");
-			Animation anim = new Animation(new Frame(new Image(), new Point(0,0)), "derp");
-			Dictionary<String, Animation> animz = new Dictionary<String, Animation>();
-			animz.Add("derp", anim);
-			pr2.RenderComponent = new RenderComponent(animz, anim, pr2);
-			pr2.TransformComponent = new TransformComponent(new Point(400, 400), 0, new Point(50, 50), pr2);
+			width = 50;
+			height = 50;
+			WriteableBitmap wb = new WriteableBitmap(width, height);
+			for (int i=0; i < width*height; i++)
+				wb.Pixels[i] = ConvertToARGB32(Color.FromArgb(255, 255, 0, 0));
+			wb.Invalidate();
+			Image box = new Image();
+			box.Source = wb;
+			go2.RenderComponent = new RenderComponent(new Animation(new Frame(box, new Point(0, 0)), "default"), go2);
+			//go2.TransformComponent.Position = new Point(400, 0);
+			go2.TransformComponent = new TransformComponent(new Point(400, 0), 0, new Point(50, 50), go2);
+			go2.TransformComponent.Velocity = new Point(0.1, 0);
 
-			pr2.TransformComponent.Translate(new Point(300, 0));
-
-			GameObject go3 = new GameObject(animations, animation, "gesrgr");
+			GameObject go3 = new GameObject("herf");
+			wb = new WriteableBitmap(width, height);
+			for (int i = 0; i < width * height; i++)
+				wb.Pixels[i] = ConvertToARGB32(Color.FromArgb(255, 0, 255, 0));
+			wb.Invalidate();
+			Image box2 = new Image();
+			box2.Source = wb;
+			go3.RenderComponent = new RenderComponent(new Animation(new Frame(box2, new Point(0, 0)), "default"), go3);
+			go3.TransformComponent = new TransformComponent(new Point(550, 0), 0, new Point(50, 50), go3);
+			
 		}
 
 		/// <summary>
@@ -103,7 +121,8 @@ namespace Library.GameLogic {
 		/// </summary>
 		/// <param name="color"></param>
 		/// <returns></returns>
-		private int ConvertToARGB32(Color color) {
+		private int ConvertToARGB32(Color color)
+		{
 			return ((color.R << 16) | (color.G << 8) | (color.B << 0) | (color.A << 24));
 		}
 	}

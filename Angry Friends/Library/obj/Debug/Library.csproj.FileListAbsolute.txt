@@ -21,3 +21,8 @@ D:\Coolege\OOSE\Angry Friends\angry-friends\Angry Friends\Library\Bin\Debug\Libr
 D:\Coolege\OOSE\Angry Friends\angry-friends\Angry Friends\Library\obj\Debug\ResolveAssemblyReference.cache
 D:\Coolege\OOSE\Angry Friends\angry-friends\Angry Friends\Library\obj\Debug\Library.dll
 D:\Coolege\OOSE\Angry Friends\angry-friends\Angry Friends\Library\obj\Debug\Library.pdb
+C:\Users\menohack\Documents\OOSE\Angry Friends\angry-friends\Angry Friends\Library\Bin\Debug\Library.dll
+C:\Users\menohack\Documents\OOSE\Angry Friends\angry-friends\Angry Friends\Library\Bin\Debug\Library.pdb
+C:\Users\menohack\Documents\OOSE\Angry Friends\angry-friends\Angry Friends\Library\obj\Debug\ResolveAssemblyReference.cache
+C:\Users\menohack\Documents\OOSE\Angry Friends\angry-friends\Angry Friends\Library\obj\Debug\Library.dll
+C:\Users\menohack\Documents\OOSE\Angry Friends\angry-friends\Angry Friends\Library\obj\Debug\Library.pdb

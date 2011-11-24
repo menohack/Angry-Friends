@@ -30,7 +30,7 @@ namespace Library.Engine.Component {
 		/// <summary>
 		/// The velocity of this TransformComponent.
 		/// </summary>
-		private Point velocity;
+		public Point Velocity { get; set; }
 		/// <summary>
 		/// The accessor for the position of the TransformComponent.
 		/// </summary>
@@ -81,6 +81,7 @@ namespace Library.Engine.Component {
 			this.position = position;
 			this.Position = position;
 			this.Rotation = rotation;
+			this.Velocity = new Point(0, 0);
 		}
 
 		/// <summary>
@@ -302,6 +303,20 @@ namespace Library.Engine.Component {
 			double x = a.X - b.X;
 			double y = a.Y - b.Y;
 			return Math.Sqrt(x * x + y * y);
+		}
+
+		public Point Update(double deltaTime)
+		{
+			double x = Position.X + Velocity.X * deltaTime;
+			double y = Position.Y + Velocity.Y * deltaTime;
+			if (x > 600)
+				Velocity = new Point(Velocity.X * -1.0, Velocity.Y);
+			if (y > 400)
+				Velocity = new Point(Velocity.X, Velocity.Y * -1.0);
+
+			Point pos = new Point(x, y);
+			Position = pos;
+			return pos;
 		}
 	}
 }
