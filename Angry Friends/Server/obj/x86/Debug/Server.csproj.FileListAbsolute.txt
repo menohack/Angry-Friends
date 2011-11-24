@@ -31,11 +31,3 @@ D:\Coolege\OOSE\Angry Friends\angry-friends\Angry Friends\Server\bin\Debug\Libra
 D:\Coolege\OOSE\Angry Friends\angry-friends\Angry Friends\Server\obj\x86\Debug\ResolveAssemblyReference.cache
 D:\Coolege\OOSE\Angry Friends\angry-friends\Angry Friends\Server\obj\x86\Debug\Server.exe
 D:\Coolege\OOSE\Angry Friends\angry-friends\Angry Friends\Server\obj\x86\Debug\Server.pdb
-C:\Users\menohack\Documents\OOSE\Angry Friends\angry-friends\Angry Friends\Server\bin\Debug\Server.exe
-C:\Users\menohack\Documents\OOSE\Angry Friends\angry-friends\Angry Friends\Server\bin\Debug\Server.pdb
-C:\Users\menohack\Documents\OOSE\Angry Friends\angry-friends\Angry Friends\Server\bin\Debug\Library.dll
-C:\Users\menohack\Documents\OOSE\Angry Friends\angry-friends\Angry Friends\Server\bin\Debug\WriteableBitmapEx.dll
-C:\Users\menohack\Documents\OOSE\Angry Friends\angry-friends\Angry Friends\Server\bin\Debug\Library.pdb
-C:\Users\menohack\Documents\OOSE\Angry Friends\angry-friends\Angry Friends\Server\obj\x86\Debug\ResolveAssemblyReference.cache
-C:\Users\menohack\Documents\OOSE\Angry Friends\angry-friends\Angry Friends\Server\obj\x86\Debug\Server.exe
-C:\Users\menohack\Documents\OOSE\Angry Friends\angry-friends\Angry Friends\Server\obj\x86\Debug\Server.pdb
