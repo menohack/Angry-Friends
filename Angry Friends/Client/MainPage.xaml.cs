@@ -16,12 +16,18 @@ namespace Client {
 		/// </summary>
 		public MainPage() {
 			InitializeComponent();
-
-			Canvas canvas2electricboogaloo = new Canvas();
-			canvas.Children.Add(canvas2electricboogaloo);
-
-			Game game = new Game(canvas2electricboogaloo);
-            new Tests();
+            Initialize();
 		}
+
+        /// <summary>
+        /// The hook for the Engine.
+        /// </summary>
+        public void Initialize()
+        {
+            Canvas viewport = new Canvas();
+			canvas.Children.Add(viewport);
+
+			Game game = new Game(viewport);
+        }
 	}
 }

@@ -7,6 +7,7 @@ using System.Windows.Media.Imaging;
 using Library.Engine.Component.Graphic;
 using Library.Engine.Object;
 using Library.Engine.Component;
+using Library.Engine;
 namespace Library.GameLogic {
 	/// <summary>
 	/// This class represents the Game. All game-logic stems from here.
@@ -14,22 +15,26 @@ namespace Library.GameLogic {
 	public class Game {
 
 		/// <summary>
-		/// The world of the game.
+		/// The instance of the Engine.
 		/// </summary>
-		public World world;
+		private World world;
+
+        /// <summary>
+        /// Accessor for the World.
+        /// </summary>
 		public World World { get { return world; } }
 
-		public Team CurrentTeam { get; private set; }
-		public List<Team> Teams { get; private set; }
-		public Terrain Terrain { get; private set; }
+        /// <summary>
+        /// The viewport of this Game.
+        /// </summary>
+        public static Canvas Viewport { get; private set; }
 
 		/// <summary>
 		/// Constructor for the Game.
 		/// </summary>
-		public Game(Canvas canvas) {
+		public Game(Canvas viewport) {
+            Viewport = viewport;
 			world = World.Instance;
-			world.setCanvas(canvas);
-			//web = new Web();
 
 			//
 			//THIS IS TEMPORARY FOR TESTING
@@ -65,7 +70,7 @@ namespace Library.GameLogic {
 							drawMe.Pixels[j * width + i] = ConvertToARGB32(Color.FromArgb(255, 0, 0, 200));
 					}
 
-				drawMe.Invalidate();
+			    drawMe.Invalidate();
 
 				Image image = new Image();
 				image.Source = drawMe;
@@ -73,9 +78,7 @@ namespace Library.GameLogic {
 				image.Height = height;
 
 				frames.Insert(f, new Frame(image, new Point(xOffset, yOffset)));
-
-
-
+                new Tests();
 			}
 
 			//TODO: Figure out why 0,0 corresponds to the center of the screen
