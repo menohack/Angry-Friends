@@ -6,6 +6,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using Library.Engine.Component.Graphic;
 using Library.Engine.Object;
+using Library.Engine.Component;
 namespace Library.GameLogic {
 	/// <summary>
 	/// This class represents the Game. All game-logic stems from here.
@@ -28,7 +29,6 @@ namespace Library.GameLogic {
 		public Game(Canvas canvas) {
 			world = World.Instance;
 			world.setCanvas(canvas);
-			canvas.SetValue(Canvas.LeftProperty, 400.0);
 			//web = new Web();
 
 			//
@@ -84,6 +84,18 @@ namespace Library.GameLogic {
 			animations.Add("grow", animation);
 
 			GameObject projectile = new GameObject(animations, animation, "projectile");
+
+
+			GameObject pr2 = new GameObject("pr2");
+			Animation anim = new Animation(new Frame(new Image(), new Point(0,0)), "derp");
+			Dictionary<String, Animation> animz = new Dictionary<String, Animation>();
+			animz.Add("derp", anim);
+			pr2.RenderComponent = new RenderComponent(animz, anim, pr2);
+			pr2.TransformComponent = new TransformComponent(new Point(400, 400), 0, new Point(50, 50), pr2);
+
+			pr2.TransformComponent.Translate(new Point(300, 0));
+
+			GameObject go3 = new GameObject(animations, animation, "gesrgr");
 		}
 
 		/// <summary>

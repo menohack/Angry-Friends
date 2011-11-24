@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Windows;
 using Library.Engine.Component;
 using Library.Engine.Component.Graphic;
+
 namespace Library.Engine.Object {
 	/// <summary>
 	/// GameObject represents a base for all in-game objects. 
@@ -12,7 +13,7 @@ namespace Library.Engine.Object {
 		/// <summary>
 		/// This GameObject's TransformComponent.
 		/// </summary>
-		public TransformComponent TransformComponent { get; private set; }
+		public TransformComponent TransformComponent { get; set; }
 		/// <summary>
 		/// The GameObject's AudioComponent.
 		/// </summary>
