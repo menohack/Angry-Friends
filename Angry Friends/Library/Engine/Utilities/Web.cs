@@ -37,6 +37,18 @@ namespace Library.Engine.Utilities {
 		/// </summary>
 		ManualResetEvent mre = new ManualResetEvent(false);
 		/// <summary>
+		/// Downloads any type of resource
+		/// </summary>
+		/// <param name="url">URL where the string is located</param>
+		/// <param name="type">The type of the download file</param>
+		/// <param name="onLoaded">Event to be fired once the download is in progress or completed</param>
+		public void Download(string url, ExternalResource.ResourceType type, Action<ExternalResource> onLoaded) {
+			switch (type) {
+				case ExternalResource.ResourceType.Image: DownloadImage(url, data => onLoaded(new ExternalResource(url, data))); break;
+				case ExternalResource.ResourceType.Sound: DownloadSound(url, data => onLoaded(new ExternalResource(url, data))); break;
+			}
+		}
+		/// <summary>
 		/// Downloads a string asynchronously.
 		/// </summary>
 		/// <param name="url">URL where the string is located</param>
@@ -105,6 +117,16 @@ namespace Library.Engine.Utilities {
 			}
 			return null;
 		}
+		void LoadResources(int index, List<ExternalResource> resources, MapInfo mapInfo, Action<int, MapInfo> progress) {
+			Download(resources[index].URL, resources[index].Type, res => {
+				switch (res.Type) {
+                    case ExternalResource.ResourceType.Image: mapInfo.Images.Add(res.Name, (BitmapImage)res.Value); break;
+                    case ExternalResource.ResourceType.Sound: mapInfo.Sounds.Add(res.Name, (MediaElement)res.Value); break;
+				}
+				progress(Convert.ToInt32(100.0 * ++index / resources.Count), mapInfo);
+				if (index < resources.Count) LoadResources(index, resources, mapInfo, progress);
+			});
+		}
 		/// <summary>
 		/// Downloads a map asynchronously
 		/// </summary>
@@ -114,7 +136,7 @@ namespace Library.Engine.Utilities {
 			DownloadString(url, data => {
 				using (XmlReader reader = XmlReader.Create(new StringReader(data))) {
 					MapInfo mapInfo = new MapInfo();
-					List<ExternalResource> resources = new List<ExternalResource>();
+                    List<ExternalResource> resources = new List<ExternalResource>();
 					reader.MoveToContent();
 					while (reader.MoveToNextAttribute())
 						switch (reader.Name) {
@@ -127,30 +149,13 @@ namespace Library.Engine.Utilities {
 									while (reader.Read()) { // reads all the resources
 										switch (reader.NodeType) {
 											case XmlNodeType.Element:
-												resources.Add(new ExternalResource(reader.GetAttribute("url"), reader.Name, reader.GetAttribute("priority")));
+                                                resources.Add(new ExternalResource(reader.GetAttribute("url"), reader.Name, reader.GetAttribute("priority")));
 												break;
 										}
 									}
 									break;
 							}
-					double count = 0, total = resources.Count;
-					resources.ForEach(r => {
-						switch (r.Type) {
-							case ExternalResource.ResourceType.Image:
-								BitmapImage image = DownloadImage(r.URL);
-								if (image == null)
-									throw new Exception(string.Format("The image resource \"{0}\" in the map \"{1}\" was not found.", r.Name, mapInfo.Title));
-								else mapInfo.Images.Add(r.Name, image);
-								break;
-							case ExternalResource.ResourceType.Sound:
-								MediaElement sound = DownloadSound(r.URL);
-								if (sound == null)
-									throw new Exception(string.Format("The sound resource \"{0}\" in the map \"{1}\" was not found.", r.Name, mapInfo.Title));
-								else mapInfo.Sounds.Add(r.Name, sound);
-								break;
-						}
-						progress(Convert.ToInt32(100.0 * ++count / total), mapInfo);
-					});
+					LoadResources(0, resources, mapInfo, progress);
 				};
 			});
 		}

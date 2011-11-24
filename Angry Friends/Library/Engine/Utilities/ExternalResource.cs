@@ -1,5 +1,7 @@
 ﻿using System;
 using System.IO;
+using System.Windows.Media.Imaging;
+using System.Windows.Controls;
 namespace Library.Engine.Utilities {
 
     /// <summary>
@@ -37,6 +39,11 @@ namespace Library.Engine.Utilities {
 		/// </summary>
 		public ResourcePriority Priority { get; private set; }
 
+        /// <summary>
+        /// The value of this ExternalResource
+        /// </summary>
+        public object Value { get; set; }
+
 		/// <summary>
 		/// Constructor for an ExternalResource.
 		/// </summary>
@@ -65,5 +72,24 @@ namespace Library.Engine.Utilities {
                 this.Priority = (ResourcePriority)Enum.Parse(typeof(ResourcePriority), priority, true);
             }
 		}
-	}
+
+        /// <summary>
+        /// Constructs an image resource with value
+        /// </summary>
+        /// <param name="url"></param>
+        /// <param name="image"></param>
+        public ExternalResource(string url, BitmapImage image) : this(url, "image", "sync") {
+            Value = image;
+        }
+
+        /// <summary>
+        /// Constructs a sound resource with value
+        /// </summary>
+        /// <param name="url"></param>
+        /// <param name="image"></param>
+        public ExternalResource(string url, MediaElement sound) : this(url, "sound", "sync")
+        {
+            Value = sound;
+        }
+    }
 }
