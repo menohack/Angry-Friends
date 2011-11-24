@@ -40,7 +40,7 @@ namespace Library.Engine.Object {
 		/// </summary>
 		private IDictionary<GameObject, Image> previousImages;
 
-		private Canvas canvas;
+		public Camera camera;
 
 		/// <summary>
 		/// The constructor for a new instance of World.
@@ -61,7 +61,7 @@ namespace Library.Engine.Object {
 
 		public void setCanvas(Canvas canvas)
 		{
-			this.canvas = canvas;
+			camera = new Camera(canvas);
 		}
 
 		/// <summary>
@@ -79,11 +79,12 @@ namespace Library.Engine.Object {
 
 		void GameObjectRemoved(Image image)
 		{
-			canvas.Children.Remove(image);
+			camera.GameObjectRemoved(image);
 		}
+
 		void GameObjectAdded(Image image)
 		{
-			canvas.Children.Add(image);
+			camera.GameObjectAdded(image);
 		}
 
 		/// <summary>
@@ -134,7 +135,7 @@ namespace Library.Engine.Object {
 		/// </summary>
 		/// <returns>The ReadOnlyCollection of GameObjects this World has.</returns>
 		public ReadOnlyCollection<GameObject> GetGameObjects() {
-			return (ReadOnlyCollection<GameObject>)gameObjects;
+			return new ReadOnlyCollection<GameObject>(gameObjects);
 		}
 		/// <summary>
 		/// Adds a GameObject to the world.
