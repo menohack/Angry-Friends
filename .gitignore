@@ -65,3 +65,6 @@ Angry Friends/Library/obj/Debug/Library.csproj.FileListAbsolute.txt
 Angry Friends/Server/obj/x86/Debug/Server.csproj.FileListAbsolute.txt
 Angry Friends/Web/obj/Debug/Web.csproj.FileListAbsolute.txt
 Angry Friends/Angry Friends.suo
+Angry Friends/Client/obj/Debug/Client.g.resources
+Angry Friends/Client/Bin/
+Angry Friends/Server/bin/
