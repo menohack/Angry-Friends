@@ -23,7 +23,7 @@ namespace Library.Engine
             Web.Instance.DownloadImage("http://alexanderschiffhauer.com/Friendly_Wars/spritesheet.png", data =>
             {
                 SpriteSheetLoader.SpriteSheet spriteSheet = new SpriteSheetLoader.SpriteSheet(data, new Point(data.PixelWidth, data.PixelHeight), new Point(30, 30));
-                IList<Frame> frames = SpriteSheetLoader.Instance.GetFramesFromSpriteSheet(spriteSheet, new Point(0, 0), new Point(3, 0));
+                //IList<Frame> frames = SpriteSheetLoader.Instance.GetFramesFromSpriteSheet(spriteSheet, new Point(0, 0), new Point(3, 0));
             });
             //Web.Instance.DownloadMap("http://alexanderschiffhauer.com/Friendly_Wars/test.xml", progress);
         }
@@ -43,7 +43,7 @@ namespace Library.Engine
                // {
                     // HALF OF THE TIME THIS DOESN'T WORK AND APPEARS 0.
                     // <3 SILVERLIGHT
-                    //canvas.Children.Add(image);
+                    //viewport.Children.Add(image);
                     //double height = image.ActualHeight;
                     //double width = image.ActualWidth;
                     //SpriteSheetLoader.SpriteSheet spriteSheet = new SpriteSheetLoader.SpriteSheet(image, 15, 15, 30, 30);
