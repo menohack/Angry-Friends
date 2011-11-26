@@ -305,6 +305,11 @@ namespace Library.Engine.Component {
 			return Math.Sqrt(x * x + y * y);
 		}
 
+		/// <summary>
+		/// Updates the transformcomponent based on a change in time.
+		/// </summary>
+		/// <param name="deltaTime">The time since the last update.</param>
+		/// <returns>The new position of the TransformComponent.</returns>
 		public Point Update(double deltaTime)
 		{
 			double x = Position.X + Velocity.X * deltaTime;
