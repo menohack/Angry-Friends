@@ -4,45 +4,95 @@ using Library.Engine.Object;
 using Library.Engine.Utilities;
 namespace Library.Engine.Component {
 	/// <summary>
-	/// Handles positioning, size and rotation of an Object.
+	/// Handles positioning, size and rotation of a GameObject.
 	/// </summary>
 	public class TransformComponent : BaseComponent {
 		/// <summary>
 		/// The mimimum angle of rotation.
 		/// </summary>
 		private static readonly int MIMIMUM_ROTATION_ANGLE = 0;
+
 		/// <summary>
 		/// The maximum angle of rotation.
 		/// </summary>
 		private static readonly int MAXIMUM_ROTATION_ANGLE = 360;
+
 		/// <summary>
 		/// The position of this TransformComponent.
 		/// </summary>
-		private Point position;
+		private Point currentPosition;
+        
+        /// <summary>
+        /// The previous position of this TransformComponent.
+        /// </summary>
+        private Point previousPosition;
+
+        /// <summary>
+        /// The time at which the previous change-in-position was recorded.
+        /// </summary>
+        private DateTime previousPositionTime;
+
+        /// <summary>
+        /// The time at which the current change-in-position was recorded.
+        /// </summary>
+        private DateTime currentPositionTime;
+
+        /// <summary>
+        /// The velocity of this TransformComponent, in pixels per second.
+        /// </summary>
+        private Point velocity;
+
 		/// <summary>
 		/// The rotation of this TransformComponent.
 		/// </summary>
 		private int rotation;
+
 		/// <summary>
 		/// The size of this TransformComponent.
 		/// </summary>
 		private Point size;
+
 		/// <summary>
 		/// The velocity of this TransformComponent.
 		/// </summary>
-		public Point Velocity { get; set; }
+        public Point Velocity
+        {
+            get
+            {
+                TimeSpan deltaTime = previousPositionTime.TimeOfDay - currentPositionTime.TimeOfDay;
+                Point deltaPosition = new Point(currentPosition.X - previousPosition.X, currentPosition.Y - previousPosition.Y);
+
+                if (deltaPosition == new Point(0, 0))
+                {
+                    return new Point(0, 0);
+                }
+
+                velocity = new Point(deltaPosition.X / deltaTime.Seconds, deltaPosition.Y / deltaTime.Seconds);
+                return velocity;
+            }
+        }
+
 		/// <summary>
 		/// The accessor for the position of the TransformComponent.
 		/// </summary>
 		public Point Position {
 			get {
-				return position;
+				return currentPosition;
 			}
 			set {
-				position = CollisionDetection(new Point(value.X, value.Y));
-                World.Instance.AddToRedrawQueue(base.Owner);
+                previousPosition = currentPosition;
+                previousPositionTime = currentPositionTime;
+
+				currentPosition = CollisionDetection(new Point(value.X, value.Y));
+                currentPositionTime = DateTime.Now;
+
+                if (previousPosition != currentPosition)
+                {
+                    World.Instance.AddToRedrawQueue(base.Owner);
+                }
 			}
 		}
+
 		/// <summary>
 		/// The rotation of this TransformComponent, clamped in degrees: [0, 360].
 		/// </summary>
@@ -52,10 +102,11 @@ namespace Library.Engine.Component {
 			}
 			set {
 				rotation = value;
-				position = CollisionDetection(position);
+				currentPosition = CollisionDetection(currentPosition);
                 World.Instance.AddToRedrawQueue(base.Owner);
 			}
 		}
+
 		/// <summary>
 		/// The size of this TransformComponent.
 		/// </summary>
@@ -65,7 +116,7 @@ namespace Library.Engine.Component {
 			}
 			set {
 				size = value;
-				position = CollisionDetection(position);
+				currentPosition = CollisionDetection(currentPosition);
                 World.Instance.AddToRedrawQueue(base.Owner);
 			}
 		}
@@ -78,10 +129,10 @@ namespace Library.Engine.Component {
 		/// <param name="size">The initial size of this TransformComponent.</param>
 		/// <param name="owner">The GameObject that owns this TransformComponent.</param>
 		public TransformComponent(Point position, int rotation, Point size, GameObject owner) : base(owner) {
-			this.Size = size;
-			this.Position = position;
+            this.Size = size;
+            this.currentPosition = position;
+            this.currentPositionTime = DateTime.Now;
 			this.Rotation = rotation;
-			this.Velocity = new Point(0, 0);
 		}
 
 		/// <summary>
@@ -89,7 +140,7 @@ namespace Library.Engine.Component {
 		/// </summary>
 		/// <param name="deltaPosition">The change of position.</param>
 		public void Translate(Point deltaPosition) {
-			position = CollisionDetection(new Point(position.X + deltaPosition.X, position.Y + deltaPosition.Y));
+			Position = CollisionDetection(new Point(currentPosition.X + deltaPosition.X, currentPosition.Y + deltaPosition.Y));
             World.Instance.AddToRedrawQueue(base.Owner);
 		}
 		/// <summary>
@@ -126,8 +177,8 @@ namespace Library.Engine.Component {
 				newPosition = Collide(desiredPosition, this, gameObject.TransformComponent);
 
 				//If we bump into something else sooner
-				if (newPosition.X - position.X < 0 || newPosition.Y - position.Y < 0)
-					position = newPosition;
+				if (newPosition.X - currentPosition.X < 0 || newPosition.Y - currentPosition.Y < 0)
+					currentPosition = newPosition;
 			}
 
 
@@ -159,16 +210,16 @@ namespace Library.Engine.Component {
 			//Note that the top left of the screen is (0,0), with x increasing to the right and y increasing downward
 
 			//a's bounding box (before moving)
-			double aleft = a.position.X - a.size.X / 2;
-			double aright = a.position.X + a.size.X / 2;
-			double atop = a.position.Y - a.size.Y / 2;
-			double abottom = a.position.Y + a.size.Y / 2;
+			double aleft = a.currentPosition.X - a.size.X / 2;
+			double aright = a.currentPosition.X + a.size.X / 2;
+			double atop = a.currentPosition.Y - a.size.Y / 2;
+			double abottom = a.currentPosition.Y + a.size.Y / 2;
 
 			//b's bounding box
-			double bleft = b.position.X - b.size.X / 2;
-			double bright = b.position.X + b.size.X / 2;
-			double btop = b.position.Y - b.size.Y / 2;
-			double bbottom = b.position.Y + b.size.Y / 2;
+			double bleft = b.currentPosition.X - b.size.X / 2;
+			double bright = b.currentPosition.X + b.size.X / 2;
+			double btop = b.currentPosition.Y - b.size.Y / 2;
+			double bbottom = b.currentPosition.Y + b.size.Y / 2;
 
 			//If the objects overlap to begin with, throw an exception
 			bool overlap = true;
@@ -178,15 +229,15 @@ namespace Library.Engine.Component {
 				throw new CollisionException("Objects collide before movement.");
 
 			//If a doesn't move then we are done colliding
-			if (a.position.Equals(desiredPosition))
+			if (a.currentPosition.Equals(desiredPosition))
 				return desiredPosition;
 
 			//First see if b is within a box around a in its new position and end position
 			//a's path's bounding box
-			double top = Math.Min(a.position.Y, desiredPosition.Y) - a.size.Y / 2;
-			double bottom = Math.Max(a.position.Y, desiredPosition.Y) + a.size.Y / 2;
-			double left = Math.Min(a.position.X, desiredPosition.X) - a.size.X / 2;
-			double right = Math.Max(a.position.X, desiredPosition.X) + a.size.X / 2;
+			double top = Math.Min(a.currentPosition.Y, desiredPosition.Y) - a.size.Y / 2;
+			double bottom = Math.Max(a.currentPosition.Y, desiredPosition.Y) + a.size.Y / 2;
+			double left = Math.Min(a.currentPosition.X, desiredPosition.X) - a.size.X / 2;
+			double right = Math.Max(a.currentPosition.X, desiredPosition.X) + a.size.X / 2;
 
 			//Return the desired position if b is not within the bounding box
 			if (bleft >= right || bright <= left || btop >= bottom || bbottom <= top)
@@ -194,24 +245,24 @@ namespace Library.Engine.Component {
 
 			//Choose points that describe the top diagonal plane
 			Point p1, p2;
-			if (a.position.Y <= desiredPosition.Y) {
-				if (a.position.X <= desiredPosition.X) {
-					p1 = new Point(a.position.X + a.size.X / 2, a.position.Y - a.size.Y / 2);
+			if (a.currentPosition.Y <= desiredPosition.Y) {
+				if (a.currentPosition.X <= desiredPosition.X) {
+					p1 = new Point(a.currentPosition.X + a.size.X / 2, a.currentPosition.Y - a.size.Y / 2);
 					p2 = new Point(desiredPosition.X + a.size.X / 2, desiredPosition.Y - a.size.Y / 2);
 				}
 				else {
 					p1 = new Point(desiredPosition.X - a.size.X / 2, desiredPosition.Y - a.size.Y / 2);
-					p2 = new Point(a.position.X - a.size.X / 2, a.position.Y - a.size.Y / 2);
+					p2 = new Point(a.currentPosition.X - a.size.X / 2, a.currentPosition.Y - a.size.Y / 2);
 				}
 			}
 			else {
-				if (a.position.X <= desiredPosition.X) {
-					p1 = new Point(a.position.X - a.size.X / 2, a.position.Y - a.size.Y / 2);
+				if (a.currentPosition.X <= desiredPosition.X) {
+					p1 = new Point(a.currentPosition.X - a.size.X / 2, a.currentPosition.Y - a.size.Y / 2);
 					p2 = new Point(desiredPosition.X - a.size.X / 2, desiredPosition.Y - a.size.Y / 2);
 				}
 				else {
 					p1 = new Point(desiredPosition.X + a.size.X / 2, desiredPosition.Y - a.size.Y / 2);
-					p2 = new Point(a.position.X + a.size.X / 2, a.position.Y - a.size.Y / 2);
+					p2 = new Point(a.currentPosition.X + a.size.X / 2, a.currentPosition.Y - a.size.Y / 2);
 				}
 			}
 
@@ -224,24 +275,24 @@ namespace Library.Engine.Component {
 				return desiredPosition;
 
 			//Choose points that describe the bottom diagonal plane
-			if (a.position.Y <= desiredPosition.Y) {
-				if (a.position.X <= desiredPosition.X) {
-					p1 = new Point(a.position.X - a.size.X / 2, a.position.Y + a.size.Y / 2);
+			if (a.currentPosition.Y <= desiredPosition.Y) {
+				if (a.currentPosition.X <= desiredPosition.X) {
+					p1 = new Point(a.currentPosition.X - a.size.X / 2, a.currentPosition.Y + a.size.Y / 2);
 					p2 = new Point(desiredPosition.X - a.size.X / 2, desiredPosition.Y + a.size.Y / 2);
 				}
 				else {
 					p1 = new Point(desiredPosition.X + a.size.X / 2, desiredPosition.Y + a.size.Y / 2);
-					p2 = new Point(a.position.X + a.size.X / 2, a.position.Y + a.size.Y / 2);
+					p2 = new Point(a.currentPosition.X + a.size.X / 2, a.currentPosition.Y + a.size.Y / 2);
 				}
 			}
 			else {
-				if (a.position.X <= desiredPosition.X) {
-					p1 = new Point(a.position.X + a.size.X / 2, a.position.Y + a.size.Y / 2);
+				if (a.currentPosition.X <= desiredPosition.X) {
+					p1 = new Point(a.currentPosition.X + a.size.X / 2, a.currentPosition.Y + a.size.Y / 2);
 					p2 = new Point(desiredPosition.X + a.size.X / 2, desiredPosition.Y + a.size.Y / 2);
 				}
 				else {
 					p1 = new Point(desiredPosition.X - a.size.X / 2, desiredPosition.Y + a.size.Y / 2);
-					p2 = new Point(a.position.X - a.size.X / 2, a.position.Y + a.size.Y / 2);
+					p2 = new Point(a.currentPosition.X - a.size.X / 2, a.currentPosition.Y + a.size.Y / 2);
 				}
 			}
 
@@ -255,7 +306,7 @@ namespace Library.Engine.Component {
 
 			//There is a collision. Compute the longest distance a can travel before hitting b.
 			//throw new CollisionException("This part hasn't been written yet.");
-			p1 = a.position;
+			p1 = a.currentPosition;
 			p2 = desiredPosition;
 
 			//If the object is moving only vertically or horizontally then we check two positions to prevent division by zero
@@ -268,27 +319,27 @@ namespace Library.Engine.Component {
 			double[] x = new double[4];
 			double[] y = new double[4];
 
-			x[0] = b.position.X - b.size.X / 2 - a.size.X / 2;
+			x[0] = b.currentPosition.X - b.size.X / 2 - a.size.X / 2;
 			y[0] = (p2.Y - p1.Y) * (x[0] - p1.X) / (p2.X - p1.X) + p1.Y;
 
-			x[1] = b.position.X + b.size.X / 2 + a.size.X / 2;
+			x[1] = b.currentPosition.X + b.size.X / 2 + a.size.X / 2;
 			y[1] = (p2.Y - p1.Y) * (x[1] - p1.X) / (p2.X - p1.X) + p1.Y;
 
-			y[2] = b.position.Y - b.size.Y / 2 - a.size.Y / 2;
+			y[2] = b.currentPosition.Y - b.size.Y / 2 - a.size.Y / 2;
 			x[2] = (p2.X - p1.X) * (y[2] - p1.Y) / (p2.Y - p1.Y) + p1.X;
 
-			y[3] = b.position.Y + b.size.Y / 2 + a.size.Y / 2;
+			y[3] = b.currentPosition.Y + b.size.Y / 2 + a.size.Y / 2;
 			x[3] = (p2.X - p1.X) * (y[3] - p1.Y) / (p2.Y - p1.Y) + p1.X;
 
 			Point newPosition = desiredPosition;
-			double distance = Distance(a.position, desiredPosition);
+			double distance = Distance(a.currentPosition, desiredPosition);
 			for (; i < iMax; i++)
 			//if (x[i] > a.position.X && x[i] < desiredPosition.X || x[i] < a.position.X || x[i] > desiredPosition.X)
 			//if (y[i] > a.position.Y && y[i] < desiredPosition.Y || y[i] < a.position.Y && y[i] > desiredPosition.Y)
 					{
 				Point tempPosition = new Point(x[i], y[i]);
 				//double tempDistance = Math.Sqrt(x[i] * x[i] + y[i] * y[i]);
-				double tempDistance = Distance(tempPosition, a.position);
+				double tempDistance = Distance(tempPosition, a.currentPosition);
 				if (tempDistance < distance) {
 					distance = tempDistance;
 					newPosition = tempPosition;

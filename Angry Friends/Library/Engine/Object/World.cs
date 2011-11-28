@@ -78,6 +78,12 @@ namespace Library.Engine.Object {
 		public void Update(double deltaTime) {
 			Debug.WriteLine("FPS: " + Convert.ToInt32(1000.00 / deltaTime).ToString());
 
+            foreach (GameObject gameObject in gameObjects)
+            {
+                gameObject.TransformComponent.Translate(new Point(deltaTime/1000 * 10, deltaTime/1000 * 10));
+                break;
+            }
+
 			// Remove previously drawn GameObjects.
 			foreach (GameObject gameObject in redrawQueue) {
 				Image image;
@@ -103,7 +109,7 @@ namespace Library.Engine.Object {
 				previousImages.Add(gameObject, image);
 			}
 
-            Camera.MoveCamera(new Point(10 * deltaTime/1000, 10 * deltaTime/1000));
+            //Camera.MoveCamera(new Point(10 * deltaTime/1000, 10 * deltaTime/1000));
 		}
 		/// <summary>
 		/// Adds a GameObject to the redraw queue.
