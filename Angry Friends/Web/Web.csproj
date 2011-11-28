@@ -14,7 +14,7 @@
     <AssemblyName>Web</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <UseIISExpress>false</UseIISExpress>
-    <SilverlightApplicationList>{4980572F-BAF3-4A24-B411-A7455C821501}|..\Client\Client.csproj|ClientBin|False</SilverlightApplicationList>
+    <SilverlightApplicationList>{4980572F-BAF3-4A24-B411-A7455C821501}|..\Client\Client.csproj|ClientBin|False,{C80EF86A-A7DA-415B-8F2D-8A0760D4233C}|..\Test\Test.csproj|ClientBin|False</SilverlightApplicationList>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -53,9 +53,12 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="ClientBin\Client.xap" />
+    <Content Include="ClientBin\Test.xap" />
     <Content Include="ClientTestPage.aspx" />
     <Content Include="ClientTestPage.html" />
     <Content Include="Silverlight.js" />
+    <Content Include="TestTestPage.aspx" />
+    <Content Include="TestTestPage.html" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>

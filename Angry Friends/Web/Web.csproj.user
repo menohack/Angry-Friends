@@ -4,7 +4,7 @@
     <VisualStudio>
       <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
         <WebProjectProperties>
-          <StartPageUrl>ClientTestPage.aspx</StartPageUrl>
+          <StartPageUrl>TestTestPage.aspx</StartPageUrl>
           <StartAction>SpecificPage</StartAction>
           <AspNetDebugging>True</AspNetDebugging>
           <SilverlightDebugging>True</SilverlightDebugging>
@@ -22,6 +22,7 @@
           <AlwaysStartWebServerOnDebug>True</AlwaysStartWebServerOnDebug>
           <ProjectOutputReferences>
             <Ref Project="{4980572F-BAF3-4A24-B411-A7455C821501}" Folder="ClientBin">Client.xap</Ref>
+            <Ref Project="{C80EF86A-A7DA-415B-8F2D-8A0760D4233C}" Folder="ClientBin">Test.xap</Ref>
           </ProjectOutputReferences>
         </WebProjectProperties>
       </FlavorProperties>

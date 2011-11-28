@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using Library.Engine.Object;
 using Library.Engine.Utilities;
+using System.Windows;
+using System.Windows.Controls;
 namespace Library.Engine.Component.Graphic {
 	/// <summary>
 	/// Handles the rendering of an Object. 
@@ -34,6 +36,21 @@ namespace Library.Engine.Component.Graphic {
 		public RenderComponent(IDictionary<String, Animation> animations, Animation defaultAnimation, GameObject owner)
 			: base(owner) {
 			this.animations = animations;
+			this.defaultAnimation = defaultAnimation;
+			this.CurrentAnimation = this.defaultAnimation;
+			Play(this.defaultAnimation.Name);
+		}
+
+		/// <summary>
+		/// Constructor for a RenderComponent with one animation.
+		/// </summary>
+		/// <param name="defaultAnimation">The default animation to play.</param>
+		/// <param name="owner">The owner of this RenderComponent.</param>
+		public RenderComponent(Animation defaultAnimation, GameObject owner)
+			: base(owner)
+		{
+			this.animations = new Dictionary<String, Animation>();
+			this.animations.Add("default", defaultAnimation);
 			this.defaultAnimation = defaultAnimation;
 			this.CurrentAnimation = this.defaultAnimation;
 			Play(this.defaultAnimation.Name);
@@ -75,6 +92,16 @@ namespace Library.Engine.Component.Graphic {
 		/// <param name="deltaTime">The time in milliseconds since the last Update.</param>
 		public void Update(double deltaTime) {
 			World.Instance.AddToRedrawQueue(Owner);
+		}
+
+		/// <summary>
+		/// Updates the position of the current frame.
+		/// </summary>
+		/// <param name="position">The new position of the current frame.</param>
+		public void UpdatePosition(Point position)
+		{
+			CurrentAnimation.CurrentFrame.Image.SetValue(Canvas.LeftProperty, position.X);
+			CurrentAnimation.CurrentFrame.Image.SetValue(Canvas.TopProperty, position.Y);
 		}
 	}
 }

@@ -42,10 +42,10 @@ namespace Library.Engine.Utilities {
 		/// <param name="url">URL where the string is located</param>
 		/// <param name="type">The type of the download file</param>
 		/// <param name="onLoaded">Event to be fired once the download is in progress or completed</param>
-		public void Download(string url, ExternalResource.ResourceType type, Action<ExternalResource> onLoaded) {
+		public void Download(string url, Resource.Types type, Action<Resource> onLoaded) {
 			switch (type) {
-				case ExternalResource.ResourceType.Image: DownloadImage(url, data => onLoaded(new ExternalResource(url, data))); break;
-				case ExternalResource.ResourceType.Sound: DownloadSound(url, data => onLoaded(new ExternalResource(url, data))); break;
+				case Resource.Types.Image: DownloadImage(url, data => onLoaded(new Resource(url, data))); break;
+				case Resource.Types.Sound: DownloadSound(url, data => onLoaded(new Resource(url, data))); break;
 			}
 		}
 		/// <summary>
@@ -117,11 +117,11 @@ namespace Library.Engine.Utilities {
 			}
 			return null;
 		}
-		void LoadResources(int index, List<ExternalResource> resources, MapInfo mapInfo, Action<int, MapInfo> progress) {
+		void LoadResources(int index, List<Resource> resources, MapInfo mapInfo, Action<int, MapInfo> progress) {
 			Download(resources[index].URL, resources[index].Type, res => {
 				switch (res.Type) {
-                    case ExternalResource.ResourceType.Image: mapInfo.Images.Add(res.Name, (BitmapImage)res.Value); break;
-                    case ExternalResource.ResourceType.Sound: mapInfo.Sounds.Add(res.Name, (MediaElement)res.Value); break;
+					case Resource.Types.Image: mapInfo.Images.Add(res.Name, (BitmapImage)res.Value); break;
+					case Resource.Types.Sound: mapInfo.Sounds.Add(res.Name, (MediaElement)res.Value); break;
 				}
 				progress(Convert.ToInt32(100.0 * ++index / resources.Count), mapInfo);
 				if (index < resources.Count) LoadResources(index, resources, mapInfo, progress);
@@ -136,7 +136,7 @@ namespace Library.Engine.Utilities {
 			DownloadString(url, data => {
 				using (XmlReader reader = XmlReader.Create(new StringReader(data))) {
 					MapInfo mapInfo = new MapInfo();
-                    List<ExternalResource> resources = new List<ExternalResource>();
+					List<Resource> resources = new List<Resource>();
 					reader.MoveToContent();
 					while (reader.MoveToNextAttribute())
 						switch (reader.Name) {
@@ -149,7 +149,7 @@ namespace Library.Engine.Utilities {
 									while (reader.Read()) { // reads all the resources
 										switch (reader.NodeType) {
 											case XmlNodeType.Element:
-                                                resources.Add(new ExternalResource(reader.GetAttribute("url"), reader.Name, reader.GetAttribute("priority")));
+												resources.Add(new Resource(reader.GetAttribute("url"), reader.Name, reader.GetAttribute("priority")));
 												break;
 										}
 									}

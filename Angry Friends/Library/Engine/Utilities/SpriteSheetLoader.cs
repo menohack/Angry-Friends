@@ -27,43 +27,28 @@ namespace Library.Engine.Utilities
             /// <summary>
             /// The Image of this SpriteSheet.
             /// </summary>
-            public Image Image { get; private set; }
+            public BitmapImage Image { get; private set; }
+
             /// <summary>
             /// The size of this SpriteSheet.
             /// </summary>
             public Point Size { get; private set; }
+
             /// <summary>
-            /// The number of rows in this SpriteSheet.
+            /// The size of each Frame in this SpriteSheet.
             /// </summary>
-            public int Rows { get; private set; }
-            /// <summary>
-            /// The number of columns in this SpriteSheet.
-            /// </summary>
-            public int Columns { get; private set; }
-            /// <summary>
-            /// The size of each cell in the horizontal direction.
-            /// </summary>
-            public int horizontalCellSize { get; private set; }
-            /// <summary>
-            /// The size of each cell in the vertical direction.
-            /// </summary>
-            public int verticalCellSize { get; private set; }
+            public Point FrameSize { get; private set; }
 
             /// <summary>
             /// Constructor for a new SpriteSheet.
             /// </summary>
-            /// <param name="image">The Image of this SpriteSheet.</param>
-            /// <param name="rows">The number of rows in this SpriteSheet.</param>
-            /// <param name="columns">The number of columns in this SpriteSheet.</param>
-            /// <param name="horizontalCellSize">The size of each cell in the horizontal direction.</param>
-            /// <param name="horizontalVerticalSize">The size of each cell in the vertical direction.</param>
-            public SpriteSheet(Image image, int rows, int columns, int horizontalCellSize, int horizontalVerticalSize) {
+            /// <param name="image">The BitmapImage of the actual SpriteSheet.</param>
+            /// <param name="size">The pixel dimensions of the actual SpriteSheet.</param>
+            /// <param name="frameSize">The size of each Frame in this SpriteSheet.</param>
+            public SpriteSheet(BitmapImage image, Point size, Point frameSize) {
                 this.Image = image;
-                this.Size = new Point(image.ActualWidth, image.ActualHeight);
-                this.Rows = rows;
-                this.Columns = columns;
-                this.horizontalCellSize = horizontalCellSize;
-                this.verticalCellSize = horizontalVerticalSize;
+                this.Size = size;
+                this.FrameSize = frameSize;
             }
         }
 
@@ -93,24 +78,23 @@ namespace Library.Engine.Utilities
         /// </summary>
         private SpriteSheetLoader() {}
 
+
         /// <summary>
         /// Get the Frames that correspond to supplied paramaters from a given SpriteSheet.
         /// </summary>
         /// <param name="spriteSheet">The SpriteSheet from which to get the Frames.</param>
-        /// <param name="initialRow">The row at which to start getting Frames. [0, n). </param>
-        /// <param name="initialColumn">The column at which to start getting Frames. [0, n).</param>
-        /// <param name="finalRow">The row at which to stop getting Frames. [0, n).</param>
-        /// <param name="finalColumn">The column at which to start getting Frames. [0, n).</param>
+        /// <param name="initialPosition">The initial row and column. [0, n) </param>
+        /// <param name="finalPosition">The final row and column. [0, n) </param>
         /// <returns></returns>
-        public IList<Frame> GetFramesFromSpriteSheet(SpriteSheet spriteSheet, int initialRow, int initialColumn, int finalRow, int finalColumn)
+        public IList<Frame> GetFramesFromSpriteSheet(SpriteSheet spriteSheet, Point initialPosition, Point finalPosition)
         {
             IList<Frame> frames = new List<Frame>();
 
-            int x = (spriteSheet.horizontalCellSize * initialRow) % (int) spriteSheet.Size.X;
-            int y = initialColumn * spriteSheet.verticalCellSize;
-
+            int x = (int) (spriteSheet.FrameSize.X * initialPosition.X) % (int) spriteSheet.Size.X;
+            int y = (int) (spriteSheet.FrameSize.Y * initialPosition.Y);
+            
             // The number of pixels to move without taking wrap-over into account.
-            int distanceToMove = (finalColumn * (int)spriteSheet.Size.X) + (finalRow * (int)spriteSheet.horizontalCellSize) - ((initialColumn * (int)spriteSheet.Size.X) + (initialRow * (int)spriteSheet.horizontalCellSize));
+            int distanceToMove = Convert.ToInt32((finalPosition.Y * spriteSheet.Size.X) + (finalPosition.X * spriteSheet.FrameSize.X) - ((initialPosition.Y * spriteSheet.Size.X) + (initialPosition.X * spriteSheet.FrameSize.X)));
 
             // Loop through and copy the corresponding pixels into a List of Frames.
             while (distanceToMove > 0)
@@ -120,19 +104,20 @@ namespace Library.Engine.Utilities
                     x -= (int)spriteSheet.Size.X;
                 }
 
-                WriteableBitmap spriteSheetWriteableBitmap = new WriteableBitmap((BitmapSource) spriteSheet.Image.Source);
-                WriteableBitmap desiredFrame = new WriteableBitmap(spriteSheet.horizontalCellSize, spriteSheet.verticalCellSize);
+                WriteableBitmap spriteSheetWriteableBitmap = new WriteableBitmap((BitmapSource)spriteSheet.Image);
+                spriteSheetWriteableBitmap = spriteSheetWriteableBitmap.Clone();
+                WriteableBitmap desiredFrame = new WriteableBitmap((int) spriteSheet.FrameSize.X, (int) spriteSheet.FrameSize.Y);
 
-                desiredFrame.Blit(new Rect(0, 0, spriteSheet.horizontalCellSize, spriteSheet.verticalCellSize), spriteSheetWriteableBitmap, new Rect(x, y, spriteSheet.horizontalCellSize, spriteSheet.verticalCellSize));
+                desiredFrame.Blit(new Rect(0, 0, spriteSheet.FrameSize.X, spriteSheet.FrameSize.Y), spriteSheetWriteableBitmap, new Rect(x, y, spriteSheet.FrameSize.X, spriteSheet.FrameSize.Y));
 
                 Image frame = new Image();
                 frame.Source = desiredFrame;
-                frame.Width = spriteSheet.horizontalCellSize;
-                frame.Height = spriteSheet.verticalCellSize;
+                frame.Width = spriteSheet.FrameSize.X;
+                frame.Height = spriteSheet.FrameSize.Y;
                 frames.Add(new Frame(frame, new Point()));
 
-                distanceToMove -= spriteSheet.horizontalCellSize;
-                x += spriteSheet.horizontalCellSize;
+                distanceToMove -= (int) spriteSheet.FrameSize.X;
+                x += (int) spriteSheet.FrameSize.X;
             }
 
             return frames;

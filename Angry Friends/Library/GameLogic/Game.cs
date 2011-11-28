@@ -7,6 +7,9 @@ using System.Windows.Media.Imaging;
 using Library.Engine.Component.Graphic;
 using Library.Engine.Object;
 using Library.Engine.Component;
+using Library.Engine;
+
+
 namespace Library.GameLogic {
 	/// <summary>
 	/// This class represents the Game. All game-logic stems from here.
@@ -14,22 +17,26 @@ namespace Library.GameLogic {
 	public class Game {
 
 		/// <summary>
-		/// The world of the game.
+		/// The instance of the Engine.
 		/// </summary>
-		public World world;
+		private World world;
+
+        /// <summary>
+        /// Accessor for the World.
+        /// </summary>
 		public World World { get { return world; } }
 
-		public Team CurrentTeam { get; private set; }
-		public List<Team> Teams { get; private set; }
-		public Terrain Terrain { get; private set; }
+        /// <summary>
+        /// The viewport of this Game.
+        /// </summary>
+        public static Canvas Viewport { get; private set; }
 
 		/// <summary>
 		/// Constructor for the Game.
 		/// </summary>
-		public Game(Canvas canvas) {
+		public Game(Canvas viewport) {
+            Viewport = viewport;
 			world = World.Instance;
-			world.setCanvas(canvas);
-			//web = new Web();
 
 			//
 			//THIS IS TEMPORARY FOR TESTING
@@ -65,7 +72,7 @@ namespace Library.GameLogic {
 							drawMe.Pixels[j * width + i] = ConvertToARGB32(Color.FromArgb(255, 0, 0, 200));
 					}
 
-				drawMe.Invalidate();
+			    drawMe.Invalidate();
 
 				Image image = new Image();
 				image.Source = drawMe;
@@ -73,9 +80,7 @@ namespace Library.GameLogic {
 				image.Height = height;
 
 				frames.Insert(f, new Frame(image, new Point(xOffset, yOffset)));
-
-
-
+                new Tests();
 			}
 
 			//TODO: Figure out why 0,0 corresponds to the center of the screen
@@ -83,19 +88,36 @@ namespace Library.GameLogic {
 			Animation animation = new Animation(frames, 1000 * duration / numFrames, 60, "grow");
 			animations.Add("grow", animation);
 
-			GameObject projectile = new GameObject(animations, animation, "projectile");
+			
+			//GameObject projectile = new GameObject(animations, animation, "projectile");
+			//projectile.TransformComponent = new TransformComponent(new Point(0, 0), 0, new Point(width, height), projectile); 
 
+			GameObject go2 = new GameObject("derf");
+			//go3.TransformComponent = new TransformComponent(new Point(200, 0), 0, new Point(50, 50), go3);
 
-			GameObject pr2 = new GameObject("pr2");
-			Animation anim = new Animation(new Frame(new Image(), new Point(0,0)), "derp");
-			Dictionary<String, Animation> animz = new Dictionary<String, Animation>();
-			animz.Add("derp", anim);
-			pr2.RenderComponent = new RenderComponent(animz, anim, pr2);
-			pr2.TransformComponent = new TransformComponent(new Point(400, 400), 0, new Point(50, 50), pr2);
+			width = 50;
+			height = 50;
+			WriteableBitmap wb = new WriteableBitmap(width, height);
+			for (int i=0; i < width*height; i++)
+				wb.Pixels[i] = ConvertToARGB32(Color.FromArgb(255, 255, 0, 0));
+			wb.Invalidate();
+			Image box = new Image();
+			box.Source = wb;
+			go2.RenderComponent = new RenderComponent(new Animation(new Frame(box, new Point(0, 0)), "default"), go2);
+			//go2.TransformComponent.Position = new Point(400, 0);
+			go2.TransformComponent = new TransformComponent(new Point(400, 0), 0, new Point(50, 50), go2);
+			go2.TransformComponent.Velocity = new Point(0.1, 0);
 
-			pr2.TransformComponent.Translate(new Point(300, 0));
-
-			GameObject go3 = new GameObject(animations, animation, "gesrgr");
+			GameObject go3 = new GameObject("herf");
+			wb = new WriteableBitmap(width, height);
+			for (int i = 0; i < width * height; i++)
+				wb.Pixels[i] = ConvertToARGB32(Color.FromArgb(255, 0, 255, 0));
+			wb.Invalidate();
+			Image box2 = new Image();
+			box2.Source = wb;
+			go3.RenderComponent = new RenderComponent(new Animation(new Frame(box2, new Point(0, 0)), "default"), go3);
+			go3.TransformComponent = new TransformComponent(new Point(550, 0), 0, new Point(50, 50), go3);
+			
 		}
 
 		/// <summary>
@@ -103,7 +125,8 @@ namespace Library.GameLogic {
 		/// </summary>
 		/// <param name="color"></param>
 		/// <returns></returns>
-		private int ConvertToARGB32(Color color) {
+		private int ConvertToARGB32(Color color)
+		{
 			return ((color.R << 16) | (color.G << 8) | (color.B << 0) | (color.A << 24));
 		}
 	}

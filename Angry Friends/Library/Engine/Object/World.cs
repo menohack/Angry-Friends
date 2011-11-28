@@ -4,15 +4,14 @@ using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Windows.Controls;
 using Library.Engine.Utilities;
+using Library.GameLogic;
+using System.Windows;
 namespace Library.Engine.Object {
 	/// <summary>
 	/// World can be thought of as the "universe" of a game. 
 	/// Not only does it contain all GameObjects, but it also provides functionality for finding GameObjects and drawing GameObjects at appropriate times.
 	/// </summary>
 	public class World : IUpdateable {
-
-		public delegate void ObjectEventArgs(Image image);
-		public event ObjectEventArgs GameObjectAddedEvent, GameObjectRemovedEvent;
 
 		/// <summary>
 		/// The single instsance of world.
@@ -36,11 +35,13 @@ namespace Library.Engine.Object {
 		/// </summary>
 		private IList<GameObject> redrawQueue;
 		/// <summary>
-		/// TEMPORARY: This stores a reference to the GameObject's previous Frame, allowing us to remove it from the screen.
+		/// This stores a reference to the GameObject's previous Frame, allowing us to remove it from the screen.
 		/// </summary>
 		private IDictionary<GameObject, Image> previousImages;
-
-		public Camera camera;
+        /// <summary>
+        /// The camera that controls moving the viewport of this World.
+        /// </summary>
+        public Camera Camera { get; private set; }
 
 		/// <summary>
 		/// The constructor for a new instance of World.
@@ -50,18 +51,11 @@ namespace Library.Engine.Object {
 			gameObjects = new List<GameObject>();
 			redrawQueue = new List<GameObject>(0);
 			previousImages = new Dictionary<GameObject, Image>();
-
-			GameObjectAddedEvent += new World.ObjectEventArgs(GameObjectAdded);
-			GameObjectRemovedEvent += new World.ObjectEventArgs(GameObjectRemoved);
+            Camera = new Camera(Game.Viewport);
 
 			// Initialize the timing of the updating of the World.
 			worldUpdateTimer = new EngineTimer(EngineTimer.FromHertzToMiliSeconds(UPDATES_PER_SECOND), new List<IUpdateable> { this });
 			worldUpdateTimer.Start();
-		}
-
-		public void setCanvas(Canvas canvas)
-		{
-			camera = new Camera(canvas);
 		}
 
 		/// <summary>
@@ -77,16 +71,6 @@ namespace Library.Engine.Object {
 			}
 		}
 
-		void GameObjectRemoved(Image image)
-		{
-			camera.GameObjectRemoved(image);
-		}
-
-		void GameObjectAdded(Image image)
-		{
-			camera.GameObjectAdded(image);
-		}
-
 		/// <summary>
 		/// Updates World as fast as possible; however, updating is capped at UPDATES_PER_SECOND.
 		/// </summary>
@@ -99,27 +83,25 @@ namespace Library.Engine.Object {
 				Image image;
 				previousImages.TryGetValue(gameObject, out image);
 				if (image != null) {
-                    if (GameObjectRemovedEvent != null)
-                    {
-                        GameObjectRemoved(image);
-                    }
+                    Camera.RemoveImage(image);
 					previousImages.Remove(gameObject);
 				}
 			}
 
 			// Iterate through each RenderComponent in the redrawQueue and redraw it.
 			foreach (GameObject gameObject in redrawQueue) {
-				if (gameObject == null)
-					continue;
-
-				Image image = gameObject.RenderComponent.CurrentAnimation.CurrentFrame.Image;
-                if (GameObjectAddedEvent != null)
+                if (gameObject == null)
                 {
-                    GameObjectAdded(image);
+                    continue;
                 }
 
-				previousImages.Add(gameObject, gameObject.RenderComponent.CurrentAnimation.CurrentFrame.Image);
+				gameObject.RenderComponent.UpdatePosition(gameObject.TransformComponent.Update(deltaTime));
+				Image image = gameObject.RenderComponent.CurrentAnimation.CurrentFrame.Image;
+                Camera.AddImage(image);
+				previousImages.Add(gameObject, image);
 			}
+
+            Camera.MoveCamera(new Point(10 * deltaTime/1000, 10 * deltaTime/1000));
 		}
 		/// <summary>
 		/// Adds a GameObject to the redraw queue.
