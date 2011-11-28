@@ -6,6 +6,7 @@ using System.Windows.Controls;
 using Library.Engine.Utilities;
 using Library.GameLogic;
 using System.Windows;
+using Library.Engine.Component.Graphic;
 namespace Library.Engine.Object {
 	/// <summary>
 	/// World can be thought of as the "universe" of a game. 
@@ -81,7 +82,7 @@ namespace Library.Engine.Object {
             foreach (GameObject gameObject in gameObjects)
             {
                 gameObject.TransformComponent.Translate(new Point(deltaTime/1000 * 10, deltaTime/1000 * 10));
-                Debug.WriteLine("Velocity should be ~(-10, -10): " + gameObject.TransformComponent.Velocity);
+                Debug.WriteLine("Velocity should be ~(10, 10): " + gameObject.TransformComponent.Velocity);
                 break;
             }
 
@@ -102,12 +103,13 @@ namespace Library.Engine.Object {
                     continue;
                 }
 
-				Image image = gameObject.RenderComponent.CurrentAnimation.CurrentFrame.Image;
-                image.SetValue(Canvas.LeftProperty, gameObject.TransformComponent.Position.X);
-                image.SetValue(Canvas.TopProperty, gameObject.TransformComponent.Position.Y);
+                Frame frame = gameObject.RenderComponent.CurrentAnimation.CurrentFrame;
 
-                Camera.AddImage(image);
-				previousImages.Add(gameObject, image);
+                frame.Image.SetValue(Canvas.LeftProperty, gameObject.TransformComponent.Position.X + frame.Offset.X);
+                frame.Image.SetValue(Canvas.TopProperty, gameObject.TransformComponent.Position.Y + frame.Offset.Y);
+
+                Camera.AddImage(frame.Image);
+				previousImages.Add(gameObject, frame.Image);
 			}
 
             //Camera.MoveCamera(new Point(10 * deltaTime/1000, 10 * deltaTime/1000));

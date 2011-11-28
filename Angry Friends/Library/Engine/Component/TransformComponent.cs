@@ -53,13 +53,13 @@ namespace Library.Engine.Component {
 		private Point size;
 
 		/// <summary>
-		/// The velocity of this TransformComponent.
+		/// The accessor for the velocity of this TransformComponent.
 		/// </summary>
         public Point Velocity
         {
             get
             {
-                TimeSpan deltaTime = previousPositionTime.TimeOfDay - currentPositionTime.TimeOfDay;
+                TimeSpan deltaTime = currentPositionTime.TimeOfDay - previousPositionTime.TimeOfDay;
                 Point deltaPosition = new Point(currentPosition.X - previousPosition.X, currentPosition.Y - previousPosition.Y);
 
                 if (deltaPosition == new Point(0, 0))

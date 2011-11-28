@@ -14,14 +14,17 @@ namespace Library.Engine.Component.Graphic {
 		/// A Dictionary of names-to-Animations that contains all of the Animations of this RenderComponent.
 		/// </summary>
 		private IDictionary<String, Animation> animations;
+
 		/// <summary>
 		/// The Animation that is currently playing.
 		/// </summary>
 		public Animation CurrentAnimation { get; private set; }
+
 		/// <summary>
 		/// The default Animation for this RenderComponent.  It will play when no other Animation is specified to play.
 		/// </summary>
 		private Animation defaultAnimation;
+
 		/// <summary>
 		/// The EngineTimer that handles updating this RenderComponent's Animations.
 		/// </summary>
@@ -33,8 +36,7 @@ namespace Library.Engine.Component.Graphic {
 		/// <param name="animations">The Dictionary of names-to-Animations of this RenderComponent. </param>
 		/// <param name="defaultAnimation">The Animation to play when no other Animation is specified to play.</param>
 		/// <param name="owner">The GameObject that owns this RenderComponent.</param>
-		public RenderComponent(IDictionary<String, Animation> animations, Animation defaultAnimation, GameObject owner)
-			: base(owner) {
+		public RenderComponent(IDictionary<String, Animation> animations, Animation defaultAnimation, GameObject owner) : base(owner) {
 			this.animations = animations;
 			this.defaultAnimation = defaultAnimation;
 			this.CurrentAnimation = this.defaultAnimation;
@@ -44,17 +46,9 @@ namespace Library.Engine.Component.Graphic {
 		/// <summary>
 		/// Constructor for a RenderComponent with one animation.
 		/// </summary>
-		/// <param name="defaultAnimation">The default animation to play.</param>
-		/// <param name="owner">The owner of this RenderComponent.</param>
-		public RenderComponent(Animation defaultAnimation, GameObject owner)
-			: base(owner)
-		{
-			this.animations = new Dictionary<String, Animation>();
-			this.animations.Add("default", defaultAnimation);
-			this.defaultAnimation = defaultAnimation;
-			this.CurrentAnimation = this.defaultAnimation;
-			Play(this.defaultAnimation.Name);
-		}
+        /// <param name="defaultAnimation">The default Animation for this RenderComponent.</param>
+        /// <param name="owner">The GameObject that owns this RenderComponent.</param>
+		public RenderComponent(Animation defaultAnimation, GameObject owner) : this(new Dictionary<String, Animation> { {defaultAnimation.Name, defaultAnimation} }, defaultAnimation, owner) {}
 
 		/// <summary>
 		/// Plays a specific Animation.
@@ -65,9 +59,13 @@ namespace Library.Engine.Component.Graphic {
 			Debug.Assert(animations.TryGetValue(animationName, out animation), "The Animation: " + animationName + " does not exist.");
 			CurrentAnimation = animation;
 
-			animationTimer = new EngineTimer(CurrentAnimation.FPS, new List<IUpdateable> { CurrentAnimation, this });
-			animationTimer.Start();
+            if (CurrentAnimation.FPS != 0)
+            {
+                animationTimer = new EngineTimer(CurrentAnimation.FPS, new List<IUpdateable> { CurrentAnimation, this });
+                animationTimer.Start();
+            }
 		}
+        
 		/// <summary>
 		/// Stops playing a specific Animation.
 		/// </summary>
@@ -79,13 +77,7 @@ namespace Library.Engine.Component.Graphic {
 
 			Play(defaultAnimation.Name);
 		}
-		/// <summary>
-		/// Accesses the current Frame of the current Animation.
-		/// </summary>
-		/// <returns>The current frame.</returns>
-		public Frame GetRenderContent() {
-			return CurrentAnimation.CurrentFrame;
-		}
+
 		/// <summary>
 		/// Notify the World that this RenderComponent needs to be re-rendered.
 		/// </summary>
