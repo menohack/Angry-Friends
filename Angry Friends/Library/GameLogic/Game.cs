@@ -96,7 +96,7 @@ namespace Library.GameLogic {
 			Image box = new Image();
 			box.Source = wb;
 			go2.RenderComponent = new RenderComponent(new Animation(new Frame(box, new Point(0, 0)), "default"), go2);
-			go2.TransformComponent = new TransformComponent(new Point(475, 0), 0, new Point(50, 50), go2);
+			go2.TransformComponent = new TransformComponent(new Point(100, 0), 0, new Point(50, 50), go2);
 
 			GameObject go3 = new GameObject("herf");
 			wb = new WriteableBitmap(width, height);

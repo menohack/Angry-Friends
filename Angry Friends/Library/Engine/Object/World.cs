@@ -81,9 +81,10 @@ namespace Library.Engine.Object {
 
             foreach (GameObject gameObject in gameObjects)
             {
-                gameObject.TransformComponent.Translate(new Point(deltaTime/1000 * 10, deltaTime/1000 * 10));
-                Debug.WriteLine("Velocity should be ~(10, 10): " + gameObject.TransformComponent.Velocity);
-                break;
+                if (gameObject.Name == "derf")
+                    gameObject.TransformComponent.Translate(new Point(deltaTime / 1000 * 50, deltaTime / 1000 * 50));
+                else
+                    gameObject.TransformComponent.Translate(new Point(deltaTime / 1000 * -50, deltaTime / 1000 * 50));
             }
 
 			// Remove previously drawn GameObjects.
