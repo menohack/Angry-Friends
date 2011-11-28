@@ -62,11 +62,6 @@ namespace Library.Engine.Component {
                 TimeSpan deltaTime = DateTime.Now.TimeOfDay - previousPositionTime.TimeOfDay;
                 Point deltaPosition = new Point(currentPosition.X - previousPosition.X, currentPosition.Y - previousPosition.Y);
 
-                if (deltaPosition == new Point(0, 0))
-                {
-                    return new Point(0, 0);
-                }
-
                 velocity = new Point(deltaPosition.X / (deltaTime.Milliseconds / 1000.00), deltaPosition.Y / (deltaTime.Milliseconds / 1000.00));
                 return velocity;
             }
