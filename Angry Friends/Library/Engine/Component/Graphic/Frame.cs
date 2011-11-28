@@ -10,6 +10,7 @@ namespace Library.Engine.Component.Graphic {
 		/// The actual Image of this Frame.
 		/// </summary>
 		public Image Image { get; private set; }
+
 		/// <summary>
 		/// The offset of this Frame's Image.
 		/// </summary>

@@ -59,13 +59,8 @@ namespace Library.Engine.Component {
         {
             get
             {
-                TimeSpan deltaTime = currentPositionTime.TimeOfDay - previousPositionTime.TimeOfDay;
+                TimeSpan deltaTime = DateTime.Now.TimeOfDay - previousPositionTime.TimeOfDay;
                 Point deltaPosition = new Point(currentPosition.X - previousPosition.X, currentPosition.Y - previousPosition.Y);
-
-                if (deltaPosition == new Point(0, 0))
-                {
-                    return new Point(0, 0);
-                }
 
                 velocity = new Point(deltaPosition.X / (deltaTime.Milliseconds / 1000.00), deltaPosition.Y / (deltaTime.Milliseconds / 1000.00));
                 return velocity;
@@ -141,7 +136,6 @@ namespace Library.Engine.Component {
 		/// <param name="deltaPosition">The change of position.</param>
 		public void Translate(Point deltaPosition) {
 			Position = CollisionDetection(new Point(currentPosition.X + deltaPosition.X, currentPosition.Y + deltaPosition.Y));
-            World.Instance.AddToRedrawQueue(base.Owner);
 		}
 		/// <summary>
 		/// Rotates by a given number of degrees.
@@ -149,7 +143,6 @@ namespace Library.Engine.Component {
 		/// <param name="deltaRotation">The change of rotation.</param>
 		public void Rotate(int deltaRotation) {
 			EngineMath.Clamp(Rotation += deltaRotation, MIMIMUM_ROTATION_ANGLE, MAXIMUM_ROTATION_ANGLE);
-            World.Instance.AddToRedrawQueue(base.Owner);
 		}
 		/// <summary>
 		/// Resizes by a given factor.
@@ -157,7 +150,6 @@ namespace Library.Engine.Component {
 		/// <param name="resizeFactor">The factor by which to resize.</param>
 		public void Resize(Point resizeFactor) {
 			Size = new Point(Size.X * resizeFactor.X, Size.Y * resizeFactor.Y);
-            World.Instance.AddToRedrawQueue(base.Owner);
 		}
 
 		/// <summary>
