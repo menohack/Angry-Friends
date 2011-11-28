@@ -93,15 +93,5 @@ namespace Library.Engine.Component.Graphic {
 		public void Update(double deltaTime) {
 			World.Instance.AddToRedrawQueue(Owner);
 		}
-
-		/// <summary>
-		/// Updates the position of the current frame.
-		/// </summary>
-		/// <param name="position">The new position of the current frame.</param>
-		public void UpdatePosition(Point position)
-		{
-			CurrentAnimation.CurrentFrame.Image.SetValue(Canvas.LeftProperty, position.X);
-			CurrentAnimation.CurrentFrame.Image.SetValue(Canvas.TopProperty, position.Y);
-		}
 	}
 }

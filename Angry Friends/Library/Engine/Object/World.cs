@@ -95,8 +95,10 @@ namespace Library.Engine.Object {
                     continue;
                 }
 
-				gameObject.RenderComponent.UpdatePosition(gameObject.TransformComponent.Update(deltaTime));
 				Image image = gameObject.RenderComponent.CurrentAnimation.CurrentFrame.Image;
+                image.SetValue(Canvas.LeftProperty, gameObject.TransformComponent.Position.X);
+                image.SetValue(Canvas.TopProperty, gameObject.TransformComponent.Position.Y);
+
                 Camera.AddImage(image);
 				previousImages.Add(gameObject, image);
 			}

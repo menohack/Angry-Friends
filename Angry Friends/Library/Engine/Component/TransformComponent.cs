@@ -40,6 +40,7 @@ namespace Library.Engine.Component {
 			}
 			set {
 				position = CollisionDetection(new Point(value.X, value.Y));
+                World.Instance.AddToRedrawQueue(base.Owner);
 			}
 		}
 		/// <summary>
@@ -52,6 +53,7 @@ namespace Library.Engine.Component {
 			set {
 				rotation = value;
 				position = CollisionDetection(position);
+                World.Instance.AddToRedrawQueue(base.Owner);
 			}
 		}
 		/// <summary>
@@ -64,6 +66,7 @@ namespace Library.Engine.Component {
 			set {
 				size = value;
 				position = CollisionDetection(position);
+                World.Instance.AddToRedrawQueue(base.Owner);
 			}
 		}
 
@@ -90,6 +93,7 @@ namespace Library.Engine.Component {
 		/// <param name="deltaPosition">The change of position.</param>
 		public void Translate(Point deltaPosition) {
 			position = CollisionDetection(new Point(position.X + deltaPosition.X, position.Y + deltaPosition.Y));
+            World.Instance.AddToRedrawQueue(base.Owner);
 		}
 		/// <summary>
 		/// Rotates by a given number of degrees.
@@ -97,6 +101,7 @@ namespace Library.Engine.Component {
 		/// <param name="deltaRotation">The change of rotation.</param>
 		public void Rotate(int deltaRotation) {
 			EngineMath.Clamp(Rotation += deltaRotation, MIMIMUM_ROTATION_ANGLE, MAXIMUM_ROTATION_ANGLE);
+            World.Instance.AddToRedrawQueue(base.Owner);
 		}
 		/// <summary>
 		/// Resizes by a given factor.
@@ -104,7 +109,9 @@ namespace Library.Engine.Component {
 		/// <param name="resizeFactor">The factor by which to resize.</param>
 		public void Resize(Point resizeFactor) {
 			Size = new Point(Size.X * resizeFactor.X, Size.Y * resizeFactor.Y);
+            World.Instance.AddToRedrawQueue(base.Owner);
 		}
+
 		/// <summary>
 		/// If this linear-motion produces collision, CollisionDetection returns the modified value that satisifies non-collision requirements.
 		/// </summary>
@@ -303,25 +310,6 @@ namespace Library.Engine.Component {
 			double x = a.X - b.X;
 			double y = a.Y - b.Y;
 			return Math.Sqrt(x * x + y * y);
-		}
-
-		/// <summary>
-		/// Updates the transformcomponent based on a change in time.
-		/// </summary>
-		/// <param name="deltaTime">The time since the last update.</param>
-		/// <returns>The new position of the TransformComponent.</returns>
-		public Point Update(double deltaTime)
-		{
-			double x = Position.X + Velocity.X * deltaTime;
-			double y = Position.Y + Velocity.Y * deltaTime;
-			if (x > 600)
-				Velocity = new Point(Velocity.X * -1.0, Velocity.Y);
-			if (y > 400)
-				Velocity = new Point(Velocity.X, Velocity.Y * -1.0);
-
-			Point pos = new Point(x, y);
-			Position = pos;
-			return pos;
 		}
 	}
 }
