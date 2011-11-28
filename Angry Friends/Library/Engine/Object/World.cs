@@ -95,6 +95,7 @@ namespace Library.Engine.Object {
                     continue;
                 }
 
+				gameObject.RenderComponent.UpdatePosition(gameObject.TransformComponent.Update(deltaTime));
 				Image image = gameObject.RenderComponent.CurrentAnimation.CurrentFrame.Image;
                 Camera.AddImage(image);
 				previousImages.Add(gameObject, image);

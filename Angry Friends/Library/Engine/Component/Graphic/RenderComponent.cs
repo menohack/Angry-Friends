@@ -91,12 +91,17 @@ namespace Library.Engine.Component.Graphic {
 		/// </summary>
 		/// <param name="deltaTime">The time in milliseconds since the last Update.</param>
 		public void Update(double deltaTime) {
-			Point pos = Owner.TransformComponent.Update(deltaTime);
-
-			CurrentAnimation.CurrentFrame.Image.SetValue(Canvas.LeftProperty, pos.X);
-			CurrentAnimation.CurrentFrame.Image.SetValue(Canvas.TopProperty, pos.Y);
-
 			World.Instance.AddToRedrawQueue(Owner);
+		}
+
+		/// <summary>
+		/// Updates the position of the current frame.
+		/// </summary>
+		/// <param name="position">The new position of the current frame.</param>
+		public void UpdatePosition(Point position)
+		{
+			CurrentAnimation.CurrentFrame.Image.SetValue(Canvas.LeftProperty, position.X);
+			CurrentAnimation.CurrentFrame.Image.SetValue(Canvas.TopProperty, position.Y);
 		}
 	}
 }
