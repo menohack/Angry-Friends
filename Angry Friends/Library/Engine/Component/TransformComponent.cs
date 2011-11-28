@@ -67,7 +67,7 @@ namespace Library.Engine.Component {
                     return new Point(0, 0);
                 }
 
-                velocity = new Point(deltaPosition.X / deltaTime.Seconds, deltaPosition.Y / deltaTime.Seconds);
+                velocity = new Point(deltaPosition.X / (deltaTime.Milliseconds / 1000.00), deltaPosition.Y / (deltaTime.Milliseconds / 1000.00));
                 return velocity;
             }
         }
