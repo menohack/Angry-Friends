@@ -77,11 +77,8 @@ namespace Library.Engine.Component {
 		/// <param name="rotation">The initial rotation of this TransformComponent.</param>
 		/// <param name="size">The initial size of this TransformComponent.</param>
 		/// <param name="owner">The GameObject that owns this TransformComponent.</param>
-		public TransformComponent(Point position, int rotation, Point size, GameObject owner)
-			: base(owner) {
+		public TransformComponent(Point position, int rotation, Point size, GameObject owner) : base(owner) {
 			this.Size = size;
-			//This is intentional
-			this.position = position;
 			this.Position = position;
 			this.Rotation = rotation;
 			this.Velocity = new Point(0, 0);
