@@ -55,17 +55,17 @@ namespace Library.Engine.Component {
 		/// <summary>
 		/// The accessor for the velocity of this TransformComponent.
 		/// </summary>
-        public Point Velocity
-        {
-            get
-            {
-                TimeSpan deltaTime = DateTime.Now.TimeOfDay - previousPositionTime.TimeOfDay;
-                Point deltaPosition = new Point(currentPosition.X - previousPosition.X, currentPosition.Y - previousPosition.Y);
+		public Point Velocity
+		{
+			get
+			{
+				TimeSpan deltaTime = DateTime.Now.TimeOfDay - previousPositionTime.TimeOfDay;
+				Point deltaPosition = new Point(currentPosition.X - previousPosition.X, currentPosition.Y - previousPosition.Y);
 
-                velocity = new Point(deltaPosition.X / (deltaTime.Milliseconds / 1000.00), deltaPosition.Y / (deltaTime.Milliseconds / 1000.00));
-                return velocity;
-            }
-        }
+				velocity = new Point(deltaPosition.X / (deltaTime.Milliseconds / 1000.00), deltaPosition.Y / (deltaTime.Milliseconds / 1000.00));
+				return velocity;
+			}
+		}
 
 		/// <summary>
 		/// The accessor for the position of the TransformComponent.

@@ -35,6 +35,7 @@ namespace Library.GameLogic {
 		/// Constructor for the Game.
 		/// </summary>
 		public Game(Canvas viewport) {
+			Input.Instance.AimEvent += new Input.InputEventHandler(Instance_AimEvent);
             Viewport = viewport;
 			world = World.Instance;
 
@@ -109,6 +110,12 @@ namespace Library.GameLogic {
 			go3.TransformComponent = new TransformComponent(new Point(550, 0), 0, new Point(50, 50), go3);
 			
 		}
+
+		void Instance_AimEvent(UIElement sender, InputEventArgs e)
+		{
+			throw new NotImplementedException();
+		}
+
 
 		/// <summary>
 		/// TEMPORARY HELPER FUNCTION, DONT KILL ME ALEX

@@ -1,13 +1,7 @@
-﻿using System.Windows;
-using System.Windows.Controls;
+﻿using System.Windows.Controls;
 using Library.Engine.Object;
-using Library.Engine.Utilities;
 using Library.GameLogic;
-using System.Windows.Media.Imaging;
-using Library.Engine.Component.Graphic;
-using System.Collections.Generic;
-using System.Diagnostics;
-using Library.Engine;
+using System.Windows.Input;
 namespace Client {
 	public partial class MainPage : UserControl {
 
@@ -19,6 +13,8 @@ namespace Client {
             Initialize();
 		}
 
+		Input input;
+
         /// <summary>
         /// The hook for the Engine.
         /// </summary>
@@ -27,7 +23,36 @@ namespace Client {
             Canvas viewport = new Canvas();
 			canvas.Children.Add(viewport);
 
+			input = Input.Instance;
+
 			Game game = new Game(viewport);
         }
+
+		protected override void OnKeyDown(KeyEventArgs e)
+		{
+			input.OnKeyDown(this, e);
+			e.Handled = true;
+		}
+
+		protected override void OnKeyUp(KeyEventArgs e)
+		{
+			input.OnKeyUp(this, e);
+			e.Handled = true;
+		}
+
+		protected override void OnMouseLeftButtonDown(MouseButtonEventArgs e)
+		{
+			input.OnMouseLeftButtonDown(this, e);
+		}
+
+		protected override void OnMouseRightButtonDown(MouseButtonEventArgs e)
+		{
+			input.OnMouseLeftButtonDown(this, e);
+		}
+
+		protected override void OnMouseMove(MouseEventArgs e)
+		{
+			input.OnMouseMove(this, e);
+		}
 	}
 }
