@@ -1,5 +1,4 @@
 ﻿using System.Windows.Controls;
-using Library.Engine.Object;
 using Library.GameLogic;
 using System.Windows.Input;
 namespace Client {
@@ -43,11 +42,13 @@ namespace Client {
 		protected override void OnMouseLeftButtonDown(MouseButtonEventArgs e)
 		{
 			input.OnMouseLeftButtonDown(this, e);
+			e.Handled = true;
 		}
 
 		protected override void OnMouseRightButtonDown(MouseButtonEventArgs e)
 		{
 			input.OnMouseLeftButtonDown(this, e);
+			e.Handled = true;
 		}
 
 		protected override void OnMouseMove(MouseEventArgs e)

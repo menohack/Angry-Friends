@@ -79,15 +79,6 @@ namespace Library.Engine.Object {
 		public void Update(double deltaTime) {
 			Debug.WriteLine("FPS: " + Convert.ToInt32(1000.00 / deltaTime).ToString());
 
-            foreach (GameObject gameObject in gameObjects)
-            {
-                Debug.WriteLine("Velocity: " + gameObject.TransformComponent.Velocity);
-                if (gameObject.Name == "derf")
-                    gameObject.TransformComponent.Translate(new Point(deltaTime / 1000 * 50, deltaTime / 1000 * 50));
-                else
-                    gameObject.TransformComponent.Translate(new Point(deltaTime / 1000 * -50, deltaTime / 1000 * 50));
-            }
-
 			// Remove previously drawn GameObjects.
 			foreach (GameObject gameObject in redrawQueue) {
 				Image image;
@@ -101,20 +92,17 @@ namespace Library.Engine.Object {
 			// Iterate through each RenderComponent in the redrawQueue and redraw it.
 			foreach (GameObject gameObject in redrawQueue) {
                 if (gameObject == null)
-                {
                     continue;
-                }
 
                 Frame frame = gameObject.RenderComponent.CurrentAnimation.CurrentFrame;
 
+				gameObject.TransformComponent.Update(deltaTime);
                 frame.Image.SetValue(Canvas.LeftProperty, gameObject.TransformComponent.Position.X + frame.Offset.X);
                 frame.Image.SetValue(Canvas.TopProperty, gameObject.TransformComponent.Position.Y + frame.Offset.Y);
 
                 Camera.AddImage(frame.Image);
 				previousImages.Add(gameObject, frame.Image);
 			}
-
-            //Camera.MoveCamera(new Point(10 * deltaTime/1000, 10 * deltaTime/1000));
 		}
 		/// <summary>
 		/// Adds a GameObject to the redraw queue.
