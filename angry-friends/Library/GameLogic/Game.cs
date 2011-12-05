@@ -42,8 +42,6 @@ namespace Library.GameLogic {
 			//THIS IS TEMPORARY FOR TESTING
 			//
 
-			//Build a temporary projectile image
-
 			int width = 200;
 			int height = 200;
 
@@ -83,17 +81,11 @@ namespace Library.GameLogic {
                 new Tests();
 			}
 
-			//TODO: Figure out why 0,0 corresponds to the center of the screen
 			Dictionary<String, Animation> animations = new Dictionary<String, Animation>();
 			Animation animation = new Animation(frames, 1000 * duration / numFrames, 60, "grow");
 			animations.Add("grow", animation);
 
-			
-			//GameObject projectile = new GameObject(animations, animation, "projectile");
-			//projectile.TransformComponent = new TransformComponent(new Point(0, 0), 0, new Point(width, height), projectile); 
-
 			GameObject go2 = new GameObject("derf");
-			//go3.TransformComponent = new TransformComponent(new Point(200, 0), 0, new Point(50, 50), go3);
 
 			width = 50;
 			height = 50;
@@ -104,9 +96,7 @@ namespace Library.GameLogic {
 			Image box = new Image();
 			box.Source = wb;
 			go2.RenderComponent = new RenderComponent(new Animation(new Frame(box, new Point(0, 0)), "default"), go2);
-			//go2.TransformComponent.Position = new Point(400, 0);
-			go2.TransformComponent = new TransformComponent(new Point(400, 0), 0, new Point(50, 50), go2);
-			go2.TransformComponent.Velocity = new Point(0.1, 0);
+			go2.TransformComponent = new TransformComponent(new Point(100, 0), 0, new Point(50, 50), go2);
 
 			GameObject go3 = new GameObject("herf");
 			wb = new WriteableBitmap(width, height);

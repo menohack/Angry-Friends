@@ -10,10 +10,12 @@ namespace Library.Engine.Component.Graphic {
 		/// All the Frames of this Animation.
 		/// </summary>
 		private IList<Frame> frames;
+
 		/// <summary>
 		/// The current Frame of this Animation.
 		/// </summary>
 		public Frame CurrentFrame { get; private set; }
+
 		/// <summary>
 		/// The index for the current Frame of this Animation.
 		/// </summary>
@@ -23,10 +25,12 @@ namespace Library.Engine.Component.Graphic {
 		/// The length, in miliseconds, of this Animation. 
 		/// </summary>
 		private Double length;
+
 		/// <summary>
 		/// The frames-per-second of this Animation.
 		/// </summary>
 		public int FPS { get; private set; }
+
 		/// <summary>
 		/// The name of this Animation.
 		/// </summary>
