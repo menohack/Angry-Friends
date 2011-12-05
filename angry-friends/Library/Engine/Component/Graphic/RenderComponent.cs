@@ -5,30 +5,36 @@ using Library.Engine.Object;
 using Library.Engine.Utilities;
 using System.Windows;
 using System.Windows.Controls;
+using System.Runtime.Serialization;
 namespace Library.Engine.Component.Graphic {
 	/// <summary>
 	/// Handles the rendering of an Object. 
 	/// </summary>
-	public class RenderComponent : BaseComponent, IUpdateable {
+	[DataContract]
+    public class RenderComponent : BaseComponent, IUpdateable {
 		/// <summary>
 		/// A Dictionary of names-to-Animations that contains all of the Animations of this RenderComponent.
 		/// </summary>
-		private IDictionary<String, Animation> animations;
+        [DataMember]
+        private IDictionary<String, Animation> animations;
 
 		/// <summary>
 		/// The Animation that is currently playing.
 		/// </summary>
-		public Animation CurrentAnimation { get; private set; }
+        [DataMember]
+        public Animation CurrentAnimation { get; private set; }
 
 		/// <summary>
 		/// The default Animation for this RenderComponent.  It will play when no other Animation is specified to play.
 		/// </summary>
-		private Animation defaultAnimation;
+        [DataMember]
+        private Animation defaultAnimation;
 
 		/// <summary>
 		/// The EngineTimer that handles updating this RenderComponent's Animations.
 		/// </summary>
-		private EngineTimer animationTimer;
+        [DataMember]
+        private EngineTimer animationTimer;
 
 		/// <summary>
 		/// Constructor for a new RenderComponent.

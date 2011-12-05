@@ -3,46 +3,56 @@ using System.Collections.Generic;
 using System.Windows;
 using Library.Engine.Component;
 using Library.Engine.Component.Graphic;
+using System.Runtime.Serialization;
 
 namespace Library.Engine.Object {
 	/// <summary>
 	/// GameObject represents a base for all in-game objects. 
 	/// GameObject is composed of different Components that provide core game-functionality, such as rendering, audio and movement.
 	/// </summary>
-	public class GameObject {
+	[DataContract]
+    public class GameObject {
 		/// <summary>
 		/// This GameObject's TransformComponent.
 		/// </summary>
-		public TransformComponent TransformComponent { get; set; }
+		[DataMember]
+        public TransformComponent TransformComponent { get; set; }
 		/// <summary>
 		/// The GameObject's AudioComponent.
 		/// </summary>
-		public AudioComponent AudioComponent { get; private set; }
+        [DataMember]
+        public AudioComponent AudioComponent { get; private set; }
 		/// <summary>
 		/// This GameObject's RenderComponent.
 		/// </summary>
-		public RenderComponent RenderComponent { get; set; }
+        [DataMember]
+        public RenderComponent RenderComponent { get; set; }
 
 		/// <summary>
 		/// This GameObject's name.
 		/// </summary>
-		public String Name { get; private set; }
+        [DataMember]
+        public String Name { get; private set; }
 		/// <summary>
 		/// This GameObject's tag.
 		/// </summary>
-		public String Tag { get; private set; }
+        [DataMember]
+        public String Tag { get; private set; }
 		/// <summary>
 		/// This GameObject's UID.
 		/// </summary>
-		public int UID { get; private set; }
+        [DataMember]
+        public int UID { get; private set; }
 		/// <summary>
 		/// The last UID assigned to a GameObject.
 		/// </summary>
-		private static int currentUID;
+        [DataMember]
+        private static int currentUID;
 		/// <summary>
 		/// This GameObject's children.
 		/// </summary>
-		public IList<GameObject> Children { get; private set; }
+        [DataMember]
+        public IList<GameObject> Children { get; private set; }
 
 		//TODO: Pass in components through constructor.
 		/// <summary>

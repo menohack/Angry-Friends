@@ -2,59 +2,71 @@
 using System.Windows;
 using Library.Engine.Object;
 using Library.Engine.Utilities;
+using System.Runtime.Serialization;
 namespace Library.Engine.Component {
 	/// <summary>
 	/// Handles positioning, size and rotation of a GameObject.
 	/// </summary>
-	public class TransformComponent : BaseComponent {
+	[DataContract]
+    public class TransformComponent : BaseComponent {
 		/// <summary>
 		/// The mimimum angle of rotation.
 		/// </summary>
-		private static readonly int MIMIMUM_ROTATION_ANGLE = 0;
+        [DataMember]
+        private static readonly int MIMIMUM_ROTATION_ANGLE = 0;
 
 		/// <summary>
 		/// The maximum angle of rotation.
 		/// </summary>
-		private static readonly int MAXIMUM_ROTATION_ANGLE = 360;
+        [DataMember]
+        private static readonly int MAXIMUM_ROTATION_ANGLE = 360;
 
 		/// <summary>
 		/// The position of this TransformComponent.
 		/// </summary>
-		private Point currentPosition;
+        [DataMember]
+        private Point currentPosition;
         
         /// <summary>
         /// The previous position of this TransformComponent.
         /// </summary>
+        [DataMember]
         private Point previousPosition;
 
         /// <summary>
         /// The time at which the previous change-in-position was recorded.
         /// </summary>
+        [DataMember]
         private DateTime previousPositionTime;
 
         /// <summary>
         /// The time at which the current change-in-position was recorded.
         /// </summary>
+        [DataMember]
         private DateTime currentPositionTime;
 
         /// <summary>
         /// The velocity of this TransformComponent, in pixels per second.
         /// </summary>
+        [DataMember]
         private Point velocity;
 
 		/// <summary>
 		/// The rotation of this TransformComponent.
 		/// </summary>
-		private int rotation;
+        [DataMember]
+        private int rotation;
 
 		/// <summary>
 		/// The size of this TransformComponent.
 		/// </summary>
-		private Point size;
+        [DataMember]
+        private Point size;
 
 		/// <summary>
 		/// The accessor for the velocity of this TransformComponent.
 		/// </summary>
+        [IgnoreDataMember]
         public Point Velocity
         {
             get
@@ -70,7 +82,8 @@ namespace Library.Engine.Component {
 		/// <summary>
 		/// The accessor for the position of the TransformComponent.
 		/// </summary>
-		public Point Position {
+		[IgnoreDataMember]
+        public Point Position {
 			get {
 				return currentPosition;
 			}
@@ -105,7 +118,8 @@ namespace Library.Engine.Component {
 		/// <summary>
 		/// The size of this TransformComponent.
 		/// </summary>
-		public Point Size {
+		[IgnoreDataMember]
+        public Point Size {
 			get {
 				return size;
 			}
