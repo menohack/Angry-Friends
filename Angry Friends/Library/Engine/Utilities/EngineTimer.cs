@@ -2,15 +2,16 @@
 using System.Collections.Generic;
 using System.Windows.Threading;
 namespace Library.Engine.Utilities {
+
 	/// <summary>
-	/// An interface for listening to an engineTimer. It recieves the time elapsed from the last interval.
+	/// An interface for listening to an EngineTimer. It recieves the time elapsed from the last interval.
 	/// </summary>
 	public interface IUpdateable {
 		/// <summary>
 		/// Dispatches an event with the elapsed time, in miliseconds, from the previous update.
 		/// </summary>
 		/// <param name="deltaTime">The elapsed time, in miliseconds, from the previous update.</param>
-		void Update(Double deltaTime);
+		public delegate void Update(Double deltaTime);
 	}
 
 	/// <summary>
@@ -32,7 +33,7 @@ namespace Library.Engine.Utilities {
 		/// </summary>
 		private DateTime previousTime;
 		/// <summary>
-		/// All of the objects that are listening for dispatched events from this engineTimer.
+		/// All of the objects that are listening for dispatched events from this EngineTimer.
 		/// </summary>
 		private ICollection<IUpdateable> eventListeners;
 		/// <summary>
