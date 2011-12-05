@@ -46,9 +46,9 @@ namespace Library.Engine.Component.Graphic {
 		/// <summary>
 		/// Constructor for a RenderComponent with one animation.
 		/// </summary>
-        /// <param name="defaultAnimation">The default Animation for this RenderComponent.</param>
+        /// <param name="animation">The single Animation for this RenderComponent.</param>
         /// <param name="owner">The GameObject that owns this RenderComponent.</param>
-		public RenderComponent(Animation defaultAnimation, GameObject owner) : this(new Dictionary<String, Animation> { {defaultAnimation.Name, defaultAnimation} }, defaultAnimation, owner) {}
+		public RenderComponent(Animation animation, GameObject owner) : this(new Dictionary<String, Animation> { {animation.Name, animation} }, animation, owner) {}
 
 		/// <summary>
 		/// Plays a specific Animation.
@@ -82,8 +82,9 @@ namespace Library.Engine.Component.Graphic {
 		/// Notify the World that this RenderComponent needs to be re-rendered.
 		/// </summary>
 		/// <param name="deltaTime">The time in milliseconds since the last Update.</param>
-		public void Update(double deltaTime) {
-			World.Instance.AddToRedrawQueue(Owner);
-		}
+        public void Update(double deltaTime)
+        {
+            World.Instance.AddToRedrawQueue(Owner);
+        }
 	}
 }
