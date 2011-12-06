@@ -4,6 +4,7 @@ using System.Windows;
 using Library.Engine.Component;
 using Library.Engine.Component.Graphic;
 using System.Runtime.Serialization;
+using Library.Engine.Utilities;
 
 namespace Library.Engine.Object {
 
@@ -12,7 +13,7 @@ namespace Library.Engine.Object {
 	/// GameObject is composed of different Components that provide core game-functionality, such as rendering, audio and movement.
 	/// </summary>
 	[DataContract]
-    public class GameObject {
+    public class GameObject : IUpdateable {
 
 		/// <summary>
 		/// This GameObject's TransformComponent.
@@ -58,50 +59,25 @@ namespace Library.Engine.Object {
 
 		//TODO: GameObjectFactory.
 
-		/// <summary>
-		/// The Constructor for a GameObject.
-		/// </summary>
-		/// <param name="name">The name of the GameObject.</param>
-		public GameObject(IDictionary<String, Animation> animations, Animation defaultAnimation, String name) {
-			EngineObject.Instance.AddGameObject(this);
-			this.Name = name;
-			this.UID = NextUID();
+        public GameObject()
+        {
+        }
 
-			Children = new List<GameObject>();
-			RenderComponent = new RenderComponent(animations, defaultAnimation, this);
+        public GameObject(string name, TransformComponent tc, AudioComponent ac, RenderComponent rc)
+        {
             EngineObject.Instance.AddGameObject(this);
-		}
+            Name = name;
+            UID = NextUID();
+            Children = new List<GameObject>();
+            TransformComponent = tc;
+            TransformComponent.Owner = this;
+            AudioComponent = ac;
+            AudioComponent.Owner = this;
+            RenderComponent = rc;
+            RenderComponent.Owner = this;
+        }
 
-		/// <summary>
-		/// The Constructor for a GameObject. GameObjects are automatically added to the World.
-		/// </summary>
-		/// <param name="name">The name of the GameObject.</param>
-		/// <param name="tag">The tag of the GameObject.</param>
-		public GameObject(String name) {
-			EngineObject.Instance.AddGameObject(this);
-			this.Name = name;
-			this.UID = NextUID();
 
-			Children = new List<GameObject>();
-            EngineObject.Instance.AddGameObject(this);
-		}
-
-		/// <summary>
-		/// The Constructor for a GameObject. GameObjects are automatically added to the World.
-		/// </summary>
-		/// <param name="name">The name of the GameObject.</param>
-		/// <param name="position">The starting position of the GameObject.</param>
-		/// <param name="rotation">The starting rotation of the GameObject.</param>
-		/// <param name="size">The starting size of the GameObject.</param>
-		public GameObject(String name, Point position, int rotation, Point size) {
-			EngineObject.Instance.AddGameObject(this);
-			this.Name = name;
-			this.UID = NextUID();
-
-			Children = new List<GameObject>();
-			TransformComponent = new TransformComponent(position, rotation, size, this);
-            EngineObject.Instance.AddGameObject(this);
-		}
 
 		/// <summary>
 		/// Creates a UID for a GameObject.
@@ -118,5 +94,18 @@ namespace Library.Engine.Object {
 		public static void Destroy(GameObject gameObject) {
 			EngineObject.Instance.RemoveGameObject(gameObject);
 		}
-	}
+
+        /// <summary>
+        /// Updates this GameObject everytime EngineObject updates.
+        /// </summary>
+        /// <param name="deltaTime">The time, in milliseconds, since the last update.</param>
+        public void Update(double deltaTime)
+        {
+        }
+
+        private TransformComponent CreateDefaultTransformComponent()
+        {
+            TransformComponent transformComponent = new TransformComponent(new Point(1, 1), 0,
+        }
+    }
 }

@@ -1,4 +1,5 @@
 ﻿using Library.Engine.Object;
+using System;
 namespace Library.Engine.Component {
 
 	/// <summary>
@@ -6,10 +7,25 @@ namespace Library.Engine.Component {
 	/// </summary>
 	public class BaseComponent {
 
+        private GameObject _owner = null;
+
 		/// <summary>
 		/// The GameObject that owns this Component.
 		/// </summary>
-		public GameObject Owner { get; private set; }
+		public GameObject Owner
+        {
+            get
+            {
+                return _owner;
+            }
+            set
+            {
+                if (_owner != null)
+                    throw new Exception("Can't reset owner in component");
+                else
+                    _owner = value;
+            }
+        }
 
 		/// <summary>
 		/// Constructor for a new BaseComponent.

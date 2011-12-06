@@ -100,6 +100,10 @@ namespace Library.Engine.Object {
 		/// </summary>
 		/// <param name="deltaTime">The time elapsed, in milliseconds, since the last update.</param>
 		public void Update(double deltaTime) {
+            foreach (GameObject gameObject in gameObjects)
+            {
+                gameObject.Update(deltaTime);
+            }
             Camera.Viewport.UpdateGameObjects();
 		}
 
