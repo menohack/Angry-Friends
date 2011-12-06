@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -70,8 +70,11 @@
     <Compile Include="Engine\Object\EngineObject.cs" />
     <Compile Include="Engine\Object\Viewport.cs" />
     <Compile Include="Engine\Tests.cs" />
+<<<<<<< HEAD
+    <Compile Include="Engine\Utilities\WriteableBitmapExtension.cs" />
+=======
     <Compile Include="Engine\Utilities\GameInfo.cs" />
-	<Compile Include="Engine\Utilities\WriteableBitmapExtension.cs" />
+>>>>>>> 50f5e7254c0be42366374c5afd2df924295f1f72
     <Compile Include="Engine\Utilities\ExternalResource.cs" />
     <Compile Include="Engine\Utilities\Network.cs" />
     <Compile Include="Engine\Utilities\RoomInfo.cs" />

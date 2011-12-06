@@ -10,7 +10,6 @@ using Library.Engine.Component;
 using Library.Engine;
 using System.Runtime.Serialization;
 
-
 namespace Library.GameLogic {
 
 	/// <summary>

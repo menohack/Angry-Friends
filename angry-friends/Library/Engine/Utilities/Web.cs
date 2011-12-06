@@ -28,13 +28,6 @@ namespace Library.Engine.Utilities {
 				return instance;
 			}
 		}
-		/// <summary>
-		/// The WebClient used to actually generate HTTP requests and process responses.
-		/// </summary>
-		WebClient webclient = new WebClient();
-		/// <summary>
-		/// 
-		/// </summary>
 		ManualResetEvent mre = new ManualResetEvent(false);
 		/// <summary>
 		/// Downloads any type of resource
@@ -54,8 +47,10 @@ namespace Library.Engine.Utilities {
 		/// <param name="url">URL where the string is located</param>
 		/// <param name="onLoaded">Event to be fired once the download is completed</param>
 		public void DownloadString(string url, Action<string> onLoaded) {
+			WebClient webclient = new WebClient();
 			webclient.DownloadStringCompleted += (s, events) => { onLoaded(events.Result); };
-			webclient.DownloadStringAsync(new Uri(url));
+			var unique = url + "&rand=" + DateTime.Now.Minute + DateTime.Now.Second;
+			webclient.DownloadStringAsync(new Uri(unique));
 		}
 		/// <summary>
 		/// Downloads an image synchronously
