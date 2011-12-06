@@ -59,8 +59,9 @@ namespace Library.Engine.Object {
 
 		//TODO: GameObjectFactory.
 
-        public GameObject()
+        public GameObject(string name)
         {
+			this.Name = name;
         }
 
         public GameObject(string name, TransformComponent tc, AudioComponent ac, RenderComponent rc)
@@ -105,7 +106,8 @@ namespace Library.Engine.Object {
 
         private TransformComponent CreateDefaultTransformComponent()
         {
-            TransformComponent transformComponent = new TransformComponent(new Point(1, 1), 0,
+			TransformComponent transformComponent = new TransformComponent(new Point(1, 1), 0, new Point(50, 50), this);
+			return transformComponent;
         }
     }
 }

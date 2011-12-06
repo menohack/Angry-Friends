@@ -11,8 +11,8 @@ namespace Test {
 		public void Initialize() {
 			EngineObject world = EngineObject.Instance;
 
-			go1 = new GameObject("go1", new Point(200.0, 300.0), 0, new Point(100, 100));
-			go2 = new GameObject("go2", new Point(400.0, 300.0), 0, new Point(100, 100));
+			//go1 = new GameObject("go1", new Point(200.0, 300.0), 0, new Point(100, 100));
+			//go2 = new GameObject("go2", new Point(400.0, 300.0), 0, new Point(100, 100));
 		}
 
 		[TestMethod]
@@ -41,7 +41,7 @@ namespace Test {
 		public void Collide() {
 			//Try spawning a GameObject on top of another GameObject
 			try {
-				GameObject go3 = new GameObject("go3", new Point(250.0, 300.0), 0, new Point(100.0, 100.0));
+				//GameObject go3 = new GameObject("go3", new Point(250.0, 300.0), 0, new Point(100.0, 100.0));
 			}
 			catch (TransformComponent.CollisionException e) {
 				Assert.IsTrue(typeof(TransformComponent.CollisionException).Equals(e.GetType()));
