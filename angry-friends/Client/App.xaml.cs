@@ -15,7 +15,7 @@ namespace Client {
 
 		private void Application_Startup(object sender, StartupEventArgs e) {
 			this.RootVisual = new Grid();
-			SwitchTo(new Rooms("ewfiuwh"));
+			SwitchTo(new TestGame());
 		}
 
 		public static void SwitchTo(UserControl control){
