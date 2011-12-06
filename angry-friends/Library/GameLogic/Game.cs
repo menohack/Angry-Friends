@@ -11,14 +11,12 @@ using Library.Engine;
 using System.Runtime.Serialization;
 
 namespace Library.GameLogic {
-	[DataContract]
 	/// <summary>
 	/// This class represents the Game. All game-logic stems from here.
 	/// </summary>
     [DataContract]
 	public class Game {
 
-		[DataMember]
 		/// <summary>
 		/// The instance of the Engine.
 		/// </summary>
