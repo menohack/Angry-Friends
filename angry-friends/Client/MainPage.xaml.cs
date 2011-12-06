@@ -12,22 +12,19 @@ namespace Client {
 	public partial class MainPage : UserControl {
 
 		/// <summary>
-		/// This class represents our Silverlight page.
+		/// The hook for our Silverlight application.
 		/// </summary>
 		public MainPage() {
-			InitializeComponent();
+            InitializeComponent();
             Initialize();
 		}
 
         /// <summary>
-        /// The hook for the Engine.
+        /// The hook for Engine.
         /// </summary>
-        public void Initialize()
+        private void Initialize()
         {
-            Canvas viewport = new Canvas();
-			canvas.Children.Add(viewport);
-
-			Game game = new Game(viewport);
+            new EngineObjectHelper(canvas);
         }
 	}
 }

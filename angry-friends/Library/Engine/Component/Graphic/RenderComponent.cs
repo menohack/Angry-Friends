@@ -7,11 +7,13 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Runtime.Serialization;
 namespace Library.Engine.Component.Graphic {
+
 	/// <summary>
-	/// Handles the rendering of an Object. 
+	/// Handles the rendering of a GameObject. 
 	/// </summary>
 	[DataContract]
     public class RenderComponent : BaseComponent, IUpdateable {
+
 		/// <summary>
 		/// A Dictionary of names-to-Animations that contains all of the Animations of this RenderComponent.
 		/// </summary>
@@ -90,7 +92,7 @@ namespace Library.Engine.Component.Graphic {
 		/// <param name="deltaTime">The time in milliseconds since the last Update.</param>
         public void Update(double deltaTime)
         {
-            World.Instance.AddToRedrawQueue(Owner);
+            EngineObject.Instance.Camera.Viewport.AddGameObjectToRedrawQueue(Owner);
         }
 	}
 }

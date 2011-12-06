@@ -3,11 +3,13 @@ using System.Collections.Generic;
 using Library.Engine.Utilities;
 using System.Runtime.Serialization;
 namespace Library.Engine.Component.Graphic {
+
 	/// <summary>
 	/// Contains all data pertaining to a series of Frames representing an Animation.
 	/// </summary>
 	[DataContract]
     public class Animation : IUpdateable {
+
 		/// <summary>
 		/// All the Frames of this Animation.
 		/// </summary>
@@ -27,7 +29,7 @@ namespace Library.Engine.Component.Graphic {
         private int index;
 
 		/// <summary>
-		/// The length, in miliseconds, of this Animation. 
+		/// The length, in seconds, of this Animation. 
 		/// </summary>
         [DataMember]
         private Double length;

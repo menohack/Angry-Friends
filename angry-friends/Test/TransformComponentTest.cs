@@ -9,7 +9,7 @@ namespace Test {
 
 		[TestInitialize]
 		public void Initialize() {
-			World world = World.Instance;
+			EngineObject world = EngineObject.Instance;
 
 			go1 = new GameObject("go1", new Point(200.0, 300.0), 0, new Point(100, 100));
 			go2 = new GameObject("go2", new Point(400.0, 300.0), 0, new Point(100, 100));

@@ -2,12 +2,14 @@
 using System.Windows.Controls;
 using System.Runtime.Serialization;
 namespace Library.Engine.Component.Graphic {
+
 	/// <summary>
 	/// Frame is the base class for an Animation.  
 	/// It contains the actual Image of this Frame and its offset.
 	/// </summary>
 	[DataContract]
     public class Frame {
+
 		/// <summary>
 		/// The actual Image of this Frame.
 		/// </summary>

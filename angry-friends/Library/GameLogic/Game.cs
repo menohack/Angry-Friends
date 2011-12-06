@@ -12,6 +12,7 @@ using System.Runtime.Serialization;
 
 
 namespace Library.GameLogic {
+
 	/// <summary>
 	/// This class represents the Game. All game-logic stems from here.
 	/// </summary>
@@ -19,23 +20,16 @@ namespace Library.GameLogic {
 	public class Game {
 
 		/// <summary>
-		/// The instance of the Engine.
+		/// The instance of the EngineObject.
 		/// </summary>
         [DataMember]
-        public World World { get; private set; }
-
-        /// <summary>
-        /// The viewport of this Game.
-        /// </summary>
-        [DataMember]
-        public static Canvas Viewport { get; private set; }
+        public EngineObject EngineObject { get; private set; }
 
 		/// <summary>
 		/// Constructor for the Game.
 		/// </summary>
-		public Game(Canvas viewport) {
-            Viewport = viewport;
-			World = World.Instance;
+		public Game() {
+			EngineObject = EngineObject.Instance;
 
 			//
 			//THIS IS TEMPORARY FOR TESTING

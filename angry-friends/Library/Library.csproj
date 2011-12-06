@@ -68,8 +68,10 @@
     <Compile Include="Engine\Component\TransformComponent.cs" />
     <Compile Include="Engine\Object\Camera.cs" />
     <Compile Include="Engine\Object\GameObject.cs" />
-    <Compile Include="Engine\Object\World.cs" />
+    <Compile Include="Engine\Object\EngineObject.cs" />
+    <Compile Include="Engine\Object\Viewport.cs" />
     <Compile Include="Engine\Tests.cs" />
+    <Compile Include="Engine\Utilities\WriteableBitmapExtension.cs" />
     <Compile Include="Engine\Utilities\ExternalResource.cs" />
     <Compile Include="Engine\Utilities\SpriteSheetLoader.cs" />
     <Compile Include="Engine\Utilities\Web.cs" />

@@ -4,11 +4,13 @@ using Library.Engine.Object;
 using Library.Engine.Utilities;
 using System.Runtime.Serialization;
 namespace Library.Engine.Component {
+
 	/// <summary>
 	/// Handles positioning, size and rotation of a GameObject.
 	/// </summary>
 	[DataContract]
     public class TransformComponent : BaseComponent {
+
 		/// <summary>
 		/// The mimimum angle of rotation.
 		/// </summary>
@@ -84,7 +86,8 @@ namespace Library.Engine.Component {
 		/// </summary>
 		[IgnoreDataMember]
         public Point Position {
-			get {
+			get 
+            {
 				return currentPosition;
 			}
 			set {
@@ -96,7 +99,7 @@ namespace Library.Engine.Component {
 
                 if (previousPosition != currentPosition)
                 {
-                    World.Instance.AddToRedrawQueue(base.Owner);
+                    EngineObject.Instance.Camera.Viewport.AddGameObjectToRedrawQueue(base.Owner);
                 }
 			}
 		}
@@ -105,13 +108,15 @@ namespace Library.Engine.Component {
 		/// The rotation of this TransformComponent, clamped in degrees: [0, 360].
 		/// </summary>
 		public int Rotation {
-			get {
+			get 
+            {
 				return rotation;
 			}
-			set {
+			set 
+            {
 				rotation = value;
 				currentPosition = CollisionDetection(currentPosition);
-                World.Instance.AddToRedrawQueue(base.Owner);
+                EngineObject.Instance.Camera.Viewport.AddGameObjectToRedrawQueue(base.Owner);
 			}
 		}
 
@@ -120,13 +125,14 @@ namespace Library.Engine.Component {
 		/// </summary>
 		[IgnoreDataMember]
         public Point Size {
-			get {
+			get 
+            {
 				return size;
 			}
 			set {
 				size = value;
 				currentPosition = CollisionDetection(currentPosition);
-                World.Instance.AddToRedrawQueue(base.Owner);
+                EngineObject.Instance.Camera.Viewport.AddGameObjectToRedrawQueue(base.Owner);
 			}
 		}
 
@@ -151,6 +157,7 @@ namespace Library.Engine.Component {
 		public void Translate(Point deltaPosition) {
 			Position = CollisionDetection(new Point(currentPosition.X + deltaPosition.X, currentPosition.Y + deltaPosition.Y));
 		}
+
 		/// <summary>
 		/// Rotates by a given number of degrees.
 		/// </summary>
@@ -158,6 +165,7 @@ namespace Library.Engine.Component {
 		public void Rotate(int deltaRotation) {
 			EngineMath.Clamp(Rotation += deltaRotation, MIMIMUM_ROTATION_ANGLE, MAXIMUM_ROTATION_ANGLE);
 		}
+
 		/// <summary>
 		/// Resizes by a given factor.
 		/// </summary>
@@ -175,7 +183,7 @@ namespace Library.Engine.Component {
 			Point newPosition = desiredPosition;
 
 			//Find the distance we can move before colliding
-			foreach (GameObject gameObject in World.Instance.GetGameObjects()) {
+			foreach (GameObject gameObject in EngineObject.Instance.GetGameObjects()) {
 				//Skip itself
 				if (gameObject.TransformComponent == null || gameObject.TransformComponent.Equals(this))
 					continue;
@@ -199,9 +207,7 @@ namespace Library.Engine.Component {
 			/// Create an exception with the specified error message.
 			/// </summary>
 			/// <param name="message">The error message.</param>
-			public CollisionException(String message)
-				: base(message) {
-			}
+			public CollisionException(String message): base(message) {}
 		}
 
 		/// <summary>
@@ -354,6 +360,7 @@ namespace Library.Engine.Component {
 
 			return newPosition;
 		}
+
 		/// <summary>
 		/// Calculates the distance between two points.
 		/// </summary>
