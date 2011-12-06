@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Windows.Threading;
+using System.Runtime.Serialization;
 namespace Library.Engine.Utilities {
+
 	/// <summary>
-	/// An interface for listening to an engineTimer. It recieves the time elapsed from the last interval.
+	/// An interface for listening to an EngineTimer. It recieves the time elapsed from the last interval.
 	/// </summary>
 	public interface IUpdateable {
 		/// <summary>
@@ -18,29 +20,35 @@ namespace Library.Engine.Utilities {
 	/// It dispatches the change in time from the last update, all while trying to update at a constant interval.
 	/// engineTimer is frame-rate-independent and will account for a drop in frame rate.
 	/// </summary>
-	public class EngineTimer {
+	[DataContract]
+    public class EngineTimer {
 		/// <summary>
 		/// The timer that tries to update at a given interval.
 		/// </summary>
-		private DispatcherTimer updateTimer;
+		[DataMember]
+        private DispatcherTimer updateTimer;
 		/// <summary>
 		/// The interval, in miliseconds, at which the timer will try to update.
 		/// </summary>
-		public int Interval { get; private set; }
+        [DataMember]
+        public int Interval { get; private set; }
 		/// <summary>
 		/// The DateTime associated with the last update.
 		/// </summary>
-		private DateTime previousTime;
+        [DataMember]
+        private DateTime previousTime;
 		/// <summary>
-		/// All of the objects that are listening for dispatched events from this engineTimer.
+		/// All of the objects that are listening for dispatched events from this EngineTimer.
 		/// </summary>
-		private ICollection<IUpdateable> eventListeners;
+        [DataMember]
+        private ICollection<IUpdateable> eventListeners;
 		/// <summary>
 		/// Constructor for a new EngineTimer.
 		/// </summary>
 		/// <param name="interval">The interval, in miliseconds, at which the timer will try to update.</param>
 		/// <param name="eventListeners">The EngineTimer's eventListeners.</param>
-		public EngineTimer(int interval, ICollection<IUpdateable> eventListeners) {
+        public EngineTimer(int interval, ICollection<IUpdateable> eventListeners)
+        {
 			this.Interval = interval;
 			this.eventListeners = eventListeners;
 		}

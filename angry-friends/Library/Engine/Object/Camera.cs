@@ -1,16 +1,19 @@
 ﻿using System.Windows.Controls;
 using System.Windows;
 using System.Diagnostics;
+using System.Runtime.Serialization;
 namespace Library.Engine.Object {
 	/// <summary>
 	/// Represents a Camera that handles the positioning of the "viewport"; Camera determines what the screen should render.
 	/// </summary>
-	public class Camera {
+	[DataContract]
+    public class Camera {
 
 		/// <summary>
 		/// The Silverlight Canvas that represents the game's viewport.
 		/// </summary>
-		private Canvas viewport;
+        [DataMember]
+        private Canvas viewport;
 
 		/// <summary>
 		/// Constructor for a new camera.

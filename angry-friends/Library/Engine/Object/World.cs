@@ -7,41 +7,50 @@ using Library.Engine.Utilities;
 using Library.GameLogic;
 using System.Windows;
 using Library.Engine.Component.Graphic;
+using System.Runtime.Serialization;
 namespace Library.Engine.Object {
 	/// <summary>
 	/// World can be thought of as the "universe" of a game. 
 	/// Not only does it contain all GameObjects, but it also provides functionality for finding GameObjects and drawing GameObjects at appropriate times.
 	/// </summary>
+    [DataContract]
 	public class World : IUpdateable {
 
 		/// <summary>
 		/// The single instsance of world.
 		/// </summary>
+        [DataMember]
 		private static World instance;
 		/// <summary>
 		/// The EngineTimer that will handle updating this world.
 		/// </summary>
+        [DataMember]
 		private EngineTimer worldUpdateTimer;
 		/// <summary>
 		/// World will try to update this many times per second.
 		/// </summary>
+        [DataMember]
 		private readonly int UPDATES_PER_SECOND = 60;
 
 		/// <summary>
 		/// All of the gameObjects in the game.
 		/// </summary>
+        [DataMember]
 		private IList<GameObject> gameObjects;
 		/// <summary>
 		/// The queue of GameObjects that need to be re-drawn/updated the next time WordObject updates.
 		/// </summary>
-		private IList<GameObject> redrawQueue;
+        [DataMember]
+        private IList<GameObject> redrawQueue;
 		/// <summary>
 		/// This stores a reference to the GameObject's previous Frame, allowing us to remove it from the screen.
 		/// </summary>
-		private IDictionary<GameObject, Image> previousImages;
+        [DataMember]
+        private IDictionary<GameObject, Image> previousImages;
         /// <summary>
         /// The camera that controls moving the viewport of this World.
         /// </summary>
+        [DataMember]
         public Camera Camera { get; private set; }
 
 		/// <summary>
