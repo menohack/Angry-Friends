@@ -8,14 +8,17 @@ using Library.Engine.Component.Graphic;
 using Library.Engine.Object;
 using Library.Engine.Component;
 using Library.Engine;
-
+using System.Runtime;
+using System.Runtime.Serialization;
 
 namespace Library.GameLogic {
+	[DataContract]
 	/// <summary>
 	/// This class represents the Game. All game-logic stems from here.
 	/// </summary>
 	public class Game {
 
+		[DataMember]
 		/// <summary>
 		/// The instance of the Engine.
 		/// </summary>
@@ -26,6 +29,7 @@ namespace Library.GameLogic {
         /// </summary>
 		public World World { get { return world; } }
 
+		[DataMember]
         /// <summary>
         /// The viewport of this Game.
         /// </summary>
