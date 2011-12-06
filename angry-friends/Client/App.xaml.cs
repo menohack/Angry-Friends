@@ -13,6 +13,8 @@ using System.Windows.Shapes;
 namespace Client {
 	public partial class App : Application {
 
+		public static Canvas screen;
+
 		public App() {
 			this.Startup += this.Application_Startup;
 			this.Exit += this.Application_Exit;
@@ -22,7 +24,9 @@ namespace Client {
 		}
 
 		private void Application_Startup(object sender, StartupEventArgs e) {
-			this.RootVisual = new MainPage();
+			screen = new Canvas();
+			screen.Children.Add(new Lobby());
+			this.RootVisual = screen;
 		}
 
 		private void Application_Exit(object sender, EventArgs e) {

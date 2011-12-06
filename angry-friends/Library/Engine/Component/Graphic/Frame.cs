@@ -3,21 +3,26 @@ using System.Windows.Controls;
 using System.Windows.Media.Imaging;
 using System.Windows.Media;
 using System;
+using System.Runtime.Serialization;
+
 namespace Library.Engine.Component.Graphic {
 	/// <summary>
 	/// Frame is the base class for an Animation.  
 	/// It contains the actual Image of this Frame and its offset.
 	/// </summary>
-	public class Frame {
+	[DataContract]
+    public class Frame {
 		/// <summary>
 		/// The actual Image of this Frame.
 		/// </summary>
-		public Image Image { get; private set; }
+		[DataMember]
+        public Image Image { get; private set; }
 
 		/// <summary>
 		/// The offset of this Frame's Image.
 		/// </summary>
-		public Point Offset { get; private set; }
+        [DataMember]
+        public Point Offset { get; private set; }
 
 		/// <summary>
 		/// Constructor for a Frame.

@@ -69,7 +69,11 @@ Angry Friends/Client/obj/Debug/Client.g.resources
 Angry Friends/Client/Bin/
 Angry Friends/Server/bin/
 Angry Friends/Library/obj/Debug/ResolveAssemblyReference.cache
+*.DS_Store
+Angry Friends/Library/obj/Debug/ResolveAssemblyReference.cache
 Angry Friends/Test/obj/Debug/DesignTimeResolveAssemblyReferencesInput.cache
 Angry Friends/Test/obj/Debug/App.g.cs
 Angry Friends/Test/obj/Debug/App.g.i.cs
 Angry Friends/Client/obj/Debug/ResolveAssemblyReference.cache
+Overview.ppt
+Code Review.pptx

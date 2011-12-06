@@ -47,6 +47,8 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="mscorlib" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Runtime.Serialization.Json, Version=2.0.5.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
     <Reference Include="System.Windows" />
     <Reference Include="system" />
     <Reference Include="System.Core" />
@@ -75,6 +77,7 @@
     <Compile Include="Engine\Utilities\Web.cs" />
     <Compile Include="GameLogic\Ammo.cs" />
     <Compile Include="GameLogic\Game.cs" />
+    <Compile Include="GameLogic\GUI.cs" />
     <Compile Include="GameLogic\MapInfo.cs" />
     <Compile Include="GameLogic\Persistence\Item.cs" />
     <Compile Include="GameLogic\Persistence\Restriction.cs" />

@@ -3,15 +3,18 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Windows.Controls;
 using Library.Engine.Object;
+using System.Runtime.Serialization;
 namespace Library.Engine.Component {
 	/// <summary>
 	/// Handles the control of a GameObject's audio.
 	/// </summary>
-	public class AudioComponent : BaseComponent {
+	[DataContract]
+    public class AudioComponent : BaseComponent {
 		/// <summary>
 		/// A Dictionary between the names of audio and the audio, itself.
 		/// </summary>
-		private IDictionary<String, MediaElement> audioClips;
+        [DataMember]
+        private IDictionary<String, MediaElement> audioClips;
 
 		/// <summary>
 		/// Constructor for an audioComponent.
