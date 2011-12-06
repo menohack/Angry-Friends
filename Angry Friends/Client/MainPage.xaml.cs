@@ -1,6 +1,7 @@
 ﻿using System.Windows.Controls;
 using Library.GameLogic;
 using System.Windows.Input;
+using Library.Engine.Object;
 namespace Client {
 	public partial class MainPage : UserControl {
 
@@ -12,7 +13,7 @@ namespace Client {
             Initialize();
 		}
 
-		Input input;
+		Controller controller;
 
         /// <summary>
         /// The hook for the Engine.
@@ -22,38 +23,38 @@ namespace Client {
             Canvas viewport = new Canvas();
 			canvas.Children.Add(viewport);
 
-			input = Input.Instance;
+			controller = Controller.Instance;
 
 			Game game = new Game(viewport);
         }
 
 		protected override void OnKeyDown(KeyEventArgs e)
 		{
-			input.OnKeyDown(this, e);
+			controller.OnKeyDown(this, e);
 			e.Handled = true;
 		}
 
 		protected override void OnKeyUp(KeyEventArgs e)
 		{
-			input.OnKeyUp(this, e);
+			controller.OnKeyUp(this, e);
 			e.Handled = true;
 		}
 
 		protected override void OnMouseLeftButtonDown(MouseButtonEventArgs e)
 		{
-			input.OnMouseLeftButtonDown(this, e);
+			controller.OnMouseLeftButtonDown(this, e);
 			e.Handled = true;
 		}
 
 		protected override void OnMouseRightButtonDown(MouseButtonEventArgs e)
 		{
-			input.OnMouseLeftButtonDown(this, e);
+			controller.OnMouseLeftButtonDown(this, e);
 			e.Handled = true;
 		}
 
 		protected override void OnMouseMove(MouseEventArgs e)
 		{
-			input.OnMouseMove(this, e);
+			controller.OnMouseMove(this, e);
 		}
 	}
 }

@@ -65,6 +65,7 @@
     <Compile Include="Engine\Component\Graphic\RenderComponent.cs" />
     <Compile Include="Engine\Component\TransformComponent.cs" />
     <Compile Include="Engine\Object\Camera.cs" />
+    <Compile Include="Engine\Object\Controller.cs" />
     <Compile Include="Engine\Object\GameObject.cs" />
     <Compile Include="GameLogic\Input.cs" />
     <Compile Include="Engine\Object\World.cs" />

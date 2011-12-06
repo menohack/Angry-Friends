@@ -1,5 +1,8 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Media.Imaging;
+using System.Windows.Media;
+using System;
 namespace Library.Engine.Component.Graphic {
 	/// <summary>
 	/// Frame is the base class for an Animation.  
@@ -24,6 +27,47 @@ namespace Library.Engine.Component.Graphic {
 		public Frame(Image image, Point offset) {
 			this.Image = image;
 			this.Offset = offset;
+		}
+
+		/// <summary>
+		/// Constructor for a Frame with no offset.
+		/// </summary>
+		/// <param name="image">The Image of this Frame.</param>
+		public Frame(Image image)
+		{
+			this.Image = image;
+			this.Offset = new Point(0.0, 0.0);
+		}
+
+		/// <summary>
+		/// Constructor for a solid color box for easy testing.
+		/// </summary>
+		/// <param name="color">The color of the box.</param>
+		/// <param name="size">The size of the box.</param>
+		public Frame(Color color, Point size)
+		{
+			int width = (int)Math.Ceiling(size.X);
+			int height = (int)Math.Ceiling(size.Y);
+
+			WriteableBitmap wb = new WriteableBitmap(width, height);
+			for (int i = 0; i < width * height; i++)
+				wb.Pixels[i] = ConvertToARGB32(color);
+			wb.Invalidate();
+			Image box = new Image();
+			box.Source = wb;
+
+			this.Image = box;
+			this.Offset = new Point(0.0, 0.0);
+		}
+
+		/// <summary>
+		/// TEMPORARY HELPER FUNCTION, DONT KILL ME ALEX
+		/// </summary>
+		/// <param name="color"></param>
+		/// <returns></returns>
+		private int ConvertToARGB32(Color color)
+		{
+			return ((color.R << 16) | (color.G << 8) | (color.B << 0) | (color.A << 24));
 		}
 	}
 }

@@ -2,6 +2,8 @@
 using Library.Engine.Object;
 using System;
 using System.Collections.Generic;
+using System.Windows;
+using System.Windows.Media;
 
 namespace Library.GameLogic
 {
@@ -63,6 +65,17 @@ namespace Library.GameLogic
 		{
 		}
 
+		/// <summary>
+		/// Constructor for a new Player.
+		/// </summary>
+		/// <param name="name">The name of this Player.</param>
+		/// <param name="tag">The tag of this Player.</param>
+		public Player(String name, Color color, Point position, Point size, Point velocity, String tag = null)
+			: base(name, color, position, size, velocity, tag)
+		{
+			
+		}
+
         /// <summary>
         /// Aim this player's shot.
         /// </summary>
@@ -73,8 +86,9 @@ namespace Library.GameLogic
         /// <summary>
         /// Move this player.
         /// </summary>
-		public void Move()
+		public void Move(UIElement sender, MoveEventArgs e)
 		{
+			
 		}
 
         /// <summary>

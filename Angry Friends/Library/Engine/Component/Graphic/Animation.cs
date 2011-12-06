@@ -61,6 +61,13 @@ namespace Library.Engine.Component.Graphic {
 		public Animation(Frame frame, String name) : this(new List<Frame> { frame }, 0.0, 0, name) {}
 
 		/// <summary>
+		/// Constructor for a new Animation with a single frame.
+		/// </summary>
+		/// <param name="frame">The Frame of the Animation.</param>
+		/// <param name="name">The name of the Animation.</param>
+		public Animation(Frame frame) : this(new List<Frame> { frame }, 0.0, 0, "default") { }
+
+		/// <summary>
 		/// Updates the Frame of this Animation.
 		/// </summary>
 		/// <param name="deltaTime">The time in milliseconds from the previous update.</param>
