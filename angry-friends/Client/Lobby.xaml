@@ -1,0 +1,19 @@
+﻿<navigation:Page x:Class="Client.Lobby" 
+           xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+           xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" 
+           xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+           xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+           mc:Ignorable="d"
+           xmlns:navigation="clr-namespace:System.Windows.Controls;assembly=System.Windows.Controls.Navigation"
+           d:DesignWidth="640" d:DesignHeight="480"
+           Title="Lobby Page" xmlns:sdk="http://schemas.microsoft.com/winfx/2006/xaml/presentation/sdk">
+    <Grid x:Name="LayoutRoot">
+        <Button Content="Play Game" Height="57" HorizontalAlignment="Left" Margin="241,388,0,0" Name="play" VerticalAlignment="Top" Width="141" />
+        <ListBox Height="165" HorizontalAlignment="Left" Margin="112,76,0,0" Name="availablePlayers" VerticalAlignment="Top" Width="402" />
+        <TextBlock Height="39" FontSize="32" TextAlignment="Center" Margin="0,12,232,0" Name="title" Text="Lobby" VerticalAlignment="Top" Width="157" HorizontalAlignment="Right" />
+        <ListBox Height="86" HorizontalAlignment="Left" Margin="112,262,0,0" Name="currentPlayers" VerticalAlignment="Top" Width="402" />
+        <TextBlock Height="23" HorizontalAlignment="Left" Margin="112,58,0,0" Name="textBlock1" Text="Available Players" VerticalAlignment="Top" Width="402" />
+        <TextBlock Height="23" HorizontalAlignment="Left" Margin="112,247,0,0" Name="textBlock2" Text="Players in Game" VerticalAlignment="Top" Width="402" />
+        <StackPanel Height="185" HorizontalAlignment="Left" Margin="269,76,0,0" Name="stackPanel1" VerticalAlignment="Top" Width="359"></StackPanel>
+    </Grid>
+</navigation:Page>
