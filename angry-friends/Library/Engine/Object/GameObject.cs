@@ -100,9 +100,9 @@ namespace Library.Engine.Object {
         /// Updates this GameObject everytime EngineObject updates.
         /// </summary>
         /// <param name="deltaTime">The time, in milliseconds, since the last update.</param>
-        public void Update(double deltaTime)
-        {
-        }
+		public virtual void Update(double deltaTime)
+		{
+		}
 
         private TransformComponent CreateDefaultTransformComponent()
         {

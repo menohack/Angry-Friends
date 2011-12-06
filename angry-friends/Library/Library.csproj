@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -71,7 +71,7 @@
     <Compile Include="Engine\Object\Viewport.cs" />
     <Compile Include="Engine\Tests.cs" />
     <Compile Include="Engine\Utilities\GameInfo.cs" />
-	<Compile Include="Engine\Utilities\WriteableBitmapExtension.cs" />
+    <Compile Include="Engine\Utilities\WriteableBitmapExtension.cs" />
     <Compile Include="Engine\Utilities\ExternalResource.cs" />
     <Compile Include="Engine\Utilities\Network.cs" />
     <Compile Include="Engine\Utilities\RoomInfo.cs" />
@@ -81,6 +81,7 @@
     <Compile Include="GameLogic\Game.cs" />
     <Compile Include="GameLogic\GUI.cs" />
     <Compile Include="GameLogic\MapInfo.cs" />
+    <Compile Include="GameLogic\MyGameObjectTest.cs" />
     <Compile Include="GameLogic\Persistence\Item.cs" />
     <Compile Include="GameLogic\Persistence\Restriction.cs" />
     <Compile Include="GameLogic\Persistence\User.cs" />

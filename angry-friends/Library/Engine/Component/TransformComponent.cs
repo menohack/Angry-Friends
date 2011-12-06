@@ -5,6 +5,24 @@ using Library.Engine.Utilities;
 using System.Runtime.Serialization;
 namespace Library.Engine.Component {
 
+	public class Velocity
+	{
+		public Velocity()
+		{
+			X = 0.0;
+			Y = 0.0;
+		}
+
+		public Velocity(double x, double y)
+		{
+			X = x;
+			Y = y;
+		}
+
+		public double X { get; set; }
+		public double Y { get; set; }
+	}
+
 	/// <summary>
 	/// Handles positioning, size and rotation of a GameObject.
 	/// </summary>
@@ -51,7 +69,7 @@ namespace Library.Engine.Component {
         /// The velocity of this TransformComponent, in pixels per second.
         /// </summary>
         [DataMember]
-        private Point velocity;
+        private Velocity velocity;
 
 		/// <summary>
 		/// The rotation of this TransformComponent.
@@ -69,14 +87,14 @@ namespace Library.Engine.Component {
 		/// The accessor for the velocity of this TransformComponent.
 		/// </summary>
         [IgnoreDataMember]
-        public Point Velocity
+        public Velocity Velocity
         {
             get
             {
                 TimeSpan deltaTime = DateTime.Now.TimeOfDay - previousPositionTime.TimeOfDay;
                 Point deltaPosition = new Point(currentPosition.X - previousPosition.X, currentPosition.Y - previousPosition.Y);
 
-                velocity = new Point(deltaPosition.X / (deltaTime.Milliseconds / 1000.00), deltaPosition.Y / (deltaTime.Milliseconds / 1000.00));
+                velocity = new Velocity(deltaPosition.X / (deltaTime.Milliseconds / 1000.00), deltaPosition.Y / (deltaTime.Milliseconds / 1000.00));
                 return velocity;
             }
         }
@@ -155,7 +173,7 @@ namespace Library.Engine.Component {
 		/// </summary>
 		/// <param name="deltaPosition">The change of position.</param>
 		public void Translate(Point deltaPosition) {
-			Position = CollisionDetection(new Point(currentPosition.X + deltaPosition.X, currentPosition.Y + deltaPosition.Y));
+			Position = new Point(currentPosition.X + deltaPosition.X, currentPosition.Y + deltaPosition.Y);
 		}
 
 		/// <summary>
