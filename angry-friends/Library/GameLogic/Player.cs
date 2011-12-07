@@ -64,9 +64,11 @@ namespace Library.GameLogic
 		public override void Update(double deltaTime)
 		{
  			base.Update(deltaTime);
+
+			//This is obviously just to demo collision.
 			double x = 3.0;
 			double y = 4.0;
-			//TransformComponent.Translate(new Point(x, y));
+			TransformComponent.Translate(new Point(x, y));
 		}
 							
 

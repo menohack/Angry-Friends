@@ -6,21 +6,39 @@ using System.Runtime.Serialization;
 
 namespace Library.Engine.Component {
 
+	/// <summary>
+	/// The Velocity class stores a x-component and a y-component that represent distance per second.
+	/// </summary>
 	public class Velocity
 	{
+		/// <summary>
+		/// Default constructor of the zero vector.
+		/// </summary>
 		public Velocity()
 		{
 			X = 0.0;
 			Y = 0.0;
 		}
 
+		/// <summary>
+		/// Constructor for velocity.
+		/// </summary>
+		/// <param name="x">The x-component of the velocity.</param>
+		/// <param name="y">The y-component of the velocity.</param>
 		public Velocity(double x, double y)
 		{
 			X = x;
 			Y = y;
 		}
 
+		/// <summary>
+		/// The x-component of the velocity.
+		/// </summary>
 		public double X { get; set; }
+
+		/// <summary>
+		/// The y-component of the velocity.
+		/// </summary>
 		public double Y { get; set; }
 	}
 
@@ -30,6 +48,9 @@ namespace Library.Engine.Component {
 	[DataContract]
 	public class TransformComponent : BaseComponent {
 
+		/// <summary>
+		/// The following Path classes are prototypes. They are just food for thought now in case they become necessary later.
+		/// </summary>
 		public abstract class Path
 		{
 			protected DateTime startTime;
@@ -193,9 +214,12 @@ namespace Library.Engine.Component {
 		/// <param name="owner">The GameObject that owns this TransformComponent.</param>
 		
 		public TransformComponent(Point position, int rotation, Point size, GameObject owner) : base(owner) {
-            Position = position;
-            Rotation = rotation;
-            Size = size;
+			//This is necessary because CollisionDetection assumes that the TransformComponent has a current position. If the
+			//position is not pre-emptively set then it assumes (0,0), which is incorrect.
+			this.position = position;
+			Position = position;
+			Rotation = rotation;
+			Size = size;
 		}
 		
 
