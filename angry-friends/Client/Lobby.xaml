@@ -6,14 +6,41 @@
            mc:Ignorable="d"
            xmlns:navigation="clr-namespace:System.Windows.Controls;assembly=System.Windows.Controls.Navigation"
            d:DesignWidth="640" d:DesignHeight="480"
+           xmlns:toolKit="clr-namespace:System.Windows.Controls;assembly=System.Windows.Controls.Toolkit"
            Title="Lobby Page" xmlns:sdk="http://schemas.microsoft.com/winfx/2006/xaml/presentation/sdk">
-    <Grid x:Name="LayoutRoot">
-        <Button Content="Play Game" Height="57" HorizontalAlignment="Left" Margin="241,388,0,0" Name="play" VerticalAlignment="Top" Width="141" />
-        <ListBox Height="165" HorizontalAlignment="Left" Margin="112,76,0,0" Name="availablePlayers" VerticalAlignment="Top" Width="402" />
-        <TextBlock Height="39" FontSize="32" TextAlignment="Center" Margin="0,12,232,0" Name="title" Text="Lobby" VerticalAlignment="Top" Width="157" HorizontalAlignment="Right" />
-        <ListBox Height="86" HorizontalAlignment="Left" Margin="112,262,0,0" Name="currentPlayers" VerticalAlignment="Top" Width="402" />
-        <TextBlock Height="23" HorizontalAlignment="Left" Margin="112,58,0,0" Name="textBlock1" Text="Available Players" VerticalAlignment="Top" Width="402" />
-        <TextBlock Height="23" HorizontalAlignment="Left" Margin="112,247,0,0" Name="textBlock2" Text="Players in Game" VerticalAlignment="Top" Width="402" />
-        <StackPanel Height="185" HorizontalAlignment="Left" Margin="269,76,0,0" Name="stackPanel1" VerticalAlignment="Top" Width="359"></StackPanel>
+    <Grid x:Name="LayoutRoot" Background="White">
+        <toolKit:ListBoxDragDropTarget AllowDrop="True">
+            <ListBox x:Name="listbox" Margin="75,232,141,0" Height="82" VerticalAlignment="Top" Width="359">
+            
+                <ListBox.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <StackPanel Orientation="Horizontal" />
+                    </ItemsPanelTemplate>
+                </ListBox.ItemsPanel>
+                <ListBox.Template>
+                    <ControlTemplate TargetType="ListBox">
+                        <ItemsPresenter />
+                    </ControlTemplate>
+                </ListBox.Template>
+            </ListBox>
+        </toolKit:ListBoxDragDropTarget>
+        <Button Content="U WANT PRAY GAME? WE PRAY GAME" Height="44" HorizontalAlignment="Left" Margin="177,411,0,0" Name="playButton" VerticalAlignment="Top" Width="286" />
+        <TextBlock Height="18" HorizontalAlignment="Left" Margin="78,52,0,0" Name="textBlock1" Text="Available Players" VerticalAlignment="Top" Width="174" />
+        <TextBlock Height="17" HorizontalAlignment="Left" Margin="78,209,0,0" Name="textBlock2" Text="Party" VerticalAlignment="Top" Width="177" />
+        <toolKit:ListBoxDragDropTarget AllowDrop="True" Margin="0,0,0,0">
+            <ListBox Height="127" Margin="0,0,0,0" Name="party" VerticalAlignment="Top" AllowDrop="True" Width="421" SelectionChanged="party_SelectionChanged">
+                <ListBox.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <StackPanel Orientation="Horizontal" />
+                    </ItemsPanelTemplate>
+                </ListBox.ItemsPanel>
+                <ListBox.Template>
+                    <ControlTemplate TargetType="ListBox">
+                        <ItemsPresenter />
+                    </ControlTemplate>
+                </ListBox.Template>
+            </ListBox>
+        </toolKit:ListBoxDragDropTarget>
     </Grid>
+
 </navigation:Page>

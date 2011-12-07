@@ -48,7 +48,7 @@ namespace Library.GameLogic
 		public event PlayGameHandler PlayGame;
 		public delegate void PlayGameHandler();
 
-		public GUI(ListBox available, ListBox current, Button play, StackPanel panel)
+		public GUI(ListBox available, ListBox current, Button play)
 		{
 			availablePlayers = available;
 			currentPlayers = current;
@@ -67,15 +67,55 @@ namespace Library.GameLogic
 			box1.Source = wb1;
 			Image box2 = new Image();
 			box2.Source = wb2;
+			
 
-			Row row1 = new Row(new Portrait(box1, "Alex"), new Portrait(box2, "Max"));
+			//Row row1 = new Row(new Portrait(box1, "Alex"), new Portrait(box2, "Max"));
 
-			panel.Children.Add(row1);
+			available.Items.Add(new Portrait(box1, "Alex"));
+			current.Items.Add(new Portrait(box2, "Max"));
 
-			panel.MouseEnter += new System.Windows.Input.MouseEventHandler(panel_MouseEnter);
+
+			available.MouseLeftButtonDown += new System.Windows.Input.MouseButtonEventHandler(available_MouseLeftButtonDown);
+
+			available.DragLeave += new System.Windows.DragEventHandler(available_DragLeave);
+
+			current.AllowDrop = true;
+			current.DragEnter += new System.Windows.DragEventHandler(available_DragEnter);
+			current.Drop += new System.Windows.DragEventHandler(current_Drop);
+			current.DragLeave += new System.Windows.DragEventHandler(current_DragLeave);
+
+			//panel.Children.Add(row1);
+
+			//panel.MouseEnter += new System.Windows.Input.MouseEventHandler(panel_MouseEnter);
 			
 
 			playButton.Click += new System.Windows.RoutedEventHandler(playButton_Click);
+		}
+
+		void current_DragLeave(object sender, System.Windows.DragEventArgs e)
+		{
+			throw new System.NotImplementedException();
+		}
+
+		void current_Drop(object sender, System.Windows.DragEventArgs e)
+		{
+			throw new System.NotImplementedException();
+		}
+
+		void available_DragLeave(object sender, System.Windows.DragEventArgs e)
+		{
+			throw new System.NotImplementedException();
+		}
+
+		void available_DragEnter(object sender, System.Windows.DragEventArgs e)
+		{
+			throw new System.NotImplementedException();
+		}
+
+		void available_MouseLeftButtonDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
+		{
+			object nig = e.OriginalSource;
+			int t = 2;
 		}
 
 		void panel_MouseEnter(object sender, System.Windows.Input.MouseEventArgs e)

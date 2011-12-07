@@ -21,7 +21,7 @@ namespace Client
 		{
 			InitializeComponent();
 
-			GUI gui = new GUI(availablePlayers, currentPlayers, play, stackPanel1);
+			GUI gui = new GUI(listbox, party, playButton);
 			//GUI gui = new GUI(LayoutRoot);
 			gui.PlayGame += new GUI.PlayGameHandler(gui_PlayGame);
 		}
@@ -30,6 +30,11 @@ namespace Client
 		{
 			App.screen.Children.Clear();
 			App.screen.Children.Add(new MainPage());
+		}
+
+		private void party_SelectionChanged(object sender, SelectionChangedEventArgs e)
+		{
+
 		}
 	}
 }
