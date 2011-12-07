@@ -26,8 +26,7 @@ namespace Library.GameLogic
         /// Constructor for a new Ammo.
         /// </summary>
         /// <param name="name">The name of this type of Ammo.</param>
-        /// <param name="tag">The tag for this Ammo.</param>
-		public Ammo(String name, String tag) : base(name, tag)
+		public Ammo(String name) : base(name)
 		{
 		}
 	}

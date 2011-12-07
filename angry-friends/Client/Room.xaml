@@ -1,0 +1,14 @@
+﻿<UserControl x:Class="Client.Room"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d" Foreground="White">
+
+    <Canvas x:Name="canvas" Height="308" Width="480">
+        <TextBlock Canvas.Left="10" Canvas.Top="10" FontSize="18" Foreground="Black" Height="34" Name="textBlock2" Text="Angry Friends" Width="142" />
+        <ListBox Canvas.Left="247" Canvas.Top="10" Height="286" Name="roomlist" Width="221" />
+        <TextBlock Canvas.Left="12" Canvas.Top="50" Foreground="Black" Height="18" Name="textBlock1" Text="Waiting for players to join" Width="221" />
+        <ProgressBar Canvas.Left="12" Canvas.Top="66" Height="10" Name="progress" Width="221" />
+    </Canvas>
+</UserControl>

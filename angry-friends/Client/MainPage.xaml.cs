@@ -6,26 +6,30 @@ namespace Client {
 	public partial class MainPage : UserControl {
 
 		/// <summary>
-		/// This class represents our Silverlight page.
+		/// The hook for our Silverlight application.
 		/// </summary>
 		public MainPage() {
-			InitializeComponent();
+            InitializeComponent();
             Initialize();
 		}
 
 		Controller controller;
 
         /// <summary>
-        /// The hook for the Engine.
+        /// The hook for Engine.
         /// </summary>
-        public void Initialize()
+        private void Initialize()
         {
+<<<<<<< HEAD
             Canvas viewport = new Canvas();
 			canvas.Children.Add(viewport);
 
 			controller = Controller.Instance;
 
 			Game game = new Game(viewport);
+=======
+            new EngineObjectHelper(canvas);
+>>>>>>> 2c6dee3145729079b8c7cc36b123172a8f324145
         }
 
 		protected override void OnKeyDown(KeyEventArgs e)

@@ -59,11 +59,7 @@ namespace Library.GameLogic
         /// Constructor for a new Player.
         /// </summary>
         /// <param name="name">The name of this Player.</param>
-        /// <param name="tag">The tag of this Player.</param>
-		public Player(String name, String tag = null)
-			: base(name, tag)
-		{
-		}
+		public Player(String name): base(name){}
 
 		/// <summary>
 		/// Constructor for a new Player.

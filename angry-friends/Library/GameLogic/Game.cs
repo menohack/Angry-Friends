@@ -10,8 +10,8 @@ using Library.Engine.Component;
 using Library.Engine;
 using System.Runtime.Serialization;
 
-
 namespace Library.GameLogic {
+
 	/// <summary>
 	/// This class represents the Game. All game-logic stems from here.
 	/// </summary>
@@ -19,26 +19,25 @@ namespace Library.GameLogic {
 	public class Game {
 
 		/// <summary>
-		/// The instance of the Engine.
+		/// The instance of the EngineObject.
 		/// </summary>
         [DataMember]
-        public World World { get; private set; }
-
-        /// <summary>
-        /// The viewport of this Game.
-        /// </summary>
-        [DataMember]
-        public static Canvas Viewport { get; private set; }
+        public EngineObject EngineObject { get; private set; }
 
 		private Player currentPlayer;
 
 		/// <summary>
 		/// Constructor for the Game.
 		/// </summary>
+		public Game()
+		{
+		}
+
 		public Game(Canvas viewport) {
-			Input.Instance.AimEvent += new Input.AimEventHandler(Instance_AimEvent);
-            Viewport = viewport;
-			World = World.Instance;
+			EngineObject = EngineObject.Instance;
+			//Input.Instance.AimEvent += new Input.AimEventHandler(Instance_AimEvent);
+            //Viewport = viewport;
+			//World = World.Instance;
 
 			int width = 50;
 			int height = 50;
@@ -52,7 +51,7 @@ namespace Library.GameLogic {
 
 			currentPlayer = new Player("box4", Colors.Blue, new Point(250, 150), new Point(75, 75), new Point(0, -20));
 
-			Input.Instance.MoveEvent += new Input.MoveEventHandler(Instance_MoveEvent);
+			//Input.Instance.MoveEvent += new Input.MoveEventHandler(Instance_MoveEvent);
 		}
 
 		void Instance_MoveEvent(UIElement sender, MoveEventArgs e)

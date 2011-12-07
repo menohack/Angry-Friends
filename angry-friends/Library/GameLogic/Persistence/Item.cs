@@ -44,8 +44,7 @@ namespace Library.GameLogic.Persistence
         /// Constructor for a new item.
         /// </summary>
         /// <param name="name">The name of this item.</param>
-        /// <param name="tag">The tag of this item.</param>
-		public Item(String name, String tag = null) : base(name, tag)
+		public Item(String name) : base(name)
 		{
 		}
 	}

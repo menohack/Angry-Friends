@@ -5,11 +5,13 @@ using System.Windows.Controls;
 using Library.Engine.Object;
 using System.Runtime.Serialization;
 namespace Library.Engine.Component {
+
 	/// <summary>
 	/// Handles the control of a GameObject's audio.
 	/// </summary>
 	[DataContract]
     public class AudioComponent : BaseComponent {
+
 		/// <summary>
 		/// A Dictionary between the names of audio and the audio, itself.
 		/// </summary>
@@ -21,8 +23,7 @@ namespace Library.Engine.Component {
 		/// </summary>
 		/// <param name="audioClips">The clips that the audioComponent is capable of playing.</param>
 		/// <param name="owner">The GameObject that owns this AudioComponent.</param>
-		public AudioComponent(IDictionary<String, MediaElement> audioClips, GameObject owner)
-			: base(owner) {
+		public AudioComponent(IDictionary<String, MediaElement> audioClips, GameObject owner) : base(owner) {
 			this.audioClips = audioClips;
 		}
 
@@ -35,6 +36,7 @@ namespace Library.Engine.Component {
 			Debug.Assert(audioClips.TryGetValue(name, out audioClip), "This AudioClip " + name + " does not exist.");
 			audioClip.Play();
 		}
+
 		/// <summary>
 		/// Stops playing a specific audio clip.
 		/// </summary>

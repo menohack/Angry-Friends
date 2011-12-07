@@ -5,6 +5,25 @@ using Library.Engine.Utilities;
 using System.Runtime.Serialization;
 
 namespace Library.Engine.Component {
+
+	public class Velocity
+	{
+		public Velocity()
+		{
+			X = 0.0;
+			Y = 0.0;
+		}
+
+		public Velocity(double x, double y)
+		{
+			X = x;
+			Y = y;
+		}
+
+		public double X { get; set; }
+		public double Y { get; set; }
+	}
+
 	/// <summary>
 	/// Handles positioning, size and rotation of a GameObject.
 	/// </summary>
@@ -81,7 +100,7 @@ namespace Library.Engine.Component {
         /// The velocity of this TransformComponent, in pixels per second.
         /// </summary>
         [DataMember]
-        private Point velocity;
+        private Velocity velocity;
 
 		/// <summary>
 		/// The rotation of this TransformComponent.
@@ -98,36 +117,40 @@ namespace Library.Engine.Component {
 		/// <summary>
 		/// The accessor for the velocity of this TransformComponent.
 		/// </summary>
+        [IgnoreDataMember]
+        public Velocity Velocity
+        {
+            get
+            {
+                TimeSpan deltaTime = DateTime.Now.TimeOfDay - previousPositionTime.TimeOfDay;
+                Point deltaPosition = new Point(currentPosition.X - previousPosition.X, currentPosition.Y - previousPosition.Y);
 
-		[IgnoreDataMember]
-		public Point Velocity
-		{
-			get
-			{
-				/*
-				TimeSpan deltaTime = DateTime.Now.TimeOfDay - previousPositionTime.TimeOfDay;
-				Point deltaPosition = new Point(currentPosition.X - previousPosition.X, currentPosition.Y - previousPosition.Y);
-
-				velocity = new Point(deltaPosition.X / (deltaTime.Milliseconds / 1000.00), deltaPosition.Y / (deltaTime.Milliseconds / 1000.00));
-				*/
-				return velocity;
-			}
-			set
-			{
-				velocity = value;
-			}
-		}
+                velocity = new Velocity(deltaPosition.X / (deltaTime.Milliseconds / 1000.00), deltaPosition.Y / (deltaTime.Milliseconds / 1000.00));
+                return velocity;
+            }
+        }
 
 		/// <summary>
 		/// The accessor for the position of the TransformComponent.
 		/// </summary>
 		[IgnoreDataMember]
         public Point Position {
-			get {
-				return position;
+			get 
+            {
+				return currentPosition;
 			}
-			set {
-				position = CollisionDetection(value);
+			set 
+			{
+                previousPosition = currentPosition;
+                previousPositionTime = currentPositionTime;
+
+				currentPosition = CollisionDetection(new Point(value.X, value.Y));
+                currentPositionTime = DateTime.Now;
+
+                if (previousPosition != currentPosition)
+                {
+                    EngineObject.Instance.Camera.Viewport.AddGameObjectToRedrawQueue(base.Owner);
+                }
 			}
 		}
 
@@ -135,12 +158,15 @@ namespace Library.Engine.Component {
 		/// The rotation of this TransformComponent, clamped in degrees: [0, 360].
 		/// </summary>
 		public int Rotation {
-			get {
+			get 
+            {
 				return rotation;
 			}
-			set {
+			set 
+            {
 				rotation = value;
-				position = CollisionDetection(position);
+				currentPosition = CollisionDetection(currentPosition);
+                EngineObject.Instance.Camera.Viewport.AddGameObjectToRedrawQueue(base.Owner);
 			}
 		}
 
@@ -149,12 +175,14 @@ namespace Library.Engine.Component {
 		/// </summary>
 		[IgnoreDataMember]
         public Point Size {
-			get {
+			get 
+            {
 				return size;
 			}
 			set {
 				size = value;
-				position = CollisionDetection(position);
+				currentPosition = CollisionDetection(currentPosition);
+                EngineObject.Instance.Camera.Viewport.AddGameObjectToRedrawQueue(base.Owner);
 			}
 		}
 
@@ -165,6 +193,7 @@ namespace Library.Engine.Component {
 		/// <param name="rotation">The initial rotation of this TransformComponent.</param>
 		/// <param name="size">The initial size of this TransformComponent.</param>
 		/// <param name="owner">The GameObject that owns this TransformComponent.</param>
+		/*
 		public TransformComponent(Point position, int rotation, Point size, GameObject owner) : base(owner) {
 			//First, set the fields
 			this.position = position;
@@ -177,14 +206,16 @@ namespace Library.Engine.Component {
 			//The GameObject now has physics associated with it so it needs to be updated regularly
 			World.Instance.AddToRedrawQueue(owner);
 		}
+		*/
 
 		/// <summary>
 		/// Translates by a given point.
 		/// </summary>
 		/// <param name="deltaPosition">The change of position.</param>
 		public void Translate(Point deltaPosition) {
-			Position = CollisionDetection(new Point(position.X + deltaPosition.X, position.Y + deltaPosition.Y));
+			Position = new Point(currentPosition.X + deltaPosition.X, currentPosition.Y + deltaPosition.Y);
 		}
+
 		/// <summary>
 		/// Rotates by a given number of degrees.
 		/// </summary>
@@ -192,6 +223,7 @@ namespace Library.Engine.Component {
 		public void Rotate(int deltaRotation) {
 			EngineMath.Clamp(Rotation += deltaRotation, MIMIMUM_ROTATION_ANGLE, MAXIMUM_ROTATION_ANGLE);
 		}
+
 		/// <summary>
 		/// Resizes by a given factor.
 		/// </summary>
@@ -218,7 +250,7 @@ namespace Library.Engine.Component {
 			Point newPosition = desiredPosition;
 
 			//Find the distance we can move before colliding
-			foreach (GameObject gameObject in World.Instance.GetGameObjects()) {
+			foreach (GameObject gameObject in EngineObject.Instance.GetGameObjects()) {
 				//Skip itself
 				if (gameObject.TransformComponent == null || gameObject.TransformComponent.Equals(this))
 					continue;
@@ -242,9 +274,7 @@ namespace Library.Engine.Component {
 			/// Create an exception with the specified error message.
 			/// </summary>
 			/// <param name="message">The error message.</param>
-			public CollisionException(String message)
-				: base(message) {
-			}
+			public CollisionException(String message): base(message) {}
 		}
 
 		/// <summary>
@@ -398,15 +428,18 @@ namespace Library.Engine.Component {
 					newPosition = tempPosition;
 
 					//If we hit something set the velocity to zero
+					/*
 					if (i < 2)
 						a.Velocity = new Point(0.0, a.Velocity.Y);
 					else
 						a.Velocity = new Point(a.Velocity.X, 0.0);
+					*/
 				}
 			}
 
 			return newPosition;
 		}
+
 		/// <summary>
 		/// Calculates the distance between two points.
 		/// </summary>
