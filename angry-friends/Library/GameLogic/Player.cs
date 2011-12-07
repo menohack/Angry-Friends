@@ -65,7 +65,7 @@ namespace Library.GameLogic
 		public override void Update(double deltaTime)
 		{
             deltaTime /= 1000.00;
-            Point velocity = new Point(1000 * deltaTime, 1000 * deltaTime);
+            Point velocity = new Point(100 * deltaTime, 100 * deltaTime);
 			TransformComponent.Translate(velocity);
             Debug.WriteLine(TransformComponent.Velocity);
 		}

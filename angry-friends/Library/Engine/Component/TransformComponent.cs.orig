@@ -6,12 +6,83 @@ using System.Runtime.Serialization;
 using System.Diagnostics;
 
 namespace Library.Engine.Component {
+
+<<<<<<< HEAD
+=======
+	/// <summary>
+	/// The Velocity class stores a x-component and a y-component that represent distance per second.
+	/// </summary>
+	public class Velocity
+	{
+		/// <summary>
+		/// Default constructor of the zero vector.
+		/// </summary>
+		public Velocity()
+		{
+			X = 0.0;
+			Y = 0.0;
+		}
+
+		/// <summary>
+		/// Constructor for velocity.
+		/// </summary>
+		/// <param name="x">The x-component of the velocity.</param>
+		/// <param name="y">The y-component of the velocity.</param>
+		public Velocity(double x, double y)
+		{
+			X = x;
+			Y = y;
+		}
+
+		/// <summary>
+		/// The x-component of the velocity.
+		/// </summary>
+		public double X { get; set; }
+
+		/// <summary>
+		/// The y-component of the velocity.
+		/// </summary>
+		public double Y { get; set; }
+	}
+
+>>>>>>> 111188b0d03669474dc04835ee41898db15768f5
 	/// <summary>
 	/// Handles positioning, size and rotation of a GameObject.
 	/// </summary>
 	[DataContract]
 	public class TransformComponent : BaseComponent {
 
+<<<<<<< HEAD
+=======
+		/// <summary>
+		/// The following Path classes are prototypes. They are just food for thought now in case they become necessary later.
+		/// </summary>
+		public abstract class Path
+		{
+			protected DateTime startTime;
+			public abstract Point CalculatePosition(double deltaTime);
+		}
+
+		public class LinearPath : Path
+		{
+			private Point startPosition;
+			private Point endPosition;
+
+			public LinearPath(Point startPosition, Point endPosition)
+			{
+				this.startPosition = startPosition;
+				this.endPosition = endPosition;
+			}
+
+			public override Point CalculatePosition(double deltaTime)
+			{
+				TimeSpan delta = startTime - DateTime.Now;
+				double seconds = delta.TotalSeconds;
+				return new Point();
+			}
+		}
+
+>>>>>>> 111188b0d03669474dc04835ee41898db15768f5
 		/// <summary>
 		/// The mimimum angle of rotation.
 		/// </summary>
@@ -153,14 +224,26 @@ namespace Library.Engine.Component {
 		/// <param name="rotation">The initial rotation of this TransformComponent.</param>
 		/// <param name="size">The initial size of this TransformComponent.</param>
 		/// <param name="owner">The GameObject that owns this TransformComponent.</param>
+		
+<<<<<<< HEAD
 		public TransformComponent(Point position, int rotation, Point size, GameObject owner = null) : base(owner) {
             previousPosition = position;
             previousPositionTime = DateTime.Now;
             currentPosition = position;
             currentPositionTime = previousPositionTime;
 
+            this.Position = position;
             this.Rotation = rotation;
             this.Size = size;
+=======
+		public TransformComponent(Point position, int rotation, Point size, GameObject owner) : base(owner) {
+			//This is necessary because CollisionDetection assumes that the TransformComponent has a current position. If the
+			//position is not pre-emptively set then it assumes (0,0), which is incorrect.
+			this.position = position;
+			Position = position;
+			Rotation = rotation;
+			Size = size;
+>>>>>>> 111188b0d03669474dc04835ee41898db15768f5
 		}
 		
 
@@ -189,33 +272,36 @@ namespace Library.Engine.Component {
             Size = new Point(Size.X * resizeFactor.X, Size.Y * resizeFactor.Y);
         }
 
-		/// <summary>
-		/// The following Path classes are prototypes. They are just food for thought now in case they become necessary later.
-		/// </summary>
-		public abstract class Path
-		{
-			protected DateTime startTime;
-			public abstract Point CalculatePosition(double deltaTime);
-		}
 
-		public class LinearPath : Path
-		{
-			private Point startPosition;
-			private Point endPosition;
 
-			public LinearPath(Point startPosition, Point endPosition)
-			{
-				this.startPosition = startPosition;
-				this.endPosition = endPosition;
-			}
 
-			public override Point CalculatePosition(double deltaTime)
-			{
-				TimeSpan delta = startTime - DateTime.Now;
-				double seconds = delta.TotalSeconds;
-				return new Point();
-			}
-		}
+
+
+
+        public abstract class Path
+        {
+            protected DateTime startTime;
+            public abstract Point CalculatePosition(double deltaTime);
+        }
+
+        public class LinearPath : Path
+        {
+            private Point startPosition;
+            private Point endPosition;
+
+            public LinearPath(Point startPosition, Point endPosition)
+            {
+                this.startPosition = startPosition;
+                this.endPosition = endPosition;
+            }
+
+            public override Point CalculatePosition(double deltaTime)
+            {
+                TimeSpan delta = startTime - DateTime.Now;
+                double seconds = delta.TotalSeconds;
+                return new Point();
+            }
+        }
 
 		/// <summary>
 		/// If this linear-motion produces collision, CollisionDetection returns the modified value that satisifies non-collision requirements.

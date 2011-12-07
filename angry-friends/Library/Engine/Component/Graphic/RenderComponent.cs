@@ -44,7 +44,7 @@ namespace Library.Engine.Component.Graphic {
 		/// <param name="animations">The Dictionary of names-to-Animations of this RenderComponent. </param>
 		/// <param name="defaultAnimation">The Animation to play when no other Animation is specified to play.</param>
 		/// <param name="owner">The GameObject that owns this RenderComponent.</param>
-		public RenderComponent(IDictionary<String, Animation> animations, Animation defaultAnimation, GameObject owner) : base(owner) {
+		public RenderComponent(IDictionary<String, Animation> animations, Animation defaultAnimation, GameObject owner = null) : base(owner) {
 			this.animations = animations;
 			this.defaultAnimation = defaultAnimation;
 			this.CurrentAnimation = this.defaultAnimation;
