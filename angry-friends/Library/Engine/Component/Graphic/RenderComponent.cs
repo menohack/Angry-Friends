@@ -56,7 +56,7 @@ namespace Library.Engine.Component.Graphic {
 		/// </summary>
         /// <param name="animation">The single Animation for this RenderComponent.</param>
         /// <param name="owner">The GameObject that owns this RenderComponent.</param>
-		public RenderComponent(Animation animation, GameObject owner) : this(new Dictionary<String, Animation> { {animation.Name, animation} }, animation, owner) {}
+		public RenderComponent(Animation animation, GameObject owner = null) : this(new Dictionary<String, Animation> { {animation.Name, animation} }, animation, owner) {}
 
 		/// <summary>
 		/// Plays a specific Animation.

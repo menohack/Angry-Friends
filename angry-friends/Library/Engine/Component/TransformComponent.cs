@@ -6,54 +6,11 @@ using System.Runtime.Serialization;
 
 namespace Library.Engine.Component {
 
-	public class Velocity
-	{
-		public Velocity()
-		{
-			X = 0.0;
-			Y = 0.0;
-		}
-
-		public Velocity(double x, double y)
-		{
-			X = x;
-			Y = y;
-		}
-
-		public double X { get; set; }
-		public double Y { get; set; }
-	}
-
 	/// <summary>
 	/// Handles positioning, size and rotation of a GameObject.
 	/// </summary>
 	[DataContract]
 	public class TransformComponent : BaseComponent {
-
-		public abstract class Path
-		{
-			protected DateTime startTime;
-			public abstract Point CalculatePosition(double deltaTime);
-		}
-
-		public class LinearPath : Path
-		{
-			private Point startPosition;
-			private Point endPosition;
-
-			public LinearPath(Point startPosition, Point endPosition)
-			{
-				this.startPosition = startPosition;
-				this.endPosition = endPosition;
-			}
-
-			public override Point CalculatePosition(double deltaTime)
-			{
-				TimeSpan delta = startTime - DateTime.Now;
-				double seconds = delta.TotalSeconds;
-				return new Point();
-			}
-		}
 
 		/// <summary>
 		/// The mimimum angle of rotation.
@@ -192,10 +149,15 @@ namespace Library.Engine.Component {
 		/// <param name="size">The initial size of this TransformComponent.</param>
 		/// <param name="owner">The GameObject that owns this TransformComponent.</param>
 		
-		public TransformComponent(Point position, int rotation, Point size, GameObject owner) : base(owner) {
-            Position = position;
-            Rotation = rotation;
-            Size = size;
+		public TransformComponent(Point position, int rotation, Point size, GameObject owner = null) : base(owner) {
+            previousPosition = position;
+            previousPositionTime = DateTime.Now;
+            currentPosition = position;
+            currentPositionTime = previousPositionTime;
+
+            this.Position = position;
+            this.Rotation = rotation;
+            this.Size = size;
 		}
 		
 
@@ -222,6 +184,37 @@ namespace Library.Engine.Component {
         public void Resize(Point resizeFactor)
         {
             Size = new Point(Size.X * resizeFactor.X, Size.Y * resizeFactor.Y);
+        }
+
+
+
+
+
+
+
+        public abstract class Path
+        {
+            protected DateTime startTime;
+            public abstract Point CalculatePosition(double deltaTime);
+        }
+
+        public class LinearPath : Path
+        {
+            private Point startPosition;
+            private Point endPosition;
+
+            public LinearPath(Point startPosition, Point endPosition)
+            {
+                this.startPosition = startPosition;
+                this.endPosition = endPosition;
+            }
+
+            public override Point CalculatePosition(double deltaTime)
+            {
+                TimeSpan delta = startTime - DateTime.Now;
+                double seconds = delta.TotalSeconds;
+                return new Point();
+            }
         }
 
 		/// <summary>

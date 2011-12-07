@@ -6,6 +6,7 @@ using System.Windows;
 using System.Windows.Media;
 using Library.Engine.Component;
 using Library.Engine.Component.Graphic;
+using System.Diagnostics;
 
 namespace Library.GameLogic
 {
@@ -63,10 +64,10 @@ namespace Library.GameLogic
 
 		public override void Update(double deltaTime)
 		{
- 			base.Update(deltaTime);
-			double x = 3.0;
-			double y = 4.0;
-			//TransformComponent.Translate(new Point(x, y));
+            deltaTime /= 1000.00;
+            Point velocity = new Point(100 * deltaTime, 100 * deltaTime);
+			TransformComponent.Translate(velocity);
+            Debug.WriteLine(TransformComponent.Velocity);
 		}
 							
 
