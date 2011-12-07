@@ -6,7 +6,5 @@
     mc:Ignorable="d"
     d:DesignHeight="300" d:DesignWidth="400">
     
-    <Canvas x:Name="canvas" Background="Black">
-
-    </Canvas>
+    <Canvas x:Name="canvas" Background="Black"></Canvas>
 </UserControl>

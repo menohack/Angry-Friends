@@ -4,6 +4,8 @@ using System;
 using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Media;
+using Library.Engine.Component;
+using Library.Engine.Component.Graphic;
 
 namespace Library.GameLogic
 {
@@ -55,22 +57,24 @@ namespace Library.GameLogic
         /// </summary>
 		private AmmoType currentAmmo;
 
+		public Player(string name, TransformComponent tc, AudioComponent ac, RenderComponent rc) : base(name, tc, ac, rc)
+		{
+		}
+
+		public override void Update(double deltaTime)
+		{
+ 			base.Update(deltaTime);
+			double x = 3.0;
+			double y = 4.0;
+			//TransformComponent.Translate(new Point(x, y));
+		}
+							
+
         /// <summary>
         /// Constructor for a new Player.
         /// </summary>
         /// <param name="name">The name of this Player.</param>
-		public Player(String name): base(name){}
-
-		/// <summary>
-		/// Constructor for a new Player.
-		/// </summary>
-		/// <param name="name">The name of this Player.</param>
-		/// <param name="tag">The tag of this Player.</param>
-		public Player(String name, Color color, Point position, Point size, Point velocity, String tag = null)
-			: base(name, color, position, size, velocity, tag)
-		{
-			
-		}
+		public Player(string name): base(name){}
 
         /// <summary>
         /// Aim this player's shot.

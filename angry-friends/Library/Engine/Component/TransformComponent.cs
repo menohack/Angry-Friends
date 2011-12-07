@@ -193,7 +193,7 @@ namespace Library.Engine.Component {
 		/// <param name="rotation">The initial rotation of this TransformComponent.</param>
 		/// <param name="size">The initial size of this TransformComponent.</param>
 		/// <param name="owner">The GameObject that owns this TransformComponent.</param>
-		/*
+		
 		public TransformComponent(Point position, int rotation, Point size, GameObject owner) : base(owner) {
 			//First, set the fields
 			this.position = position;
@@ -204,9 +204,9 @@ namespace Library.Engine.Component {
 			this.Position = position;
 
 			//The GameObject now has physics associated with it so it needs to be updated regularly
-			World.Instance.AddToRedrawQueue(owner);
+			//World.Instance.AddToRedrawQueue(owner);
 		}
-		*/
+		
 
 		/// <summary>
 		/// Translates by a given point.

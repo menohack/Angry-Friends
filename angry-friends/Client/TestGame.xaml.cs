@@ -27,5 +27,28 @@ namespace Client
         public void Initialize() {
             new EngineObjectHelper(canvas);
         }
+
+		protected override void OnKeyDown(KeyEventArgs e)
+		{
+			EngineObject.Instance.controller.OnKeyDown(this, e);
+			e.Handled = true;
+		}
+
+		protected override void OnKeyUp(KeyEventArgs e)
+		{
+			EngineObject.Instance.controller.OnKeyUp(this, e);
+			e.Handled = true;
+		}
+
+		protected override void OnMouseLeftButtonDown(MouseButtonEventArgs e)
+		{
+			EngineObject.Instance.controller.OnMouseLeftButtonDown(this, e);
+			e.Handled = true;
+		}
+
+		protected override void OnMouseMove(MouseEventArgs e)
+		{
+			EngineObject.Instance.controller.OnMouseMove(this, e);
+		}
     }
 }

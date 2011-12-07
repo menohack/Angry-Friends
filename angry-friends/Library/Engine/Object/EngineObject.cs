@@ -82,6 +82,8 @@ namespace Library.Engine.Object {
         [DataMember]
         public Camera Camera { get; private set; }
 
+		public Controller controller;
+
 		/// <summary>
 		/// The constructor for a new instance of EngineObject.
 		/// EngineObject uses the singleton pattern; therefore, its constructor's scope is limited to itself.
@@ -89,6 +91,7 @@ namespace Library.Engine.Object {
 		private EngineObject(Viewport viewport) {
 			gameObjects = new List<GameObject>();
             Camera = new Camera(viewport);
+			controller = new Controller();
 
 			// Initialize the timing of the updating of the World.
 			worldUpdateTimer = new EngineTimer(EngineTimer.FromHertzToMiliSeconds(UPDATES_PER_SECOND), new List<IUpdateable> { this });

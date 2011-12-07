@@ -42,11 +42,14 @@ namespace Library.Engine.Object
         /// </summary>
         public void UpdateGameObjects()
         {
-            
+
             // Remove previously drawn GameObjects.
             foreach (GameObject gameObject in redrawQueue)
             {
-                Frame frame;
+				if (gameObject == null)
+					continue;
+
+				Frame frame;
                 previousFrames.TryGetValue(gameObject, out frame);
                 if (frame != null)
                 {
@@ -59,9 +62,7 @@ namespace Library.Engine.Object
             foreach (GameObject gameObject in redrawQueue)
             {
                 if (gameObject == null)
-                {
                     continue;
-                }
 
                 Frame frame = gameObject.RenderComponent.CurrentAnimation.CurrentFrame;
                 frame.Image.SetValue(Canvas.LeftProperty, gameObject.TransformComponent.Position.X + frame.Offset.X);

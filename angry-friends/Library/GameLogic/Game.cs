@@ -31,8 +31,23 @@ namespace Library.GameLogic {
 		/// </summary>
 		public Game()
 		{
+			EngineObject = EngineObject.Instance;
+
+			TransformComponent tc = new TransformComponent(new Point(200, 200), 0, new Point(50, 50), null);
+			RenderComponent rc = new RenderComponent(new Animation(new Frame(Colors.Red, new Point(50, 50))), null); ;
+			AudioComponent ac = new AudioComponent(new Dictionary<String, MediaElement>(), null);
+			Player redBox = new Player("redBox", tc, ac, rc);
+			currentPlayer = redBox;
+
+			EngineObject.Instance.controller.Target = redBox;
+
+			TransformComponent tc2 = new TransformComponent(new Point(300, 400), 0, new Point(50, 50), null);
+			RenderComponent rc2 = new RenderComponent(new Animation(new Frame(Colors.Blue, new Point(50, 50))), null); ;
+			AudioComponent ac2 = new AudioComponent(new Dictionary<String, MediaElement>(), null);
+			GameObject blueBox = new GameObject("blueBox", tc2, ac2, rc2);
 		}
 
+		/*
 		public Game(Canvas viewport) {
 			EngineObject = EngineObject.Instance;
 			//Input.Instance.AimEvent += new Input.AimEventHandler(Instance_AimEvent);
@@ -53,16 +68,7 @@ namespace Library.GameLogic {
 
 			//Input.Instance.MoveEvent += new Input.MoveEventHandler(Instance_MoveEvent);
 		}
-
-		void Instance_MoveEvent(UIElement sender, MoveEventArgs e)
-		{
-			currentPlayer.Move(sender, e);
-		}
-
-		void Instance_AimEvent(UIElement sender, AimEventArgs e)
-		{
-			
-		}
+		*/
 
 		/// <summary>
 		/// TEMPORARY HELPER FUNCTION, DONT KILL ME ALEX

@@ -79,30 +79,6 @@ namespace Library.Engine.Object {
             RenderComponent.Owner = this;
         }
 
-
-
-		/// <summary>
-		/// The Constructor for the GameObject of a solid-color box. GameObjects are automatically added to the World.
-		/// </summary>
-		/// <param name="name">The name of the GameObject.</param>
-		/// <param name="color">The color of the box.</param>
-		/// <param name="position">The position of the box.</param>
-		/// <param name="size">The size of the box.</param>
-		/// <param name="velocity">The velocity of the box.</param>
-		/// <param name="tag">The tag of the GameObject.</param>
-		public GameObject(String name, Color color, Point position, Point size, Point velocity, String tag = null)
-		{
-			World.Instance.AddGameObject(this);
-			this.Name = name;
-			this.Tag = tag;
-			this.UID = NextUID();
-
-			Children = new List<GameObject>();
-			RenderComponent = new RenderComponent(new Animation(new Frame(color, size)), this);
-			TransformComponent = new TransformComponent(position, 0, size, this);
-			TransformComponent.Velocity = velocity;
-		}
-
 		/// <summary>
 		/// Creates a UID for a GameObject.
 		/// </summary>
@@ -125,6 +101,7 @@ namespace Library.Engine.Object {
         /// <param name="deltaTime">The time, in milliseconds, since the last update.</param>
 		public virtual void Update(double deltaTime)
 		{
+			EngineObjectHelper.Viewport.AddGameObjectToRedrawQueue(this);
 		}
 
         private TransformComponent CreateDefaultTransformComponent()
