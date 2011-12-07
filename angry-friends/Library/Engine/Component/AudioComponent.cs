@@ -23,7 +23,7 @@ namespace Library.Engine.Component {
 		/// </summary>
 		/// <param name="audioClips">The clips that the audioComponent is capable of playing.</param>
 		/// <param name="owner">The GameObject that owns this AudioComponent.</param>
-		public AudioComponent(IDictionary<String, MediaElement> audioClips, GameObject owner) : base(owner) {
+		public AudioComponent(IDictionary<String, MediaElement> audioClips, GameObject owner = null) : base(owner) {
 			this.audioClips = audioClips;
 		}
 

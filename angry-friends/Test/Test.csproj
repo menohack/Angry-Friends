@@ -99,7 +99,6 @@
     <Compile Include="Tests.cs" />
     <Compile Include="TransformComponentTest.cs" />
     <Compile Include="Web.cs" />
-    <Compile Include="WorldTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <ApplicationDefinition Include="App.xaml">
