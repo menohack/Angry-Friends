@@ -70,7 +70,6 @@
     <Compile Include="Engine\Object\EngineObject.cs" />
     <Compile Include="Engine\Object\GameObjectFactory.cs" />
     <Compile Include="Engine\Object\Viewport.cs" />
-    <Compile Include="Engine\Tests.cs" />
     <Compile Include="Engine\Utilities\GameInfo.cs" />
     <Compile Include="Engine\Utilities\Velocity.cs" />
     <Compile Include="Engine\Utilities\WriteableBitmapExtension.cs" />

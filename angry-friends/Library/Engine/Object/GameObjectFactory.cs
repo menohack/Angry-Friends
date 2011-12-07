@@ -13,22 +13,6 @@ namespace Library.Engine.Object
 {
     public class GameObjectFactory
     {
-        public GameObject CreateGameObject()
-        {
-            GameObject gameObject = new GameObject("Game Object", new Point(5, 5), 0, new Point(2, 2));
-            return gameObject;
-        }
-
-        public GameObject CreateGameObject(string name)
-        {
-            GameObject gameObject = new GameObject(name, new Point(5, 5), 0, new Point(2, 2));
-            return gameObject;
-        }
-
-        public GameObject CreateTestGameObject()
-        {
-            GameObject gameObject = new TestGame
-        }
 
     }
 }

@@ -10,7 +10,7 @@ namespace Library.GameLogic
     /// </summary>
 	public class Terrain : GameObject
 	{
-		public Terrain(string name, TransformComponent tc, AudioComponent ac, RenderComponent rc) : base(name, tc, ac, rc)
+		public Terrain(string name, TransformComponent tc, AudioComponent ac, RenderComponent rc) : base(name, null, ac, rc)
 		{
 			TransformComponent = new PixelTransformComponent(tc.Position, tc.Rotation, tc.Size, this);
 

@@ -32,7 +32,7 @@ namespace Library.Engine.Object {
                 return transformComponent;
             }
 
-            private set 
+			protected set 
             {
                 if (transformComponent == null)
                 {
