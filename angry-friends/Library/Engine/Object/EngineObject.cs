@@ -69,7 +69,7 @@ namespace Library.Engine.Object {
 		/// EngineObject will try to update at a fixed interval.
 		/// </summary>
         [DataMember]
-		private readonly int UPDATES_PER_SECOND = 60;
+		private readonly int UPDATES_PER_SECOND = 30;
 
 		/// <summary>
 		/// All of the GameObjects this EngineObject has.

@@ -3,6 +3,7 @@ using System.Windows;
 using Library.Engine.Object;
 using Library.Engine.Utilities;
 using System.Runtime.Serialization;
+using System.Diagnostics;
 
 namespace Library.Engine.Component {
 
@@ -52,10 +53,11 @@ namespace Library.Engine.Component {
         private DateTime currentPositionTime;
 
         /// <summary>
-        /// The velocity of this TransformComponent, in pixels per second.
+        /// The maximum amount of miliseconds from a change-in-time we still assume the GameObject is moving.
+        /// We interpolate that the TransformComponent is Translating if the change-in-time since the last move is less than or equal to 1/15 of a second.
+        /// Worst case scenario is we say the GameObject has velocity for 1/30 of a second when it, in fact, does not.
         /// </summary>
-        [DataMember]
-        private Velocity velocity;
+        private readonly int VELOCITY_INTERPOLATION = 68;
 
 		/// <summary>
 		/// The rotation of this TransformComponent.
@@ -77,11 +79,15 @@ namespace Library.Engine.Component {
         {
             get
             {
-                TimeSpan deltaTime = DateTime.Now.TimeOfDay - previousPositionTime.TimeOfDay;
                 Point deltaPosition = new Point(currentPosition.X - previousPosition.X, currentPosition.Y - previousPosition.Y);
+                TimeSpan deltaTime = DateTime.Now.TimeOfDay - previousPositionTime.TimeOfDay;
 
-                velocity = new Velocity(deltaPosition.X / (deltaTime.Milliseconds / 1000.00), deltaPosition.Y / (deltaTime.Milliseconds / 1000.00));
-                return velocity;
+                if (deltaTime.TotalMilliseconds <= VELOCITY_INTERPOLATION)
+                {
+                    deltaTime = currentPositionTime.TimeOfDay - previousPositionTime.TimeOfDay;
+                }
+
+                return new Velocity(deltaPosition.X / (deltaTime.TotalMilliseconds / 1000.00), deltaPosition.Y / (deltaTime.TotalMilliseconds / 1000.00));
             }
         }
 
