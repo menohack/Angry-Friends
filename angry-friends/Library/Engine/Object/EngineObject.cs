@@ -15,7 +15,6 @@ namespace Library.Engine.Object {
     /// </summary>
     public class EngineObjectHelper
     {
-
         /// <summary>
         /// The accessor for the Viewport of EngineObjectHelper.
         /// </summary>

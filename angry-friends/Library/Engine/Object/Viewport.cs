@@ -10,6 +10,8 @@ using System.Windows.Media.Animation;
 using System.Windows.Shapes;
 using System.Collections.Generic;
 using Library.Engine.Component.Graphic;
+using System.Windows.Media.Imaging;
+using Library.Engine.Utilities;
 
 namespace Library.Engine.Object
 {

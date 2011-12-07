@@ -95,8 +95,12 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
-    <None Include="Engine\Assets\default_audio_clip.mp3" />
-    <Resource Include="Engine\Assets\default_sprite_sheet.png" />
+    <Resource Include="Engine\Assets\default_audio_clip.mp3">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Engine\Assets\default_sprite_sheet.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Silverlight\$(SilverlightVersion)\Microsoft.Silverlight.CSharp.targets" />
   <ProjectExtensions>

@@ -83,7 +83,7 @@ namespace Library.Engine.Component.Graphic {
 		/// <param name="deltaTime">The time in milliseconds from the previous update.</param>
 		public void Update(Double deltaTime) {
 			index = (index + (int)(deltaTime / length)) % frames.Count;
-			CurrentFrame = frames[index];
+            CurrentFrame = frames[index];
 		}
 	}
 }

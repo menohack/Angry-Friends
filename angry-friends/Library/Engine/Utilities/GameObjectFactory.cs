@@ -44,12 +44,12 @@ namespace Library.Engine.Utilities
         /// <summary>
         /// The path to an embedded sprite sheet.
         /// </summary>
-        private readonly String PATH_TO_DEFAULT_SPRITE_SHEET = "Library;Engine/Assets/default_sprite_sheet.png";
+        private readonly String PATH_TO_DEFAULT_SPRITE_SHEET = "Library;/Engine/Assets/default_sprite_sheet.png";
 
         /// <summary>
         /// The path to an embedded audio clip.
         /// </summary>
-        private readonly String PATH_TO_DEFAULT_AUDIO_CLIP = "Library;Engine/Assets/default_audio_clip.mp3";
+        private readonly String PATH_TO_DEFAULT_AUDIO_CLIP = "Library;/Engine/Assets/default_audio_clip.mp3";
 
         /// <summary>
         /// The singleton instance of a GameObjectFactory.
