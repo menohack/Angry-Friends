@@ -15,7 +15,6 @@ namespace Library.Engine.Object {
     /// </summary>
     public class EngineObjectHelper
     {
-
         /// <summary>
         /// The accessor for the Viewport of EngineObjectHelper.
         /// </summary>
@@ -95,7 +94,7 @@ namespace Library.Engine.Object {
 		private EngineObject(Viewport viewport) {
 			gameObjects = new List<GameObject>();
             Camera = new Camera(viewport);
-			Input = new Input();
+			Input = Input.Instance;
 
 			// Initialize the timing of the updating of the World.
 			worldUpdateTimer = new EngineTimer(EngineTimer.FromHertzToMiliSeconds(UPDATES_PER_SECOND), new List<IUpdateable> { this });

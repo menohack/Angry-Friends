@@ -28,8 +28,6 @@ namespace Library.Engine.Component {
 		/// The position of this TransformComponent.
 		/// </summary>
 
-		private Point position;
-
         [DataMember]
         private Point currentPosition;
         
@@ -154,13 +152,16 @@ namespace Library.Engine.Component {
 		/// <param name="size">The initial size of this TransformComponent.</param>
 		/// <param name="owner">The GameObject that owns this TransformComponent.</param>
 		public TransformComponent(Point position, int rotation, Point size, GameObject owner = null) : base(owner) {
+			//size and currentPosition *********MUST********** be set before we check that the TransformComponent has a valid position through a setter
             previousPosition = position;
             previousPositionTime = DateTime.Now;
             currentPosition = position;
             currentPositionTime = previousPositionTime;
 
+			this.size = size;
+
+			this.Size = size;
             this.Rotation = rotation;
-            this.Size = size;
 		}
 		
 
@@ -235,7 +236,7 @@ namespace Library.Engine.Component {
 				newPosition = Collide(desiredPosition, this, gameObject.TransformComponent);
 
 				//If we bump into something else sooner
-				if (Distance(position, newPosition) < Distance(position, tempPosition))
+				if (Distance(currentPosition, newPosition) < Distance(currentPosition, tempPosition))
 					tempPosition = newPosition;
 			}
 
@@ -265,16 +266,16 @@ namespace Library.Engine.Component {
 			//Note that the top left of the screen is (0,0), with x increasing to the right and y increasing downward
 
 			//a's bounding box (before moving)
-			double aleft = a.position.X - a.size.X / 2;
-			double aright = a.position.X + a.size.X / 2;
-			double atop = a.position.Y - a.size.Y / 2;
-			double abottom = a.position.Y + a.size.Y / 2;
+			double aleft = a.currentPosition.X - a.size.X / 2;
+			double aright = a.currentPosition.X + a.size.X / 2;
+			double atop = a.currentPosition.Y - a.size.Y / 2;
+			double abottom = a.currentPosition.Y + a.size.Y / 2;
 
 			//b's bounding box
-			double bleft = b.position.X - b.size.X / 2;
-			double bright = b.position.X + b.size.X / 2;
-			double btop = b.position.Y - b.size.Y / 2;
-			double bbottom = b.position.Y + b.size.Y / 2;
+			double bleft = b.currentPosition.X - b.size.X / 2;
+			double bright = b.currentPosition.X + b.size.X / 2;
+			double btop = b.currentPosition.Y - b.size.Y / 2;
+			double bbottom = b.currentPosition.Y + b.size.Y / 2;
 
 			//If the objects overlap to begin with, throw an exception
 			bool overlap = true;
@@ -284,15 +285,15 @@ namespace Library.Engine.Component {
 				throw new CollisionException("Objects collide before movement.");
 
 			//If a doesn't move then we are done colliding
-			if (a.position.Equals(desiredPosition))
+			if (a.currentPosition.Equals(desiredPosition))
 				return desiredPosition;
 
 			//First see if b is within a box around a in its new position and end position
 			//a's path's bounding box
-			double top = Math.Min(a.position.Y, desiredPosition.Y) - a.size.Y / 2;
-			double bottom = Math.Max(a.position.Y, desiredPosition.Y) + a.size.Y / 2;
-			double left = Math.Min(a.position.X, desiredPosition.X) - a.size.X / 2;
-			double right = Math.Max(a.position.X, desiredPosition.X) + a.size.X / 2;
+			double top = Math.Min(a.currentPosition.Y, desiredPosition.Y) - a.size.Y / 2;
+			double bottom = Math.Max(a.currentPosition.Y, desiredPosition.Y) + a.size.Y / 2;
+			double left = Math.Min(a.currentPosition.X, desiredPosition.X) - a.size.X / 2;
+			double right = Math.Max(a.currentPosition.X, desiredPosition.X) + a.size.X / 2;
 
 			//Return the desired position if b is not within the bounding box
 			if (bleft >= right || bright <= left || btop >= bottom || bbottom <= top)
@@ -300,24 +301,24 @@ namespace Library.Engine.Component {
 
 			//Choose points that describe the top diagonal plane
 			Point p1, p2;
-			if (a.position.Y <= desiredPosition.Y) {
-				if (a.position.X <= desiredPosition.X) {
-					p1 = new Point(a.position.X + a.size.X / 2, a.position.Y - a.size.Y / 2);
+			if (a.currentPosition.Y <= desiredPosition.Y) {
+				if (a.currentPosition.X <= desiredPosition.X) {
+					p1 = new Point(a.currentPosition.X + a.size.X / 2, a.currentPosition.Y - a.size.Y / 2);
 					p2 = new Point(desiredPosition.X + a.size.X / 2, desiredPosition.Y - a.size.Y / 2);
 				}
 				else {
 					p1 = new Point(desiredPosition.X - a.size.X / 2, desiredPosition.Y - a.size.Y / 2);
-					p2 = new Point(a.position.X - a.size.X / 2, a.position.Y - a.size.Y / 2);
+					p2 = new Point(a.currentPosition.X - a.size.X / 2, a.currentPosition.Y - a.size.Y / 2);
 				}
 			}
 			else {
-				if (a.position.X <= desiredPosition.X) {
-					p1 = new Point(a.position.X - a.size.X / 2, a.position.Y - a.size.Y / 2);
+				if (a.currentPosition.X <= desiredPosition.X) {
+					p1 = new Point(a.currentPosition.X - a.size.X / 2, a.currentPosition.Y - a.size.Y / 2);
 					p2 = new Point(desiredPosition.X - a.size.X / 2, desiredPosition.Y - a.size.Y / 2);
 				}
 				else {
 					p1 = new Point(desiredPosition.X + a.size.X / 2, desiredPosition.Y - a.size.Y / 2);
-					p2 = new Point(a.position.X + a.size.X / 2, a.position.Y - a.size.Y / 2);
+					p2 = new Point(a.currentPosition.X + a.size.X / 2, a.currentPosition.Y - a.size.Y / 2);
 				}
 			}
 
@@ -330,24 +331,24 @@ namespace Library.Engine.Component {
 				return desiredPosition;
 
 			//Choose points that describe the bottom diagonal plane
-			if (a.position.Y <= desiredPosition.Y) {
-				if (a.position.X <= desiredPosition.X) {
-					p1 = new Point(a.position.X - a.size.X / 2, a.position.Y + a.size.Y / 2);
+			if (a.currentPosition.Y <= desiredPosition.Y) {
+				if (a.currentPosition.X <= desiredPosition.X) {
+					p1 = new Point(a.currentPosition.X - a.size.X / 2, a.currentPosition.Y + a.size.Y / 2);
 					p2 = new Point(desiredPosition.X - a.size.X / 2, desiredPosition.Y + a.size.Y / 2);
 				}
 				else {
 					p1 = new Point(desiredPosition.X + a.size.X / 2, desiredPosition.Y + a.size.Y / 2);
-					p2 = new Point(a.position.X + a.size.X / 2, a.position.Y + a.size.Y / 2);
+					p2 = new Point(a.currentPosition.X + a.size.X / 2, a.currentPosition.Y + a.size.Y / 2);
 				}
 			}
 			else {
-				if (a.position.X <= desiredPosition.X) {
-					p1 = new Point(a.position.X + a.size.X / 2, a.position.Y + a.size.Y / 2);
+				if (a.currentPosition.X <= desiredPosition.X) {
+					p1 = new Point(a.currentPosition.X + a.size.X / 2, a.currentPosition.Y + a.size.Y / 2);
 					p2 = new Point(desiredPosition.X + a.size.X / 2, desiredPosition.Y + a.size.Y / 2);
 				}
 				else {
 					p1 = new Point(desiredPosition.X - a.size.X / 2, desiredPosition.Y + a.size.Y / 2);
-					p2 = new Point(a.position.X - a.size.X / 2, a.position.Y + a.size.Y / 2);
+					p2 = new Point(a.currentPosition.X - a.size.X / 2, a.currentPosition.Y + a.size.Y / 2);
 				}
 			}
 
@@ -360,7 +361,7 @@ namespace Library.Engine.Component {
 				return desiredPosition;
 
 			//There is a collision. Compute the longest distance a can travel before hitting b.
-			p1 = a.position;
+			p1 = a.currentPosition;
 			p2 = desiredPosition;
 
 			//If the object is moving only vertically or horizontally then we check two positions to prevent division by zero
@@ -375,30 +376,30 @@ namespace Library.Engine.Component {
 			double[] y = new double[4];
 
 			//To the left of b
-			x[0] = b.position.X - b.size.X / 2 - a.size.X / 2;
+			x[0] = b.currentPosition.X - b.size.X / 2 - a.size.X / 2;
 			y[0] = (p2.Y - p1.Y) * (x[0] - p1.X) / (p2.X - p1.X) + p1.Y;
 
 			//To the right of b
-			x[1] = b.position.X + b.size.X / 2 + a.size.X / 2;
+			x[1] = b.currentPosition.X + b.size.X / 2 + a.size.X / 2;
 			y[1] = (p2.Y - p1.Y) * (x[1] - p1.X) / (p2.X - p1.X) + p1.Y;
 
 			//Above b
-			y[2] = b.position.Y - b.size.Y / 2 - a.size.Y / 2;
+			y[2] = b.currentPosition.Y - b.size.Y / 2 - a.size.Y / 2;
 			x[2] = (p2.X - p1.X) * (y[2] - p1.Y) / (p2.Y - p1.Y) + p1.X;
 
 			//Below b
-			y[3] = b.position.Y + b.size.Y / 2 + a.size.Y / 2;
+			y[3] = b.currentPosition.Y + b.size.Y / 2 + a.size.Y / 2;
 			x[3] = (p2.X - p1.X) * (y[3] - p1.Y) / (p2.Y - p1.Y) + p1.X;
 
 			Point newPosition = desiredPosition;
-			double distance = Distance(a.position, desiredPosition);
+			double distance = Distance(a.currentPosition, desiredPosition);
 			for (; i < iMax; i++)
 			//if (x[i] > a.position.X && x[i] < desiredPosition.X || x[i] < a.position.X || x[i] > desiredPosition.X)
 			//if (y[i] > a.position.Y && y[i] < desiredPosition.Y || y[i] < a.position.Y && y[i] > desiredPosition.Y)
 					{
 				Point tempPosition = new Point(x[i], y[i]);
 				//double tempDistance = Math.Sqrt(x[i] * x[i] + y[i] * y[i]);
-				double tempDistance = Distance(tempPosition, a.position);
+				double tempDistance = Distance(tempPosition, a.currentPosition);
 				if (tempDistance < distance) {
 					distance = tempDistance;
 					newPosition = tempPosition;

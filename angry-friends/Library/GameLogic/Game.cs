@@ -41,7 +41,7 @@ namespace Library.GameLogic {
 
 			EngineObject.Instance.Input.Target = redBox;
 
-			TransformComponent tc2 = new TransformComponent(new Point(300, 400), 0, new Point(50, 50), null);
+			TransformComponent tc2 = new TransformComponent(new Point(310, 400), 0, new Point(50, 50), null);
 			RenderComponent rc2 = new RenderComponent(new Animation(new Frame(Colors.Blue, new Point(50, 50))), null); ;
 			AudioComponent ac2 = new AudioComponent(new Dictionary<String, MediaElement>(), null);
 			GameObject blueBox = new GameObject("blueBox", tc2, ac2, rc2);
