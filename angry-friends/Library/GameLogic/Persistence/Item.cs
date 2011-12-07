@@ -23,7 +23,7 @@ namespace Library.GameLogic.Persistence
     /// <summary>
     /// Item represents an item that a Player can have.
     /// </summary>
-	public class Item : GameObject
+	public class Item 
 	{
         /// <summary>
         /// The type of this item.
@@ -44,8 +44,8 @@ namespace Library.GameLogic.Persistence
         /// Constructor for a new item.
         /// </summary>
         /// <param name="name">The name of this item.</param>
-		public Item(String name) : base(name)
-		{
-		}
+		//public Item(String name) : base(name)
+		//{
+		//}
 	}
 }

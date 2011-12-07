@@ -25,7 +25,7 @@ namespace Library.Engine.Object
 	/// <summary>
 	/// The Input class handles keyboard and mouse events and translates them into events that the game logic can understand.
 	/// </summary>
-	public class Controller
+	public class Input
 	{
 		public event AimEventHandler AimEvent;
 		public event MoveEventHandler MoveEvent;
@@ -39,7 +39,7 @@ namespace Library.Engine.Object
 			set;
 		}
 
-		public Controller()
+		public Input()
 		{
 
 		}

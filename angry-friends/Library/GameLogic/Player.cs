@@ -74,7 +74,7 @@ namespace Library.GameLogic
         /// Constructor for a new Player.
         /// </summary>
         /// <param name="name">The name of this Player.</param>
-		public Player(string name): base(name){}
+		//public Player(string name): base(name){}
 
         /// <summary>
         /// Aim this player's shot.

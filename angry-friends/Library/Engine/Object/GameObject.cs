@@ -16,23 +16,84 @@ namespace Library.Engine.Object {
 	[DataContract]
     public class GameObject : IUpdateable {
 
+        /// <summary>
+        /// This GameObject's TransformComponent.
+        /// </summary>
+        private TransformComponent transformComponent;
+
 		/// <summary>
 		/// This GameObject's TransformComponent.
 		/// </summary>
-		[DataMember]
-        public TransformComponent TransformComponent { get; set; }
+        [DataMember]
+        public TransformComponent TransformComponent 
+        {
+            get
+            {
+                return transformComponent;
+            }
+
+            private set 
+            {
+                if (transformComponent == null)
+                {
+                    transformComponent = value;
+                    TransformComponent.Owner = this;
+                }
+            } 
+        }
+
+        /// <summary>
+        /// This GameObject's AudioComponent.
+        /// </summary>
+        private AudioComponent audioComponent;
+
 
 		/// <summary>
 		/// The GameObject's AudioComponent.
 		/// </summary>
         [DataMember]
-        public AudioComponent AudioComponent { get; set; }
+        public AudioComponent AudioComponent 
+        {
+            get
+            {
+                return audioComponent;
+            }
+
+            private set
+            {
+                if (audioComponent == null)
+                {
+                    audioComponent = value;
+                    AudioComponent.Owner = this;
+                }
+            } 
+        }
+
+        /// <summary>
+        /// This GameObject's AudioComponent.
+        /// </summary>
+        private RenderComponent renderComponent;
 
 		/// <summary>
 		/// This GameObject's RenderComponent.
 		/// </summary>
         [DataMember]
-        public RenderComponent RenderComponent { get; set; }
+        public RenderComponent RenderComponent
+        {
+            get
+            {
+                return renderComponent;
+            }
+
+            private set 
+            {
+                if (renderComponent == null)
+                {
+                    renderComponent = value;
+                    RenderComponent.Owner = this;
+                }
+            } 
+        }
 
 		/// <summary>
 		/// This GameObject's name.
@@ -58,26 +119,31 @@ namespace Library.Engine.Object {
         [DataMember]
         private static int currentUID;
 
-		//TODO: GameObjectFactory.
-
-        public GameObject(string name)
+        /// <summary>
+        /// The Constructor for a new GameObject.
+        /// </summary>
+        /// <param name="name">The GameObject's name.</param>
+        /// <param name="transformComponent">The GameObject's TransformComponent.</param>
+        /// <param name="audioComponent">The GameObject's AudioComponent.</param>
+        /// <param name="renderComponent">The GameObject's RenderComponent.</param>
+        public GameObject(String name, TransformComponent transformComponent, AudioComponent audioComponent, RenderComponent renderComponent)
         {
-			this.Name = name;
-        }
-
-        public GameObject(string name, TransformComponent tc, AudioComponent ac, RenderComponent rc)
-        {
-            EngineObject.Instance.AddGameObject(this);
-            Name = name;
             UID = NextUID();
+            Name = name;
             Children = new List<GameObject>();
-            TransformComponent = tc;
-            TransformComponent.Owner = this;
-            AudioComponent = ac;
-            AudioComponent.Owner = this;
-            RenderComponent = rc;
-            RenderComponent.Owner = this;
+
+            TransformComponent = transformComponent;
+            AudioComponent = audioComponent;
+            RenderComponent = renderComponent;
+
+            EngineObject.Instance.AddGameObject(this);
         }
+
+        /// <summary>
+        /// Updates this GameObject everytime EngineObject updates.
+        /// </summary>
+        /// <param name="deltaTime">The time, in milliseconds, since the last update.</param>
+        public virtual void Update(double deltaTime) {}
 
 		/// <summary>
 		/// Creates a UID for a GameObject.
@@ -86,28 +152,5 @@ namespace Library.Engine.Object {
 		private static int NextUID() {
 			return ++currentUID;
 		}
-
-		/// <summary>
-		/// Destroys a given GameObject.
-		/// </summary>
-		/// <param name="gameObject">The GameObject that will be destroyed.</param>
-		public static void Destroy(GameObject gameObject) {
-			EngineObject.Instance.RemoveGameObject(gameObject);
-		}
-
-        /// <summary>
-        /// Updates this GameObject everytime EngineObject updates.
-        /// </summary>
-        /// <param name="deltaTime">The time, in milliseconds, since the last update.</param>
-		public virtual void Update(double deltaTime)
-		{
-			EngineObjectHelper.Viewport.AddGameObjectToRedrawQueue(this);
-		}
-
-        private TransformComponent CreateDefaultTransformComponent()
-        {
-			TransformComponent transformComponent = new TransformComponent(new Point(1, 1), 0, new Point(50, 50), this);
-			return transformComponent;
-        }
     }
 }
