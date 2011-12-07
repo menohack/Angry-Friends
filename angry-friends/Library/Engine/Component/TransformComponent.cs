@@ -285,7 +285,7 @@ namespace Library.Engine.Component {
 		/// <param name="a">The TransformComponent that is moving.</param>
 		/// <param name="b">The TransformComponent that is fixed.</param>
 		/// <returns>The closest position towards desiredPosition that a can move before hitting b.</returns>
-		private static Point Collide(Point desiredPosition, TransformComponent a, TransformComponent b) {
+		public virtual Point Collide(Point desiredPosition, TransformComponent a, TransformComponent b) {
 			//Note that the top left of the screen is (0,0), with x increasing to the right and y increasing downward
 
 			//a's bounding box (before moving)
