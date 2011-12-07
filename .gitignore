@@ -173,3 +173,10 @@ angry-friends/Client/Bin/Debug/zh-Hans/System.Windows.Controls.Navigation.resour
 angry-friends/Client/Bin/Debug/zh-Hant/System.Windows.Controls.Navigation.resources.dll
 angry-friends/Client/Bin/Debug/System.Windows.Controls.Navigation.xml
 angry-friends/Client/obj/Debug/ResolveAssemblyReference.cache
+angry-friends/Client/obj/Debug/Arena.g.cs
+angry-friends/Client/obj/Debug/Arena.g.i.cs
+angry-friends/Client/obj/Debug/Room.g.cs
+angry-friends/Client/obj/Debug/Room.g.i.cs
+angry-friends/Client/obj/Debug/Rooms.g.cs
+angry-friends/Client/obj/Debug/Rooms.g.i.cs
+angry-friends/Client/obj/Debug/TestGame.g.i.cs

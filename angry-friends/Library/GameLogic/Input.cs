@@ -1,6 +1,7 @@
 ﻿using System.Windows.Input;
 using System.Windows;
 using System;
+using Library.Engine.Object;
 
 namespace Library.GameLogic
 {
@@ -35,6 +36,8 @@ namespace Library.GameLogic
 
 		public delegate void AimEventHandler(UIElement sender, AimEventArgs e);
 		public delegate void MoveEventHandler(UIElement sender, MoveEventArgs e);
+
+		public GameObject Target { get; set; }
 
 		private Input()
 		{

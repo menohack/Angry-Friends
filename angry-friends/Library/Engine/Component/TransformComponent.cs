@@ -55,8 +55,6 @@ namespace Library.Engine.Component {
 			}
 		}
 
-		private Path path;
-
 		/// <summary>
 		/// The mimimum angle of rotation.
 		/// </summary>
@@ -195,16 +193,9 @@ namespace Library.Engine.Component {
 		/// <param name="owner">The GameObject that owns this TransformComponent.</param>
 		
 		public TransformComponent(Point position, int rotation, Point size, GameObject owner) : base(owner) {
-			//First, set the fields
-			this.position = position;
-			this.size = size;
-			this.rotation = rotation;
-
-			//Then check if this is a valid position
-			this.Position = position;
-
-			//The GameObject now has physics associated with it so it needs to be updated regularly
-			//World.Instance.AddToRedrawQueue(owner);
+            Position = position;
+            Rotation = rotation;
+            Size = size;
 		}
 		
 
@@ -228,17 +219,10 @@ namespace Library.Engine.Component {
 		/// Resizes by a given factor.
 		/// </summary>
 		/// <param name="resizeFactor">The factor by which to resize.</param>
-		public void Resize(Point resizeFactor) {
-			Size = new Point(Size.X * resizeFactor.X, Size.Y * resizeFactor.Y);
-		}
-
-		private DateTime lastTime;
-
-		public void Update(double deltaTime)
-		{
-			Point newPosition = new Point(Position.X + Velocity.X * deltaTime / 1000.0, Position.Y + Velocity.Y * deltaTime / 1000.0);
-			Position = newPosition;
-		}
+        public void Resize(Point resizeFactor)
+        {
+            Size = new Point(Size.X * resizeFactor.X, Size.Y * resizeFactor.Y);
+        }
 
 		/// <summary>
 		/// If this linear-motion produces collision, CollisionDetection returns the modified value that satisifies non-collision requirements.
@@ -261,7 +245,6 @@ namespace Library.Engine.Component {
 				if (Distance(position, newPosition) < Distance(position, tempPosition))
 					tempPosition = newPosition;
 			}
-
 
 			return tempPosition;
 		}

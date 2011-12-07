@@ -77,12 +77,16 @@ namespace Library.Engine.Object {
         [DataMember]
 		private IList<GameObject> gameObjects;
 
+        /// <summary>
         /// The Camera that controls moving the Viewport of this EngineObject.
         /// </summary>
         [DataMember]
         public Camera Camera { get; private set; }
 
-		public Controller controller;
+        /// <summary>
+        /// The Input for this EngineObject.
+        /// </summary>
+        public Input Input { get; private set; }
 
 		/// <summary>
 		/// The constructor for a new instance of EngineObject.
@@ -91,7 +95,7 @@ namespace Library.Engine.Object {
 		private EngineObject(Viewport viewport) {
 			gameObjects = new List<GameObject>();
             Camera = new Camera(viewport);
-			controller = new Controller();
+			Input = new Input();
 
 			// Initialize the timing of the updating of the World.
 			worldUpdateTimer = new EngineTimer(EngineTimer.FromHertzToMiliSeconds(UPDATES_PER_SECOND), new List<IUpdateable> { this });
@@ -107,7 +111,7 @@ namespace Library.Engine.Object {
             {
                 gameObject.Update(deltaTime);
             }
-            Camera.Viewport.UpdateGameObjects();
+            Camera.Viewport.RedrawGameObjects();
 		}
 
 		/// <summary>
@@ -124,6 +128,7 @@ namespace Library.Engine.Object {
 		public void AddGameObject(GameObject gameObject) {
 			if (!gameObjects.Contains(gameObject)) {
 				gameObjects.Add(gameObject);
+                Camera.Viewport.AddGameObjectToRedrawQueue(gameObject);
 			}
 		}
 		/// <summary>

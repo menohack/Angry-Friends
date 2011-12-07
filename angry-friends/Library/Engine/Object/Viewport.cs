@@ -38,16 +38,17 @@ namespace Library.Engine.Object
         }
 
         /// <summary>
-        /// Updates the GameObjects in this Viewport.
+        /// Redraws the GameObjects in this Viewport.
         /// </summary>
-        public void UpdateGameObjects()
+        public void RedrawGameObjects()
         {
-
             // Remove previously drawn GameObjects.
             foreach (GameObject gameObject in redrawQueue)
             {
-				if (gameObject == null)
-					continue;
+                if (gameObject == null)
+                {
+                    continue;
+                }
 
 				Frame frame;
                 previousFrames.TryGetValue(gameObject, out frame);

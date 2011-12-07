@@ -30,25 +30,25 @@ namespace Client
 
 		protected override void OnKeyDown(KeyEventArgs e)
 		{
-			EngineObject.Instance.controller.OnKeyDown(this, e);
+			EngineObject.Instance.Input.OnKeyDown(this, e);
 			e.Handled = true;
 		}
 
 		protected override void OnKeyUp(KeyEventArgs e)
 		{
-			EngineObject.Instance.controller.OnKeyUp(this, e);
+			EngineObject.Instance.Input.OnKeyUp(this, e);
 			e.Handled = true;
 		}
 
 		protected override void OnMouseLeftButtonDown(MouseButtonEventArgs e)
 		{
-			EngineObject.Instance.controller.OnMouseLeftButtonDown(this, e);
+			EngineObject.Instance.Input.OnMouseLeftButtonDown(this, e);
 			e.Handled = true;
 		}
 
 		protected override void OnMouseMove(MouseEventArgs e)
 		{
-			EngineObject.Instance.controller.OnMouseMove(this, e);
+			EngineObject.Instance.Input.OnMouseMove(this, e);
 		}
     }
 }

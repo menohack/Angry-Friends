@@ -7,23 +7,26 @@ namespace Library.Engine.Component {
 	/// </summary>
 	public class BaseComponent {
 
-        private GameObject _owner = null;
+        /// <summary>
+        /// The GameObject that owns this Component.
+        /// </summary>
+        private GameObject owner = null;
 
 		/// <summary>
-		/// The GameObject that owns this Component.
+		/// The GameObject that owns this Component. This can only be set once.
 		/// </summary>
 		public GameObject Owner
         {
             get
             {
-                return _owner;
+                return owner;
             }
             set
             {
-                if (_owner != null)
-                    throw new Exception("Can't reset owner in component");
-                else
-                    _owner = value;
+                if (owner == null)
+                {
+                    owner = value;
+                }
             }
         }
 
