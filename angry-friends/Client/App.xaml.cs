@@ -15,7 +15,7 @@ namespace Client {
 
 		private void Application_Startup(object sender, StartupEventArgs e) {
 			this.RootVisual = new Grid();
-            GUIStateHelper.Instance.NextUserControl();
+            GUIStateHelper.Instance.NextUserControl();;
 		}
 
 		private void Application_Exit(object sender, EventArgs e) {

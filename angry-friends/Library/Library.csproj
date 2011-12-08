@@ -82,6 +82,7 @@
     <Compile Include="GameLogic\Game.cs" />
     <Compile Include="GameLogic\GUI.cs" />
     <Compile Include="GameLogic\Input.cs" />
+    <Compile Include="GameLogic\InteractiveGameObject.cs" />
     <Compile Include="GameLogic\MapInfo.cs" />
     <Compile Include="GameLogic\Persistence\Item.cs" />
     <Compile Include="GameLogic\Persistence\Restriction.cs" />

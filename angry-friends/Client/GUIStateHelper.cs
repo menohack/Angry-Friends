@@ -46,7 +46,7 @@ namespace Client
         /// The private constructor for the GUIStateHelper.
         /// </summary>
         private GUIStateHelper() {
-            position = -1;
+            position = 2;
         }
 
         /// <summary>
@@ -73,7 +73,9 @@ namespace Client
         private void SwitchUserControl()
         {
             UserControl userControl = new UserControl();
-            
+            Grid root = App.Current.RootVisual as Grid;
+            root.Children.Clear();
+
             switch (position) {
                 case 0:
                     userControl = new LoadingScreen();
@@ -86,11 +88,11 @@ namespace Client
                     break;
                 case 3:
                     userControl = new Game();
+                    root.KeyDown += (s, e) => userControl.GetType().InvokeMember("MyKeyDown", System.Reflection.BindingFlags.InvokeMethod, null, userControl, new object[] { e });
+                    root.KeyUp += (s, e) => userControl.GetType().InvokeMember("MyKeyUp", System.Reflection.BindingFlags.InvokeMethod, null, userControl, new object[] { e });
                     break;
             }
 
-            Grid root = App.Current.RootVisual as Grid;
-            root.Children.Clear();
             root.Children.Add(userControl);
         }
     }

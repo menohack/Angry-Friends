@@ -7,12 +7,14 @@ using System.Windows.Media;
 using Library.Engine.Component;
 using Library.Engine.Component.Graphic;
 using System.Diagnostics;
+using Library.Engine.Utilities;
 
 namespace Library.GameLogic
 {
-    /// <summary>
-    /// The state this Player is in.
-    /// </summary>
+
+	/// <summary>
+	/// The states that a Player can be in.
+	/// </summary>
 	public enum GameState
 	{
 		MOVING, AIMING, SHOOTING, IDLE, DEAD, SPECIAL
@@ -21,11 +23,12 @@ namespace Library.GameLogic
     /// <summary>
     /// Player represents a User that is in-game, on a team, and in a match.
     /// </summary>
-	public class Player : GameObject
+	public class Player : InteractiveGameObject
 	{
-        /// <summary>
-        /// This player's current state.
-        /// </summary>
+
+		/// <summary>
+		/// This player's current state.
+		/// </summary>
 		private GameState currentState;
 
         /// <summary>
@@ -58,38 +61,22 @@ namespace Library.GameLogic
         /// </summary>
 		private AmmoType currentAmmo;
 
-		public Player(string name, TransformComponent tc, AudioComponent ac, RenderComponent rc) : base(name, tc, ac, rc)
+		/// <summary>
+		/// The Constructor for a new Player.
+		/// </summary>
+		/// <param name="name">The Player's name.</param>
+		/// <param name="transformComponent">The Player's TransformComponent.</param>
+		/// <param name="audioComponent">The Player's AudioComponent.</param>
+		/// <param name="renderComponent">The Player's RenderComponent.</param>
+		public Player(string name, Velocity moveSpeed, TransformComponent tc, AudioComponent ac, RenderComponent rc) : base(name, moveSpeed, tc, ac, rc)
 		{
-		}
-
-		public override void Update(double deltaTime)
-		{
-            deltaTime /= 1000.00;
-            Point velocity = new Point(100 * deltaTime, 100 * deltaTime);
-			TransformComponent.Translate(velocity);
-            Debug.WriteLine(TransformComponent.Velocity);
-		}
-							
-
-        /// <summary>
-        /// Constructor for a new Player.
-        /// </summary>
-        /// <param name="name">The name of this Player.</param>
-		//public Player(string name): base(name){}
+		}					
 
         /// <summary>
         /// Aim this player's shot.
         /// </summary>
 		public void Aim()
 		{
-		}
-
-        /// <summary>
-        /// Move this player.
-        /// </summary>
-		public void Move(UIElement sender, MoveEventArgs e)
-		{
-			
 		}
 
         /// <summary>
