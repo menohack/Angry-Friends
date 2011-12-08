@@ -73,11 +73,11 @@
     <Compile Include="Engine\Utilities\GameObjectFactory.cs" />
     <Compile Include="Engine\Utilities\Velocity.cs" />
     <Compile Include="Engine\Utilities\WriteableBitmapExtension.cs" />
-    <Compile Include="Engine\Utilities\ExternalAsset.cs" />
+    <Compile Include="Engine\Utilities\Assets\ExternalAsset.cs" />
     <Compile Include="Engine\Utilities\Network.cs" />
     <Compile Include="Engine\Utilities\RoomInfo.cs" />
     <Compile Include="Engine\Utilities\SpriteSheetLoader.cs" />
-    <Compile Include="Engine\Utilities\DownloadManager.cs" />
+    <Compile Include="Engine\Utilities\Assets\AssetManager.cs" />
     <Compile Include="GameLogic\Ammo.cs" />
     <Compile Include="GameLogic\Game.cs" />
     <Compile Include="GameLogic\GUI.cs" />
@@ -100,18 +100,14 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Engine\Assets\default_audio_clip.mp3">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="Engine\Assets\default_sprite_sheet.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-  </ItemGroup>
-  <ItemGroup>
     <EmbeddedResource Include="res.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>res.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="GameLogic\Networking\" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Silverlight\$(SilverlightVersion)\Microsoft.Silverlight.CSharp.targets" />
   <ProjectExtensions>

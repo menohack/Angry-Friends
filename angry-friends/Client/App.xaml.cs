@@ -3,6 +3,9 @@ using System.Windows;
 using System.Windows.Controls;
 
 namespace Client {
+    /// <summary>
+    /// This is the "hook" for our Silverlight application.  The threading starts here.
+    /// </summary>
 	public partial class App : Application {
 
 		public App() {
@@ -13,9 +16,13 @@ namespace Client {
 			InitializeComponent();
 		}
 
+        /// <summary>
+        /// The startup of this Application.
+        /// </summary>
 		private void Application_Startup(object sender, StartupEventArgs e) {
 			this.RootVisual = new Grid();
-            GUIStateHelper.Instance.NextUserControl();;
+            // Handle the state of the GUI.
+            GUIStateHelper.Instance.NextUserControl();
 		}
 
 		private void Application_Exit(object sender, EventArgs e) {

@@ -117,9 +117,9 @@
     <None Include="Properties\AppManifest.xml" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Library\Library.csproj">
+    <ProjectReference Include="..\Library\Model.csproj">
       <Project>{8A47AC40-00DA-4EFB-B9FB-F7642EA8BE2F}</Project>
-      <Name>Library</Name>
+      <Name>Model</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

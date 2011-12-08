@@ -41,11 +41,9 @@ namespace Client
         /// </summary>
         public void Initialize()
         {
-            DownloadManager.Instance.Download(PATH_TO_REQUIRED_ASSETS, ExternalAsset.ExternalAssetType.AssetCollection, (e) =>
+            AssetManager.Instance.Download(PATH_TO_REQUIRED_ASSETS, ExternalAsset.ExternalAssetType.AssetCollection, (e) =>
                 {
-                    Dictionary<String, object> dictionary = (Dictionary<String, object>)e.Value;
-                    BitmapImage bitmapImage = (BitmapImage) dictionary["default_sprite_sheet"];
-                    //IList<Library.Engine.Component.Graphic.Frame> frames = SpriteSheetLoader.Instance.GetFramesFromSpriteSheet(new SpriteSheetLoader.SpriteSheet(bitmapImage, new Point(29, 29), new Point(bitmapImage.PixelWidth, bitmapImage.PixelHeight)), new Point(0, 0), new Point(3, 0));
+                    Dictionary<String, ExternalAsset> dictionary = (Dictionary<String, ExternalAsset>)e.GetAssetCollection();
                     GUIStateHelper.Instance.NextUserControl();
                 });
         }
