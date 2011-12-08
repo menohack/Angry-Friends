@@ -15,13 +15,7 @@ namespace Client {
 
 		private void Application_Startup(object sender, StartupEventArgs e) {
 			this.RootVisual = new Grid();
-			SwitchTo(new TestGame());
-		}
-
-		public static void SwitchTo(UserControl control){
-			Grid root = App.Current.RootVisual as Grid;
-			root.Children.Clear();
-			root.Children.Add(control);
+            GUIStateHelper.Instance.NextUserControl();
 		}
 
 		private void Application_Exit(object sender, EventArgs e) {

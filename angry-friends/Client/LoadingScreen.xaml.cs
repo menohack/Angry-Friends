@@ -1,0 +1,53 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Net;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Documents;
+using System.Windows.Input;
+using System.Windows.Media;
+using System.Windows.Media.Animation;
+using System.Windows.Shapes;
+using Library.Engine.Utilities;
+using System.Diagnostics;
+using Library.Engine.Object;
+using System.Windows.Media.Imaging;
+
+namespace Client
+{
+    /// <summary>
+    /// Displays a loading screen while requierd assets are being downloaded.
+    /// </summary>
+    public partial class LoadingScreen : UserControl
+    {
+
+        /// <summary>
+        /// The path to the required assets on XML.
+        /// </summary>
+        private static readonly String PATH_TO_REQUIRED_ASSETS = "http://alexanderschiffhauer.com/AngryFriends/Assets/AssetCollections/required_assets.XML";
+
+        /// <summary>
+        /// The constructor for a new LoadingScreen.
+        /// </summary>
+        public LoadingScreen ()
+        {
+            InitializeComponent();
+            Initialize();
+        }
+
+        /// <summary>
+        /// Initializes this LoadingScreen.
+        /// </summary>
+        public void Initialize()
+        {
+            DownloadManager.Instance.Download(PATH_TO_REQUIRED_ASSETS, ExternalAsset.ExternalAssetType.AssetCollection, (e) =>
+                {
+                    Dictionary<String, object> dictionary = (Dictionary<String, object>)e.Value;
+                    BitmapImage bitmapImage = (BitmapImage) dictionary["default_sprite_sheet"];
+                    //IList<Library.Engine.Component.Graphic.Frame> frames = SpriteSheetLoader.Instance.GetFramesFromSpriteSheet(new SpriteSheetLoader.SpriteSheet(bitmapImage, new Point(29, 29), new Point(bitmapImage.PixelWidth, bitmapImage.PixelHeight)), new Point(0, 0), new Point(3, 0));
+                    GUIStateHelper.Instance.NextUserControl();
+                });
+        }
+    }
+}

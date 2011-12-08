@@ -5,24 +5,29 @@ namespace Library.Engine.Utilities {
 	public class Network {
 		const string url = "http://luisgrimaldo.com/angryfriends/";
 		public static void GetAllRooms(Action<List<RoomInfo>> onLoaded) {
-			Web.Instance.DownloadString(url + "room.php?action=get", data => {
+			DownloadManager.Instance.Download(url + "room.php?action=get", ExternalAsset.ExternalAssetType.Text, data => {
+                string dataString = (string) data.Value;
 				List<RoomInfo> rooms = new List<RoomInfo>();
-				string[] lines = data.Contains("\n") ? data.Split('\n') : new[] { data };
+                string[] lines = dataString.Contains("\n") ? dataString.Split('\n') : new[] { dataString };
 				for (int i = 0; i < lines.Length; i++) rooms.Add(ParseRoomInformation(lines[i]));
 				onLoaded(rooms);
 			});
 		}
-		public static void GetRoomById(int id, Action<RoomInfo> onLoaded) {
-			Web.Instance.DownloadString(url + "room.php?action=get&id=" + id, data =>
-				onLoaded(ParseRoomInformation(data)));
-		}
+        public static void GetRoomById(int id, Action<RoomInfo> onLoaded)
+        {
+            DownloadManager.Instance.Download(url + "room.php?action=get&id=" + id, ExternalAsset.ExternalAssetType.Text, data =>
+            {
+                string dataString = (string)data.Value;
+                onLoaded(ParseRoomInformation(dataString));
+            });
+        }
 		public static void JoinRoom(int id, string fbid, Action<RoomInfo> onLoaded) {
 			GetRoomPlayersByIdAsString(id, players => {
-				Web.Instance.DownloadString(url + "room.php?action=set&id=" + id + "&players=" + players + "," + fbid, data => onLoaded(ParseRoomInformation(data)));
+				DownloadManager.Instance.Download(url + "room.php?action=set&id=" + id + "&players=" + players + "," + fbid, ExternalAsset.ExternalAssetType.Text, data => onLoaded(ParseRoomInformation((string)data.Value)));
 			});
 		}
 		public static void CreateRoom(string fbid, Action<RoomInfo> onLoaded) {
-			Web.Instance.DownloadString(url + "room.php?action=set", data =>
+			DownloadManager.Instance.Download(url + "room.php?action=set", ExternalAsset.ExternalAssetType.Text, data =>
 				JoinRoom(Convert.ToInt32(data), fbid, room => onLoaded(room)));
 		}
 		static RoomInfo ParseRoomInformation(string data) {
@@ -35,18 +40,18 @@ namespace Library.Engine.Utilities {
 		}
 		public static void ChangeRoomSize(int id, int total, Action onLoaded) {
 			GetRoomPlayersByIdAsString(id, players => {
-				Web.Instance.DownloadString(url + "room.php?action=set&id=" + id + "&players=" + players + "&total=" + total, x => onLoaded());
+				DownloadManager.Instance.Download(url + "room.php?action=set&id=" + id + "&players=" + players + "&total=" + total, ExternalAsset.ExternalAssetType.Text, x => onLoaded());
 			});
 		}
 		public static void GetGameById(int id, Action<GameInfo> onLoaded) {
-			Web.Instance.DownloadString(url + "game.php?action=get&id=" + id, data => {
+			DownloadManager.Instance.Download(url + "game.php?action=get&id=" + id, ExternalAsset.ExternalAssetType.Text, data => {
 				GameInfo game = new GameInfo();
-				game.State = data;
+				game.State = (string)data.Value;
 				onLoaded(game);
 			});
 		}
 		public static void JoinGame(int id, Action onLoaded) {
-			Web.Instance.DownloadString(url + "game.php?action=set&id=" + id, data => onLoaded());
+			DownloadManager.Instance.Download(url + "game.php?action=set&id=" + id, ExternalAsset.ExternalAssetType.Text, data => onLoaded());
 		}
 		static void GetRoomPlayersByIdAsString(int id, Action<string> onLoaded) {
 			GetAllRooms(data => {

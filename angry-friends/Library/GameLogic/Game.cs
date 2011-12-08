@@ -9,6 +9,7 @@ using Library.Engine.Object;
 using Library.Engine.Component;
 using Library.Engine;
 using System.Runtime.Serialization;
+using Library.Engine.Utilities;
 
 namespace Library.GameLogic {
 
@@ -50,6 +51,9 @@ namespace Library.GameLogic {
 			RenderComponent rc3 = new RenderComponent(new Animation(new Frame(Colors.Blue, new Point(50, 50))), null); ;
 			AudioComponent ac3 = new AudioComponent(new Dictionary<String, MediaElement>(), null);
 			Terrain terrain = new Terrain("terrain", tc3, ac3, rc3);
+
+
+
 
 		}
 

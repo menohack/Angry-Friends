@@ -13,9 +13,9 @@ using Library.Engine.Object;
 
 namespace Client
 {
-    public partial class TestGame : UserControl
+    public partial class Game : UserControl
     {
-        public TestGame()
+        public Game()
         {
             InitializeComponent();
             Initialize();

@@ -76,18 +76,19 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Arena.xaml.cs">
-      <DependentUpon>Arena.xaml</DependentUpon>
+    <Compile Include="GUIStateHelper.cs" />
+    <Compile Include="LoadingScreen.xaml.cs">
+      <DependentUpon>LoadingScreen.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Room.xaml.cs">
-      <DependentUpon>Room.xaml</DependentUpon>
+    <Compile Include="GameLobby.xaml.cs">
+      <DependentUpon>GameLobby.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Rooms.xaml.cs">
-      <DependentUpon>Rooms.xaml</DependentUpon>
+    <Compile Include="Lobby.xaml.cs">
+      <DependentUpon>Lobby.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="TestGame.xaml.cs">
-      <DependentUpon>TestGame.xaml</DependentUpon>
+    <Compile Include="Game.xaml.cs">
+      <DependentUpon>Game.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -95,19 +96,19 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </ApplicationDefinition>
-    <Page Include="Arena.xaml">
+    <Page Include="LoadingScreen.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Room.xaml">
+    <Page Include="GameLobby.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Rooms.xaml">
+    <Page Include="Lobby.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="TestGame.xaml">
+    <Page Include="Game.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

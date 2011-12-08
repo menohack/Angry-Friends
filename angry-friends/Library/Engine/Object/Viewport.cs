@@ -35,6 +35,16 @@ namespace Library.Engine.Object
         /// The constructor for a new Viewport.
         /// </summary>
         public Viewport() : base() {
+
+            //Web.Instance.DownloadImage("default_sprite_sheet.png", bmp =>
+            //{
+            var image = new Image();
+            var source = new BitmapImage(new Uri("Engine/Assets/default_sprite_sheet.png", UriKind.Relative));
+            source.ImageOpened += (s, e) => MessageBox.Show(source.PixelWidth + ";" + source.PixelHeight);
+            image.Source = source;
+            Children.Add(image);
+            //});
+
             previousFrames = new Dictionary<GameObject, Frame>();
             redrawQueue = new List<GameObject>();
         }
