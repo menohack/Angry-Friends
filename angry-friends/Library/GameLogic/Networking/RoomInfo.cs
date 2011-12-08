@@ -1,4 +1,4 @@
-﻿namespace Library.Engine.Utilities {
+﻿namespace Model.Engine.Utilities {
 	public class RoomInfo {
 		public int ID { get; set; }
 		public string[] Players { get; set; }

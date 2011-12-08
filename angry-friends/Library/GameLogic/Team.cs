@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Runtime.Serialization;
 
-namespace Library.GameLogic
+namespace Model.GameLogic
 {
     /// <summary>
     /// Team represents a collection of Players that are on the same side and fighting together.

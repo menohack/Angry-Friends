@@ -1,10 +1,10 @@
 ﻿using System.Windows.Input;
 using System.Windows;
 using System;
-using Library.Engine.Object;
+using Model.Engine.Object;
 using System.Collections.Generic;
 
-namespace Library.GameLogic
+namespace Model.GameLogic
 {
 	/// <summary>
 	/// The Input class handles keyboard and mouse events and translates them into events that the game logic can understand.

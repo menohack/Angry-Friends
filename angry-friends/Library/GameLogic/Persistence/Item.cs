@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
-using Library.Engine.Object;
+using Model.Engine.Object;
 using System;
 
-namespace Library.GameLogic.Persistence
+namespace Model.GameLogic.Persistence
 {
     /// <summary>
     /// Attributes for an Item.

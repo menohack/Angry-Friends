@@ -1,11 +1,11 @@
-﻿using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Media.Imaging;
-using System.Windows.Media;
-using System;
+﻿using System;
 using System.Runtime.Serialization;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
 
-namespace Library.Engine.Component.Graphic {
+namespace Model.Engine.Component.Media.Rendering {
 
 	/// <summary>
 	/// Frame is the base class for an Animation.  

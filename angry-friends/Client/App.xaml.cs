@@ -22,7 +22,7 @@ namespace Client {
 		private void Application_Startup(object sender, StartupEventArgs e) {
 			this.RootVisual = new Grid();
             // Handle the state of the GUI.
-            GUIStateHelper.Instance.NextUserControl();
+            ViewHelper.Instance.NextUserControl();
 		}
 
 		private void Application_Exit(object sender, EventArgs e) {

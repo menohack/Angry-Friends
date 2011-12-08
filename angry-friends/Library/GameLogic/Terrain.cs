@@ -1,9 +1,9 @@
-﻿using Library.Engine.Object;
-using Library.Engine.Component;
-using System.Windows;
-using Library.Engine.Component.Graphic;
+﻿using Model.Engine.Component.Media;
+using Model.Engine.Component.Media.Rendering;
+using Model.Engine.Object.GameObjects;
+using Model.Engine.Component.Transform;
 
-namespace Library.GameLogic
+namespace Model.GameLogic
 {
     /// <summary>
     /// Terrain is the land on which the team falls and fights.

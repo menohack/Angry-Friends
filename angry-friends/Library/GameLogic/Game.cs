@@ -1,17 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Runtime.Serialization;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using Library.Engine.Component.Graphic;
-using Library.Engine.Object;
-using Library.Engine.Component;
-using Library.Engine;
-using System.Runtime.Serialization;
-using Library.Engine.Utilities;
+using Model.Engine.Component.Media;
+using Model.Engine.Component.Media.Rendering;
+using Model.Engine.Component.Transform;
+using Model.Engine.Object;
+using Model.Engine.Object.GameObjects;
 
-namespace Library.GameLogic {
+namespace Model.GameLogic {
 
 	/// <summary>
 	/// This class represents the Game. All game-logic stems from here.

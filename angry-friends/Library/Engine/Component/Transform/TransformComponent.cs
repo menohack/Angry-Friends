@@ -1,11 +1,11 @@
 ﻿using System;
-using System.Windows;
-using Library.Engine.Object;
-using Library.Engine.Utilities;
 using System.Runtime.Serialization;
-using System.Diagnostics;
+using System.Windows;
+using Model.Engine.Object;
+using Model.Engine.Object.GameObjects;
+using Model.Engine.Utilities;
 
-namespace Library.Engine.Component {
+namespace Model.Engine.Component.Transform {
 	/// <summary>
 	/// Handles positioning, size and rotation of a GameObject.
 	/// </summary>
@@ -193,11 +193,11 @@ namespace Library.Engine.Component {
         /// If this linear-motion produces collision, CollisionDetection returns the modified value that satisifies non-collision requirements.
         /// </summary>
         /// <param name="desiredPosition">The position to move to, if possible.</param>
-        /// <returns>The new position.</returns>
+        /// <returns>The final position after processing collision.</returns>
         private Point CollisionDetection(Point desiredPosition)
         {
-            Point tempPosition = desiredPosition;
-            Point newPosition = desiredPosition;
+            Point temporaryPosition = desiredPosition;
+            Point finalPosition = desiredPosition;
 
             //Find the distance we can move before colliding
             foreach (GameObject gameObject in EngineObject.Instance.GetGameObjects())
@@ -206,14 +206,14 @@ namespace Library.Engine.Component {
                 if (gameObject.TransformComponent == null || gameObject.TransformComponent.Equals(this))
                     continue;
 
-                newPosition = CollisionHelper.Instance.Collide(desiredPosition, this, gameObject.TransformComponent);
+                finalPosition = CollisionHelper.Instance.Collide(desiredPosition, this, gameObject.TransformComponent);
 
                 //If we bump into something else sooner
-                if (EngineMath.Distance(Position, newPosition) < EngineMath.Distance(Position, tempPosition))
-                    tempPosition = newPosition;
+                if (EngineMath.Distance(Position, finalPosition) < EngineMath.Distance(Position, temporaryPosition))
+                    temporaryPosition = finalPosition;
             }
 
-            return tempPosition;
+            return temporaryPosition;
         }
 	}
 }

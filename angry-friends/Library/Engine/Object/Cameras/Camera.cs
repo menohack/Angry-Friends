@@ -1,8 +1,8 @@
-﻿using System.Windows.Controls;
+﻿using System.Runtime.Serialization;
 using System.Windows;
-using System.Diagnostics;
-using System.Runtime.Serialization;
-namespace Library.Engine.Object {
+using System.Windows.Controls;
+
+namespace Model.Engine.Object.Cameras {
 
 	/// <summary>
 	/// Represents a Camera that handles the positioning of the "viewport"; Camera determines what the screen should render.

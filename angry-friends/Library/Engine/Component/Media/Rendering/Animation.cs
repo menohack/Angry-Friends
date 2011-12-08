@@ -1,8 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using Library.Engine.Utilities;
 using System.Runtime.Serialization;
-namespace Library.Engine.Component.Graphic {
+using Model.Engine.Utilities;
+
+namespace Model.Engine.Component.Media.Rendering {
 
 	/// <summary>
 	/// Contains all data pertaining to a series of Frames representing an Animation.

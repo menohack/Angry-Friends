@@ -1,4 +1,4 @@
-﻿namespace Library.GameLogic.Persistence
+﻿namespace Model.GameLogic.Persistence
 {
     /// <summary>
     /// All in-game ranks.

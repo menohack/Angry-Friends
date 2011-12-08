@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Windows;
-namespace Library.Engine.Utilities {
+
+namespace Model.Engine.Utilities {
 	/// <summary>
 	/// EngineMath process Engine-related math.
 	/// </summary>

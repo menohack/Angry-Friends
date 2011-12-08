@@ -15,37 +15,37 @@ namespace Client
     /// <summary>
     /// Assists in dealing with the different states of our GUI/Logic.
     /// </summary>
-    public class GUIStateHelper
+    public class ViewHelper
     {
         /// <summary>
-        /// The instance of this GUIStateHelper.
+        /// The instance of this ViewHelper.
         /// </summary>
-        private static GUIStateHelper instance;
+        private static ViewHelper instance;
 
         /// <summary>
-        /// The instance of this GUIStateHelper.
+        /// The instance of this ViewHelper.
         /// </summary>
-        public static GUIStateHelper Instance
+        public static ViewHelper Instance
         {
             get
             {
                 if (instance == null)
                 {
-                    instance = new GUIStateHelper();
+                    instance = new ViewHelper();
                 }
                 return instance;
             }
         }
 
         /// <summary>
-        /// The position of this GUIStateHelper.
+        /// The position of this ViewHelper.
         /// </summary>
         private int position;
 
         /// <summary>
-        /// The private constructor for the GUIStateHelper.
+        /// The private constructor for the ViewHelper.
         /// </summary>
-        private GUIStateHelper() {
+        private ViewHelper() {
             position = 2;
         }
 

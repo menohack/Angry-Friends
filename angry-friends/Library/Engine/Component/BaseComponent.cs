@@ -1,6 +1,6 @@
-﻿using Library.Engine.Object;
-using System;
-namespace Library.Engine.Component {
+﻿using Model.Engine.Object.GameObjects;
+
+namespace Model.Engine.Component {
 
 	/// <summary>
 	/// The base for all Components.  It stores the GameObject that owns this Component.

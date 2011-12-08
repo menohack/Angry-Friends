@@ -1,13 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Windows;
-using Library.Engine.Component;
-using Library.Engine.Component.Graphic;
-using System.Windows.Media;
 using System.Runtime.Serialization;
-using Library.Engine.Utilities;
+using Model.Engine.Component.Media;
+using Model.Engine.Component.Media.Rendering;
+using Model.Engine.Component.Transform;
+using Model.Engine.Utilities;
 
-namespace Library.Engine.Object {
+namespace Model.Engine.Object.GameObjects {
 
 	/// <summary>
 	/// GameObject represents a base for all in-game objects. 
@@ -46,7 +45,6 @@ namespace Library.Engine.Object {
         /// This GameObject's AudioComponent.
         /// </summary>
         private AudioComponent audioComponent;
-
 
 		/// <summary>
 		/// The GameObject's AudioComponent.

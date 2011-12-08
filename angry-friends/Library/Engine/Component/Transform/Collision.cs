@@ -1,17 +1,8 @@
 ﻿using System;
-using System.Net;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Documents;
-using System.Windows.Ink;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Animation;
-using System.Windows.Shapes;
-using Library.Engine.Utilities;
-using Library.Engine.Object;
+using Model.Engine.Utilities;
 
-namespace Library.Engine.Component
+namespace Model.Engine.Component.Transform
 {
     /// <summary>
     /// Handles the collision of a TransformComponent.

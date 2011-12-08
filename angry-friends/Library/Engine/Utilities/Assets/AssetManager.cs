@@ -2,14 +2,11 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Net;
-using System.Threading;
 using System.Windows.Controls;
 using System.Windows.Media.Imaging;
 using System.Xml;
-using Library.GameLogic;
-using System.Diagnostics;
 
-namespace Library.Engine.Utilities {
+namespace Model.Engine.Utilities {
 
 	/// <summary>
 	/// AssetManager is responsible for downloading ExternalAssets.
@@ -136,7 +133,7 @@ namespace Library.Engine.Utilities {
         }
 
 		/// <summary>
-		/// Download an audio clip.
+		/// Download an audio clip.  This DOES NOT work.  I couldn't tell you why, either...
 		/// </summary>
 		/// <param name="URL">The URL that points to an image.</param>
 		/// <param name="onLoaded">The event to be fired once the download is completed.</param>
@@ -185,7 +182,7 @@ namespace Library.Engine.Utilities {
                                     });
                                     break;
                                 case EXTERNAL_ASSET_TYPE_AUDIO_CLIP:
-                                    //externalAssetsLength++;
+                                    externalAssetsToProcess++;
                                     DownloadAudioClip(externalAssetURL, loadedAudioClip =>
                                     {
                                         externalAssets.Add(externalAssetName, loadedAudioClip);

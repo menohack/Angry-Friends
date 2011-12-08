@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Library.Engine.Utilities {
+namespace Model.Engine.Utilities {
 	public class Network {
 		const string url = "http://luisgrimaldo.com/angryfriends/";
 		public static void GetAllRooms(Action<List<RoomInfo>> onLoaded) {

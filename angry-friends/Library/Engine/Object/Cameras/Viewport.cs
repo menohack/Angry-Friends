@@ -1,20 +1,9 @@
-﻿using System;
-using System.Net;
-using System.Windows;
+﻿using System.Collections.Generic;
 using System.Windows.Controls;
-using System.Windows.Documents;
-using System.Windows.Ink;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Animation;
-using System.Windows.Shapes;
-using System.Collections.Generic;
-using Library.Engine.Component.Graphic;
-using System.Windows.Media.Imaging;
-using Library.Engine.Utilities;
+using Model.Engine.Component.Media.Rendering;
+using Model.Engine.Object.GameObjects;
 
-namespace Library.Engine.Object
-{
+namespace Model.Engine.Object.Cameras {
     /// <summary>
     /// Viewport represents the drawable screen of this game.
     /// </summary>
@@ -35,16 +24,6 @@ namespace Library.Engine.Object
         /// The constructor for a new Viewport.
         /// </summary>
         public Viewport() : base() {
-
-            //Web.Instance.DownloadImage("default_sprite_sheet.png", bmp =>
-            //{
-            var image = new Image();
-            var source = new BitmapImage(new Uri("Engine/Assets/default_sprite_sheet.png", UriKind.Relative));
-            source.ImageOpened += (s, e) => MessageBox.Show(source.PixelWidth + ";" + source.PixelHeight);
-            image.Source = source;
-            Children.Add(image);
-            //});
-
             previousFrames = new Dictionary<GameObject, Frame>();
             redrawQueue = new List<GameObject>();
         }

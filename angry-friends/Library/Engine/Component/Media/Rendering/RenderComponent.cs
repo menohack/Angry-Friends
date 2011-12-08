@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using Library.Engine.Object;
-using Library.Engine.Utilities;
-using System.Windows;
-using System.Windows.Controls;
 using System.Runtime.Serialization;
-namespace Library.Engine.Component.Graphic {
+using Model.Engine.Object;
+using Model.Engine.Object.GameObjects;
+using Model.Engine.Utilities;
+
+namespace Model.Engine.Component.Media.Rendering {
 
 	/// <summary>
 	/// Handles the rendering of a GameObject. 

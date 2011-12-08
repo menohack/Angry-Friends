@@ -1,15 +1,11 @@
-﻿using Library.GameLogic.Persistence;
-using Library.Engine.Object;
-using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Windows;
-using System.Windows.Media;
-using Library.Engine.Component;
-using Library.Engine.Component.Graphic;
-using System.Diagnostics;
-using Library.Engine.Utilities;
+using Model.Engine.Component.Media;
+using Model.Engine.Component.Media.Rendering;
+using Model.GameLogic.Persistence;
+using Model.Engine.Component.Transform;
 
-namespace Library.GameLogic
+namespace Model.GameLogic
 {
 
 	/// <summary>

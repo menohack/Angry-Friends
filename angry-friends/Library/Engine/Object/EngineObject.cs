@@ -1,14 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Diagnostics;
-using System.Windows.Controls;
-using Library.Engine.Utilities;
-using Library.GameLogic;
-using System.Windows;
-using Library.Engine.Component.Graphic;
 using System.Runtime.Serialization;
-namespace Library.Engine.Object {
+using System.Windows.Controls;
+using Model.Engine.Object.Cameras;
+using Model.Engine.Object.GameObjects;
+using Model.Engine.Utilities;
+using Model.GameLogic;
+
+namespace Model.Engine.Object {
 
     /// <summary>
     /// EngineHelper assists by encapsulating required fields for the creation of EngineObject.

@@ -1,11 +1,11 @@
-﻿
-using Library.Engine.Object;
-using Library.Engine.Component;
-using Library.Engine.Component.Graphic;
-using Library.Engine.Utilities;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Input;
-namespace Library.GameLogic
+using Model.Engine.Component.Media;
+using Model.Engine.Component.Media.Rendering;
+using Model.Engine.Component.Transform;
+using Model.Engine.Object.GameObjects;
+
+namespace Model.GameLogic
 {
 
 	/// <summary>

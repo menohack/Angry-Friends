@@ -1,9 +1,10 @@
 ﻿using System;
-using System.IO;
-using System.Windows.Media.Imaging;
-using System.Windows.Controls;
 using System.Collections.Generic;
-namespace Library.Engine.Utilities {
+using System.IO;
+using System.Windows.Controls;
+using System.Windows.Media.Imaging;
+
+namespace Model.Engine.Utilities {
 
     /// <summary>
     /// A representation of Engine-needed external assets.

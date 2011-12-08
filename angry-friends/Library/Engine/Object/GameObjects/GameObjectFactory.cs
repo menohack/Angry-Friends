@@ -1,20 +1,12 @@
 ﻿using System;
-using System.Net;
+using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Documents;
-using System.Windows.Ink;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Animation;
-using System.Windows.Shapes;
-using Library.Engine.Object;
-using Library.Engine.Component;
-using Library.Engine.Component.Graphic;
-using System.Collections.Generic;
-using System.Windows.Media.Imaging;
+using Model.Engine.Component.Media;
+using Model.Engine.Component.Media.Rendering;
+using Model.Engine.Component.Transform;
 
-namespace Library.Engine.Utilities
+namespace Model.Engine.Object.GameObjects
 {
     /// <summary>
     /// Assists in the creation of GameObjects.

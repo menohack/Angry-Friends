@@ -9,7 +9,7 @@
     <ProjectTypeGuids>{A1591282-1198-4647-A2B1-27E5FF5F6F3B};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Library</RootNamespace>
+    <RootNamespace>Model</RootNamespace>
     <AssemblyName>Library</AssemblyName>
     <TargetFrameworkIdentifier>Silverlight</TargetFrameworkIdentifier>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
@@ -59,19 +59,19 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Engine\Component\AudioComponent.cs" />
+    <Compile Include="Engine\Component\Media\AudioComponent.cs" />
     <Compile Include="Engine\Component\BaseComponent.cs" />
-    <Compile Include="Engine\Component\Collision.cs" />
-    <Compile Include="Engine\Component\Graphic\Animation.cs" />
-    <Compile Include="Engine\Component\Graphic\Frame.cs" />
-    <Compile Include="Engine\Component\Graphic\RenderComponent.cs" />
-    <Compile Include="Engine\Component\TransformComponent.cs" />
-    <Compile Include="Engine\Object\Camera.cs" />
-    <Compile Include="Engine\Object\GameObject.cs" />
+    <Compile Include="Engine\Component\Transform\Collision.cs" />
+    <Compile Include="Engine\Component\Media\Rendering\Animation.cs" />
+    <Compile Include="Engine\Component\Media\Rendering\Frame.cs" />
+    <Compile Include="Engine\Component\Media\Rendering\RenderComponent.cs" />
+    <Compile Include="Engine\Component\Transform\TransformComponent.cs" />
+    <Compile Include="Engine\Object\Cameras\Camera.cs" />
+    <Compile Include="Engine\Object\GameObjects\GameObject.cs" />
     <Compile Include="Engine\Object\EngineObject.cs" />
-    <Compile Include="Engine\Object\Viewport.cs" />
+    <Compile Include="Engine\Object\Cameras\Viewport.cs" />
     <Compile Include="GameLogic\Networking\GameInfo.cs" />
-    <Compile Include="Engine\Object\GameObjectFactory.cs" />
+    <Compile Include="Engine\Object\GameObjects\GameObjectFactory.cs" />
     <Compile Include="Engine\Utilities\Assets\ExternalAsset.cs" />
     <Compile Include="GameLogic\Networking\Network.cs" />
     <Compile Include="GameLogic\Networking\RoomInfo.cs" />

@@ -1,8 +1,8 @@
-﻿using Library.Engine.Object;
-using Library.GameLogic.Persistence;
+﻿using Model.Engine.Object;
+using Model.GameLogic.Persistence;
 using System;
 
-namespace Library.GameLogic
+namespace Model.GameLogic
 {
     /// <summary>
     /// The types of Ammo in-game.

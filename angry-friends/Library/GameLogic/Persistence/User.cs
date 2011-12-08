@@ -2,7 +2,7 @@
 using System;
 using System.Runtime.Serialization;
 
-namespace Library.GameLogic.Persistence
+namespace Model.GameLogic.Persistence
 {
     /// <summary>
     /// User represents someone who uses the Game.  It contains data relating to the User's friends, rank, etc., and contains methods for acting on the game, such as inviting another User to the game.

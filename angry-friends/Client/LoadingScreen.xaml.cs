@@ -9,9 +9,9 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
 using System.Windows.Shapes;
-using Library.Engine.Utilities;
+using Model.Engine.Utilities;
 using System.Diagnostics;
-using Library.Engine.Object;
+using Model.Engine.Object;
 using System.Windows.Media.Imaging;
 
 namespace Client
@@ -44,7 +44,7 @@ namespace Client
             AssetManager.Instance.Download(PATH_TO_REQUIRED_ASSETS, ExternalAsset.ExternalAssetType.AssetCollection, (e) =>
                 {
                     Dictionary<String, ExternalAsset> dictionary = (Dictionary<String, ExternalAsset>)e.GetAssetCollection();
-                    GUIStateHelper.Instance.NextUserControl();
+                    ViewHelper.Instance.NextUserControl();
                 });
         }
     }

@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.Windows.Controls;
-using Library.Engine.Object;
 using System.Runtime.Serialization;
-namespace Library.Engine.Component {
+using System.Windows.Controls;
+using Model.Engine.Object.GameObjects;
+
+namespace Model.Engine.Component.Media {
 
 	/// <summary>
 	/// Handles the control of a GameObject's audio.
