@@ -34,6 +34,16 @@ namespace Client
 			e.Handled = true;
 		}
 
+		public void MyKeyDown(KeyEventArgs e)
+		{
+			OnKeyDown(e);
+		}
+
+		public void MyKeyUp(KeyEventArgs e)
+		{
+			OnKeyUp(e);
+		}
+
 		protected override void OnKeyUp(KeyEventArgs e)
 		{
 			EngineObject.Instance.Input.OnKeyUp(this, e);
@@ -43,6 +53,12 @@ namespace Client
 		protected override void OnMouseLeftButtonDown(MouseButtonEventArgs e)
 		{
 			EngineObject.Instance.Input.OnMouseLeftButtonDown(this, e);
+			e.Handled = true;
+		}
+
+		protected override void OnMouseRightButtonDown(MouseButtonEventArgs e)
+		{
+			EngineObject.Instance.Input.OnMouseRightButtonDown(this, e);
 			e.Handled = true;
 		}
 

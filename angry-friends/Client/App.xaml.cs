@@ -21,6 +21,13 @@ namespace Client {
 		public static void SwitchTo(UserControl control){
 			Grid root = App.Current.RootVisual as Grid;
 			root.Children.Clear();
+			control.Focus();
+			root.KeyDown += (s,e) => control.GetType().InvokeMember("MyKeyDown", System.Reflection.BindingFlags.InvokeMethod, null, control, new object[] { e });
+			root.KeyUp += (s, e) => control.GetType().InvokeMember("MyKeyUp", System.Reflection.BindingFlags.InvokeMethod, null, control, new object[] { e });
+			//root.MouseMove += (s, e) => control.GetType().InvokeMember("MyMouseMove", System.Reflection.BindingFlags.InvokeMethod, null, control, new object[] { e });
+			//root.MouseLeftButtonDown += (s, e) => control.GetType().InvokeMember("MyMouseLeftButtonDown", System.Reflection.BindingFlags.InvokeMethod, null, control, new object[] { e });
+			//root.MouseRightButtonDown += (s, e) => control.GetType().InvokeMember("MyMouseRightButtonDown", System.Reflection.BindingFlags.InvokeMethod, null, control, new object[] { e });
+
 			root.Children.Add(control);
 		}
 

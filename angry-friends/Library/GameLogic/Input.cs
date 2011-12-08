@@ -2,6 +2,7 @@
 using System.Windows;
 using System;
 using Library.Engine.Object;
+using System.Collections.Generic;
 
 namespace Library.GameLogic
 {
@@ -37,11 +38,13 @@ namespace Library.GameLogic
 		public delegate void AimEventHandler(UIElement sender, AimEventArgs e);
 		public delegate void MoveEventHandler(UIElement sender, MoveEventArgs e);
 
-		public GameObject Target { get; set; }
+		public Player Target { get; set; }
+
+		private List<Key> depressed;
 
 		private Input()
 		{
-
+			depressed = new List<Key>();
 		}
 
 		public static Input Instance
@@ -59,17 +62,39 @@ namespace Library.GameLogic
 
 		public void OnKeyDown(UIElement sender, KeyEventArgs e)
 		{
-			MoveEventArgs args = new MoveEventArgs();
-			if (MoveEvent != null)
-				MoveEvent(sender, args);
+			if (Target == null)
+				return;
+
+			depressed.Add(e.Key);
+
+			switch (e.Key)
+			{
+				case Key.A:
+					Target.MoveLeft();
+					break;
+				case Key.D:
+					Target.MoveRight();
+					break;
+				default:
+					break;
+			}
 		}
 
 		public void OnKeyUp(object sender, KeyEventArgs e)
 		{
+			if (Target == null)
+				return;
 
+			if (depressed.Remove(e.Key))
+				Target.Stop();
 		}
 
 		public void OnMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+		{
+
+		}
+
+		public void OnMouseRightButtonDown(object sender, MouseButtonEventArgs e)
 		{
 
 		}

@@ -46,6 +46,8 @@ namespace Library.GameLogic {
 			AudioComponent ac2 = new AudioComponent(new Dictionary<String, MediaElement>(), null);
 			GameObject blueBox = new GameObject("blueBox", tc2, ac2, rc2);
 
+			
+
 			TransformComponent tc3 = new TransformComponent(new Point(600, 400), 0, new Point(50, 50), null);
 			RenderComponent rc3 = new RenderComponent(new Animation(new Frame(Colors.Blue, new Point(50, 50))), null); ;
 			AudioComponent ac3 = new AudioComponent(new Dictionary<String, MediaElement>(), null);
