@@ -47,16 +47,6 @@ namespace Model.GameLogic
         /// </summary>
 		private Item bottomSlot;
 
-        /// <summary>
-        /// A IList of available Ammo.
-        /// </summary>
-		private IList<Ammo> ammo;
-
-        /// <summary>
-        /// The current Ammo selected.
-        /// </summary>
-		private AmmoType currentAmmo;
-
 		/// <summary>
 		/// The Constructor for a new Player.
 		/// </summary>
@@ -80,15 +70,6 @@ namespace Model.GameLogic
         /// </summary>
 		public void Shoot()
 		{
-		}
-
-        /// <summary>
-        /// Change this player's current Ammo.
-        /// </summary>
-        /// <param name="newAmmo">The new Ammo to change to.</param>
-		public void ChangeAmmo(AmmoType newAmmo)
-		{
-            currentAmmo = newAmmo;
 		}
 	}
 }

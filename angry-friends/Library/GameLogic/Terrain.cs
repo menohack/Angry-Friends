@@ -12,9 +12,7 @@ namespace Model.GameLogic
 	{
 		public Terrain(string name, TransformComponent tc, AudioComponent ac, RenderComponent rc) : base(name, tc, ac, rc)
 		{
-			//TransformComponent = new PixelTransformComponent(tc.Position, tc.Rotation, tc.Size, this);
 
 		}
-
 	}
 }

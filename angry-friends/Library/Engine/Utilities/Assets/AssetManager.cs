@@ -51,7 +51,7 @@ namespace Model.Engine.Utilities {
         /// <summary>
         /// Accessor for the dictionary of ExternalAssets downloaded.
         /// </summary>
-        private static Dictionary<String, ExternalAsset> externalAssets;
+        public Dictionary<String, ExternalAsset> ExternalAssets { get; private set; }
 		
         /// <summary>
         /// Accessor for the singleton pattern of AssetManager.
@@ -71,7 +71,7 @@ namespace Model.Engine.Utilities {
         /// </summary>
         private AssetManager()
         {
-            externalAssets = new Dictionary<String, ExternalAsset>();
+            ExternalAssets = new Dictionary<String, ExternalAsset>();
         }
 
 		/// <summary>
@@ -177,7 +177,7 @@ namespace Model.Engine.Utilities {
                                 case EXTERNAL_ASSET_TYPE_IMAGE:
                                     externalAssetsToProcess++;
                                     DownloadBitmapImage(externalAssetURL, loadedImage => {
-                                        externalAssets.Add(externalAssetName, loadedImage);
+                                        ExternalAssets.Add(externalAssetName, loadedImage);
                                         DispatchAssetCollection(--externalAssetsToProcess, onLoaded);
                                     });
                                     break;
@@ -185,7 +185,7 @@ namespace Model.Engine.Utilities {
                                     externalAssetsToProcess++;
                                     DownloadAudioClip(externalAssetURL, loadedAudioClip =>
                                     {
-                                        externalAssets.Add(externalAssetName, loadedAudioClip);
+                                        ExternalAssets.Add(externalAssetName, loadedAudioClip);
                                         DispatchAssetCollection(--externalAssetsToProcess, onLoaded);
                                     });
                                     break;
@@ -205,7 +205,7 @@ namespace Model.Engine.Utilities {
         {
             if (externalAssetsToProcess == 0)
             {
-                onLoaded(externalAssets);
+                onLoaded(ExternalAssets);
             }
         }
 	}
