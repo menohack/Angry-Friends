@@ -157,7 +157,7 @@ namespace Library.GameLogic
 		/// <summary>
 		/// The InteractiveGameObject's maximum movement speed.
 		/// </summary>
-		private Velocity moveSpeed;
+		private Point moveSpeed;
 
 		/// <summary>
 		/// The Constructor for a new InteractiveGameObject.
@@ -166,7 +166,7 @@ namespace Library.GameLogic
 		/// <param name="transformComponent">The InteractiveGameObject's TransformComponent.</param>
 		/// <param name="audioComponent">The InteractiveGameObject's AudioComponent.</param>
 		/// <param name="renderComponent">The InteractiveGameObject's RenderComponent.</param>
-		public InteractiveGameObject(string name, Velocity moveSpeed, TransformComponent tc, AudioComponent ac, RenderComponent rc) : base(name, tc, ac, rc)
+		public InteractiveGameObject(string name, Point moveSpeed, TransformComponent tc, AudioComponent ac, RenderComponent rc) : base(name, tc, ac, rc)
 		{
 			verticalMoveState = new VerticalIdleState();
 			horizontalMoveState = new HorizontalIdleState();

@@ -40,7 +40,7 @@ namespace Library.GameLogic {
 			TransformComponent tc = new TransformComponent(new Point(200, 200), 0, new Point(50, 50), null);
 			RenderComponent rc = new RenderComponent(new Animation(new Frame(Colors.Red, new Point(50, 50))), null); ;
 			AudioComponent ac = new AudioComponent(new Dictionary<String, MediaElement>(), null);
-			Player redBox = new Player("redBox", new Velocity(500.0, 500.0), tc, ac, rc);
+			Player redBox = new Player("redBox", new Point(500.0, 500.0), tc, ac, rc);
 			currentPlayer = redBox;
 
 			//Set the player as the target of user input.

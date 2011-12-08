@@ -46,7 +46,7 @@ namespace Client
         /// The private constructor for the GUIStateHelper.
         /// </summary>
         private GUIStateHelper() {
-            position =-1;
+            position = 2;
         }
 
         /// <summary>

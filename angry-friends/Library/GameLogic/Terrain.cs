@@ -17,16 +17,4 @@ namespace Library.GameLogic
 		}
 
 	}
-
-	public class PixelTransformComponent : TransformComponent
-	{
-		public PixelTransformComponent(Point position, int rotation, Point size, GameObject owner) : base(position, rotation, size, owner)
-		{
-		}
-
-		public override Point Collide(Point desiredPosition, TransformComponent a, TransformComponent b)
-		{
-			return new Point();
-		}
-	}
 }

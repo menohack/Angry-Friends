@@ -54,7 +54,7 @@ namespace Library.Engine.Utilities {
         /// <summary>
         /// Accessor for the dictionary of ExternalAssets downloaded.
         /// </summary>
-        public static Dictionary<String, ExternalAsset> ExternalAssets { get; private set; }
+        private static Dictionary<String, ExternalAsset> externalAssets;
 		
         /// <summary>
         /// Accessor for the singleton pattern of AssetManager.
@@ -74,7 +74,7 @@ namespace Library.Engine.Utilities {
         /// </summary>
         private AssetManager()
         {
-            ExternalAssets = new Dictionary<String, ExternalAsset>();
+            externalAssets = new Dictionary<String, ExternalAsset>();
         }
 
 		/// <summary>
@@ -180,7 +180,7 @@ namespace Library.Engine.Utilities {
                                 case EXTERNAL_ASSET_TYPE_IMAGE:
                                     externalAssetsToProcess++;
                                     DownloadBitmapImage(externalAssetURL, loadedImage => {
-                                        ExternalAssets.Add(externalAssetName, loadedImage);
+                                        externalAssets.Add(externalAssetName, loadedImage);
                                         DispatchAssetCollection(--externalAssetsToProcess, onLoaded);
                                     });
                                     break;
@@ -188,7 +188,7 @@ namespace Library.Engine.Utilities {
                                     //externalAssetsLength++;
                                     DownloadAudioClip(externalAssetURL, loadedAudioClip =>
                                     {
-                                        ExternalAssets.Add(externalAssetName, loadedAudioClip);
+                                        externalAssets.Add(externalAssetName, loadedAudioClip);
                                         DispatchAssetCollection(--externalAssetsToProcess, onLoaded);
                                     });
                                     break;
@@ -208,7 +208,7 @@ namespace Library.Engine.Utilities {
         {
             if (externalAssetsToProcess == 0)
             {
-                onLoaded(ExternalAssets);
+                onLoaded(externalAssets);
             }
         }
 	}

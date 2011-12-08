@@ -104,7 +104,6 @@ namespace Library.Engine.Utilities
                 }
 
                 WriteableBitmap spriteSheetWriteableBitmap = new WriteableBitmap((BitmapSource)spriteSheet.Image);
-                spriteSheetWriteableBitmap = spriteSheetWriteableBitmap.Copy();
                 WriteableBitmap desiredFrame = new WriteableBitmap((int) spriteSheet.FrameSize.X, (int) spriteSheet.FrameSize.Y);
 
                 desiredFrame.Blit(new Rect(0, 0, spriteSheet.FrameSize.X, spriteSheet.FrameSize.Y), spriteSheetWriteableBitmap, new Rect(x, y, spriteSheet.FrameSize.X, spriteSheet.FrameSize.Y));

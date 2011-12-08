@@ -68,7 +68,7 @@ namespace Library.GameLogic
 		/// <param name="transformComponent">The Player's TransformComponent.</param>
 		/// <param name="audioComponent">The Player's AudioComponent.</param>
 		/// <param name="renderComponent">The Player's RenderComponent.</param>
-		public Player(string name, Velocity moveSpeed, TransformComponent tc, AudioComponent ac, RenderComponent rc) : base(name, moveSpeed, tc, ac, rc)
+		public Player(string name, Point moveSpeed, TransformComponent tc, AudioComponent ac, RenderComponent rc) : base(name, moveSpeed, tc, ac, rc)
 		{
 		}					
 
