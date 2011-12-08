@@ -28,6 +28,10 @@ namespace Client
             new EngineObjectHelper(canvas);
         }
 
+		/// <summary>
+		/// This method is called before a KeyDown event.
+		/// </summary>
+		/// <param name="e">The event arguments of the key press.</param>
 		protected override void OnKeyDown(KeyEventArgs e)
 		{
 			EngineObject.Instance.Input.OnKeyDown(this, e);
@@ -44,24 +48,40 @@ namespace Client
 			OnKeyUp(e);
 		}
 
+		/// <summary>
+		/// This method is called before a KeyUp event.
+		/// </summary>
+		/// <param name="e">The event arguments of the key release.</param>
 		protected override void OnKeyUp(KeyEventArgs e)
 		{
 			EngineObject.Instance.Input.OnKeyUp(this, e);
 			e.Handled = true;
 		}
 
+		/// <summary>
+		/// This method is called before a MouseRightButtonDown event.
+		/// </summary>
+		/// <param name="e">The event arguments of the button press.</param>
 		protected override void OnMouseLeftButtonDown(MouseButtonEventArgs e)
 		{
 			EngineObject.Instance.Input.OnMouseLeftButtonDown(this, e);
 			e.Handled = true;
 		}
 
+		/// <summary>
+		/// This method is called before a MouseLeftButtonDown event.
+		/// </summary>
+		/// <param name="e">The event arguments of the button press.</param>
 		protected override void OnMouseRightButtonDown(MouseButtonEventArgs e)
 		{
 			EngineObject.Instance.Input.OnMouseRightButtonDown(this, e);
 			e.Handled = true;
 		}
 
+		/// <summary>
+		/// This method is called before a MouseMove event.
+		/// </summary>
+		/// <param name="e">The event arguments of the mouse movement.</param>
 		protected override void OnMouseMove(MouseEventArgs e)
 		{
 			EngineObject.Instance.Input.OnMouseMove(this, e);

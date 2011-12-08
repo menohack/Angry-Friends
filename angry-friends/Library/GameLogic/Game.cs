@@ -9,6 +9,7 @@ using Library.Engine.Object;
 using Library.Engine.Component;
 using Library.Engine;
 using System.Runtime.Serialization;
+using Library.Engine.Utilities;
 
 namespace Library.GameLogic {
 
@@ -24,6 +25,9 @@ namespace Library.GameLogic {
         [DataMember]
         public EngineObject EngineObject { get; private set; }
 
+		/// <summary>
+		/// The current player.
+		/// </summary>
 		private Player currentPlayer;
 
 		/// <summary>
@@ -36,9 +40,10 @@ namespace Library.GameLogic {
 			TransformComponent tc = new TransformComponent(new Point(200, 200), 0, new Point(50, 50), null);
 			RenderComponent rc = new RenderComponent(new Animation(new Frame(Colors.Red, new Point(50, 50))), null); ;
 			AudioComponent ac = new AudioComponent(new Dictionary<String, MediaElement>(), null);
-			Player redBox = new Player("redBox", tc, ac, rc);
+			Player redBox = new Player("redBox", new Velocity(500.0, 500.0), tc, ac, rc);
 			currentPlayer = redBox;
 
+			//Set the player as the target of user input.
 			EngineObject.Instance.Input.Target = redBox;
 
 			TransformComponent tc2 = new TransformComponent(new Point(310, 400), 0, new Point(50, 50), null);
@@ -46,23 +51,12 @@ namespace Library.GameLogic {
 			AudioComponent ac2 = new AudioComponent(new Dictionary<String, MediaElement>(), null);
 			GameObject blueBox = new GameObject("blueBox", tc2, ac2, rc2);
 
-			
 
 			TransformComponent tc3 = new TransformComponent(new Point(600, 400), 0, new Point(50, 50), null);
 			RenderComponent rc3 = new RenderComponent(new Animation(new Frame(Colors.Blue, new Point(50, 50))), null); ;
 			AudioComponent ac3 = new AudioComponent(new Dictionary<String, MediaElement>(), null);
 			Terrain terrain = new Terrain("terrain", tc3, ac3, rc3);
 
-		}
-
-		/// <summary>
-		/// TEMPORARY HELPER FUNCTION, DONT KILL ME ALEX
-		/// </summary>
-		/// <param name="color"></param>
-		/// <returns></returns>
-		private int ConvertToARGB32(Color color)
-		{
-			return ((color.R << 16) | (color.G << 8) | (color.B << 0) | (color.A << 24));
 		}
 	}
 }

@@ -11,38 +11,25 @@ using Library.Engine.Utilities;
 
 namespace Library.GameLogic
 {
-    /// <summary>
-    /// The state this Player is in.
-    /// </summary>
+
+	/// <summary>
+	/// The states that a Player can be in.
+	/// </summary>
 	public enum GameState
 	{
 		MOVING, AIMING, SHOOTING, IDLE, DEAD, SPECIAL
 	}
 
-	public enum MoveState
-	{
-		LEFT, RIGHT, UP, DOWN
-	}
-
     /// <summary>
     /// Player represents a User that is in-game, on a team, and in a match.
     /// </summary>
-	public class Player : GameObject
+	public class Player : InteractiveGameObject
 	{
-        /// <summary>
-        /// This player's current state.
-        /// </summary>
+
+		/// <summary>
+		/// This player's current state.
+		/// </summary>
 		private GameState currentState;
-
-		/// <summary>
-		/// The movement state of the Player.
-		/// </summary>
-		private MoveState moveState;
-
-		/// <summary>
-		/// The Player's maximum movement speed.
-		/// </summary>
-		private Velocity moveSpeed;
 
         /// <summary>
         /// This Player's team.
@@ -74,69 +61,22 @@ namespace Library.GameLogic
         /// </summary>
 		private AmmoType currentAmmo;
 
-		public Player(string name, TransformComponent tc, AudioComponent ac, RenderComponent rc) : base(name, tc, ac, rc)
+		/// <summary>
+		/// The Constructor for a new Player.
+		/// </summary>
+		/// <param name="name">The Player's name.</param>
+		/// <param name="transformComponent">The Player's TransformComponent.</param>
+		/// <param name="audioComponent">The Player's AudioComponent.</param>
+		/// <param name="renderComponent">The Player's RenderComponent.</param>
+		public Player(string name, Velocity moveSpeed, TransformComponent tc, AudioComponent ac, RenderComponent rc) : base(name, moveSpeed, tc, ac, rc)
 		{
-			currentState = GameState.IDLE;
-			moveSpeed = new Velocity(500.0, 0.0);
-		}
-
-		public override void Update(double deltaTime)
-		{
-			if (currentState != GameState.MOVING)
-				return;
-
-            deltaTime /= 1000.00;
-			switch (moveState)
-			{
-				case MoveState.LEFT:
-					TransformComponent.Translate(new Point(-1.0 * moveSpeed.X * deltaTime, 0.0));
-					break;
-				case MoveState.RIGHT:
-					TransformComponent.Translate(new Point( 1.0 * moveSpeed.X * deltaTime, 0.0));
-					break;
-				default:
-					break;
-			}
-		}
-							
-
-        /// <summary>
-        /// Constructor for a new Player.
-        /// </summary>
-        /// <param name="name">The name of this Player.</param>
-		//public Player(string name): base(name){}
+		}					
 
         /// <summary>
         /// Aim this player's shot.
         /// </summary>
 		public void Aim()
 		{
-		}
-
-        /// <summary>
-        /// Move this player left.
-        /// </summary>
-		public void MoveLeft()
-		{
-			currentState = GameState.MOVING;
-			moveState = MoveState.LEFT;
-		}
-
-		/// <summary>
-		/// Move this player right.
-		/// </summary>
-		public void MoveRight()
-		{
-			currentState = GameState.MOVING;
-			moveState = MoveState.RIGHT;
-		}
-
-		/// <summary>
-		/// Stop moving the player.
-		/// </summary>
-		public void Stop()
-		{
-			currentState = GameState.IDLE;
 		}
 
         /// <summary>
