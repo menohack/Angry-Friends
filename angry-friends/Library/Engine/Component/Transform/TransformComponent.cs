@@ -4,6 +4,7 @@ using System.Windows;
 using Model.Engine.Object;
 using Model.Engine.Object.GameObjects;
 using Model.Engine.Utilities;
+using System.Collections.Generic;
 
 namespace Model.Engine.Component.Transform {
 	/// <summary>
@@ -67,6 +68,8 @@ namespace Model.Engine.Component.Transform {
 		/// </summary>
         [DataMember]
         private Point size;
+
+        private IList<String> listOfCollidingGameObjects;
 
 		/// <summary>
 		/// The accessor for the velocity of this TransformComponent.
@@ -190,6 +193,26 @@ namespace Model.Engine.Component.Transform {
         }
 
         /// <summary>
+        /// Determines if this TransformComponent is colliding with another GameObject.
+        /// </summary>
+        /// <param name="nameOfGameObject">The name of the GameObject that is in question.</param>
+        /// <returns>True if this TransformComponent is colliding with the given GameObject; otherwise, false.</returns>
+        public bool IsCollidingWith(String nameOfGameObject)
+        {
+            if (listOfCollidingGameObjects == null || listOfCollidingGameObjects.Count == 0)
+            {
+                return false;
+            }
+            if (listOfCollidingGameObjects.Contains(nameOfGameObject)) {
+                return true;
+            }
+            else 
+            {
+                return false;
+            }
+        }
+
+        /// <summary>
         /// If this linear-motion produces collision, CollisionDetection returns the modified value that satisifies non-collision requirements.
         /// </summary>
         /// <param name="desiredPosition">The position to move to, if possible.</param>
@@ -198,6 +221,7 @@ namespace Model.Engine.Component.Transform {
         {
             Point temporaryPosition = desiredPosition;
             Point finalPosition = desiredPosition;
+            IList<String> listOfCollidingGameObjects = new List<String>();
 
             //Find the distance we can move before colliding
             foreach (GameObject gameObject in EngineObject.Instance.GetGameObjects())
@@ -209,10 +233,13 @@ namespace Model.Engine.Component.Transform {
                 finalPosition = CollisionHelper.Instance.Collide(desiredPosition, this, gameObject.TransformComponent);
 
                 //If we bump into something else sooner
-                if (EngineMath.Distance(Position, finalPosition) < EngineMath.Distance(Position, temporaryPosition))
+                if (EngineMath.Distance(Position, finalPosition) < EngineMath.Distance(Position, temporaryPosition)) {
+                    listOfCollidingGameObjects.Add(gameObject.Name);
                     temporaryPosition = finalPosition;
+                }
             }
 
+            this.listOfCollidingGameObjects = listOfCollidingGameObjects;
             return temporaryPosition;
         }
 	}

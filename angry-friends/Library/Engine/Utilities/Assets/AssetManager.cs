@@ -5,6 +5,7 @@ using System.Net;
 using System.Windows.Controls;
 using System.Windows.Media.Imaging;
 using System.Xml;
+using System.Diagnostics;
 
 namespace Model.Engine.Utilities {
 
@@ -133,22 +134,19 @@ namespace Model.Engine.Utilities {
         }
 
 		/// <summary>
-		/// Download an audio clip.  This DOES NOT work.  I couldn't tell you why, either...
+		/// Download an audio clip.
 		/// </summary>
 		/// <param name="URL">The URL that points to an image.</param>
 		/// <param name="onLoaded">The event to be fired once the download is completed.</param>
 		private void DownloadAudioClip(String URL, Action<ExternalAsset> onLoaded) 
         {
-            MediaElement media = new MediaElement();
-			media.Loaded += (s, e) => 
+            MediaElement audioClip = new MediaElement();
+			audioClip.MediaOpened += (s, e) => 
             {
-                if (media.DownloadProgress == 1)
-                {
-                    onLoaded(new ExternalAsset(URL, ExternalAsset.ExternalAssetType.AudioClip, media));
-                }
+                onLoaded(new ExternalAsset(URL, ExternalAsset.ExternalAssetType.AudioClip, audioClip));
 			};
 
-            media.Source = new Uri(URL);
+            audioClip.Source = new Uri(URL, UriKind.Absolute);
 		}
 
         /// <summary>

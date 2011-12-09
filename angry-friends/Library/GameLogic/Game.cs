@@ -52,13 +52,7 @@ namespace Model.GameLogic {
 			AudioComponent ac2 = new AudioComponent(new Dictionary<String, MediaElement>(), null);
 			GameObject blueBox = new GameObject("blueBox", tc2, ac2, rc2);
 
-
-			TransformComponent tc3 = new TransformComponent(new Point(600, 400), 0, new Point(50, 50), null);
-			RenderComponent rc3 = new RenderComponent(new Animation(new Frame(Colors.Blue, new Point(50, 50))), null); ;
-			AudioComponent ac3 = new AudioComponent(new Dictionary<String, MediaElement>(), null);
-			Terrain terrain = new Terrain("terrain", tc3, ac3, rc3);
-
-            TransformComponent tc4 = new TransformComponent(new Point(0, 0), 0, new Point(50, 50), null);
+            TransformComponent tc4 = new TransformComponent(new Point(0, 0), 0, new Point(29, 29), null);
             
             BitmapImage bImage1 = AssetManager.Instance.ExternalAssets["mario_walk_01"].GetBitmapImage();
             Image image1 = new Image();
@@ -81,6 +75,9 @@ namespace Model.GameLogic {
 
             Player mario = new Player("mario", new Point(500, 500), tc4, ac4, rc4);
             EngineObject.Instance.Input.Target = mario;
+
+            Factory.Instance.CreateBackground();
+            Factory.Instance.CreateTerrain();
 
 		}
 	}

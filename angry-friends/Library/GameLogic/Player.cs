@@ -4,48 +4,46 @@ using Model.Engine.Component.Media;
 using Model.Engine.Component.Media.Rendering;
 using Model.GameLogic.Persistence;
 using Model.Engine.Component.Transform;
+using Model.Engine.Utilities;
+using System.Collections.ObjectModel;
 
 namespace Model.GameLogic
 {
-
-	/// <summary>
-	/// The states that a Player can be in.
-	/// </summary>
-	public enum GameState
-	{
-		MOVING, AIMING, SHOOTING, IDLE, DEAD, SPECIAL
-	}
-
     /// <summary>
     /// Player represents a User that is in-game, on a team, and in a match.
     /// </summary>
-	public class Player : InteractiveGameObject
+    public class Player : InteractiveGameObject, IUpdateable
 	{
 
-		/// <summary>
-		/// This player's current state.
-		/// </summary>
-		private GameState currentState;
+        /// <summary>
+        /// The interval in which the player updates, looking for gravity.
+        /// </summary>
+        private static readonly int PHYSICS_UPDATE_INTERAL = 33;
 
         /// <summary>
-        /// This Player's team.
+        /// The gravitational force of gravity, in pixels.
         /// </summary>
-		private Team team;
+        private static readonly int GRAVITATIONAL_FORCE = 300;
 
         /// <summary>
-        /// The player's top slot item.
+        /// The gravitational velocity of this player.
         /// </summary>
-		private Item topSlot;
+        private double gravitationalVelocity;
 
         /// <summary>
-        /// The player's middle slot item.
+        /// This player's TransformComponent.
         /// </summary>
-		private Item middleSlot;
+        private TransformComponent transformComponent;
 
         /// <summary>
-        /// The player's bottom slot item.
+        /// This player's AudioComponent.
         /// </summary>
-		private Item bottomSlot;
+        private AudioComponent audioComponent;
+
+        /// <summary>
+        /// This player's RenderComponent.
+        /// </summary>
+        private RenderComponent renderComponent;
 
 		/// <summary>
 		/// The Constructor for a new Player.
@@ -54,22 +52,25 @@ namespace Model.GameLogic
 		/// <param name="transformComponent">The Player's TransformComponent.</param>
 		/// <param name="audioComponent">The Player's AudioComponent.</param>
 		/// <param name="renderComponent">The Player's RenderComponent.</param>
-		public Player(string name, Point moveSpeed, TransformComponent tc, AudioComponent ac, RenderComponent rc) : base(name, moveSpeed, tc, ac, rc)
+		public Player(string name, Point moveSpeed, TransformComponent transformComponent, AudioComponent audioComponent, RenderComponent renderComponent) : base(name, moveSpeed, transformComponent, audioComponent, renderComponent)
 		{
+            this.transformComponent = transformComponent;
+            EngineTimer engineTimer = new EngineTimer(PHYSICS_UPDATE_INTERAL, new Collection<IUpdateable> { this });
+            engineTimer.Start();
 		}					
 
-        /// <summary>
-        /// Aim this player's shot.
-        /// </summary>
-		public void Aim()
-		{
-		}
-
-        /// <summary>
-        /// Shot this player's shot.
-        /// </summary>
-		public void Shoot()
-		{
-		}
-	}
+        public void Update(double deltaTime)
+        {
+            deltaTime /= 1000.00;
+            if (this.transformComponent.IsCollidingWith("TERRAIN"))
+            {
+                gravitationalVelocity = 0;
+            }
+            else
+            {
+                gravitationalVelocity += GRAVITATIONAL_FORCE * deltaTime * deltaTime;
+                transformComponent.Translate(new Point(0, gravitationalVelocity));
+            }
+        }
+    }
 }

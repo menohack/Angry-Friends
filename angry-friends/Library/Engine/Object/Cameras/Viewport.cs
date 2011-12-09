@@ -2,6 +2,8 @@
 using System.Windows.Controls;
 using Model.Engine.Component.Media.Rendering;
 using Model.Engine.Object.GameObjects;
+using System.Windows;
+using System;
 
 namespace Model.Engine.Object.Cameras {
     /// <summary>
@@ -77,6 +79,15 @@ namespace Model.Engine.Object.Cameras {
             {
                 redrawQueue.Add(gameObject);
             }
+        }
+
+        /// <summary>
+        /// Adds a background image to the Viewport.  Only one background can be added.
+        /// </summary>
+        /// <param name="image">The background to add to the Viewport.</param>
+        public void AddBackgroundToViewPort(Image image)
+        {
+            Children.Insert(0, image);
         }
 
         /// <summary>
