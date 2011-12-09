@@ -4,7 +4,6 @@ Microsoft Visual Studio Solution File, Format Version 11.00
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "angry-friends.Web", "angry-friends.Web\angry-friends.Web.csproj", "{0ED881DB-D689-499E-85BA-C605C7F44DAE}"
 	ProjectSection(ProjectDependencies) = postProject
 		{4980572F-BAF3-4A24-B411-A7455C821501} = {4980572F-BAF3-4A24-B411-A7455C821501}
-		{8A47AC40-00DA-4EFB-B9FB-F7642EA8BE2F} = {8A47AC40-00DA-4EFB-B9FB-F7642EA8BE2F}
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Model", "Model\Model.csproj", "{8A47AC40-00DA-4EFB-B9FB-F7642EA8BE2F}"

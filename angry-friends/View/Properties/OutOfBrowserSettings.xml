@@ -1,7 +1,0 @@
-<OutOfBrowserSettings ShortName="Angry Friends" EnableGPUAcceleration="True" ShowInstallMenuItem="True">
-  <OutOfBrowserSettings.Blurb>Angry Friends</OutOfBrowserSettings.Blurb>
-  <OutOfBrowserSettings.WindowSettings>
-    <WindowSettings Title="Angry Friends" Height="600" Width="800" />
-  </OutOfBrowserSettings.WindowSettings>
-  <OutOfBrowserSettings.Icons />
-</OutOfBrowserSettings>
