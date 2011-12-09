@@ -48,7 +48,7 @@ namespace Client {
                 return;
             }
             _contentLoaded = true;
-            System.Windows.Application.LoadComponent(this, new System.Uri("/Client;component/Game.xaml", System.UriKind.Relative));
+            System.Windows.Application.LoadComponent(this, new System.Uri("/View;component/Game.xaml", System.UriKind.Relative));
             this.canvas = ((System.Windows.Controls.Canvas)(this.FindName("canvas")));
         }
     }

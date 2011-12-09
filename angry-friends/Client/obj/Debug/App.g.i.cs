@@ -46,7 +46,7 @@ namespace Client {
                 return;
             }
             _contentLoaded = true;
-            System.Windows.Application.LoadComponent(this, new System.Uri("/Client;component/App.xaml", System.UriKind.Relative));
+            System.Windows.Application.LoadComponent(this, new System.Uri("/View;component/App.xaml", System.UriKind.Relative));
         }
     }
 }

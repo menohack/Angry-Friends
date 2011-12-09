@@ -50,7 +50,7 @@ namespace Client {
                 return;
             }
             _contentLoaded = true;
-            System.Windows.Application.LoadComponent(this, new System.Uri("/Client;component/LoadingScreen.xaml", System.UriKind.Relative));
+            System.Windows.Application.LoadComponent(this, new System.Uri("/View;component/LoadingScreen.xaml", System.UriKind.Relative));
             this.canvas = ((System.Windows.Controls.Grid)(this.FindName("canvas")));
             this.label1 = ((System.Windows.Controls.Label)(this.FindName("label1")));
         }

@@ -56,7 +56,7 @@ namespace Client {
                 return;
             }
             _contentLoaded = true;
-            System.Windows.Application.LoadComponent(this, new System.Uri("/Client;component/GameLobby.xaml", System.UriKind.Relative));
+            System.Windows.Application.LoadComponent(this, new System.Uri("/View;component/GameLobby.xaml", System.UriKind.Relative));
             this.canvas = ((System.Windows.Controls.Canvas)(this.FindName("canvas")));
             this.textBlock2 = ((System.Windows.Controls.TextBlock)(this.FindName("textBlock2")));
             this.roomlist = ((System.Windows.Controls.ListBox)(this.FindName("roomlist")));

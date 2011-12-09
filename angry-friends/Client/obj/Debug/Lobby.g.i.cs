@@ -60,7 +60,7 @@ namespace Client {
                 return;
             }
             _contentLoaded = true;
-            System.Windows.Application.LoadComponent(this, new System.Uri("/Client;component/Lobby.xaml", System.UriKind.Relative));
+            System.Windows.Application.LoadComponent(this, new System.Uri("/View;component/Lobby.xaml", System.UriKind.Relative));
             this.canvas = ((System.Windows.Controls.Canvas)(this.FindName("canvas")));
             this.roomlist = ((System.Windows.Controls.ListBox)(this.FindName("roomlist")));
             this.textBlock1 = ((System.Windows.Controls.TextBlock)(this.FindName("textBlock1")));
