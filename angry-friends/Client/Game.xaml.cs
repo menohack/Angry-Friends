@@ -11,7 +11,7 @@ using System.Windows.Media.Animation;
 using System.Windows.Shapes;
 using Model.Engine.Object;
 
-namespace Client
+namespace View
 {
     public partial class Game : UserControl
     {

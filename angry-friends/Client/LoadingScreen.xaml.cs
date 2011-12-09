@@ -14,7 +14,7 @@ using System.Diagnostics;
 using Model.Engine.Object;
 using System.Windows.Media.Imaging;
 
-namespace Client
+namespace View
 {
     /// <summary>
     /// Displays a loading screen while requierd assets are being downloaded.

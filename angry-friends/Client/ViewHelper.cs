@@ -10,7 +10,7 @@ using System.Windows.Media.Animation;
 using System.Windows.Shapes;
 using System.Collections.Generic;
 
-namespace Client
+namespace View
 {
     /// <summary>
     /// Assists in dealing with the different states of our GUI/Logic.

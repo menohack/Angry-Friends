@@ -4,7 +4,7 @@ using System.Windows.Controls;
 using System.Windows.Threading;
 using Model.Engine.Utilities;
 using System.Collections.Generic;
-namespace Client {
+namespace View {
 
     /// <summary>
     /// This class represents the Lobby, where users interact and join games.

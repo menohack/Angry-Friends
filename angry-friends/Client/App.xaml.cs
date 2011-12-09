@@ -2,7 +2,7 @@
 using System.Windows;
 using System.Windows.Controls;
 
-namespace Client {
+namespace View {
     /// <summary>
     /// This is the "hook" for our Silverlight application.  The threading starts here.
     /// </summary>

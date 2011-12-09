@@ -3,7 +3,7 @@ using Model.Engine.Utilities;
 using System.Windows.Threading;
 using System.Collections.ObjectModel;
 
-namespace Client {
+namespace View {
     /// <summary>
     /// The GameLobby -- where players are together in a Lobby, waiting to play a game with each other.
     /// </summary>

@@ -85,7 +85,6 @@
     <Compile Include="Engine\Utilities\EngineMath.cs" />
     <Compile Include="Engine\Utilities\EngineTimer.cs" />
   </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Silverlight\$(SilverlightVersion)\Microsoft.Silverlight.CSharp.targets" />
   <ProjectExtensions>
     <VisualStudio>
