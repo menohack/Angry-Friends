@@ -16,7 +16,6 @@ namespace Model.Engine.Component.Transform {
 		/// <summary>
 		/// The position of this TransformComponent.
 		/// </summary>
-
         [DataMember]
         private Point currentPosition;
         
@@ -115,7 +114,6 @@ namespace Model.Engine.Component.Transform {
             this.Size = size;
 		}
 		
-
 		/// <summary>
 		/// Translates by a given point.
 		/// </summary>

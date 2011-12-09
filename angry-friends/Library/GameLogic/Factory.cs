@@ -25,6 +25,9 @@ namespace Model.GameLogic
     public class Factory
     {
 
+        /// <summary>
+        /// The name of Mario.
+        /// </summary>
         private static readonly String MARIO_NAME = "mario";
 
         /// <summary>
@@ -52,6 +55,9 @@ namespace Model.GameLogic
             "mario_walk_03"
         };
 
+        /// <summary>
+        /// The name of the Mario character.
+        /// </summary>
         private static readonly String MARIO_WALK_ANIMATION_NAME = "walk";
 
         /// <summary>
@@ -135,7 +141,7 @@ namespace Model.GameLogic
             Image terrainAsset = new Image();
             terrainAsset.Source = AssetManager.Instance.ExternalAssets[NAME_OF_TERRAIN_ASSET].GetBitmapImage();
 
-            RenderComponent renderComponent = new RenderComponent(new Animation(new Frame(terrainAsset)));
+            RenderComponent renderComponent = new RenderComponent(new Animation(new Frame(terrainAsset, new Point(0, 0))));
             TransformComponent transformComponent = new TransformComponent(POSITION_OF_TERRAIN, SIZE_OF_TERRAIN);
             AudioComponent audioComponent = new AudioComponent(new Dictionary<String, MediaElement>());
 
@@ -183,7 +189,7 @@ namespace Model.GameLogic
         /// <returns>The corresponding Frame of the given BitmapImage.</returns>
         private Frame GetFrameFromBitmapImage(BitmapImage bitmapImage)
         {
-            return new Frame(GetImageFromBitmapImage(bitmapImage));
+            return new Frame(GetImageFromBitmapImage(bitmapImage), new Point(0, 0));
         }
     }
 }

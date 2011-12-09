@@ -11,6 +11,11 @@ namespace Model.Engine.Component.Media.Rendering {
 	[DataContract]
     public class Animation : IUpdateable {
 
+        /// <summary>
+        /// The default name for an animation.
+        /// </summary>
+        private const String DEFAULT_ANIMATION_NAME = "default";
+
 		/// <summary>
 		/// All the Frames of this Animation.
 		/// </summary>
@@ -69,14 +74,7 @@ namespace Model.Engine.Component.Media.Rendering {
 		/// </summary>
 		/// <param name="frame">The Frame of the Animation.</param>
 		/// <param name="name">The name of the Animation.</param>
-		public Animation(Frame frame, String name) : this(new List<Frame> { frame }, 0.0, 0, name) {}
-
-		/// <summary>
-		/// Constructor for a new Animation with a single frame.
-		/// </summary>
-		/// <param name="frame">The Frame of the Animation.</param>
-		/// <param name="name">The name of the Animation.</param>
-		public Animation(Frame frame) : this(new List<Frame> { frame }, 0.0, 0, "default") { }
+		public Animation(Frame frame, String name = DEFAULT_ANIMATION_NAME) : this(new List<Frame> { frame }, 0.0, 0, name) {}
 
 		/// <summary>
 		/// Updates the Frame of this Animation.

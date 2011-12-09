@@ -56,7 +56,9 @@ namespace Model.Engine.Object.Cameras {
             foreach (GameObject gameObject in redrawQueue)
             {
                 if (gameObject == null)
+                {
                     continue;
+                }
 
                 Frame frame = gameObject.RenderComponent.CurrentAnimation.CurrentFrame;
                 frame.Image.SetValue(Canvas.LeftProperty, gameObject.TransformComponent.Position.X + frame.Offset.X);
@@ -88,18 +90,6 @@ namespace Model.Engine.Object.Cameras {
         public void AddBackgroundToViewPort(Image image)
         {
             Children.Insert(0, image);
-        }
-
-        /// <summary>
-        /// Removes a GameObject from the redraw queue.
-        /// </summary>
-        /// <param name="gameObject">The GameObject to remove from the redraw queue.</param>
-        private void RemoveGameObjectFromRedrawQueue(GameObject gameObject)
-        {
-            if (redrawQueue.Contains(gameObject))
-            {
-                redrawQueue.Remove(gameObject);
-            }
         }
 
         /// <summary>

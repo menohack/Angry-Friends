@@ -105,12 +105,6 @@ namespace Model.Engine.Object.GameObjects {
         [DataMember]
         public int UID { get; private set; }
 
-        /// <summary>
-        /// This GameObject's children.
-        /// </summary>
-        [DataMember]
-        public IList<GameObject> Children { get; private set; }
-
 		/// <summary>
 		/// The last UID assigned to a GameObject.
 		/// </summary>
@@ -128,7 +122,6 @@ namespace Model.Engine.Object.GameObjects {
         {
             UID = NextUID();
             Name = name;
-            Children = new List<GameObject>();
 
             TransformComponent = transformComponent;
             AudioComponent = audioComponent;
