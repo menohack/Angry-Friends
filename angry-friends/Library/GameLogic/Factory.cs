@@ -1,21 +1,13 @@
 ﻿using System;
-using System.Net;
+using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Documents;
-using System.Windows.Ink;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Animation;
-using System.Windows.Shapes;
-using Model.Engine.Object.GameObjects;
-using Model.Engine.Utilities;
+using System.Windows.Media.Imaging;
+using Model.Engine.Component.Media;
 using Model.Engine.Component.Media.Rendering;
 using Model.Engine.Component.Transform;
-using Model.Engine.Component.Media;
-using System.Collections.Generic;
-using System.Windows.Media.Imaging;
 using Model.Engine.Object;
+using Model.Engine.Utilities;
 
 namespace Model.GameLogic
 {
@@ -33,7 +25,7 @@ namespace Model.GameLogic
         /// <summary>
         /// The speed of Mario.
         /// </summary>
-        private static readonly Point MARIO_SPEED = new Point(50, 50);
+        private static readonly Point MARIO_SPEED = new Point(50, 500);
 
         /// <summary>
         /// Mario's initial position.
@@ -88,7 +80,7 @@ namespace Model.GameLogic
         /// <summary>
         /// The position of the terrain.
         /// </summary>
-        private static readonly Point POSITION_OF_TERRAIN = new Point(0, 500);
+        private static readonly Point POSITION_OF_TERRAIN = new Point(0, 550);
 
         /// <summary>
         /// The name of the terrain.

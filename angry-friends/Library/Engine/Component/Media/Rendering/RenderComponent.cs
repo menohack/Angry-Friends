@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Runtime.Serialization;
 using Model.Engine.Object;
-using Model.Engine.Object.GameObjects;
 using Model.Engine.Utilities;
 
 namespace Model.Engine.Component.Media.Rendering {

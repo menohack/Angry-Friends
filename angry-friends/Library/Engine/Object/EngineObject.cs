@@ -4,7 +4,6 @@ using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
 using System.Windows.Controls;
 using Model.Engine.Object.Cameras;
-using Model.Engine.Object.GameObjects;
 using Model.Engine.Utilities;
 using Model.GameLogic;
 

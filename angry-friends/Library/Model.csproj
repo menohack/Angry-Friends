@@ -67,7 +67,7 @@
     <Compile Include="Engine\Component\Media\Rendering\RenderComponent.cs" />
     <Compile Include="Engine\Component\Transform\TransformComponent.cs" />
     <Compile Include="Engine\Object\Cameras\Camera.cs" />
-    <Compile Include="Engine\Object\GameObjects\GameObject.cs" />
+    <Compile Include="Engine\Object\GameObject.cs" />
     <Compile Include="Engine\Object\EngineObject.cs" />
     <Compile Include="Engine\Object\Cameras\Viewport.cs" />
     <Compile Include="GameLogic\Factory.cs" />
@@ -75,7 +75,7 @@
     <Compile Include="Engine\Utilities\Assets\ExternalAsset.cs" />
     <Compile Include="GameLogic\Networking\Network.cs" />
     <Compile Include="GameLogic\Networking\RoomInfo.cs" />
-    <Compile Include="Engine\Utilities\SpriteSheetLoader.cs" />
+    <Compile Include="Engine\Utilities\Assets\SpriteSheetLoader.cs" />
     <Compile Include="Engine\Utilities\Assets\AssetManager.cs" />
     <Compile Include="GameLogic\Game.cs" />
     <Compile Include="GameLogic\Input.cs" />

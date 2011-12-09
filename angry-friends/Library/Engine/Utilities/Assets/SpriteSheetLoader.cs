@@ -5,7 +5,7 @@ using System.Windows.Controls;
 using System.Windows.Media.Imaging;
 using Model.Engine.Component.Media.Rendering;
 
-namespace Model.Engine.Utilities
+namespace Model.Engine.Utilities.Assets
 {
     /// <summary>
     /// SpriteSheetLoader loads the data from a SpriteSheet into readable content.

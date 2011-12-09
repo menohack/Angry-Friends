@@ -1,16 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Runtime.Serialization;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Media;
-using Model.Engine.Component.Media;
-using Model.Engine.Component.Media.Rendering;
-using Model.Engine.Component.Transform;
+﻿using System.Runtime.Serialization;
 using Model.Engine.Object;
-using Model.Engine.Object.GameObjects;
-using System.Windows.Media.Imaging;
-using Model.Engine.Utilities;
 
 namespace Model.GameLogic {
 
@@ -25,11 +14,6 @@ namespace Model.GameLogic {
 		/// </summary>
         [DataMember]
         public EngineObject EngineObject { get; private set; }
-
-		/// <summary>
-		/// The current player.
-		/// </summary>
-		private Player currentPlayer;
 
 		/// <summary>
 		/// Constructor for the Game.

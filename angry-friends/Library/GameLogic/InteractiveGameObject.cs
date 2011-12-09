@@ -3,7 +3,7 @@ using System.Windows.Input;
 using Model.Engine.Component.Media;
 using Model.Engine.Component.Media.Rendering;
 using Model.Engine.Component.Transform;
-using Model.Engine.Object.GameObjects;
+using Model.Engine.Object;
 
 namespace Model.GameLogic
 {

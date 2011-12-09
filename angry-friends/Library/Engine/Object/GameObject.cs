@@ -6,7 +6,7 @@ using Model.Engine.Component.Media.Rendering;
 using Model.Engine.Component.Transform;
 using Model.Engine.Utilities;
 
-namespace Model.Engine.Object.GameObjects {
+namespace Model.Engine.Object {
 
 	/// <summary>
 	/// GameObject represents a base for all in-game objects. 

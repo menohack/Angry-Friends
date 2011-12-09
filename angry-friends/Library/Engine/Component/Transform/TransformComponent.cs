@@ -1,10 +1,9 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Runtime.Serialization;
 using System.Windows;
 using Model.Engine.Object;
-using Model.Engine.Object.GameObjects;
 using Model.Engine.Utilities;
-using System.Collections.Generic;
 
 namespace Model.Engine.Component.Transform {
 	/// <summary>

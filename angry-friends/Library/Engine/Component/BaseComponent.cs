@@ -1,4 +1,4 @@
-﻿using Model.Engine.Object.GameObjects;
+﻿using Model.Engine.Object;
 
 namespace Model.Engine.Component {
 

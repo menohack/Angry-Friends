@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Runtime.Serialization;
 using System.Windows.Controls;
-using Model.Engine.Object.GameObjects;
 
 namespace Model.Engine.Component.Media {
 
