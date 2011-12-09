@@ -170,24 +170,12 @@ namespace Model.Engine.Component.Transform
 
 			Point newPosition = desiredPosition;
             double distance = EngineMath.Distance(a.Position, desiredPosition);
-			for (; i < iMax; i++)
-			//if (x[i] > a.position.X && x[i] < desiredPosition.X || x[i] < a.position.X || x[i] > desiredPosition.X)
-			//if (y[i] > a.position.Y && y[i] < desiredPosition.Y || y[i] < a.position.Y && y[i] > desiredPosition.Y)
-					{
+			for (; i < iMax; i++) {
 				Point tempPosition = new Point(x[i], y[i]);
-				//double tempDistance = Math.Sqrt(x[i] * x[i] + y[i] * y[i]);
 				double tempDistance = EngineMath.Distance(tempPosition, a.Position);
 				if (tempDistance < distance) {
 					distance = tempDistance;
 					newPosition = tempPosition;
-
-					//If we hit something set the velocity to zero
-					/*
-					if (i < 2)
-						a.Velocity = new Point(0.0, a.Velocity.Y);
-					else
-						a.Velocity = new Point(a.Velocity.X, 0.0);
-					*/
 				}
 			}
 
