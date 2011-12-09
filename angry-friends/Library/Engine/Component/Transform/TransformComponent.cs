@@ -199,17 +199,11 @@ namespace Model.Engine.Component.Transform {
         /// <returns>True if this TransformComponent is colliding with the given GameObject; otherwise, false.</returns>
         public bool IsCollidingWith(String nameOfGameObject)
         {
-            if (listOfCollidingGameObjects == null || listOfCollidingGameObjects.Count == 0)
+            if (listOfCollidingGameObjects == null || listOfCollidingGameObjects.Count == 0 || !listOfCollidingGameObjects.Contains(nameOfGameObject))
             {
                 return false;
             }
-            if (listOfCollidingGameObjects.Contains(nameOfGameObject)) {
-                return true;
-            }
-            else 
-            {
-                return false;
-            }
+            return true;
         }
 
         /// <summary>
