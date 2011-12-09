@@ -63,12 +63,12 @@ namespace Model.GameLogic
         /// <summary>
         /// The length, in seconds, of Mario's walk animation.
         /// </summary>
-        private static readonly double MARIO_WALK_ANIMATION_LENGTH = 1.0;
+        private static readonly double MARIO_WALK_ANIMATION_LENGTH = 1;
 
         /// <summary>
         /// The FPS of Mario's walk animation.
         /// </summary>
-        private static readonly int MARIO_WALK_ANIMATION_FPS = 3;
+        private static readonly int MARIO_WALK_ANIMATION_FPS = 8;
 
         /// <summary>
         /// The default name of the background, which is used to look up the image of the background in AssetManager.

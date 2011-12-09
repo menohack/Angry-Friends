@@ -29,21 +29,6 @@ namespace Model.GameLogic
         /// </summary>
         private double gravitationalVelocity;
 
-        /// <summary>
-        /// This player's TransformComponent.
-        /// </summary>
-        private TransformComponent transformComponent;
-
-        /// <summary>
-        /// This player's AudioComponent.
-        /// </summary>
-        private AudioComponent audioComponent;
-
-        /// <summary>
-        /// This player's RenderComponent.
-        /// </summary>
-        private RenderComponent renderComponent;
-
 		/// <summary>
 		/// The Constructor for a new Player.
 		/// </summary>
@@ -53,7 +38,6 @@ namespace Model.GameLogic
 		/// <param name="renderComponent">The Player's RenderComponent.</param>
 		public Player(string name, Point moveSpeed, TransformComponent transformComponent, AudioComponent audioComponent, RenderComponent renderComponent) : base(name, moveSpeed, transformComponent, audioComponent, renderComponent)
 		{
-            this.transformComponent = transformComponent;
             EngineTimer engineTimer = new EngineTimer(PHYSICS_UPDATE_INTERAL, new Collection<IUpdateable> { this });
             engineTimer.Start();
 		}					
@@ -61,18 +45,18 @@ namespace Model.GameLogic
         /// <summary>
         /// Updates gravity for this player.
         /// </summary>
-        /// <param name="deltaTime"></param>
+        /// <param name="deltaTime">The time since the last update.</param>
         new public void Update(double deltaTime)
         {
             deltaTime /= 1000.00;
-            if (this.transformComponent.IsCollidingWith("TERRAIN"))
+            if (base.TransformComponent.IsCollidingWith("TERRAIN"))
             {
                 gravitationalVelocity = 0;
             }
             else
             {
                 gravitationalVelocity += GRAVITATIONAL_FORCE * deltaTime * deltaTime;
-                transformComponent.Translate(new Point(0, gravitationalVelocity));
+                base.TransformComponent.Translate(new Point(0, gravitationalVelocity));
             }
         }
     }

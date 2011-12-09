@@ -69,7 +69,8 @@ namespace Model.Engine.Component.Media.Rendering {
 
             if (CurrentAnimation.FPS != 0)
             {
-                animationTimer = new EngineTimer(CurrentAnimation.FPS, new List<IUpdateable> { CurrentAnimation, this });
+                int interval = (int)(1000.00 / CurrentAnimation.FPS);
+                animationTimer = new EngineTimer(interval, new List<IUpdateable> { CurrentAnimation, this });
                 animationTimer.Start();
             }
 		}
