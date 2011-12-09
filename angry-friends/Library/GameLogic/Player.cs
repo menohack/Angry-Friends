@@ -2,7 +2,6 @@
 using System.Windows;
 using Model.Engine.Component.Media;
 using Model.Engine.Component.Media.Rendering;
-using Model.GameLogic.Persistence;
 using Model.Engine.Component.Transform;
 using Model.Engine.Utilities;
 using System.Collections.ObjectModel;
@@ -59,7 +58,11 @@ namespace Model.GameLogic
             engineTimer.Start();
 		}					
 
-        public void Update(double deltaTime)
+        /// <summary>
+        /// Updates gravity for this player.
+        /// </summary>
+        /// <param name="deltaTime"></param>
+        new public void Update(double deltaTime)
         {
             deltaTime /= 1000.00;
             if (this.transformComponent.IsCollidingWith("TERRAIN"))

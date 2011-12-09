@@ -33,9 +33,6 @@ namespace Model.Engine.Component {
 		/// <summary>
 		/// Constructor for a new BaseComponent.
 		/// </summary>
-		/// <param name="owner">The owner of this BaseComponent.</param>
-		public BaseComponent(GameObject owner) {
-			this.Owner = owner;
-		}
+		public BaseComponent() {}
 	}
 }

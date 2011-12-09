@@ -44,7 +44,7 @@ namespace Model.Engine.Component.Media.Rendering {
 		/// <param name="animations">The Dictionary of names-to-Animations of this RenderComponent. </param>
 		/// <param name="defaultAnimation">The Animation to play when no other Animation is specified to play.</param>
 		/// <param name="owner">The GameObject that owns this RenderComponent.</param>
-		public RenderComponent(IDictionary<String, Animation> animations, Animation defaultAnimation, GameObject owner = null) : base(owner) {
+		public RenderComponent(IDictionary<String, Animation> animations, Animation defaultAnimation) : base() {
 			this.animations = animations;
 			this.defaultAnimation = defaultAnimation;
 			this.CurrentAnimation = this.defaultAnimation;
@@ -56,7 +56,7 @@ namespace Model.Engine.Component.Media.Rendering {
 		/// </summary>
         /// <param name="animation">The single Animation for this RenderComponent.</param>
         /// <param name="owner">The GameObject that owns this RenderComponent.</param>
-		public RenderComponent(Animation animation, GameObject owner = null) : this(new Dictionary<String, Animation> { {animation.Name, animation} }, animation, owner) {}
+		public RenderComponent(Animation animation, GameObject owner = null) : this(new Dictionary<String, Animation> { {animation.Name, animation} }, animation) {}
 
 		/// <summary>
 		/// Plays a specific Animation.

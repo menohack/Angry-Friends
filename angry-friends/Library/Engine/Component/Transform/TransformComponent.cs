@@ -14,18 +14,6 @@ namespace Model.Engine.Component.Transform {
 	public class TransformComponent : BaseComponent {
 
 		/// <summary>
-		/// The mimimum angle of rotation.
-		/// </summary>
-        [DataMember]
-        private static readonly int MIMIMUM_ROTATION_ANGLE = 0;
-
-		/// <summary>
-		/// The maximum angle of rotation.
-		/// </summary>
-        [DataMember]
-        private static readonly int MAXIMUM_ROTATION_ANGLE = 360;
-
-		/// <summary>
 		/// The position of this TransformComponent.
 		/// </summary>
 
@@ -57,18 +45,9 @@ namespace Model.Engine.Component.Transform {
         /// </summary>
         private readonly int VELOCITY_INTERPOLATION = 68;
 
-		/// <summary>
-		/// The rotation of this TransformComponent.
-		/// </summary>
-        [DataMember]
-        private int rotation;
-
-		/// <summary>
-		/// The size of this TransformComponent.
-		/// </summary>
-        [DataMember]
-        private Point size;
-
+        /// <summary>
+        /// A list of GameObjects with which this TransformComponent is colliding.
+        /// </summary>
         private IList<String> listOfCollidingGameObjects;
 
 		/// <summary>
@@ -116,36 +95,10 @@ namespace Model.Engine.Component.Transform {
 		}
 
 		/// <summary>
-		/// The rotation of this TransformComponent, clamped in degrees: [0, 360].
-		/// </summary>
-		public int Rotation {
-			get 
-            {
-				return rotation;
-			}
-			set 
-            {
-				rotation = value;
-				currentPosition = CollisionDetection(currentPosition);
-                EngineObject.Instance.Camera.Viewport.AddGameObjectToRedrawQueue(base.Owner);
-			}
-		}
-
-		/// <summary>
 		/// The size of this TransformComponent.
 		/// </summary>
-		[IgnoreDataMember]
-        public Point Size {
-			get 
-            {
-				return size;
-			}
-			set {
-				size = value;
-				currentPosition = CollisionDetection(currentPosition);
-                EngineObject.Instance.Camera.Viewport.AddGameObjectToRedrawQueue(base.Owner);
-			}
-		}
+        [IgnoreDataMember]
+        public Point Size { get; private set; }
 
 		/// <summary>
 		/// Constructor for a new instance of TransformComponent.
@@ -153,15 +106,13 @@ namespace Model.Engine.Component.Transform {
 		/// <param name="position">The initial position of this TransformComponent.</param>
 		/// <param name="rotation">The initial rotation of this TransformComponent.</param>
 		/// <param name="size">The initial size of this TransformComponent.</param>
-		/// <param name="owner">The GameObject that owns this TransformComponent.</param>
-		public TransformComponent(Point position, int rotation, Point size, GameObject owner = null) : base(owner) {
+		public TransformComponent(Point position, Point size) : base() {
             previousPosition = position;
             previousPositionTime = DateTime.Now;
             currentPosition = position;
             currentPositionTime = previousPositionTime;
 
-			this.Size = size;
-            this.Rotation = rotation;
+            this.Size = size;
 		}
 		
 
@@ -173,24 +124,6 @@ namespace Model.Engine.Component.Transform {
         {
 			Position = new Point(currentPosition.X + deltaPosition.X, currentPosition.Y + deltaPosition.Y);
 		}
-
-		/// <summary>
-		/// Rotates by a given number of degrees.
-		/// </summary>
-		/// <param name="deltaRotation">The change of rotation.</param>
-		public void Rotate(int deltaRotation) 
-        {
-			EngineMath.Clamp(Rotation += deltaRotation, MIMIMUM_ROTATION_ANGLE, MAXIMUM_ROTATION_ANGLE);
-		}
-
-		/// <summary>
-		/// Resizes by a given factor.
-		/// </summary>
-		/// <param name="resizeFactor">The factor by which to resize.</param>
-        public void Resize(Point resizeFactor)
-        {
-            Size = new Point(Size.X * resizeFactor.X, Size.Y * resizeFactor.Y);
-        }
 
         /// <summary>
         /// Determines if this TransformComponent is colliding with another GameObject.

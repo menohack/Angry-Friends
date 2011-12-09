@@ -31,7 +31,7 @@ namespace Model.Engine.Object.GameObjects {
                 return transformComponent;
             }
 
-			protected set 
+			private set 
             {
                 if (transformComponent == null)
                 {

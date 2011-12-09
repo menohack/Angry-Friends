@@ -25,6 +25,45 @@ namespace Model.GameLogic
     public class Factory
     {
 
+        private static readonly String MARIO_NAME = "mario";
+
+        /// <summary>
+        /// The speed of Mario.
+        /// </summary>
+        private static readonly Point MARIO_SPEED = new Point(50, 50);
+
+        /// <summary>
+        /// Mario's initial position.
+        /// </summary>
+        private static readonly Point MARIO_INITIAL_POSITION = new Point(0, 0);
+
+        /// <summary>
+        /// The size of Mario, in pixels.
+        /// </summary>
+        private static readonly Point MARIO_SIZE = new Point(26, 29);
+
+        /// <summary>
+        /// The list of asset names corresponding to each frame in Mario's walk animation.
+        /// </summary>
+        private static readonly IList<String> MARIO_WALK_ANIMATION_LIST = new List<String>
+        {
+            "mario_walk_01",
+            "mario_walk_02",
+            "mario_walk_03"
+        };
+
+        private static readonly String MARIO_WALK_ANIMATION_NAME = "walk";
+
+        /// <summary>
+        /// The length, in seconds, of Mario's walk animation.
+        /// </summary>
+        private static readonly double MARIO_WALK_ANIMATION_LENGTH = 1.0;
+
+        /// <summary>
+        /// The FPS of Mario's walk animation.
+        /// </summary>
+        private static readonly int MARIO_WALK_ANIMATION_FPS = 3;
+
         /// <summary>
         /// The default name of the background, which is used to look up the image of the background in AssetManager.
         /// </summary>
@@ -97,10 +136,54 @@ namespace Model.GameLogic
             terrainAsset.Source = AssetManager.Instance.ExternalAssets[NAME_OF_TERRAIN_ASSET].GetBitmapImage();
 
             RenderComponent renderComponent = new RenderComponent(new Animation(new Frame(terrainAsset)));
-            TransformComponent transformComponent = new TransformComponent(POSITION_OF_TERRAIN, 0, SIZE_OF_TERRAIN);
-            AudioComponent audioComponent = new AudioComponent(new Dictionary<String, MediaElement>(), null);
+            TransformComponent transformComponent = new TransformComponent(POSITION_OF_TERRAIN, SIZE_OF_TERRAIN);
+            AudioComponent audioComponent = new AudioComponent(new Dictionary<String, MediaElement>());
 
             return new GameObject(NAME_OF_TERRAIN, transformComponent, audioComponent, renderComponent);
+        }
+
+        /// <summary>
+        /// Creates a new instance of Player -- Mario.
+        /// </summary>
+        /// <returns>A nwe instance of a Player -- Mario.</returns>
+        public Player CreateMario()
+        {
+            Dictionary<string, ExternalAsset> assetDictionary = AssetManager.Instance.ExternalAssets;
+            IList<Frame> frames = new List<Frame> { 
+                GetFrameFromBitmapImage(assetDictionary[MARIO_WALK_ANIMATION_LIST[0]].GetBitmapImage()), 
+                GetFrameFromBitmapImage(assetDictionary[MARIO_WALK_ANIMATION_LIST[1]].GetBitmapImage()),
+                GetFrameFromBitmapImage(assetDictionary[MARIO_WALK_ANIMATION_LIST[2]].GetBitmapImage()) 
+            };
+
+            RenderComponent renderComponent = new RenderComponent(new Animation(frames, MARIO_WALK_ANIMATION_LENGTH, MARIO_WALK_ANIMATION_FPS, MARIO_WALK_ANIMATION_NAME));
+            AudioComponent audioComponent = new AudioComponent(new Dictionary<String, MediaElement>());
+            TransformComponent transformComponent = new TransformComponent(MARIO_INITIAL_POSITION, MARIO_SIZE);
+
+            return new Player(MARIO_NAME, MARIO_SPEED, transformComponent, audioComponent, renderComponent);
+        }
+
+        /// <summary>
+        /// Creates an Image from a BitmapImage.
+        /// </summary>
+        /// <param name="bitmapImage">The BitmapImage to convert.</param>
+        /// <returns>The corresponding Image of the given BitmapImage</returns>
+        private Image GetImageFromBitmapImage(BitmapImage bitmapImage)
+        {
+            Image image = new Image();
+            image.Source = bitmapImage;
+            image.Height = bitmapImage.PixelHeight;
+            image.Width = bitmapImage.PixelWidth;
+            return image;
+        }
+
+        /// <summary>
+        /// Creates a Frame from a BitMapImage.
+        /// </summary>
+        /// <param name="bitmapImage">The BitmapImage to convert.</param>
+        /// <returns>The corresponding Frame of the given BitmapImage.</returns>
+        private Frame GetFrameFromBitmapImage(BitmapImage bitmapImage)
+        {
+            return new Frame(GetImageFromBitmapImage(bitmapImage));
         }
     }
 }
