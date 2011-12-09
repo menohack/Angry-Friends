@@ -1,0 +1,5 @@
+Z:\Users\alexanderschiffhauer\Dropbox\Johns Hopkins University\Junior\Fall Semester\OOSE\angry-friends\angry-friends\Library\Bin\Debug\Library.dll
+Z:\Users\alexanderschiffhauer\Dropbox\Johns Hopkins University\Junior\Fall Semester\OOSE\angry-friends\angry-friends\Library\Bin\Debug\Library.pdb
+Z:\Users\alexanderschiffhauer\Dropbox\Johns Hopkins University\Junior\Fall Semester\OOSE\angry-friends\angry-friends\Library\obj\Debug\ResolveAssemblyReference.cache
+Z:\Users\alexanderschiffhauer\Dropbox\Johns Hopkins University\Junior\Fall Semester\OOSE\angry-friends\angry-friends\Library\obj\Debug\Library.dll
+Z:\Users\alexanderschiffhauer\Dropbox\Johns Hopkins University\Junior\Fall Semester\OOSE\angry-friends\angry-friends\Library\obj\Debug\Library.pdb
