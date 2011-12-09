@@ -1,5 +1,0 @@
-Z:\Users\alexanderschiffhauer\Dropbox\Johns Hopkins University\Junior\Fall Semester\OOSE\angry-friends\angry-friends\Web\bin\Web.dll
-Z:\Users\alexanderschiffhauer\Dropbox\Johns Hopkins University\Junior\Fall Semester\OOSE\angry-friends\angry-friends\Web\bin\Web.pdb
-Z:\Users\alexanderschiffhauer\Dropbox\Johns Hopkins University\Junior\Fall Semester\OOSE\angry-friends\angry-friends\Web\obj\Debug\ResolveAssemblyReference.cache
-Z:\Users\alexanderschiffhauer\Dropbox\Johns Hopkins University\Junior\Fall Semester\OOSE\angry-friends\angry-friends\Web\obj\Debug\Web.dll
-Z:\Users\alexanderschiffhauer\Dropbox\Johns Hopkins University\Junior\Fall Semester\OOSE\angry-friends\angry-friends\Web\obj\Debug\Web.pdb

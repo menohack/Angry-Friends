@@ -2,14 +2,12 @@
   <Deployment.Parts>
     <AssemblyPart x:Name="View" Source="View.dll" />
     <AssemblyPart x:Name="Model" Source="Model.dll" />
+    <AssemblyPart x:Name="System.Windows.Controls.Data.Input" Source="System.Windows.Controls.Data.Input.dll" />
+    <AssemblyPart x:Name="System.Windows.Controls.Navigation" Source="System.Windows.Controls.Navigation.dll" />
+    <AssemblyPart x:Name="System.Windows.Controls.Toolkit" Source="System.Windows.Controls.Toolkit.dll" />
     <AssemblyPart x:Name="WriteableBitmapEx" Source="WriteableBitmapEx.dll" />
+    <AssemblyPart x:Name="System.ComponentModel.DataAnnotations" Source="System.ComponentModel.DataAnnotations.dll" />
     <AssemblyPart x:Name="System.Windows.Controls.Toolkit.Internals" Source="System.Windows.Controls.Toolkit.Internals.dll" />
+    <AssemblyPart x:Name="System.Windows.Controls" Source="System.Windows.Controls.dll" />
   </Deployment.Parts>
-  <Deployment.ExternalParts>
-    <ExtensionPart Source="System.Windows.Controls.Data.Input.zip" />
-    <ExtensionPart Source="System.Windows.Controls.Navigation.zip" />
-    <ExtensionPart Source="System.Windows.Controls.Toolkit.zip" />
-    <ExtensionPart Source="System.ComponentModel.DataAnnotations.zip" />
-    <ExtensionPart Source="System.Windows.Controls.zip" />
-  </Deployment.ExternalParts>
 </Deployment>

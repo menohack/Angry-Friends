@@ -8,3 +8,8 @@ Z:\Users\alexanderschiffhauer\Dropbox\Johns Hopkins University\Junior\Fall Semes
 Z:\Users\alexanderschiffhauer\Dropbox\Johns Hopkins University\Junior\Fall Semester\OOSE\angry-friends\angry-friends\Model\obj\Debug\ResolveAssemblyReference.cache
 Z:\Users\alexanderschiffhauer\Dropbox\Johns Hopkins University\Junior\Fall Semester\OOSE\angry-friends\angry-friends\Model\obj\Debug\Model.dll
 Z:\Users\alexanderschiffhauer\Dropbox\Johns Hopkins University\Junior\Fall Semester\OOSE\angry-friends\angry-friends\Model\obj\Debug\Model.pdb
+Z:\Users\alexanderschiffhauer\Desktop\angry-friends\Model\Bin\Debug\Model.dll
+Z:\Users\alexanderschiffhauer\Desktop\angry-friends\Model\Bin\Debug\Model.pdb
+Z:\Users\alexanderschiffhauer\Desktop\angry-friends\Model\obj\Debug\ResolveAssemblyReference.cache
+Z:\Users\alexanderschiffhauer\Desktop\angry-friends\Model\obj\Debug\Model.dll
+Z:\Users\alexanderschiffhauer\Desktop\angry-friends\Model\obj\Debug\Model.pdb

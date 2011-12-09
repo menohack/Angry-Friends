@@ -1,0 +1,5 @@
+Z:\Users\alexanderschiffhauer\Desktop\angry-friends\angry-friends.Web\bin\angry-friends.Web.dll
+Z:\Users\alexanderschiffhauer\Desktop\angry-friends\angry-friends.Web\bin\angry-friends.Web.pdb
+Z:\Users\alexanderschiffhauer\Desktop\angry-friends\angry-friends.Web\obj\Debug\ResolveAssemblyReference.cache
+Z:\Users\alexanderschiffhauer\Desktop\angry-friends\angry-friends.Web\obj\Debug\angry-friends.Web.dll
+Z:\Users\alexanderschiffhauer\Desktop\angry-friends\angry-friends.Web\obj\Debug\angry-friends.Web.pdb
