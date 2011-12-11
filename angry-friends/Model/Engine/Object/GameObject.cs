@@ -109,7 +109,7 @@ namespace Model.Engine.Object {
 		/// The last UID assigned to a GameObject.
 		/// </summary>
         [DataMember]
-        private static int currentUID;
+        private static int currentUID = 0;
 
         /// <summary>
         /// The Constructor for a new GameObject.

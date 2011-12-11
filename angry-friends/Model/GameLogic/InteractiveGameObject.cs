@@ -214,12 +214,11 @@ namespace Model.GameLogic
 				if (!horizontalMoveState.GetType().Equals(typeof(HorizontalIdleState)))
 					StopHorizontal();
 			}
-			else if (key.Equals(Key.W) || key.Equals(Key.Up) || key.Equals(Key.S) || key.Equals(Key.Down))
-			{
-				if (!verticalMoveState.GetType().Equals(typeof(VerticalIdleState)))
-					StopVertical();
-			}
-
+            else if (key.Equals(Key.W) || key.Equals(Key.Up) || key.Equals(Key.S) || key.Equals(Key.Down))
+            {
+                if (!verticalMoveState.GetType().Equals(typeof(VerticalIdleState)))
+                    StopVertical();
+            }
 		}
 
 		/// <summary>

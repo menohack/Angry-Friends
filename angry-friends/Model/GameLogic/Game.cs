@@ -27,7 +27,6 @@ namespace Model.GameLogic {
 
             Factory.Instance.CreateBackground();
             Factory.Instance.CreateTerrain();
-
 		}
 	}
 }

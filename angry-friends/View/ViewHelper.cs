@@ -50,6 +50,15 @@ namespace View
         }
 
         /// <summary>
+        /// Access the current drawable root.
+        /// </summary>
+        /// <returns>Returns the current drawable root.</returns>
+        public UIElement GetRootDrawable()
+        {
+            return (App.Current.RootVisual);
+        }
+
+        /// <summary>
         /// Switches to the next UserControl defined.
         /// </summary>
         public void NextUserControl()

@@ -125,14 +125,5 @@ namespace Model.Engine.Utilities {
 			Double miliseconds = 1000 * seconds;
 			return Convert.ToInt32(miliseconds);
 		}
-
-		/// <summary>
-		/// Converts a given amount of seconds to miliseconds.
-		/// </summary>
-		/// <param name="amount">The amount of seconds to convert into miliseconds.</param>
-		/// <returns>The amount of miliseconds in the given amount of seconds.</returns>
-		public static int SecondsToMiliseconds(Double amount) {
-			return Convert.ToInt32(1000.00 * amount);
-		}
 	}
 }
