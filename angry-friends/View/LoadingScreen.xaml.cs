@@ -21,7 +21,6 @@ namespace View
     /// </summary>
     public partial class LoadingScreen : UserControl
     {
-
         /// <summary>
         /// The path to the required assets on XML.
         /// </summary>
@@ -41,11 +40,12 @@ namespace View
         /// </summary>
         public void Initialize()
         {
+            AssetManager.Instance.Children = canvas.Children;
             AssetManager.Instance.Download(PATH_TO_REQUIRED_ASSETS, ExternalAsset.ExternalAssetType.AssetCollection, (e) =>
-                {
+            {
                     Dictionary<String, ExternalAsset> dictionary = (Dictionary<String, ExternalAsset>)e.GetAssetCollection();
                     ViewHelper.Instance.NextUserControl();
-                });
+            });
         }
     }
 }
