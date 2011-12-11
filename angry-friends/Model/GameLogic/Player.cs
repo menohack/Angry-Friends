@@ -11,7 +11,7 @@ namespace Model.GameLogic
     /// <summary>
     /// Player represents a User that is in-game, on a team, and in a match.
     /// </summary>
-    public class Player : InteractiveGameObject, IUpdateable
+    public class Player : InteractiveGameObject
 	{
 
         /// <summary>
@@ -27,7 +27,7 @@ namespace Model.GameLogic
         /// <summary>
         /// The gravitational velocity of this player.
         /// </summary>
-        private double gravitationalVelocity;
+        
 
 		/// <summary>
 		/// The Constructor for a new Player.
@@ -46,18 +46,14 @@ namespace Model.GameLogic
         /// Updates gravity for this player.
         /// </summary>
         /// <param name="deltaTime">The time since the last update.</param>
-        new public void Update(double deltaTime)
+        public override void Update(double deltaTime)
         {
-            deltaTime /= 1000.00;
-            if (base.TransformComponent.IsCollidingWith("TERRAIN"))
-            {
-                gravitationalVelocity = 0;
-            }
-            else
-            {
-                gravitationalVelocity += GRAVITATIONAL_FORCE * deltaTime * deltaTime;
-                base.TransformComponent.Translate(new Point(0, gravitationalVelocity));
-            }
+            double deltaTimeSeconds = deltaTime / 1000.00;
+
+			TransformComponent.gravitationalVelocity += GRAVITATIONAL_FORCE * deltaTimeSeconds * deltaTimeSeconds;
+			base.TransformComponent.Translate(new Point(0, TransformComponent.gravitationalVelocity));
+
+			base.Update(deltaTime);
         }
     }
 }

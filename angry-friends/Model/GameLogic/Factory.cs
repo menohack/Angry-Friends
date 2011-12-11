@@ -25,7 +25,7 @@ namespace Model.GameLogic
         /// <summary>
         /// The speed of Mario.
         /// </summary>
-        private static readonly Point MARIO_SPEED = new Point(50, 500);
+        private static readonly Point MARIO_SPEED = new Point(200, 500);
 
         /// <summary>
         /// Mario's initial position.

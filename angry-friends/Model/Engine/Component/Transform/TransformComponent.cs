@@ -49,6 +49,11 @@ namespace Model.Engine.Component.Transform {
         private IList<String> collidingGameObjects;
 
 		/// <summary>
+		/// The velocity beubg accumulated by gravitational acceleration.
+		/// </summary>
+		public double gravitationalVelocity;
+
+		/// <summary>
 		/// The accessor for the velocity of this TransformComponent.
 		/// </summary>
         [IgnoreDataMember]
@@ -147,6 +152,8 @@ namespace Model.Engine.Component.Transform {
             Point temporaryPosition = desiredPosition;
             Point finalPosition = desiredPosition;
 
+			collidingGameObjects.Clear();
+
             //Find the distance we can move before colliding
             foreach (GameObject gameObject in EngineObject.Instance.GetGameObjects())
             {
@@ -160,7 +167,8 @@ namespace Model.Engine.Component.Transform {
                 if (EngineMath.Distance(Position, finalPosition) < EngineMath.Distance(Position, temporaryPosition))
                 {
                     temporaryPosition = finalPosition;
-                    collidingGameObjects.Add(gameObject.Name);
+                    //collidingGameObjects.Add(gameObject.Name);
+					gravitationalVelocity = 0;
                 }
             }
             return temporaryPosition;
