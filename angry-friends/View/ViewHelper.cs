@@ -80,12 +80,6 @@ namespace View
                 case 0:
                     userControl = new LoadingScreen();
                     break;
-                case 3:
-                    userControl = new Lobby();
-                    break;
-                case 2:
-                    userControl = new GameLobby();
-                    break;
                 case 1:
                     userControl = new Game();
                     root.KeyDown += (s, e) => userControl.GetType().InvokeMember("MyKeyDown", System.Reflection.BindingFlags.InvokeMethod, null, userControl, new object[] { e });
