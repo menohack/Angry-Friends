@@ -71,10 +71,9 @@
     <Compile Include="Engine\Object\EngineObject.cs" />
     <Compile Include="Engine\Object\Cameras\Viewport.cs" />
     <Compile Include="GameLogic\Factory.cs" />
-    <Compile Include="GameLogic\Networking\GameInfo.cs" />
+    <Compile Include="GameLogic\HighScores\HighScore.cs" />
+    <Compile Include="GameLogic\HighScores\HighScoreManager.cs" />
     <Compile Include="Engine\Utilities\Assets\ExternalAsset.cs" />
-    <Compile Include="GameLogic\Networking\Network.cs" />
-    <Compile Include="GameLogic\Networking\RoomInfo.cs" />
     <Compile Include="Engine\Utilities\Assets\SpriteSheetLoader.cs" />
     <Compile Include="Engine\Utilities\Assets\AssetManager.cs" />
     <Compile Include="GameLogic\Game.cs" />

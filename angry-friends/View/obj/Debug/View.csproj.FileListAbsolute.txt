@@ -468,8 +468,6 @@ Z:\Users\alexanderschiffhauer\Dropbox\Johns Hopkins University\Junior\Fall Semes
 Z:\Users\alexanderschiffhauer\Dropbox\Johns Hopkins University\Junior\Fall Semester\OOSE\angry-friends\angry-friends\View\obj\Debug\ResolveAssemblyReference.cache
 Z:\Users\alexanderschiffhauer\Dropbox\Johns Hopkins University\Junior\Fall Semester\OOSE\angry-friends\angry-friends\View\obj\Debug\App.g.i.cs
 Z:\Users\alexanderschiffhauer\Dropbox\Johns Hopkins University\Junior\Fall Semester\OOSE\angry-friends\angry-friends\View\obj\Debug\LoadingScreen.g.i.cs
-Z:\Users\alexanderschiffhauer\Dropbox\Johns Hopkins University\Junior\Fall Semester\OOSE\angry-friends\angry-friends\View\obj\Debug\GameLobby.g.i.cs
-Z:\Users\alexanderschiffhauer\Dropbox\Johns Hopkins University\Junior\Fall Semester\OOSE\angry-friends\angry-friends\View\obj\Debug\Lobby.g.i.cs
 Z:\Users\alexanderschiffhauer\Dropbox\Johns Hopkins University\Junior\Fall Semester\OOSE\angry-friends\angry-friends\View\obj\Debug\Game.g.i.cs
 Z:\Users\alexanderschiffhauer\Dropbox\Johns Hopkins University\Junior\Fall Semester\OOSE\angry-friends\angry-friends\View\obj\Debug\View.g.resources
 Z:\Users\alexanderschiffhauer\Dropbox\Johns Hopkins University\Junior\Fall Semester\OOSE\angry-friends\angry-friends\View\obj\Debug\View.dll
