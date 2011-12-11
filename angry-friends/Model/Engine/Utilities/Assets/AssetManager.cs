@@ -146,10 +146,8 @@ namespace Model.Engine.Utilities {
 		/// <param name="onLoaded">The event to be fired once the download is completed.</param>
 		private void DownloadAudioClip(String URL, Action<ExternalAsset> onLoaded) 
         {
-            MediaElement audioClip = new MediaElement()
-            {
-                AutoPlay = true
-            };
+            MediaElement audioClip = new MediaElement();
+
 			audioClip.MediaOpened += (s, e) => 
             {
                 onLoaded(new ExternalAsset(URL, ExternalAsset.ExternalAssetType.AudioClip, audioClip));
