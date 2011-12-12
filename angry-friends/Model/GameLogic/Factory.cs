@@ -85,7 +85,7 @@ namespace Model.GameLogic
         /// <summary>
         /// The position of the terrain.
         /// </summary>
-        private static readonly Point POSITION_OF_TERRAIN = new Point(0, 550);
+        private static readonly Point POSITION_OF_TERRAIN = new Point(400, 550);
 
         /// <summary>
         /// The name of the terrain.

@@ -150,6 +150,7 @@ namespace Model.Engine.Utilities {
 
 			audioClip.MediaOpened += (s, e) => 
             {
+                audioClip.Stop();
                 onLoaded(new ExternalAsset(URL, ExternalAsset.ExternalAssetType.AudioClip, audioClip));
 			};
 

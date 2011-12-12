@@ -59,7 +59,7 @@ namespace Model.Engine.Object.Cameras {
                 }
 
                 Frame frame = gameObject.RenderComponent.CurrentAnimation.CurrentFrame;
-                frame.Image.SetValue(Canvas.LeftProperty, gameObject.TransformComponent.Position.X + frame.Offset.X);
+                frame.Image.SetValue(Canvas.LeftProperty, gameObject.TransformComponent.Position.X + frame.Offset.X - gameObject.TransformComponent.Size.X/2);
                 frame.Image.SetValue(Canvas.TopProperty, gameObject.TransformComponent.Position.Y + frame.Offset.Y - gameObject.TransformComponent.Size.Y/2);
 
                 AddFrameToViewport(frame);
