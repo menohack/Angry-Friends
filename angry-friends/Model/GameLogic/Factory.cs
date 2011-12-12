@@ -23,49 +23,51 @@ namespace Model.GameLogic
         public GameObject Terrain { get; private set; }
 
         /// <summary>
-        /// The name of Mario.
+        /// The name of Yoshi.
         /// </summary>
-        private static readonly String MARIO_NAME = "mario";
+        private static readonly String YOSHI_NAME = "yoshi";
 
         /// <summary>
-        /// The speed of Mario.
+        /// The speed of Yoshi.
         /// </summary>
-        private static readonly Point MARIO_SPEED = new Point(200, 500);
+        private static readonly Point YOSHI_SPEED = new Point(200, 500);
 
         /// <summary>
-        /// Mario's initial position.
+        /// Yoshi's initial position.
         /// </summary>
-        private static readonly Point MARIO_INITIAL_POSITION = new Point(0, 0);
+        private static readonly Point YOSHI_INITIAL_POSITION = new Point(0, 0);
 
         /// <summary>
-        /// The size of Mario, in pixels.
+        /// The size of Yoshi, in pixels.
         /// </summary>
-        private static readonly Point MARIO_SIZE = new Point(26, 29);
+        private static readonly Point YOSHI_SIZE = new Point(28, 37);
 
         /// <summary>
-        /// The list of asset names corresponding to each frame in Mario's walk animation.
+        /// The list of asset names corresponding to each frame in Yoshi's walk animation.
         /// </summary>
-        private static readonly IList<String> MARIO_WALK_ANIMATION_LIST = new List<String>
+        private static readonly IList<String> YOSHI_WALK_ANIMATION_LIST = new List<String>
         {
-            "mario_walk_01",
-            "mario_walk_02",
-            "mario_walk_03"
+            "yoshi_1",
+            "yoshi_2",
+            "yoshi_3",
+            "yoshi_4",
+            "yoshi_5"
         };
 
         /// <summary>
-        /// The name of the Mario character.
+        /// The name of the Yoshi character.
         /// </summary>
-        private static readonly String MARIO_WALK_ANIMATION_NAME = "walk";
+        private static readonly String YOSHI_WALK_ANIMATION_NAME = "walk";
 
         /// <summary>
-        /// The length, in seconds, of Mario's walk animation.
+        /// The length, in seconds, of Yoshi's walk animation.
         /// </summary>
-        private static readonly double MARIO_WALK_ANIMATION_LENGTH = 1;
+        private static readonly double YOSHI_WALK_ANIMATION_LENGTH = 1;
 
         /// <summary>
-        /// The FPS of Mario's walk animation.
+        /// The FPS of Yoshi's walk animation.
         /// </summary>
-        private static readonly int MARIO_WALK_ANIMATION_FPS = 8;
+        private static readonly int YOSHI_WALK_ANIMATION_FPS = 10;
 
         /// <summary>
         /// The default name of the background, which is used to look up the image of the background in AssetManager.
@@ -91,6 +93,16 @@ namespace Model.GameLogic
         /// The name of the terrain.
         /// </summary>
         private static readonly String NAME_OF_TERRAIN = "TERRAIN";
+
+        /// <summary>
+        /// The name of an apple.
+        /// </summary>
+        public static readonly String NAME_OF_APPLE = "apple";
+
+        /// <summary>
+        /// The size of an apple.
+        /// </summary>
+        private static readonly Point SIZE_OF_APPLE = new Point(20, 20);
 
         /// <summary>
         /// The singleton instance of Factory.
@@ -148,23 +160,40 @@ namespace Model.GameLogic
         }
 
         /// <summary>
-        /// Creates a new instance of Player -- Mario.
+        /// Creates a new instance of Player -- Yoshi.
         /// </summary>
-        /// <returns>A nwe instance of a Player -- Mario.</returns>
-        public Mario CreateMario()
+        /// <returns>A nwe instance of a Player -- Yoshi.</returns>
+        public Yoshi CreateYoshi()
         {
             Dictionary<string, ExternalAsset> assetDictionary = AssetManager.Instance.ExternalAssets;
             IList<Frame> frames = new List<Frame> { 
-                GetFrameFromBitmapImage(assetDictionary[MARIO_WALK_ANIMATION_LIST[0]].GetBitmapImage()), 
-                GetFrameFromBitmapImage(assetDictionary[MARIO_WALK_ANIMATION_LIST[1]].GetBitmapImage()),
-                GetFrameFromBitmapImage(assetDictionary[MARIO_WALK_ANIMATION_LIST[2]].GetBitmapImage()) 
+                GetFrameFromBitmapImage(assetDictionary[YOSHI_WALK_ANIMATION_LIST[0]].GetBitmapImage()), 
+                GetFrameFromBitmapImage(assetDictionary[YOSHI_WALK_ANIMATION_LIST[1]].GetBitmapImage()),
+                GetFrameFromBitmapImage(assetDictionary[YOSHI_WALK_ANIMATION_LIST[2]].GetBitmapImage()),
+                GetFrameFromBitmapImage(assetDictionary[YOSHI_WALK_ANIMATION_LIST[3]].GetBitmapImage()),
+                GetFrameFromBitmapImage(assetDictionary[YOSHI_WALK_ANIMATION_LIST[4]].GetBitmapImage()) 
             };
 
-            RenderComponent renderComponent = new RenderComponent(new Animation(frames, MARIO_WALK_ANIMATION_LENGTH, MARIO_WALK_ANIMATION_FPS, MARIO_WALK_ANIMATION_NAME));
+            RenderComponent renderComponent = new RenderComponent(new Animation(frames, YOSHI_WALK_ANIMATION_LENGTH, YOSHI_WALK_ANIMATION_FPS, YOSHI_WALK_ANIMATION_NAME));
             AudioComponent audioComponent = new AudioComponent(new Dictionary<String, MediaElement>());
-            TransformComponent transformComponent = new TransformComponent(MARIO_INITIAL_POSITION, MARIO_SIZE);
+            TransformComponent transformComponent = new TransformComponent(YOSHI_INITIAL_POSITION, YOSHI_SIZE);
 
-            return new Mario(MARIO_NAME, MARIO_SPEED, transformComponent, audioComponent, renderComponent);
+            return new Yoshi(YOSHI_NAME, YOSHI_SPEED, transformComponent, audioComponent, renderComponent);
+        }
+
+        /// <summary>
+        /// Creates a new Apple.
+        /// </summary>
+        /// <param name="point">The position of the apple.</param>
+        /// <returns>A new Apple.</returns>
+        public GravitationalGameObject CreateApple(Point point)
+        {
+            Dictionary<string, ExternalAsset> assetDictionary = AssetManager.Instance.ExternalAssets;
+            Frame frame = new Frame(GetImageFromBitmapImage(assetDictionary[NAME_OF_APPLE].GetBitmapImage()), new Point(0, 0));
+            RenderComponent renderComponent = new RenderComponent(new Animation(frame));
+            AudioComponent audioComponent = new AudioComponent(new Dictionary<String, MediaElement>());
+            TransformComponent transformComponent = new TransformComponent(point, SIZE_OF_APPLE);
+            return new GravitationalGameObject(NAME_OF_APPLE, transformComponent, audioComponent, renderComponent);
         }
 
         /// <summary>

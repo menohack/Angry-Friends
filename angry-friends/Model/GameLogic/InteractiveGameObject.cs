@@ -5,6 +5,7 @@ using Model.Engine.Component.Media.Rendering;
 using Model.Engine.Component.Transform;
 using Model.Engine.Object;
 using System;
+using System.Windows.Controls;
 
 namespace Model.GameLogic
 {
@@ -141,7 +142,8 @@ namespace Model.GameLogic
         /// <param name="deltaTime">The time since the last update.</param>
         public override void Update(double deltaTime)
         {
-            base.Update(deltaTime);
+            deltaTime /= 1000.00;
+            base.Update(deltaTime * 1000);
         }
 	}
 }

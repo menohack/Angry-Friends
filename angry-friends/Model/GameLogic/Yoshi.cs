@@ -9,19 +9,19 @@ using System.Collections.ObjectModel;
 namespace Model.GameLogic
 {
     /// <summary>
-    /// Mario represents the protagonist of the Game.
+    /// Yoshi represents the protagonist of the Game.
     /// </summary>
-    public class Mario : InteractiveGameObject
+    public class Yoshi : InteractiveGameObject
 	{
 
 		/// <summary>
-		/// The Constructor for a new Mario.
+		/// The Constructor for a new Yoshi.
 		/// </summary>
 		/// <param name="name">The Player's name.</param>
 		/// <param name="transformComponent">The Player's TransformComponent.</param>
 		/// <param name="audioComponent">The Player's AudioComponent.</param>
 		/// <param name="renderComponent">The Player's RenderComponent.</param>
-		public Mario(string name, Point moveSpeed, TransformComponent transformComponent, AudioComponent audioComponent, RenderComponent renderComponent) : base(name, moveSpeed, transformComponent, audioComponent, renderComponent) {}					
+		public Yoshi(string name, Point moveSpeed, TransformComponent transformComponent, AudioComponent audioComponent, RenderComponent renderComponent) : base(name, moveSpeed, transformComponent, audioComponent, renderComponent) {}					
 
         /// <summary>
         /// Updates gravity for this player.
@@ -40,8 +40,13 @@ namespace Model.GameLogic
                 base.IsGrounded = false;
             }
 
+            if (base.TransformComponent.IsCollidingWith(Factory.NAME_OF_APPLE))
+            {
+                int i;
+            }
+
             base.TransformComponent.Translate(new Point(base.VelocityVector.X * deltaTime, base.VelocityVector.Y * deltaTime));
-		    base.Update(deltaTime);
+		    base.Update(deltaTime * 1000);
         }
     }
 }

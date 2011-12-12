@@ -43,7 +43,7 @@ namespace View
             AssetManager.Instance.Children = canvas.Children;
             AssetManager.Instance.Download(PATH_TO_REQUIRED_ASSETS, ExternalAsset.ExternalAssetType.AssetCollection, (e) =>
             {
-                    ViewHelper.Instance.NextUserControl();
+                ViewHelper.Instance.NextUserControl();
             });
         }
     }

@@ -54,6 +54,8 @@ namespace Model.GameLogic
         /// <param name="deltaTime">The time since the last update.</param>
         public override void Update(double deltaTime)
         {
+            deltaTime /= 1000.00;
+
             if (IsGrounded)
             {
                 gravitationalVelocity = 0;
@@ -62,7 +64,7 @@ namespace Model.GameLogic
             {
                 gravitationalVelocity += GRAVITATIONAL_FORCE * deltaTime * deltaTime;
                 base.TransformComponent.Translate(new Point(0, gravitationalVelocity));
-                base.Update(deltaTime);
+                base.Update(deltaTime * 1000.00);
             }
         }
     }

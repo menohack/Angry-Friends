@@ -52,6 +52,11 @@ namespace Model.Engine.Component.Media.Rendering {
         [DataMember]
         public String Name { get; private set; }
 
+        /// <summary>
+        /// Determines if the renderer should flip this animation.
+        /// </summary>
+        public bool ShouldFlip { get; set; }
+
 		/// <summary>
 		/// Constructor for a new Animation with multiple frames.
 		/// </summary>

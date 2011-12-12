@@ -62,6 +62,31 @@ namespace Model.Engine.Object.Cameras {
                 frame.Image.SetValue(Canvas.LeftProperty, gameObject.TransformComponent.Position.X + frame.Offset.X - gameObject.TransformComponent.Size.X/2);
                 frame.Image.SetValue(Canvas.TopProperty, gameObject.TransformComponent.Position.Y + frame.Offset.Y - gameObject.TransformComponent.Size.Y/2);
 
+                // Does this animation need to be flipped?
+                if (gameObject.TransformComponent.Velocity.X < 0)
+                {
+                    gameObject.RenderComponent.CurrentAnimation.ShouldFlip = true;
+                }
+                else if (gameObject.TransformComponent.Velocity.X > 0)
+                {
+                    gameObject.RenderComponent.CurrentAnimation.ShouldFlip = false;
+                }
+
+                // Update the animation with respect to how it should be flipped.
+                if (gameObject.RenderComponent.CurrentAnimation.ShouldFlip)
+                {
+                    ScaleTransform scaleTransform = new ScaleTransform();
+                    scaleTransform.ScaleX = -1;
+                    frame.Image.RenderTransform = scaleTransform;
+                    frame.Image.SetValue(Canvas.LeftProperty, gameObject.TransformComponent.Position.X + frame.Offset.X + gameObject.TransformComponent.Size.X / 2);
+                }
+                else
+                {
+                    ScaleTransform scaleTransform = new ScaleTransform();
+                    scaleTransform.ScaleX = 1;
+                    frame.Image.RenderTransform = scaleTransform;
+                }
+
                 AddFrameToViewport(frame);
                 previousFrames.Add(gameObject, frame);
             }

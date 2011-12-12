@@ -151,6 +151,25 @@ namespace Model.Engine.Component.Transform {
         }
 
         /// <summary>
+        /// Determines if this TransformComponent is colliding with another GameObject.
+        /// </summary>
+        /// <param name="name">The name of all GameObjects to check.</param>
+        /// <returns>True if this TransformComponent is colliding with the given GameObject; otherwise, false.</returns>
+        public bool IsCollidingWith(String name)
+        {
+            ICollection<GameObject> gameObjects = EngineObject.Instance.FindGameObjectsWithName(name);
+            
+            foreach (GameObject gameObject in gameObjects)
+            {
+                if (collidingGameObjects.ContainsKey(gameObject.UID))
+                {
+                    return IsCollidingWith(gameObject.UID);
+                }
+            }
+            return false;
+        }
+
+        /// <summary>
         /// If this linear-motion produces collision, CollisionDetection returns the modified value that satisifies non-collision requirements.
         /// </summary>
         /// <param name="desiredPosition">The position to move to, if possible.</param>

@@ -9,6 +9,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
 using System.Windows.Shapes;
+using Model.Engine.Utilities;
 
 namespace View
 {
@@ -17,6 +18,16 @@ namespace View
         public MainMenu()
         {
             InitializeComponent();
+        }
+
+        /// <summary>
+        /// What the user clicks on "Play", move to the next View.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void button1_Click(object sender, RoutedEventArgs e)
+        {
+            ViewHelper.Instance.NextUserControl();
         }
     }
 }
