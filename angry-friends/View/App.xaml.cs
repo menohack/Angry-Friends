@@ -53,6 +53,6 @@ namespace View {
 			}
 			catch (Exception) {
 			}
-		}
+		}   
 	}
 }
