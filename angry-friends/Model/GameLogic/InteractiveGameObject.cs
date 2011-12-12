@@ -47,7 +47,7 @@ namespace Model.GameLogic
 		public InteractiveGameObject(String name, Point velocity, TransformComponent tc, AudioComponent ac, RenderComponent rc) : base(name, tc, ac, rc)
 		{
 			this.velocity = velocity;
-            this.VelocityVector = new Point();
+            this.VelocityVector = new Point(0, 0);
 		}
 
 		/// <summary>
@@ -93,14 +93,16 @@ namespace Model.GameLogic
 		/// </summary>
         protected virtual void MoveLeft()
 		{
+            base.RenderComponent.ShouldFlip = true;
             velocityVector.X = -velocity.X;
 		}
 
 		/// <summary>
 		/// OnKeyPressed the InteractiveGameObject right.
 		/// </summary>
-        protected void MoveRight()
+        protected virtual void MoveRight()
 		{
+            base.RenderComponent.ShouldFlip = false;
             velocityVector.X = velocity.X;
 		}
 

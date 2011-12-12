@@ -4,6 +4,7 @@ using System.Runtime.Serialization;
 using System.Windows;
 using Model.Engine.Object;
 using Model.Engine.Utilities;
+using System.Diagnostics;
 
 namespace Model.Engine.Component.Transform {
 	/// <summary>
@@ -37,13 +38,6 @@ namespace Model.Engine.Component.Transform {
         private DateTime currentPositionTime;
 
         /// <summary>
-        /// The maximum amount of miliseconds from a change-in-time we still assume the GameObject is moving.
-        /// We interpolate that the TransformComponent is Translating if the change-in-time since the last move is less than or equal to 1/15 of a second.
-        /// Worst case scenario is we say the GameObject has velocity for 1/30 of a second when it, in fact, does not.
-        /// </summary>
-        private readonly int VELOCITY_INTERPOLATION = 68;
-
-        /// <summary>
         /// A list of a GameObjects's UID's to the distance from its original collision, with which this TransformComponent is still colliding.
         /// </summary>
         private IDictionary<Double, Double> collidingGameObjects;
@@ -59,12 +53,9 @@ namespace Model.Engine.Component.Transform {
                 Point deltaPosition = new Point(currentPosition.X - previousPosition.X, currentPosition.Y - previousPosition.Y);
                 TimeSpan deltaTime = DateTime.Now.TimeOfDay - previousPositionTime.TimeOfDay;
 
-                if (deltaTime.TotalMilliseconds <= VELOCITY_INTERPOLATION)
-                {
-                    deltaTime = currentPositionTime.TimeOfDay - previousPositionTime.TimeOfDay;
-                }
+                Point velocity = new Point(deltaPosition.X / (deltaTime.TotalSeconds), deltaPosition.Y / (deltaTime.TotalSeconds));
 
-                return new Point(deltaPosition.X / (deltaTime.TotalMilliseconds / 1000.00), deltaPosition.Y / (deltaTime.TotalMilliseconds / 1000.00));
+                return velocity;
             }
         }
 

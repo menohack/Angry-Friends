@@ -58,11 +58,6 @@ namespace Model.Engine.Component.Media.Rendering {
         [DataMember]
         public String Name { get; private set; }
 
-        /// <summary>
-        /// Determines if the renderer should flip this animation.
-        /// </summary>
-        public bool ShouldFlip { get; set; }
-
 		/// <summary>
 		/// Constructor for a new Animation with multiple frames.
 		/// </summary>
@@ -102,6 +97,11 @@ namespace Model.Engine.Component.Media.Rendering {
 			double progressThroughAnimation = elapsedTime / length; 
 
             int index = (int) (progressThroughAnimation * frames.Count);
+            if (index >= frames.Count)
+            {
+                index = frames.Count - 1;
+            }
+
             CurrentFrame = frames[index];
 		}
 	}

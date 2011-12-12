@@ -57,6 +57,12 @@ namespace Model.GameLogic
             "yoshi_jump_01"
         };
 
+
+        public static readonly IList<String> YOSHI_IDLE_ANIMATION_LIST = new List<String> 
+        {
+            "yoshi_walk_01"
+        };
+
         /// <summary>
         /// The name of the Yoshi walk animation.
         /// </summary>
@@ -66,6 +72,11 @@ namespace Model.GameLogic
         /// The name of the Yoshi jump animation.
         /// </summary>
         public static readonly String YOSHI_JUMP_ANIMATION_NAME = "jump";
+
+        /// <summary>
+        /// The name of the Yoshi idle animation.
+        /// </summary>
+        public static readonly String YOSHI_IDLE_ANIMATION_NAME = "idle";
 
         /// <summary>
         /// The length, in seconds, of Yoshi's walk animation.
@@ -177,6 +188,10 @@ namespace Model.GameLogic
 
             Dictionary<String, Animation> animations = new Dictionary<string, Animation>();
 
+            // Create idle animation.
+            Frame idleFrame = GetFrameFromBitmapImage(assetDictionary[YOSHI_IDLE_ANIMATION_LIST[0]].GetBitmapImage());
+            Animation idleAnimation = new Animation(idleFrame, YOSHI_IDLE_ANIMATION_NAME);
+
             // Create walk animation.
             IList<Frame> walkFrames = new List<Frame> { 
                 GetFrameFromBitmapImage(assetDictionary[YOSHI_WALK_ANIMATION_LIST[0]].GetBitmapImage()), 
@@ -191,8 +206,9 @@ namespace Model.GameLogic
 
             animations.Add(YOSHI_WALK_ANIMATION_NAME, walkAnimation);
             animations.Add(YOSHI_JUMP_ANIMATION_NAME, jumpAnimation);
+            animations.Add(YOSHI_IDLE_ANIMATION_NAME, idleAnimation);
 
-            RenderComponent renderComponent = new RenderComponent(animations, walkAnimation);
+            RenderComponent renderComponent = new RenderComponent(animations, idleAnimation);
             AudioComponent audioComponent = new AudioComponent(new Dictionary<String, MediaElement>());
             TransformComponent transformComponent = new TransformComponent(YOSHI_INITIAL_POSITION, YOSHI_SIZE);
 
