@@ -34,6 +34,7 @@ namespace Model.GameLogic
             if (base.TransformComponent.IsCollidingWith(Factory.Instance.Terrain.UID)) 
             {
                 base.IsGrounded = true;
+                base.RenderComponent.Play(Factory.YOSHI_WALK_ANIMATION_NAME);
             }
             else
             {
@@ -42,11 +43,24 @@ namespace Model.GameLogic
 
             if (base.TransformComponent.IsCollidingWith(Factory.NAME_OF_APPLE))
             {
-                int i;
             }
 
             base.TransformComponent.Translate(new Point(base.VelocityVector.X * deltaTime, base.VelocityVector.Y * deltaTime));
 		    base.Update(deltaTime * 1000);
         }
+
+        protected override void MoveUp()
+        {
+            base.RenderComponent.Play(Factory.YOSHI_JUMP_ANIMATION_NAME);
+            base.MoveUp();
+        }
+
+
+        protected override void MoveDown()
+        {
+
+        }
+
+        //public override void M
     }
 }

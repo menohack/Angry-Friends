@@ -54,7 +54,7 @@ namespace Model.GameLogic
 		/// Processes the logic corresponding to a key press.
 		/// </summary>
 		/// <param name="key">The key that was pressed.</param>
-		public void OnKeyPressed(Key key)
+        public virtual void OnKeyPressed(Key key)
 		{
             if (key.Equals(Key.A) || key.Equals(Key.Left))
             {
@@ -77,7 +77,7 @@ namespace Model.GameLogic
 		/// Stops movement of the InteractiveGameObject in a particular direction.
 		/// </summary>
 		/// <param name="key">The key that was released.</param>
-		public void OnKeyReleased(Key key)
+        public virtual void OnKeyReleased(Key key)
 		{
 			if (key.Equals(Key.A) || key.Equals(Key.Left) || key.Equals(Key.D) || key.Equals(Key.Right))
             {
@@ -91,7 +91,7 @@ namespace Model.GameLogic
 		/// <summary>
 		/// OnKeyPressed the InteractiveGameObject left.
 		/// </summary>
-		private void MoveLeft()
+        protected virtual void MoveLeft()
 		{
             velocityVector.X = -velocity.X;
 		}
@@ -99,7 +99,7 @@ namespace Model.GameLogic
 		/// <summary>
 		/// OnKeyPressed the InteractiveGameObject right.
 		/// </summary>
-		private void MoveRight()
+        protected void MoveRight()
 		{
             velocityVector.X = velocity.X;
 		}
@@ -107,7 +107,7 @@ namespace Model.GameLogic
 		/// <summary>
 		/// OnKeyReleased moving the InteractiveGameObject horizontally.
 		/// </summary>
-		public void StopHorizontal()
+        protected virtual void StopHorizontal()
 		{
             velocityVector.X = 0;
 		}
@@ -115,7 +115,7 @@ namespace Model.GameLogic
 		/// <summary>
 		/// OnKeyPressed the InteractiveGameObject up.
 		/// </summary>
-		private void MoveUp()
+        protected virtual void MoveUp()
 		{
             velocityVector.Y = -velocity.Y;
 		}
@@ -123,7 +123,7 @@ namespace Model.GameLogic
 		/// <summary>
 		/// OnKeyPressed the InteractiveGameObject down.
 		/// </summary>
-		private void MoveDown()
+        protected virtual void MoveDown()
 		{
             velocityVector.Y = velocity.Y;
 		}
@@ -131,7 +131,7 @@ namespace Model.GameLogic
 		/// <summary>
 		/// OnKeyReleased moving the InteractiveGameObject vertically.
 		/// </summary>
-		public void StopVertical()
+		protected virtual void StopVertical()
 		{
             velocityVector.Y = 0;
 		}

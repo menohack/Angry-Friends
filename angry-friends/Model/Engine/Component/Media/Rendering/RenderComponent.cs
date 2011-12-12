@@ -47,7 +47,7 @@ namespace Model.Engine.Component.Media.Rendering {
 			this.animations = animations;
 			this.defaultAnimation = defaultAnimation;
 			this.CurrentAnimation = this.defaultAnimation;
-			Play(this.defaultAnimation.Name);
+            StartAnimationTimer();
 		}
 
 		/// <summary>
@@ -62,17 +62,31 @@ namespace Model.Engine.Component.Media.Rendering {
 		/// </summary>
 		/// <param name="animationName">The name of the Animation to play.</param>
 		public void Play(String animationName) {
+            // If we are playing the current animation.
+            if (CurrentAnimation.Name == animationName)
+            {
+                return;
+            }
 			Animation animation;
 			Debug.Assert(animations.TryGetValue(animationName, out animation), "The Animation: " + animationName + " does not exist.");
 			CurrentAnimation = animation;
+            StartAnimationTimer();
 
+		}
+
+        private void StartAnimationTimer()
+        {
             if (CurrentAnimation.FPS != 0)
             {
+                if (animationTimer != null)
+                {
+                    animationTimer.Stop();
+                }
                 int interval = (int)(1000.00 / CurrentAnimation.FPS);
                 animationTimer = new EngineTimer(interval, new List<IUpdateable> { CurrentAnimation, this });
                 animationTimer.Start();
             }
-		}
+        }
         
 		/// <summary>
 		/// Stops playing a specific Animation.

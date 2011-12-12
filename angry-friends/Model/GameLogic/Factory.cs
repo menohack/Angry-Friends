@@ -25,74 +25,82 @@ namespace Model.GameLogic
         /// <summary>
         /// The name of Yoshi.
         /// </summary>
-        private static readonly String YOSHI_NAME = "yoshi";
+        public static readonly String YOSHI_NAME = "yoshi";
 
         /// <summary>
         /// The speed of Yoshi.
         /// </summary>
-        private static readonly Point YOSHI_SPEED = new Point(200, 500);
+        public static readonly Point YOSHI_SPEED = new Point(200, 500);
 
         /// <summary>
         /// Yoshi's initial position.
         /// </summary>
-        private static readonly Point YOSHI_INITIAL_POSITION = new Point(0, 0);
+        public static readonly Point YOSHI_INITIAL_POSITION = new Point(20, 0);
 
         /// <summary>
         /// The size of Yoshi, in pixels.
         /// </summary>
-        private static readonly Point YOSHI_SIZE = new Point(28, 37);
+        public static readonly Point YOSHI_SIZE = new Point(29, 39);
 
         /// <summary>
         /// The list of asset names corresponding to each frame in Yoshi's walk animation.
         /// </summary>
-        private static readonly IList<String> YOSHI_WALK_ANIMATION_LIST = new List<String>
+        public static readonly IList<String> YOSHI_WALK_ANIMATION_LIST = new List<String>
         {
-            "yoshi_1",
-            "yoshi_2",
-            "yoshi_3",
-            "yoshi_4",
-            "yoshi_5"
+            "yoshi_walk_01",
+            "yoshi_walk_02",
+            "yoshi_walk_03"
+        };
+
+        public static readonly IList<String> YOSHI_JUMP_ANIMATION_LIST = new List<String> 
+        {
+            "yoshi_jump_01"
         };
 
         /// <summary>
-        /// The name of the Yoshi character.
+        /// The name of the Yoshi walk animation.
         /// </summary>
-        private static readonly String YOSHI_WALK_ANIMATION_NAME = "walk";
+        public static readonly String YOSHI_WALK_ANIMATION_NAME = "walk";
+        
+        /// <summary>
+        /// The name of the Yoshi jump animation.
+        /// </summary>
+        public static readonly String YOSHI_JUMP_ANIMATION_NAME = "jump";
 
         /// <summary>
         /// The length, in seconds, of Yoshi's walk animation.
         /// </summary>
-        private static readonly double YOSHI_WALK_ANIMATION_LENGTH = 1;
+        public static readonly double YOSHI_WALK_ANIMATION_LENGTH = 1;
 
         /// <summary>
         /// The FPS of Yoshi's walk animation.
         /// </summary>
-        private static readonly int YOSHI_WALK_ANIMATION_FPS = 10;
+        public static readonly int YOSHI_WALK_ANIMATION_FPS = 3;
 
         /// <summary>
         /// The default name of the background, which is used to look up the image of the background in AssetManager.
         /// </summary>
-        private static readonly String NAME_OF_BACKGROUND_ASSET = "default_background";
+        public static readonly String NAME_OF_BACKGROUND_ASSET = "default_background";
 
         /// <summary>
         /// The default name of the terrain, which is used to look up the image of the terrain in AssetManager.
         /// </summary>
-        private static readonly String NAME_OF_TERRAIN_ASSET = "default_terrain";
+        public static readonly String NAME_OF_TERRAIN_ASSET = "default_terrain";
 
         /// <summary>
         /// The size of the terrain asset.
         /// </summary>
-        private static readonly Point SIZE_OF_TERRAIN = new Point(800, 100);
+        public static readonly Point SIZE_OF_TERRAIN = new Point(800, 100);
 
         /// <summary>
         /// The position of the terrain.
         /// </summary>
-        private static readonly Point POSITION_OF_TERRAIN = new Point(400, 550);
+        public static readonly Point POSITION_OF_TERRAIN = new Point(400, 550);
 
         /// <summary>
         /// The name of the terrain.
         /// </summary>
-        private static readonly String NAME_OF_TERRAIN = "TERRAIN";
+        public static readonly String NAME_OF_TERRAIN = "TERRAIN";
 
         /// <summary>
         /// The name of an apple.
@@ -102,12 +110,12 @@ namespace Model.GameLogic
         /// <summary>
         /// The size of an apple.
         /// </summary>
-        private static readonly Point SIZE_OF_APPLE = new Point(20, 20);
+        public static readonly Point SIZE_OF_APPLE = new Point(20, 20);
 
         /// <summary>
         /// The singleton instance of Factory.
         /// </summary>
-        private static Factory instance;
+        public static Factory instance;
 
         /// <summary>
         /// The singleton accessor of Factory.
@@ -166,15 +174,25 @@ namespace Model.GameLogic
         public Yoshi CreateYoshi()
         {
             Dictionary<string, ExternalAsset> assetDictionary = AssetManager.Instance.ExternalAssets;
-            IList<Frame> frames = new List<Frame> { 
+
+            Dictionary<String, Animation> animations = new Dictionary<string, Animation>();
+
+            // Create walk animation.
+            IList<Frame> walkFrames = new List<Frame> { 
                 GetFrameFromBitmapImage(assetDictionary[YOSHI_WALK_ANIMATION_LIST[0]].GetBitmapImage()), 
                 GetFrameFromBitmapImage(assetDictionary[YOSHI_WALK_ANIMATION_LIST[1]].GetBitmapImage()),
                 GetFrameFromBitmapImage(assetDictionary[YOSHI_WALK_ANIMATION_LIST[2]].GetBitmapImage()),
-                GetFrameFromBitmapImage(assetDictionary[YOSHI_WALK_ANIMATION_LIST[3]].GetBitmapImage()),
-                GetFrameFromBitmapImage(assetDictionary[YOSHI_WALK_ANIMATION_LIST[4]].GetBitmapImage()) 
             };
+            Animation walkAnimation = new Animation(walkFrames, YOSHI_WALK_ANIMATION_LENGTH, YOSHI_WALK_ANIMATION_FPS, YOSHI_WALK_ANIMATION_NAME);
 
-            RenderComponent renderComponent = new RenderComponent(new Animation(frames, YOSHI_WALK_ANIMATION_LENGTH, YOSHI_WALK_ANIMATION_FPS, YOSHI_WALK_ANIMATION_NAME));
+            // Create jump animation.
+            Frame jumpFrame = GetFrameFromBitmapImage(assetDictionary[YOSHI_JUMP_ANIMATION_LIST[0]].GetBitmapImage());
+            Animation jumpAnimation = new Animation(jumpFrame, YOSHI_JUMP_ANIMATION_NAME);
+
+            animations.Add(YOSHI_WALK_ANIMATION_NAME, walkAnimation);
+            animations.Add(YOSHI_JUMP_ANIMATION_NAME, jumpAnimation);
+
+            RenderComponent renderComponent = new RenderComponent(animations, walkAnimation);
             AudioComponent audioComponent = new AudioComponent(new Dictionary<String, MediaElement>());
             TransformComponent transformComponent = new TransformComponent(YOSHI_INITIAL_POSITION, YOSHI_SIZE);
 
