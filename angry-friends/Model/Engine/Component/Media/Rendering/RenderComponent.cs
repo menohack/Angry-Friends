@@ -68,12 +68,10 @@ namespace Model.Engine.Component.Media.Rendering {
 		/// <param name="animationName">The name of the Animation to play.</param>
 		public void Play(String animationName) {
             // If we are playing the current animation, then do not re-play it!
-            if (CurrentAnimation.Name == animationName)
-            {
-                return;
+            if (CurrentAnimation.Name != animationName) {
+                CurrentAnimation = animations[animationName];
+                PlayCurrentAnimation();
             }
-            CurrentAnimation = animations[animationName];
-            PlayCurrentAnimation();
 		}
 
         /// <summary>

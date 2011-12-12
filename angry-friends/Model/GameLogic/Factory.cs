@@ -158,6 +158,28 @@ namespace Model.GameLogic
             Image background = new Image();
             background.Source = backgroundBitmap;
             EngineObject.Instance.Camera.Viewport.AddBackgroundToViewPort(background);
+            CreateBoundaries();
+        }
+
+        /// <summary>
+        /// Creates boundaries for the world.
+        /// </summary>
+        public void CreateBoundaries()
+        {
+
+            // Left wall
+            RenderComponent renderComponent = new RenderComponent(new Animation(new Frame(new Image(), new Point())));
+            TransformComponent transformComponent = new TransformComponent(new Point(-1, 400), new Point(1, 800));
+            AudioComponent audioComponent = new AudioComponent(new Dictionary<String, MediaElement>());
+
+            new GameObject("", transformComponent, audioComponent, renderComponent);
+
+            // Right wall
+            RenderComponent renderComponent2 = new RenderComponent(new Animation(new Frame(new Image(), new Point())));
+            TransformComponent transformComponent2 = new TransformComponent(new Point(801, 400), new Point(1, 800));
+            AudioComponent audioComponent2 = new AudioComponent(new Dictionary<String, MediaElement>());
+
+            new GameObject("", transformComponent2, audioComponent2, renderComponent2);
         }
 
         /// <summary>
