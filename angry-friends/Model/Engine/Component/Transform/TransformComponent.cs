@@ -44,14 +44,9 @@ namespace Model.Engine.Component.Transform {
         private readonly int VELOCITY_INTERPOLATION = 68;
 
         /// <summary>
-        /// A list of GameObjects with which this TransformComponent is colliding.
+        /// A list of a GameObjects's UID's to the distance from its original collision, with which this TransformComponent is still colliding.
         /// </summary>
-        private IList<String> collidingGameObjects;
-
-		/// <summary>
-		/// The velocity beubg accumulated by gravitational acceleration.
-		/// </summary>
-		public double gravitationalVelocity;
+        private IDictionary<Double, Double> collidingGameObjects;
 
 		/// <summary>
 		/// The accessor for the velocity of this TransformComponent.
@@ -116,7 +111,7 @@ namespace Model.Engine.Component.Transform {
             currentPositionTime = previousPositionTime;
 
             this.Size = size;
-            collidingGameObjects = new List<String>();
+            collidingGameObjects = new Dictionary<Double, Double>();
 		}
 		
 		/// <summary>
@@ -131,13 +126,26 @@ namespace Model.Engine.Component.Transform {
         /// <summary>
         /// Determines if this TransformComponent is colliding with another GameObject.
         /// </summary>
-        /// <param name="nameOfGameObject">The name of the GameObject that is in question.</param>
+        /// <param name="UID">The UID of the GameObject that is in question.</param>
         /// <returns>True if this TransformComponent is colliding with the given GameObject; otherwise, false.</returns>
-        public bool IsCollidingWith(String nameOfGameObject)
+        public bool IsCollidingWith(int UID)
         {
-            if (collidingGameObjects == null || collidingGameObjects.Count == 0 || !collidingGameObjects.Contains(nameOfGameObject))
+            if (collidingGameObjects == null || collidingGameObjects.Count == 0 || !collidingGameObjects.ContainsKey(UID))
             {
                 return false;
+            }
+            else
+            {
+                GameObject gameObject = EngineObject.Instance.FindGameObjectWithUID(UID);
+                double oldDistance = collidingGameObjects[UID];
+                double currentDistance = EngineMath.Distance(this.Position, gameObject.TransformComponent.Position);
+
+                // If we've moved, and the new position hasn't been added, then we are no longer colliding with this GameObject.
+                if (oldDistance != currentDistance)
+                {
+                    collidingGameObjects.Remove(UID);
+                    return false;
+                }
             }
             return true;
         }
@@ -152,14 +160,14 @@ namespace Model.Engine.Component.Transform {
             Point temporaryPosition = desiredPosition;
             Point finalPosition = desiredPosition;
 
-			collidingGameObjects.Clear();
-
             //Find the distance we can move before colliding
             foreach (GameObject gameObject in EngineObject.Instance.GetGameObjects())
             {
                 //Skip itself
                 if (gameObject.TransformComponent == null || gameObject.TransformComponent.Equals(this))
+                {
                     continue;
+                }
 
                 finalPosition = CollisionHelper.Instance.Collide(desiredPosition, this, gameObject.TransformComponent);
 
@@ -167,8 +175,8 @@ namespace Model.Engine.Component.Transform {
                 if (EngineMath.Distance(Position, finalPosition) < EngineMath.Distance(Position, temporaryPosition))
                 {
                     temporaryPosition = finalPosition;
-                    //collidingGameObjects.Add(gameObject.Name);
-					gravitationalVelocity = 0;
+                    // Store a reference to the GameObject's UID and the distance between the two positions.
+                    collidingGameObjects[gameObject.UID] = EngineMath.Distance(temporaryPosition, gameObject.TransformComponent.Position);
                 }
             }
             return temporaryPosition;

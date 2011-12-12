@@ -22,7 +22,7 @@ namespace Model.GameLogic {
 		{
 			EngineObject = EngineObject.Instance;
 
-            Player mario = Factory.Instance.CreateMario();
+            Mario mario = Factory.Instance.CreateMario();
             EngineObject.Instance.Input.Target = mario;
 
             Factory.Instance.CreateBackground();

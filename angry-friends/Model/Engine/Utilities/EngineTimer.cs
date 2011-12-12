@@ -88,7 +88,7 @@ namespace Model.Engine.Utilities {
 		}
 
 		/// <summary>
-		/// Stop dispatching events.
+		/// OnKeyReleased dispatching events.
 		/// </summary>
 		public void Stop() {
 			updateTimer.Stop();

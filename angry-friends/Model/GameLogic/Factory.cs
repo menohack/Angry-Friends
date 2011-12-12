@@ -18,6 +18,11 @@ namespace Model.GameLogic
     {
 
         /// <summary>
+        /// Accessor for the Terrain that this Factory made.
+        /// </summary>
+        public GameObject Terrain { get; private set; }
+
+        /// <summary>
         /// The name of Mario.
         /// </summary>
         private static readonly String MARIO_NAME = "mario";
@@ -137,14 +142,16 @@ namespace Model.GameLogic
             TransformComponent transformComponent = new TransformComponent(POSITION_OF_TERRAIN, SIZE_OF_TERRAIN);
             AudioComponent audioComponent = new AudioComponent(new Dictionary<String, MediaElement>());
 
-            return new GameObject(NAME_OF_TERRAIN, transformComponent, audioComponent, renderComponent);
+            Terrain = new GameObject(NAME_OF_TERRAIN, transformComponent, audioComponent, renderComponent);
+
+            return Terrain;
         }
 
         /// <summary>
         /// Creates a new instance of Player -- Mario.
         /// </summary>
         /// <returns>A nwe instance of a Player -- Mario.</returns>
-        public Player CreateMario()
+        public Mario CreateMario()
         {
             Dictionary<string, ExternalAsset> assetDictionary = AssetManager.Instance.ExternalAssets;
             IList<Frame> frames = new List<Frame> { 
@@ -157,7 +164,7 @@ namespace Model.GameLogic
             AudioComponent audioComponent = new AudioComponent(new Dictionary<String, MediaElement>());
             TransformComponent transformComponent = new TransformComponent(MARIO_INITIAL_POSITION, MARIO_SIZE);
 
-            return new Player(MARIO_NAME, MARIO_SPEED, transformComponent, audioComponent, renderComponent);
+            return new Mario(MARIO_NAME, MARIO_SPEED, transformComponent, audioComponent, renderComponent);
         }
 
         /// <summary>

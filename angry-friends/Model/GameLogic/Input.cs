@@ -61,7 +61,7 @@ namespace Model.GameLogic
 
 			depressed.Add(e.Key);
 
-			Target.Move(e.Key);
+			Target.OnKeyPressed(e.Key);
 		}
 
 		/// <summary>
@@ -75,7 +75,7 @@ namespace Model.GameLogic
 				return;
 
 			if (depressed.Remove(e.Key))
-				Target.Stop(e.Key);
+				Target.OnKeyReleased(e.Key);
 		}
 
 		/// <summary>
