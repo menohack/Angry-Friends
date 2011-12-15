@@ -24,7 +24,7 @@ namespace Model.Engine.Utilities {
 		/// <summary>
         /// The path to this ExternalAsset.
 		/// </summary>
-		public string URL { get; private set; }
+		public Uri URL { get; private set; }
 
 		/// <summary>
         /// The ExternalAssetType of this ExternalAsset.
@@ -41,7 +41,7 @@ namespace Model.Engine.Utilities {
 		/// </summary>
         /// <param name="URL">The path to this ExternalAsset.</param>
         /// <param name="externalResourceType">The Type of this ExternalAsset.</param>
-        public ExternalAsset(String URL, ExternalAsset.ExternalAssetType externalAssetType, object value)
+        public ExternalAsset(Uri URL, ExternalAsset.ExternalAssetType externalAssetType, object value)
         {
 			this.Name = Path.GetFileNameWithoutExtension(URL);
 			this.URL = URL;

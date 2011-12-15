@@ -81,7 +81,8 @@ namespace Model.Engine.Utilities {
         /// <param name="URL">The URL that points to the ExternalAsset.</param>
         /// <param name="externalAssetType">The type of ExternalAsset to download.</param>
 		/// <param name="onLoaded">The event to be fired once the download is completed.</param>
-		public void Download(String URL, ExternalAsset.ExternalAssetType externalAssetType, Action<ExternalAsset> onLoaded) {
+		public void Download(String sURL, ExternalAsset.ExternalAssetType externalAssetType, Action<ExternalAsset> onLoaded) {
+            Uri URL = new Uri(sURL);
             switch (externalAssetType) {
                 case ExternalAsset.ExternalAssetType.String:
                     DownloadString(URL, data => onLoaded(new ExternalAsset(URL, ExternalAsset.ExternalAssetType.String, data)));
