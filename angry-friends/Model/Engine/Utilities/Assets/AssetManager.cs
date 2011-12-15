@@ -6,6 +6,7 @@ using System.Windows.Controls;
 using System.Windows.Media.Imaging;
 using System.Xml;
 using System.Diagnostics;
+using Model.Engine.Object;
 
 namespace Model.Engine.Utilities {
 
@@ -13,7 +14,12 @@ namespace Model.Engine.Utilities {
 	/// AssetManager is responsible for downloading ExternalAssets.
 	/// </summary>
 	public class AssetManager {
-		
+
+        /// <summary>
+        /// A reference to the children of the current GUI.  Needed to download MediaElements.
+        /// </summary>
+        public UIElementCollection Children;
+
         /// <summary>
 		/// The single instance of AssetManager.
 		/// </summary>
@@ -22,12 +28,12 @@ namespace Model.Engine.Utilities {
         /// <summary>
         /// A constant used to represent the XML identifier "externalAsset".
         /// </summary>
-        private static readonly String EXTERNAL_ASSET = "externalAsset";
+        private readonly String EXTERNAL_ASSET = "externalAsset";
 
         /// <summary>
         /// A constant used to represent the XML identifier "type".
         /// </summary>
-        private static readonly String EXTERNAL_ASSET_TYPE = "type";
+        private readonly String EXTERNAL_ASSET_TYPE = "type";
 
         /// <summary>
         /// A constant used to represent the XML identifier "image".
@@ -42,12 +48,12 @@ namespace Model.Engine.Utilities {
         /// <summary>
         /// A constant used to represent the XML identifier "name".
         /// </summary>
-        private static readonly String EXTERNAL_ASSET_NAME = "name";
+        private readonly String EXTERNAL_ASSET_NAME = "name";
 
         /// <summary>
         /// A constant used to represent the XML identifier "url".
         /// </summary>
-        private static readonly String EXTERNAL_ASSET_URL = "url";
+        private readonly String EXTERNAL_ASSET_URL = "url";
 
         /// <summary>
         /// Accessor for the dictionary of ExternalAssets downloaded.
@@ -110,8 +116,8 @@ namespace Model.Engine.Utilities {
             { 
                 onLoaded(new ExternalAsset(URL, ExternalAsset.ExternalAssetType.String, events.Result)); 
             };
-
-			webClient.DownloadStringAsync(new Uri(URL));
+            // Use "rand" to prevent automatic caching of XML files, which are subject to frequent updates.
+            webClient.DownloadStringAsync(new Uri(URL + (URL.Contains("?") ? "&rand=" : "?rand=") + DateTime.Now.Ticks));
 		}
 
 		/// <summary>
@@ -141,13 +147,20 @@ namespace Model.Engine.Utilities {
 		/// <param name="onLoaded">The event to be fired once the download is completed.</param>
 		private void DownloadAudioClip(String URL, Action<ExternalAsset> onLoaded) 
         {
-            MediaElement audioClip = new MediaElement();
+            MediaElement audioClip = new MediaElement()
+            {
+                AutoPlay = false
+            };
+
 			audioClip.MediaOpened += (s, e) => 
             {
+                Children.Remove(audioClip);
+                audioClip.Stop();
                 onLoaded(new ExternalAsset(URL, ExternalAsset.ExternalAssetType.AudioClip, audioClip));
 			};
 
             audioClip.Source = new Uri(URL, UriKind.Absolute);
+            Children.Add(audioClip);
 		}
 
         /// <summary>

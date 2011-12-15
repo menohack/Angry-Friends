@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Runtime.Serialization;
 using Model.Engine.Utilities;
+using System.Diagnostics;
 
 namespace Model.Engine.Component.Media.Rendering {
 
@@ -33,6 +34,11 @@ namespace Model.Engine.Component.Media.Rendering {
 		/// </summary>
         [DataMember]
         private int index;
+
+        /// <summary>
+        /// The elapsed time in seconds.
+        /// </summary>
+        private double elapsedTime;
 
 		/// <summary>
 		/// The length, in seconds, of this Animation. 
@@ -81,7 +87,21 @@ namespace Model.Engine.Component.Media.Rendering {
 		/// </summary>
 		/// <param name="deltaTime">The time in milliseconds from the previous update.</param>
 		public void Update(Double deltaTime) {
-			index = (index + (int)(deltaTime / length)) % frames.Count;
+            deltaTime /= 1000;
+
+            elapsedTime += deltaTime;
+            while (elapsedTime > length)
+            {
+                elapsedTime -= length;
+            }
+			double progressThroughAnimation = elapsedTime / length; 
+
+            int index = (int) (progressThroughAnimation * frames.Count);
+            if (index >= frames.Count)
+            {
+                index = frames.Count - 1;
+            }
+
             CurrentFrame = frames[index];
 		}
 	}

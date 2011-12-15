@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Windows.Controls;
 using Model.Engine.Component.Media.Rendering;
+using System.Windows.Media;
 
 namespace Model.Engine.Object.Cameras {
     /// <summary>
@@ -58,12 +59,22 @@ namespace Model.Engine.Object.Cameras {
                 }
 
                 Frame frame = gameObject.RenderComponent.CurrentAnimation.CurrentFrame;
-                frame.Image.SetValue(Canvas.LeftProperty, gameObject.TransformComponent.Position.X + frame.Offset.X); //+ gameObject.TransformComponent.Size.X/2);
+                frame.Image.SetValue(Canvas.LeftProperty, gameObject.TransformComponent.Position.X + frame.Offset.X - gameObject.TransformComponent.Size.X/2);
                 frame.Image.SetValue(Canvas.TopProperty, gameObject.TransformComponent.Position.Y + frame.Offset.Y - gameObject.TransformComponent.Size.Y/2);
 
-                if (gameObject.TransformComponent.Velocity.X < 0)
+                // Update the animation with respect to how it should be flipped.
+                if (gameObject.RenderComponent.ShouldFlip)
                 {
-                    // Flip image.  Not allowed in Silverlight due to no pixel access.
+                    ScaleTransform scaleTransform = new ScaleTransform();
+                    scaleTransform.ScaleX = -1;
+                    frame.Image.RenderTransform = scaleTransform;
+                    frame.Image.SetValue(Canvas.LeftProperty, gameObject.TransformComponent.Position.X + frame.Offset.X + gameObject.TransformComponent.Size.X / 2);
+                }
+                else
+                {
+                    ScaleTransform scaleTransform = new ScaleTransform();
+                    scaleTransform.ScaleX = 1;
+                    frame.Image.RenderTransform = scaleTransform;
                 }
 
                 AddFrameToViewport(frame);

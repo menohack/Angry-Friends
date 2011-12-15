@@ -58,8 +58,8 @@ namespace Model.Engine.Component.Transform
 			bool overlap = true;
 			if (aright <= bleft || aleft >= bright || abottom <= btop || atop >= bbottom)
 				overlap = false;
-			if (overlap)
-				throw new CollisionException("Objects collide before movement.");
+            if (overlap)
+                return desiredPosition;
 
 			//If a doesn't move then we are done colliding
 			if (a.Position.Equals(desiredPosition))

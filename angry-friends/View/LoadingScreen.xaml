@@ -6,7 +6,7 @@
     mc:Ignorable="d"
     d:DesignHeight="600" d:DesignWidth="800" xmlns:sdk="http://schemas.microsoft.com/winfx/2006/xaml/presentation/sdk" xmlns:my="clr-namespace:View">
     
-    <Grid x:Name="canvas" Background="White">
+    <Grid x:Name="canvas" Background="White" MaxWidth="800" MaxHeight="600">
         <sdk:Label Height="28" HorizontalAlignment="Center" Margin="327,294,338,0" Name="label1" VerticalAlignment="Top" Width="135" Content="Loading Angry Friends..." />
     </Grid>
 </UserControl>

@@ -37,6 +37,11 @@ namespace Model.Engine.Component.Media.Rendering {
         [DataMember]
         private EngineTimer animationTimer;
 
+        /// <summary>
+        /// Determines if the renderer should flip this rendercomponent with respect to the Y-Axis.
+        /// </summary>
+        public bool ShouldFlip { get; set; }
+
 		/// <summary>
 		/// Constructor for a new RenderComponent.
 		/// </summary>
@@ -47,7 +52,7 @@ namespace Model.Engine.Component.Media.Rendering {
 			this.animations = animations;
 			this.defaultAnimation = defaultAnimation;
 			this.CurrentAnimation = this.defaultAnimation;
-			Play(this.defaultAnimation.Name);
+            PlayCurrentAnimation();
 		}
 
 		/// <summary>
@@ -62,29 +67,29 @@ namespace Model.Engine.Component.Media.Rendering {
 		/// </summary>
 		/// <param name="animationName">The name of the Animation to play.</param>
 		public void Play(String animationName) {
-			Animation animation;
-			Debug.Assert(animations.TryGetValue(animationName, out animation), "The Animation: " + animationName + " does not exist.");
-			CurrentAnimation = animation;
-
-            if (CurrentAnimation.FPS != 0)
-            {
-                int interval = (int)(1000.00 / CurrentAnimation.FPS);
-                animationTimer = new EngineTimer(interval, new List<IUpdateable> { CurrentAnimation, this });
-                animationTimer.Start();
+            // If we are playing the current animation, then do not re-play it!
+            if (CurrentAnimation.Name != animationName) {
+                CurrentAnimation = animations[animationName];
+                PlayCurrentAnimation();
             }
 		}
-        
-		/// <summary>
-		/// Stops playing a specific Animation.
-		/// </summary>
-		/// <param name="animationName">The name of the Animation to stop playing.</param>
-		public void Stop(String animationName) {
-			Animation animation;
-			Debug.Assert(!animations.TryGetValue(animationName, out animation), "The Animation: " + animationName + " does not exist.");
-			animationTimer.Stop();
 
-			Play(defaultAnimation.Name);
-		}
+        /// <summary>
+        /// Starts playing the current animation.
+        /// </summary>
+        private void PlayCurrentAnimation()
+        {
+            if (CurrentAnimation.FPS != 0)
+            {
+                // If another animation is already playing:
+                if (animationTimer != null)
+                {
+                    animationTimer.Stop();
+                }
+                animationTimer = new EngineTimer((int)(1000.00 / CurrentAnimation.FPS), new List<IUpdateable> { CurrentAnimation, this });
+                animationTimer.Start();
+            }
+        }
 
 		/// <summary>
 		/// Notify the World that this RenderComponent needs to be re-rendered.

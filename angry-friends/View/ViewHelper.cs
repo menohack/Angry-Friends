@@ -50,6 +50,15 @@ namespace View
         }
 
         /// <summary>
+        /// Access the current drawable root.
+        /// </summary>
+        /// <returns>Returns the current drawable root.</returns>
+        public UIElement GetRootDrawable()
+        {
+            return (App.Current.RootVisual);
+        }
+
+        /// <summary>
         /// Switches to the next UserControl defined.
         /// </summary>
         public void NextUserControl()
@@ -72,21 +81,19 @@ namespace View
         /// </summary>
         private void SwitchUserControl()
         {
-            UserControl userControl = new UserControl();
             Grid root = App.Current.RootVisual as Grid;
             root.Children.Clear();
+
+            UserControl userControl = new UserControl();
 
             switch (position) {
                 case 0:
                     userControl = new LoadingScreen();
                     break;
-                case 3:
-                    userControl = new Lobby();
+                case 1:
+                    userControl = new MainMenu();
                     break;
                 case 2:
-                    userControl = new GameLobby();
-                    break;
-                case 1:
                     userControl = new Game();
                     root.KeyDown += (s, e) => userControl.GetType().InvokeMember("MyKeyDown", System.Reflection.BindingFlags.InvokeMethod, null, userControl, new object[] { e });
                     root.KeyUp += (s, e) => userControl.GetType().InvokeMember("MyKeyUp", System.Reflection.BindingFlags.InvokeMethod, null, userControl, new object[] { e });
