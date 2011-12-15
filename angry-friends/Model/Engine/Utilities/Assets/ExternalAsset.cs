@@ -50,6 +50,7 @@ namespace Model.Engine.Utilities {
         public String GetString() {
             if (Type == ExternalAssetType.String)
             {
+                
                 return (String)Value;
             }
             else

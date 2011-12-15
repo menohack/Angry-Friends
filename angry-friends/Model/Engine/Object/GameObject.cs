@@ -36,7 +36,8 @@ namespace Model.Engine.Object {
                 if (transformComponent == null)
                 {
                     transformComponent = value;
-                    TransformComponent.Owner = this;
+                    if(value != null)
+                        TransformComponent.Owner = this;
                 }
             } 
         }
@@ -62,7 +63,8 @@ namespace Model.Engine.Object {
                 if (audioComponent == null)
                 {
                     audioComponent = value;
-                    AudioComponent.Owner = this;
+                    if(value != null)
+                        AudioComponent.Owner = this;
                 }
             } 
         }
@@ -88,7 +90,8 @@ namespace Model.Engine.Object {
                 if (renderComponent == null)
                 {
                     renderComponent = value;
-                    RenderComponent.Owner = this;
+                    if(value != null)
+                        RenderComponent.Owner = this;
                 }
             } 
         }

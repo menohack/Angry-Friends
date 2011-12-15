@@ -109,7 +109,8 @@ namespace Model.Engine.Object {
             {
                 gameObject.Update(deltaTime);
             }
-            Camera.Viewport.RedrawGameObjects();
+            if(Camera.Viewport != null)
+                Camera.Viewport.RedrawGameObjects();
 		}
 
 		/// <summary>
@@ -126,7 +127,8 @@ namespace Model.Engine.Object {
 		public void AddGameObject(GameObject gameObject) {
 			if (!gameObjects.Contains(gameObject)) {
 				gameObjects.Add(gameObject);
-                Camera.Viewport.AddGameObjectToRedrawQueue(gameObject);
+                if(Camera.Viewport != null)
+                    Camera.Viewport.AddGameObjectToRedrawQueue(gameObject);
 			}
 		}
 		/// <summary>
@@ -145,7 +147,7 @@ namespace Model.Engine.Object {
 		public ICollection<GameObject> FindGameObjectsWithName(String name) {
 			ICollection<GameObject> gameObjects = new List<GameObject>();
 
-			foreach (GameObject gameObject in gameObjects) {
+			foreach (GameObject gameObject in this.gameObjects) {
 				if (gameObject.Name == name) {
 					gameObjects.Add(gameObject);
 				}

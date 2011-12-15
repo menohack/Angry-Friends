@@ -14,7 +14,7 @@
     <AssemblyName>angry-friends.Web</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <UseIISExpress>false</UseIISExpress>
-    <SilverlightApplicationList>{4980572F-BAF3-4A24-B411-A7455C821501}|..\View\View.csproj|ClientBin|False</SilverlightApplicationList>
+    <SilverlightApplicationList>{4980572F-BAF3-4A24-B411-A7455C821501}|..\View\View.csproj|ClientBin|False,{D1715AC3-D323-4DA0-AFB7-61526BF71AF2}|..\AngryTest\AngryTest.csproj|ClientBin|False</SilverlightApplicationList>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -52,6 +52,9 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="AngryTestTestPage.aspx" />
+    <Content Include="AngryTestTestPage.html" />
+    <Content Include="ClientBin\AngryTest.xap" />
     <Content Include="ClientBin\View.xap" />
     <Content Include="Silverlight.js" />
     <Content Include="ViewTestPage.aspx" />
